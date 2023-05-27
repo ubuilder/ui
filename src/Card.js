@@ -1,3 +1,6 @@
+/**
+ * @type {import('.').Card}
+ */
 export function Card() {
     return `<div>Card</div>`
 }

@@ -1,6 +1,6 @@
 
 import {tag} from '@ulibs/router'
-import { View } from '../src/View.js'
+import { View } from '../../src/View.js'
 
 export default () => View({}, [
     tag('a', {href: '/'}, 'UBuilder'),
@@ -9,5 +9,6 @@ export default () => View({}, [
     tag('ul', {}, [
         tag('li', {}, tag('a', {href: '/components/button'}, 'Button')),
         tag('li', {}, tag('a', {href: '/components/card'}, 'Card')),
+        tag('li', {}, tag('a', {href: '/components/view'}, 'View')),
     ])
 ])

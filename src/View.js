@@ -1,5 +1,6 @@
 import { tag } from "@ulibs/router";
 
+const prefix = "u";
 function classname(component, cssProps, globalClasses) {
   let classes = [];
 
@@ -20,7 +21,9 @@ function classname(component, cssProps, globalClasses) {
   return classes.filter(Boolean).join(" ");
 }
 
-const prefix = "u";
+/**
+ * @type {import('.').View} 
+ */
 export function View(
   {
     tag: tagName = "div",
@@ -32,6 +35,7 @@ export function View(
   ...slots
 ) {
   let props = {
+    ...restProps,
     class: classname(component, cssProps, restProps.class),
     scriptName: component,
     scriptProps: {},

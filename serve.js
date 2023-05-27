@@ -2,7 +2,7 @@ import express from 'express'
 
 const app = express()
 
-app.use('/components/*', express.static('./build'))
+app.use('/components', express.static('./build'))
 
 app.get('/', (req, res) => {
     res.redirect('/components')
