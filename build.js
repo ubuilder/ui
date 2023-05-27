@@ -1,4 +1,11 @@
-import { existsSync, mkdirSync, readdirSync, rmSync, writeFileSync } from "fs";
+import {
+  cpSync,
+  existsSync,
+  mkdirSync,
+  readdirSync,
+  rmSync,
+  writeFileSync,
+} from "fs";
 import { renderTemplate } from "@ulibs/router";
 
 const files = readdirSync("./docs/pages");
@@ -30,3 +37,5 @@ for (let file of files) {
     });
   }
 }
+
+cpSync("./src/styles.css", "./build/styles.css");

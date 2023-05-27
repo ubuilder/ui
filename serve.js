@@ -1,13 +1,16 @@
-import express from 'express'
+import express from "express";
 
-const app = express()
+const app = express();
 
-app.use('/components', express.static('./build'))
+app.get("/styles.css", (req, res) => {
+  res.sendFile("/home/hadi/git/ulibs/components/src/styles.css");
+});
+app.use("/components", express.static("./build"));
 
-app.get('/', (req, res) => {
-    res.redirect('/components')
-})
+app.get("/", (req, res) => {
+  res.redirect("/components");
+});
 
-app.listen(3000, () => {
-    console.log('listening on port '+ 3000)
-})
+app.listen(3002, () => {
+  console.log("listening on port " + 3002);
+});

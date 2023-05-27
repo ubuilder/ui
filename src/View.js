@@ -22,7 +22,7 @@ function classname(component, cssProps, globalClasses) {
 }
 
 /**
- * @type {import('.').View} 
+ * @type {import('.').View}
  */
 export function View(
   {
@@ -30,13 +30,47 @@ export function View(
     component = "view",
     cssProps = {},
     onMount,
+    m,
+    p,
+    mx,
+    px,
+    ms,
+    ps,
+    my,
+    py,
+    me,
+    pe,
+    mt,
+    pt,
+    mb,
+    pb,
     ...restProps
   },
   ...slots
 ) {
+  const defaultCssProps = {
+    m,
+    p,
+    mx,
+    px,
+    ms,
+    ps,
+    my,
+    py,
+    me,
+    pe,
+    mt,
+    pt,
+    mb,
+    pb,
+  };
+
   let props = {
     ...restProps,
-    class: classname(component, cssProps, restProps.class),
+    class:
+      classname("view", defaultCssProps) +
+      " " +
+      classname(component, cssProps, restProps.class),
     scriptName: component,
     scriptProps: {},
   };

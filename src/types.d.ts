@@ -1,41 +1,113 @@
-
-type Slot = string | number | Tag
+type Slot = string | number | Tag;
 
 type Tag = {
-    tag: string,
-    props: Record<string, any>,
-    slots: Slot[],
-    script: string
-}
+  tag: string;
+  props: Record<string, any>;
+  slots: Slot[];
+  script: string;
+};
 
-export type Component<Props, Components = {}> = Components & ((props: Props, slots: Slot[]) => Tag)
+export type Colors =
+  | "primary"
+  | "secondary"
+  | "success"
+  | "error"
+  | "info"
+  | "warning"
+  | "dark"
+  | "light"
+  | undefined;
 
-export type View<Props, Components = {}> = Component<Props & { 
-    tag: string, 
-    component: string, 
-    cssProps: Record<string, string | number | boolean>, 
-    onClick: Function, 
-    onMount: Function, 
-    onChange: Function, 
-    onInput: Function, 
-    [x: string]: any
-}, Components>
+export type Sizes = "xs" | "sm" | "md" | "lg" | undefined;
+export type AllSizes =
+  | "0"
+  | 0
+  | "xxs"
+  | "xs"
+  | "sm"
+  | "md"
+  | "lg"
+  | "xl"
+  | "2xl"
+  | "3xl"
+  | "4xl"
+  | "5xl"
+  | "6xl"
+  | undefined;
+
+export type Component<Props, Components = {}, OwnProps = {}> = Components &
+  ((props: Props & OwnProps, slots: Slot[]) => Tag);
+
+export type View<Props, Components = {}> = Component<
+  Props,
+  Components,
+  {
+    tag: string;
+    component: string;
+    cssProps: Record<string, string | number | boolean>;
+    p: AllSizes;
+    px: AllSizes;
+    py: AllSizes;
+    pt: AllSizes;
+    pb: AllSizes;
+    ps: AllSizes;
+    pe: AllSizes;
+    m: AllSizes;
+    mx: AllSizes;
+    my: AllSizes;
+    mt: AllSizes;
+    mb: AllSizes;
+    ms: AllSizes;
+    me: AllSizes;
+    onClick: Function;
+    onMount: Function;
+    onChange: Function;
+    onInput: Function;
+    [x: string]: any;
+  }
+>;
 
 /**
  * ButtonGroup Component
  */
-export type ButtonGroup = View<{ color: string }>
+export type ButtonGroup = View<{ color: Colors }>;
 
 /**
  * Button Component
  */
-export type Button = View<{ color: string }, { Group: ButtonGroup }>
+export type Button = View<{ color: Colors; size: Sizes }>;
 
+/**
+ * CardHeader Component
+ */
+export type CardHeader = View<{}>;
 
-type CardHeader = View<{}>
-type CardTitle = View<{}>
-type CardFooter = View<{}>
-type CardBody = View<{}>
-type CardActions = View<{}>
+/**
+ * CardTitle Component
+ */
+export type CardTitle = View<{}>;
 
-export type Card = View<{ title: string }, { Body: CardBody, Header: CardHeader, Title: CardTitle, Footer: CardFooter, Actions: CardActions }>
+/**
+ * CardFooter Component
+ */
+export type CardFooter = View<{}>;
+
+/**
+ * CardBody Component
+ */
+export type CardBody = View<{}>;
+
+/**
+ * CardActions Component
+ */
+export type CardActions = View<{}>;
+
+/**
+ * Card Component
+ */
+export type Card = View<{ title: string }>;
+
+/**
+ * Badge Component
+ */
+export type Badge = View<{ size: Sizes; color: Colors }>;
