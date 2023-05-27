@@ -22,7 +22,7 @@ function classname(component, cssProps, globalClasses) {
 }
 
 /**
- * @type {import('.').View}
+ * @type {import('./types').View}
  */
 export function View(
   {

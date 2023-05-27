@@ -21,9 +21,12 @@ export function Button(
   );
 }
 
-Button.Group = function (
+/**
+ * @type {import('./types').ButtonGroup}
+ */
+export function ButtonGroup(
   { tag, component = "button-group", compact = false, ...props },
   ...slots
 ) {
   return View({ ...props, tag, component }, ...slots);
-};
+}
