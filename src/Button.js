@@ -1,7 +1,7 @@
 import { View } from "./View.js"
 
 /**
- * @type {import('.').Button} 
+ * @type {import('./types').Button} 
  */
 export function Button({tag = 'button', component = 'button', color="primary", ...props}, ...slots) {
     console.log(props)
@@ -11,4 +11,3 @@ export function Button({tag = 'button', component = 'button', color="primary", .
 Button.Group = function ({tag, component = 'button-group', compact = false, ...props}, ...slots) {
     return View({...props, tag, component}, ...slots)
 }
-

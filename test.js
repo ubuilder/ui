@@ -1,5 +1,10 @@
 import { renderScripts, renderTemplate, html, tag } from "@ulibs/router";
 import { Button } from "./src/Button.js";
+import { View } from "./src/View.js";
+
+function MyButton(props, ...slots) {
+  return Button.Group(props, ...slots) 
+}
 
 function test() {
   const result = Button(
