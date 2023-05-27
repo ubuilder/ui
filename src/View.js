@@ -22,7 +22,13 @@ function classname(component, cssProps, globalClasses) {
 
 const prefix = "u";
 export function View(
-  { tag: tagName = "div", component = "view", cssProps = {}, ...restProps },
+  {
+    tag: tagName = "div",
+    component = "view",
+    cssProps = {},
+    onMount,
+    ...restProps
+  },
   ...slots
 ) {
   let props = {
@@ -31,15 +37,28 @@ export function View(
     scriptProps: {},
   };
 
-  let onMount = restProps.onMount ?? "";
-  if (restProps.onClick) {
+  onMount ??= "";
+
+  let events = [];
+  Object.keys(restProps).map((key) => {
+    if (key.startsWith("on") && key[2] >= "A" && key[2] <= "Z") {
+      let event = key.substring(2).toLocaleLowerCase();
+      let code = restProps.onClick.toString();
+      events.push(`$el.addEventListener("${event}", function ${code})`);
+    }
+  });
+
+  const mountScript = onMount
+    ? `function ${onMount}
+  ${onMount ? "onMount($el)" : ""}`
+    : "";
+
+  if (mountScript || events.length > 0) {
     props.script = `${component}($el, props) {
-            function ${onMount}
-            ${onMount ? "onMount($el)" : ""}
-        $el.addEventListener("click", function ${restProps.onClick.toString()})
+      ${mountScript}
+      ${events.join("\n")}
     }`;
   }
 
-  console.log(props, restProps.onClick);
   return tag(tagName, props, ...slots);
 }

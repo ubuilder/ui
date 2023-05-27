@@ -10,6 +10,9 @@ function test() {
       onClick() {
         console.log(this, "Hello");
       },
+      onMouseOver() {
+        console.log(this, 'mouse over')
+      }
     },
     "Hello"
   );
