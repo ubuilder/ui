@@ -1,0 +1,20 @@
+<html>
+
+<head></head>
+
+<body><button button='{}' class="u-button u-button-color-primary">Hello</button>
+    <script>function button($el, props) {
+            function onMount($el) {
+                console.log("button mounted", $el);
+            }
+            onMount($el)
+            $el.addEventListener("click", function onClick() {
+                console.log(this, "Hello");
+            })
+        }
+        document.querySelectorAll('[button]').forEach(el => {
+            button(el, JSON.parse(el.getAttribute("button")))
+        })</script>
+</body>
+
+</html>
