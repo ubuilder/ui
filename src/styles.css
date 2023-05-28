@@ -320,6 +320,45 @@ h6 {
 }
 /* #endregion */
 
+
+/* #region Accordion */
+.u-accordions {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 1px var(--color-dark-shadow); 
+}
+
+.u-accordion {
+  box-shadow: 0px 1px 1px -1px var(--color-dark-shadow);
+}
+
+.u-accordion-header {
+  padding: var(--size-xs) var(--size-sm);
+  font-size: calc(var(--size-lg) * 0.8);
+  line-height: var(--size-lg);
+  cursor: pointer;
+  
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.u-accordion-body {
+  display: none;
+}
+
+.u-accordion-body-open {
+  display: block;
+}
+
+.u-accordion-body-content {
+  padding: var(--size-sm);
+}
+
+
+/* #endregion */
+
+
 /* #region View (Margin) */
 .u-view-m-0 {
   margin: 0;

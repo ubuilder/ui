@@ -1,0 +1,145 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="./src/styles.css">
+</head>
+
+<body>
+    <div u-view='{}' id="view_32" class="u-view-p-sm u-view">
+        <div u-accordions='{"persistent":false}' id="accordions_15" class="u-accordions">
+            <div u-accordion='{}' id="accordion_4" class="u-accordion">
+                <div u-accordion-header='1' id="accordion-header_1" class="u-accordion-header">AccordionHeader<div
+                        u-accordion-header-icon='{}' id="accordion-header-icon_0" class="u-accordion-header-icon">^
+                    </div>
+                </div>
+                <div u-accordion-body='1' id="accordion-body_3" class="u-accordion-body">
+                    <div u-accordion-body-content='{}' id="accordion-body-content_2" class="u-accordion-body-content">
+                        Accordion body</div>
+                </div>
+            </div>
+            <div u-accordion='{}' id="accordion_9" class="u-accordion">
+                <div u-accordion-header='2' id="accordion-header_6" class="u-accordion-header">AccordionHeader<div
+                        u-accordion-header-icon='{}' id="accordion-header-icon_5" class="u-accordion-header-icon">^
+                    </div>
+                </div>
+                <div u-accordion-body='2' id="accordion-body_8" class="u-accordion-body">
+                    <div u-accordion-body-content='{}' id="accordion-body-content_7" class="u-accordion-body-content">
+                        Accordion body</div>
+                </div>
+            </div>
+            <div u-accordion='{}' id="accordion_14" class="u-accordion">
+                <div u-accordion-header='3' id="accordion-header_11" class="u-accordion-header">AccordionHeader<div
+                        u-accordion-header-icon='{}' id="accordion-header-icon_10" class="u-accordion-header-icon">^
+                    </div>
+                </div>
+                <div u-accordion-body='3' id="accordion-body_13" class="u-accordion-body">
+                    <div u-accordion-body-content='{}' id="accordion-body-content_12" class="u-accordion-body-content">
+                        Accordion body</div>
+                </div>
+            </div>
+        </div>
+        <div u-accordions='{"persistent":false}' id="accordions_31" class="u-view-mt-sm u-accordions">
+            <div u-accordion='{}' id="accordion_20" class="u-accordion">
+                <div u-accordion-header='4' id="accordion-header_17" class="u-accordion-header">AccordionHeader<div
+                        u-accordion-header-icon='{}' id="accordion-header-icon_16" class="u-accordion-header-icon">^
+                    </div>
+                </div>
+                <div u-accordion-body='4' id="accordion-body_19" class="u-accordion-body">
+                    <div u-accordion-body-content='{}' id="accordion-body-content_18" class="u-accordion-body-content">
+                        Accordion body</div>
+                </div>
+            </div>
+            <div u-accordion='{}' id="accordion_25" class="u-accordion">
+                <div u-accordion-header='5' id="accordion-header_22" class="u-accordion-header">AccordionHeader<div
+                        u-accordion-header-icon='{}' id="accordion-header-icon_21" class="u-accordion-header-icon">^
+                    </div>
+                </div>
+                <div u-accordion-body='5' id="accordion-body_24" class="u-accordion-body">
+                    <div u-accordion-body-content='{}' id="accordion-body-content_23" class="u-accordion-body-content">
+                        Accordion body</div>
+                </div>
+            </div>
+            <div u-accordion='{}' id="accordion_30" class="u-accordion">
+                <div u-accordion-header='6' id="accordion-header_27" class="u-accordion-header">AccordionHeader<div
+                        u-accordion-header-icon='{}' id="accordion-header-icon_26" class="u-accordion-header-icon">^
+                    </div>
+                </div>
+                <div u-accordion-body='6' id="accordion-body_29" class="u-accordion-body">
+                    <div u-accordion-body-content='{}' id="accordion-body-content_28" class="u-accordion-body-content">
+                        Accordion body</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function u_accordions($el) {
+            document.querySelectorAll("[u-accordion-header]").forEach((el) => {
+                el.addEventListener("click", (event) => {
+                    const persistent =
+                        JSON.parse($el.getAttribute("u-accordions")).persistent ?? false;
+
+                    const id = el.getAttribute("u-accordion-header");
+
+                    if (!persistent) {
+                        $el
+                            .querySelector(".u-accordion-header-open")
+                            ?.classList.remove("u-accordion-header-open");
+                        $el
+                            .querySelector(".u-accordion-body-open")
+                            ?.classList.remove("u-accordion-body-open");
+                    }
+
+                    el.classList.toggle("u-accordion-header-open");
+
+                    $el
+                        .querySelector(`[u-accordion-body="${id}"]`)
+                        .classList.toggle("u-accordion-body-open");
+                });
+            });
+        }
+        document.querySelectorAll("[u-accordions]").forEach($el => {
+            u_accordions($el, JSON.parse($el.getAttribute("u-accordions")))
+        })
+
+
+
+
+
+
+        /* ----------------------------------------------- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

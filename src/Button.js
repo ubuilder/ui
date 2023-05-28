@@ -3,30 +3,42 @@ import { View } from "./View.js";
 /**
  * @type {import('./types').Button}
  */
-export function Button(
-  {
+export function Button($props, slots) {
+  const {
     tag = "button",
     component = "button",
-    color = "primary",
-    size = "sm",
+  size = "sm",
     link = false,
-    ...props
-  },
-  ...slots
-) {
-  if (link && !color) color = "dark";
-  return View(
-    { ...props, tag, component, cssProps: { color, link } },
-    ...slots
-  );
+    color = link ? "dark" : undefined,
+    ...restProps
+  } = $props;
+
+  const props = {
+    ...restProps,
+    tag,
+    component,
+    cssProps: {
+      color,
+      link,
+    },
+  };
+
+  return View(props, slots);
 }
 
 /**
  * @type {import('./types').ButtonGroup}
  */
-export function ButtonGroup(
-  { tag, component = "button-group", compact = false, ...props },
-  ...slots
-) {
-  return View({ ...props, tag, component }, ...slots);
+export function ButtonGroup($props, slots) {
+  const { component = "button-group", compact = false, ...restProps } = $props;
+
+  const props = {
+    ...restProps,
+    component,
+    cssProps: {
+      compact,
+    },
+  };
+
+  return View({ ...props, component }, slots);
 }
