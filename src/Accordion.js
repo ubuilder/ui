@@ -28,7 +28,7 @@ export function Accordions($props, slots) {
 
           $el
             .querySelector(`[u-accordion-body="${id}"]`)
-            .classList.toggle("u-accordion-body-open");
+            ?.classList.toggle("u-accordion-body-open");
         });
       });
     },
