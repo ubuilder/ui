@@ -55,7 +55,6 @@ export function Accordion($props, slots) {
 }
 
 export function AccordionHeader($props, slots) {
-  console.log("call AccordionHeader");
   const { component = "accordion-header", title, id, ...restProps } = $props;
 
   const props = {
@@ -65,13 +64,12 @@ export function AccordionHeader($props, slots) {
   };
 
   return View(props, [
-    title ? View({ tag: "h3", component: component + "-title" }, title) : slots,
-    View({ component: "accordion-header-icon" }, ["^"]),
+    title ? View({ tag: "h3", component: component + "-title" }, title) : [],
+    slots || View({ component: "accordion-header-icon" }, ["^"]),
   ]);
 }
 
 export function AccordionBody($props, slots) {
-  console.log("call AccordionBody");
   const { component = "accordion-body", id, ...restProps } = $props;
 
   const props = {

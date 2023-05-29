@@ -93,7 +93,7 @@ export function View($props, slots = []) {
   Object.keys(restProps).map((key) => {
     if (key.startsWith("on") && key[2] >= "A" && key[2] <= "Z") {
       let event = key.substring(2).toLocaleLowerCase();
-      let code = restProps.onClick.toString();
+      let code = restProps[key].toString();
 
       events.push({ event, code });
       delete props[key];

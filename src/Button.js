@@ -7,9 +7,9 @@ export function Button($props, slots) {
   const {
     tag = "button",
     component = "button",
-  size = "sm",
+    size = "sm",
     link = false,
-    color = link ? "dark" : undefined,
+    color = link ? "light" : undefined,
     ...restProps
   } = $props;
 

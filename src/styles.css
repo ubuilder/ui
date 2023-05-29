@@ -30,8 +30,8 @@
   --color-error-content: #242424;
   --color-error-shadow: #181818;
 
-  --color-dark-bg: #282828;
-  --color-dark-hover: #525252;
+  --color-dark-bg: #303030;
+  --color-dark-hover: #404040;
   --color-dark-content: #eaeaea;
   --color-dark-shadow: #181818;
 
@@ -44,6 +44,27 @@
   --color-default-hover: var(--color-light-hover);
   --color-default-content: var(--color-light-content);
   --color-default-shadow: var(--color-light-shadow);
+
+  --color-dark-500: #202020;
+  --color-dark-400: #242424;
+  --color-dark-300: #282828;
+  --color-dark-200: #2c2c2c;
+  --color-dark-100: #303030;
+  --color-dark-content: #e0e0e0;
+
+  --color-light-100: #f6f6f6;
+  --color-light-200: #f2f2f2;
+  --color-light-300: #ededed;
+  --color-light-400: #e9e9e9;
+  --color-light-500: #e4e4e4;
+  --color-light-content: #202020;
+
+  --color-base-100: var(--color-light-100);
+  --color-base-200: var(--color-light-200);
+  --color-base-300: var(--color-light-300);
+  --color-base-400: var(--color-light-400);
+  --color-base-500: var(--color-light-500);
+  --color-base-content: var(--color-light-content);
 
   --size-xxs: 4px;
   --size-xs: 8px;
@@ -59,6 +80,21 @@
 }
 /* #endregion */
 
+/* #region Dark */
+.dark {
+  --color-base-100: var(--color-dark-100);
+  --color-base-200: var(--color-dark-200);
+  --color-base-300: var(--color-dark-300);
+  --color-base-400: var(--color-dark-400);
+  --color-base-500: var(--color-dark-500);
+  --color-base-content: var(--color-dark-content);
+
+  background-color: var(--color-base-300);
+  color: var(--color-base-content);
+}
+/* #endregion */
+
+
 /* #region Reset */
 * {
   margin: 0;
@@ -68,6 +104,9 @@
 body {
   font-size: 14px;
   line-height: 16px;
+  background-color: var(--color-base-300);
+  color: var(--color-base-content);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 h1 {
@@ -103,7 +142,6 @@ h6 {
   --button-bg: var(--color-default-bg);
   --button-hover: var(--color-default-hover);
   --button-content: var(--color-default-content);
-  --button-shadow: var(--color-default-shadow);
   --button-size: var(--size-md);
 
   display: inline-flex;
@@ -115,33 +153,34 @@ h6 {
 
   background-color: var(--button-bg);
   color: var(--button-content);
-  box-shadow: 0 0 1px var(--button-shadow);
+  box-shadow: 0 0 1px var(--color-base-content);
 }
 
 .u-button:hover {
   z-index: 1;
   background-color: var(--button-hover);
-  box-shadow: 0 0 2px var(--button-shadow);
+  box-shadow: 0 0 2px var(--color-base-content);
 }
 
 .u-button:active {
   background-color: var(--button-bg);
-  box-shadow: 0 0 3px var(--button-shadow);
+  box-shadow: 0 0 3px var(--color-base-content);
 }
 
 .u-button-link {
   background-color: transparent;
   box-shadow: none;
-  color: var(--button-bg);
+  color: var(--color-base-content);
 }
 
 .u-button-link:hover {
   background-color: transparent;
   box-shadow: none;
-  color: var(--button-hover);
+  opacity: 0.7;
+  color: var(--color-base-content);
 }
 .u-button-link:active {
-  color: var(--button-bg);
+  opacity: 0.5;
 }
 
 .u-button-size-sm {
@@ -161,49 +200,41 @@ h6 {
   --button-bg: var(--color-primary-bg);
   --button-hover: var(--color-primary-hover);
   --button-content: var(--color-primary-content);
-  --button-shadow: var(--color-primary-shadow);
 }
 .u-button-color-secondary {
   --button-bg: var(--color-secondary-bg);
   --button-hover: var(--color-secondary-hover);
   --button-content: var(--color-secondary-content);
-  --button-shadow: var(--color-secondary-shadow);
 }
 .u-button-color-success {
   --button-bg: var(--color-success-bg);
   --button-hover: var(--color-success-hover);
   --button-content: var(--color-success-content);
-  --button-shadow: var(--color-success-shadow);
 }
 .u-button-color-info {
   --button-bg: var(--color-info-bg);
   --button-hover: var(--color-info-hover);
   --button-content: var(--color-info-content);
-  --button-shadow: var(--color-info-shadow);
 }
 .u-button-color-warning {
   --button-bg: var(--color-warning-bg);
   --button-hover: var(--color-warning-hover);
   --button-content: var(--color-warning-content);
-  --button-shadow: var(--color-warning-shadow);
 }
 .u-button-color-error {
   --button-bg: var(--color-error-bg);
   --button-hover: var(--color-error-hover);
   --button-content: var(--color-error-content);
-  --button-shadow: var(--color-error-shadow);
 }
 .u-button-color-dark {
   --button-bg: var(--color-dark-bg);
   --button-hover: var(--color-dark-hover);
   --button-content: var(--color-dark-content);
-  --button-shadow: var(--color-dark-shadow);
 }
 .u-button-color-light {
   --button-bg: var(--color-light-bg);
   --button-hover: var(--color-light-hover);
   --button-content: var(--color-light-content);
-  --button-shadow: var(--color-light-shadow);
 }
 
 .u-button-group {
@@ -279,8 +310,9 @@ h6 {
 
 /* #region Card */
 .u-card {
-  border: 1px solid #d3d3d3;
+  box-shadow: 0 0 1px var(--color-base-content);
   border-radius: var(--size-xxs);
+  background-color: var(--color-base-100);
 }
 
 .u-card-body {
@@ -289,7 +321,7 @@ h6 {
 
 .u-card-header {
   padding: var(--size-xs) var(--size-md);
-  border-bottom: 1px solid #d3d3d3;
+  box-shadow: 0 1px 1px -1px  var(--color-base-content);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -299,8 +331,8 @@ h6 {
 
 .u-card-footer {
   padding: var(--size-xs) var(--size-md);
-  background-color: #f4f4f4;
-  border-top: 1px solid #d3d3d3;
+  background-color: var(--color-base-200);
+  box-shadow: 0 -1px 1px -1px  var(--color-base-content);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -314,6 +346,7 @@ h6 {
 }
 
 .u-card-actions {
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: end;
@@ -325,11 +358,11 @@ h6 {
 .u-accordions {
   display: flex;
   flex-direction: column;
-  box-shadow: 0 0 1px var(--color-dark-shadow); 
+  box-shadow: 0 0 1px var(--color-base-content); 
 }
 
 .u-accordion {
-  box-shadow: 0px 1px 1px -1px var(--color-dark-shadow);
+  box-shadow: 0px 1px 1px -1px var(--color-base-content);
 }
 
 .u-accordion-header {
@@ -353,6 +386,36 @@ h6 {
 
 .u-accordion-body-content {
   padding: var(--size-sm);
+}
+
+/* #endregion */
+
+
+/* #region Input */
+
+.u-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: var(--size-xxs)
+}
+
+.u-label {
+  font-size: calc(var(--size-md) * 0.8);
+  line-height: var(--size-md);
+}
+.u-input {
+  border: none;
+  background-color: var(--color-base-100);
+  padding: var(--size-xs) var(--size-sm);
+  box-shadow: 0 0 1px var(--color-base-content);
+  color: var(--color-base-content);
+}
+
+.u-input:focus {
+  background-color: var(--color-base-200);
+  outline: none;
+  box-shadow: 0 0 0px 1px var(--color-primary-bg);
 }
 
 

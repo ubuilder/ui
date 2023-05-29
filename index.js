@@ -1,2 +1,5 @@
-export * from './src/Button'
-export * from './src/Card'
+export * from "./src/Accordion.js";
+export * from "./src/Badge.js";
+export * from "./src/Button.js";
+export * from "./src/Card.js";
+export * from "./src/View.js";
