@@ -16,7 +16,11 @@ export function DocPage(
 
   const template = renderTemplate(page);
   const script = renderScripts(page);
-  const style = View({ tag: "link", rel: "stylesheet", href: "/styles.css" });
+  const style = View({
+    tag: "link",
+    rel: "stylesheet",
+    href: "/components/styles.css",
+  });
   const title = View({ tag: "title" }, `UBuilder / Components / ` + name);
 
   return html({
