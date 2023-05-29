@@ -1,7 +1,8 @@
 import { tag } from "@ulibs/router";
 
+let id = 0;
 const prefix = "u";
-function classname(component, cssProps, globalClasses) {
+function classname(component, cssProps = {}, globalClasses = "") {
   let classes = [];
 
   classes.push([prefix, component].join("-"));
@@ -24,11 +25,12 @@ function classname(component, cssProps, globalClasses) {
 /**
  * @type {import('./types').View}
  */
-export function View(
-  {
+export function View($props, slots = []) {
+  const {
     tag: tagName = "div",
     component = "view",
     cssProps = {},
+    jsProps,
     onMount,
     m,
     p,
@@ -45,9 +47,8 @@ export function View(
     mb,
     pb,
     ...restProps
-  },
-  ...slots
-) {
+  } = $props;
+
   const defaultCssProps = {
     m,
     p,
@@ -67,36 +68,53 @@ export function View(
 
   let props = {
     ...restProps,
-    class:
-      classname("view", defaultCssProps) +
-      " " +
-      classname(component, cssProps, restProps.class),
-    scriptName: component,
-    scriptProps: {},
+    id: component + "_" + id++,
+    class: classname(
+      "view",
+      defaultCssProps,
+      classname(component, cssProps, restProps.class)
+    ).substring(classname("view").length + 1),
   };
 
-  onMount ??= "";
+  props.scriptName = classname(component);
+
+  if (onMount) {
+    let fnName = props.scriptName.replace(/\-/g, "_");
+    props.onMount = "function " + onMount.toString().replace("onMount", fnName);
+
+    props.onMount += `\ndocument.querySelectorAll("[${classname(
+      component
+    )}]").forEach($el => {
+      ${fnName}($el, JSON.parse($el.getAttribute("${classname(component)}")))
+    })`;
+  }
 
   let events = [];
   Object.keys(restProps).map((key) => {
     if (key.startsWith("on") && key[2] >= "A" && key[2] <= "Z") {
       let event = key.substring(2).toLocaleLowerCase();
-      let code = restProps.onClick.toString();
-      events.push(`$el.addEventListener("${event}", function ${code})`);
+      let code = restProps[key].toString();
+
+      events.push({ event, code });
+      delete props[key];
     }
   });
+  props.script = events
+    .map(
+      ({ code, event }) =>
+        `document.getElementById("${props.id}").addEventListener("${event}", function ${code})`
+    )
+    .join("\n");
 
-  const mountScript = onMount
-    ? `function ${onMount}
-  ${onMount ? "onMount($el)" : ""}`
-    : "";
-
-  if (mountScript || events.length > 0) {
-    props.script = `${component}($el, props) {
-      ${mountScript}
-      ${events.join("\n")}
-    }`;
+  if (typeof jsProps !== "undefined") {
+    props.scriptProps = jsProps;
   }
 
-  return tag(tagName, props, ...slots);
+  console.log(jsProps, props);
+
+  if (Array.isArray(slots)) {
+    return tag(tagName, props, ...slots.filter(Boolean));
+  } else {
+    return tag(tagName, props, slots);
+  }
 }

@@ -4,17 +4,24 @@ import { View } from "./View.js";
  *
  * @type {import('./types').Badge}
  */
-export function Badge(
-  { tag = "span", component = "badge", color, size, ...restProps },
-  ...slots
-) {
-  return View(
-    {
-      ...restProps,
-      tag,
-      component,
-      cssProps: { color, size },
+export function Badge($props, ...slots) {
+  const {
+    tag = "span",
+    component = "badge",
+    color,
+    size,
+    ...restProps
+  } = $props;
+
+  const props = {
+    ...restProps,
+    tag,
+    component,
+    cssProps: {
+      color,
+      size,
     },
-    ...slots
-  );
+  };
+
+  return View(props, ...slots);
 }
