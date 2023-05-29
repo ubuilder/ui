@@ -8,7 +8,7 @@ export function Button($props, slots) {
     href,
     tag = href ? "a" : "button",
     component = "button",
-    size = "sm",
+    size = "md",
     link = false,
     color = link ? "light" : undefined,
     ...restProps
@@ -21,6 +21,7 @@ export function Button($props, slots) {
     href,
     cssProps: {
       color,
+      size,
       link,
     },
   };

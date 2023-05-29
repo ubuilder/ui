@@ -85,7 +85,7 @@ export function View($props, slots = []) {
     props.onMount += `\ndocument.querySelectorAll("[${classname(
       component
     )}]").forEach($el => {
-      ${fnName}($el, JSON.parse($el.getAttribute("${classname(component)}")))
+      ${fnName}($el, $el.getAttribute("${classname(component)}"))
     })`;
   }
 
