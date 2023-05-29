@@ -5,7 +5,8 @@ import { View } from "./View.js";
  */
 export function Button($props, slots) {
   const {
-    tag = "button",
+    href,
+    tag = href ? "a" : "button",
     component = "button",
     size = "sm",
     link = false,
@@ -17,6 +18,7 @@ export function Button($props, slots) {
     ...restProps,
     tag,
     component,
+    href,
     cssProps: {
       color,
       link,

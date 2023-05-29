@@ -1,32 +1,10 @@
-import { Accordion, Accordions } from "../src/Accordion.js";
+import { Accordion, AccordionBody, Accordions } from "../src/Accordion.js";
 import { Button, ButtonGroup } from "../src/Button.js";
 import { Card, CardActions, CardBody, CardFooter } from "../src/Card.js";
 import { View } from "../src/View.js";
 
-function Input($props, slots) {
-  const { value, component = "input", type, label, ...restProps } = $props;
 
-  const props = {
-    ...restProps,
-    component,
-    tag: "input",
-  };
-
-  if (!value) {
-    if (type === "number") {
-      props.value = 0;
-    } else {
-      props.value = "";
-    }
-  }
-
-  return View({ component: component + "-wrapper" }, [
-    label && View({ tag: "label", component: "label" }, label),
-    View(props, slots),
-  ]);
-}
-
-let value;
+let value = "initial value";
 let components = {
   button: Button({ color: "secondary" }, "Secondary"),
   accordion: Accordions({ m: "sm" }, [
@@ -52,7 +30,7 @@ let components = {
   ]),
   card: Card({ title: "First Card" }, [
     CardBody({}, [
-      Accordions({}, [
+      Accordions({ persistent: true }, [
         Accordion({
           header: [
             "Hello",
@@ -66,17 +44,61 @@ let components = {
               "Hi"
             ),
           ],
-          body: "AccordionBody",
+          body: [
+            Input({
+              value,
+              label: "Name",
+            }),
+            Input({
+              value,
+              label: "Username",
+            }),
+            Input({
+              value,
+              label: "Age",
+            }),
+          ],
         }),
         Accordion({
           header: "Hello",
-          body: "AccordionBody",
+          body: [
+            Input({
+              value,
+              label: "Name",
+            }),
+            Input({
+              value,
+              label: "Username",
+            }),
+            Input({
+              value,
+              label: "Age",
+            }),
+          ],
+        }),
+        Accordion({
+          header: "Hello",
+          body: [
+            Input({
+              value,
+              label: "Name",
+            }),
+            Input({
+              value,
+              label: "Username",
+            }),
+            Input({
+              value,
+              label: "Age",
+            }),
+          ],
         }),
       ]),
       View({ tag: "p", mt: "md" }, [
         Input({
           value,
-          label: "Hello",
+          label: "Text:",
+          placeholder: "Type Something...",
           onInput(e) {
             value = e.target.value;
           },

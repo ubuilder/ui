@@ -366,7 +366,7 @@ h6 {
 }
 
 .u-accordion-header {
-  padding: var(--size-xs) var(--size-sm);
+  padding: var(--size-sm) var(--size-md);
   font-size: calc(var(--size-lg) * 0.8);
   line-height: var(--size-lg);
   cursor: pointer;
@@ -374,6 +374,9 @@ h6 {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.u-accordion-header-open {
+  font-weight: bold;
 }
 
 .u-accordion-body {
@@ -385,7 +388,7 @@ h6 {
 }
 
 .u-accordion-body-content {
-  padding: var(--size-sm);
+  padding: var(--size-md);
 }
 
 /* #endregion */
@@ -397,11 +400,13 @@ h6 {
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: var(--size-xxs)
+  gap: var(--size-xxs);
+  margin-bottom: var(--size-sm);
 }
 
 .u-label {
   font-size: calc(var(--size-md) * 0.8);
+  font-weight: bold;
   line-height: var(--size-md);
 }
 .u-input {
