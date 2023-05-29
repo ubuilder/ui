@@ -14,7 +14,8 @@
   "author": "",
   "license": "ISC",
   "exports": {
-    ".": "./index.js"
+    ".": "./index.js",
+    "./styles.css": "./src/styles.css"
   },
   "devDependencies": {
     "connect-livereload": "^0.6.1",
