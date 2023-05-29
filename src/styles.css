@@ -63,17 +63,17 @@
   --color-base-400: var(--color-light-400);
   --color-base-content: var(--color-light-content);
 
-  --size-xxs: 4px;
-  --size-xs: 8px;
-  --size-sm: 12px;
-  --size-md: 16px;
-  --size-lg: 24px;
-  --size-xl: 32px;
-  --size-2xl: 48px;
-  --size-3xl: 64px;
-  --size-4xl: 96px;
-  --size-5xl: 128px;
-  --size-6xl: 196px;
+  --size-xxs: 0.25rem;
+  --size-xs: 0.5rem;
+  --size-sm: 0.75rem;
+  --size-md: 1rem;
+  --size-lg: 1.5rem;
+  --size-xl: 2rem;
+  --size-2xl: 3rem;
+  --size-3xl: 4rem;
+  --size-4xl: 6rem;
+  --size-5xl: 8rem;
+  --size-6xl: 12rem;
 }
 /* #endregion */
 
@@ -98,8 +98,8 @@
 }
 
 body {
-  font-size: 14px;
-  line-height: 16px;
+  font-size: calc(var(--size-md) * 0.8);
+  line-height: var(--size-md);
   background-color: var(--color-base-200);
   color: var(--color-base-content);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -141,7 +141,7 @@ h6 {
 }
 
 .u-accordion {
-  box-shadow: 0px 1px 1px -1px var(--color-base-content);
+  box-shadow: 0 1px 1px -1px var(--color-base-content);
 }
 
 .u-accordion-header {
@@ -204,7 +204,7 @@ h6 {
 
 .u-button:active {
   background-color: var(--button-active);
-  box-shadow: 0 0 3px var(--color-base-content);
+  box-shadow: 0 0 3px var(--color-dark-100);
 }
 
 .u-button-link {
@@ -370,7 +370,7 @@ h6 {
 }
 
 .u-card-body {
-  padding: 16px;
+  padding: var(--size-md);
 }
 
 .u-card-header {
@@ -390,8 +390,8 @@ h6 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom-right-radius: 4px;
-  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: var(--size-xxs);
+  border-bottom-left-radius: var(--size-xxs);
 }
 
 .u-card-title {
