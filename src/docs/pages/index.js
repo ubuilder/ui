@@ -1,5 +1,5 @@
 import { tag } from "@ulibs/router";
-import { View } from "../../src/View.js";
+import { View } from "../../components/index.js";
 
 export default () =>
   View({}, [

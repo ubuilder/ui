@@ -8,7 +8,7 @@ import {
 } from "fs";
 import { renderTemplate } from "@ulibs/router";
 
-const files = readdirSync("./docs/pages");
+const files = readdirSync("./src/docs/pages");
 
 if (!existsSync("./build")) {
   mkdirSync("./build");
@@ -19,7 +19,7 @@ if (!existsSync("./build")) {
 
 for (let file of files) {
   if (file.endsWith(".js")) {
-    import("./docs/pages/" + file).then((module) => {
+    import("./src/docs/pages/" + file).then((module) => {
       const page = renderTemplate(module.default());
 
       if (file == "index.js") {

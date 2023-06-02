@@ -8,7 +8,10 @@
     "access": "public"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:pages": "node build.js",
+    "build:js": "rollup -f iife -i src/script/index.js -o build/ulibs.js",
+    "build": "npm run build:pages && npm run build:js",
+    "dev": "nodemon -w ./src -w ./docs ./docs/index.js"
   },
   "keywords": [],
   "author": "",
@@ -21,7 +24,8 @@
     "connect-livereload": "^0.6.1",
     "express": "^4.18.2",
     "livereload": "^0.9.3",
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.22",
+    "rollup": "^3.23.0"
   },
   "dependencies": {
     "@ulibs/router": "^0.0.2-next.9"

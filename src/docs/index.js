@@ -3,9 +3,7 @@ import express from "express";
 import connectLivereload from "connect-livereload";
 import livereload from "livereload";
 
-import { readFileSync } from "fs";
-
-import page from "./page.js";
+import { readdirSync, readFileSync } from "fs";
 
 function render(component, theme = "dark") {
   const template = renderTemplate(component);
@@ -44,8 +42,20 @@ app.get("/styles.css", (req, res) => {
   res.send(style);
 });
 
-app.get("/:name", (req, res) => {
-  res.send(render(page(req.params)));
-});
+const dir = readdirSync(new URL("./pages", import.meta.url));
+
+for (let file of dir) {
+  app.get("/" + file.split(".js")[0], async (req, res) => {
+    try {
+      const page = await import("./pages/" + file);
+      
+      res.send(render(page.default()));
+    } catch (err) {
+      console.log(err);
+      res.send("page not found");
+    }
+    // res.send(render(page(req.params)));
+  });
+}
 
 app.listen(3004, () => console.log("URL: http://localhost:3004"));
