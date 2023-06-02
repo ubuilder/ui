@@ -19,6 +19,7 @@ export default () =>
         {},
         tag("a", { href: "/components/card-example" }, "Card Example")
       ),
+      tag("li", {}, tag("a", { href: "/components/table" }, "Table & Modal")),
       tag("li", {}, tag("a", { href: "/components/view" }, "View")),
     ]),
   ]);
