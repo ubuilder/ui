@@ -54,7 +54,7 @@ jobs:
           node-version: 18
           registry-url: https://registry.npmjs.org/
       - run: npm install
-      - run: node build.js
+      - run: npm run build
 
       - name: Setup Pages
         uses: actions/configure-pages@v3
