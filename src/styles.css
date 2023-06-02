@@ -190,6 +190,7 @@ h6 {
 
   transition: all 0.2s ease;
 
+  text-decoration: none;
   display: inline-flex;
   border: none;
   cursor: pointer;
@@ -212,23 +213,25 @@ h6 {
 
 [u-button]:active {
   background-color: var(--button-active);
-  box-shadow: 0 0 3px var(--color-dark-100);
+  box-shadow: 0 0 4px var(--color-dark-100);
 }
 
 [u-button-link] {
   background-color: transparent;
-  box-shadow: none;
   color: var(--color-base-content);
+  border-color: transparent;
 }
 
 [u-button-link]:hover {
   background-color: transparent;
-  box-shadow: none;
+  border-color: transparent;
   opacity: 0.7;
   color: var(--color-base-content);
 }
 [u-button-link]:active {
   opacity: 0.5;
+  border-color: transparent;
+  box-shadow: none;
 }
 
 [u-button-size=sm] {
