@@ -1,8 +1,8 @@
 import { renderScripts, renderTemplate, html } from "@ulibs/router";
 import { Button, View } from "../../components/index.js";
 
-const prefix = "/";
-// const prefix = "/components";
+// const prefix = "/";
+const prefix = "/components";
 
 export function DocPage(
   { component = "page", name = "", ...restProps },
