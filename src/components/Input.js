@@ -1,19 +1,16 @@
+import { Base } from "../utils.js";
 import { View } from "./View.js";
 
 /**
  * @type {import('./types').Input}
  */
-export function Input($props, slots) {
+export const Input = Base(($props, $slots) => {
   const { value, component = "input", ref, type, label, ...restProps } = $props;
 
   const props = {
     ...restProps,
     component,
     ref,
-    onMount($el) {
-      console.log("onMount input", $refs, $el);
-      $refs[$el.getAttribute("ref")] = $el;
-    },
     tag: "input",
   };
 
@@ -36,6 +33,6 @@ export function Input($props, slots) {
         },
         label
       ),
-    View(props, slots),
+    View(props, $slots),
   ]);
-}
+});

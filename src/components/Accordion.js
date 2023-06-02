@@ -1,4 +1,5 @@
-import { Base, View } from "./View.js";
+import { Base } from "../utils.js";
+import { View } from "./View.js";
 
 let id = 0;
 export const Accordions = Base(($props, slots) => {
@@ -7,8 +8,7 @@ export const Accordions = Base(($props, slots) => {
   const props = {
     ...restProps,
     component,
-    ctx: { persistent },
-    // script
+    persistent,
   };
 
   return View(props, slots);
@@ -24,9 +24,9 @@ export const Accordion = Base(($props, slots) => {
   };
 
   return View(props, [
-    header && View({ ctx: { id }, component: component + "-header" }, header),
+    header && View({ id, component: component + "-header" }, header),
     View(
-      { ctx: { id }, component: component + "-content" },
+      { id, component: component + "-content" },
       body ? AccordionBody(body) : slots
     ),
   ]);
@@ -38,7 +38,7 @@ export const AccordionHeader = Base(($props, slots) => {
   const props = {
     ...restProps,
     component,
-    ctx: { id },
+    id,
   };
 
   return View(props, [
@@ -48,12 +48,11 @@ export const AccordionHeader = Base(($props, slots) => {
 });
 
 export const AccordionBody = Base(($props, slots) => {
-  const { component = "accordion-body", id, ...restProps } = $props;
+  const { component = "accordion-body", ...restProps } = $props;
 
   const props = {
     ...restProps,
     component,
-    ctx: { id },
   };
 
   return View(props, slots);

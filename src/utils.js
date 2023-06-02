@@ -50,3 +50,18 @@ export function classname(component, cssProps = {}, globalClasses = "") {
   classes.push(globalClasses);
   return classes.filter(Boolean).join(" ");
 }
+
+export function Base(callback) {
+  return (...$) => {
+    const { $props = {}, $slots = [] } = extract(...$);
+
+    let props = {};
+    for (let key in $props) {
+      if (typeof $props[key] !== "undefined") {
+        props[key] = $props[key];
+      }
+    }
+
+    return callback(props, $slots);
+  };
+}

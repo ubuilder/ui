@@ -1,22 +1,22 @@
-import { Button, ButtonGroup, View } from "../../components/index.js";
+import { Button, ButtonGroup, Icon, View } from "../../components/index.js";
 import { DocPage } from "../components/DocPage.js";
 import { Section } from "../components/Section.js";
 import { tag } from "@ulibs/router";
 
-function Icon({ name }) {
-  return View({
-    tag: "span",
-    onMount($el, props) {
-      fetch(`https://unpkg.com/@tabler/icons@2.19.0/icons/${props}.svg`)
-        .then((res) => res.text())
-        .then((svg) => {
-          $el.outerHTML = svg.replace("icon icon-tabler", "u-icon");
-        });
-    },
-    component: "icon",
-    jsProps: name,
-  });
-}
+// function Icon({ name }) {
+//   return View({
+//     tag: "span",
+//     onMount($el, props) {
+//       fetch(`https://unpkg.com/@tabler/icons@2.19.0/icons/${props}.svg`)
+//         .then((res) => res.text())
+//         .then((svg) => {
+//           $el.outerHTML = svg.replace("icon icon-tabler", "u-icon");
+//         });
+//     },
+//     component: "icon",
+//     jsProps: name,
+//   });
+// }
 
 export default function () {
   return DocPage({ name: "Button" }, [

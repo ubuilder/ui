@@ -1,10 +1,11 @@
+import { Base } from "../utils.js";
 import { View } from "./View.js";
 
 /**
  *
  * @type {import('./types').Badge}
  */
-export function Badge($props, ...slots) {
+export const Badge = Base(($props, $slots) => {
   const {
     tag = "span",
     component = "badge",
@@ -23,5 +24,5 @@ export function Badge($props, ...slots) {
     },
   };
 
-  return View(props, ...slots);
-}
+  return View(props, $slots);
+});

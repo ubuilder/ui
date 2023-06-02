@@ -15,19 +15,21 @@ const contentOpen = "u-accordion-content-open";
 export function Accordion($el) {
   queryAttr($el, header, (el) => {
     el.onclick = () => {
-      const persistent = getAttr($el, "u-persistent");
-      const id = getAttr(el, "u-id");
+      const persistent = getAttr($el, "persistent");
+      const id = getAttr(el, "id");
 
+      console.log({ persistent });
       if (!persistent) {
         // remove open attribute
         queryAttr($el, headerOpen, (el) => removeAttr(el, headerOpen, ""));
         queryAttr($el, contentOpen, (el) => removeAttr(el, contentOpen, ""));
       }
 
-      // add open for header
+      // toggle open of header
       toggleAttr(el, headerOpen);
 
-      query($el, `[${content}][u-id="${id}"]`, (el) =>
+      // toggle open of related content
+      query($el, `[${content}][id="${id}"]`, (el) =>
         toggleAttr(el, contentOpen)
       );
     };

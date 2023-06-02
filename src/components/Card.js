@@ -1,57 +1,59 @@
+import { Base } from "../utils.js";
 import { View } from "./View.js";
 
 /**
  * @type {import('./types').Card}
  */
-export function Card($props, ...slots) {
-  const { component = "card", title, ...restProps } = $props;
+export const Card = Base(($props, $slots) => {
+  $props.component = "card";
 
-  const props = {
-    ...restProps,
-    component,
-  };
+  const title = $props.title;
+  delete $props["title"];
 
-  return View(props, [title && CardHeader({}, CardTitle({}, title)), ...slots]);
-}
+  return View($props, [title && CardHeader([CardTitle(title)]), $slots]);
+});
 
 /**
  * @type {import('./types').CardBody}
  */
-export function CardBody($props, ...slots) {
-  const { component = "card-body", ...restProps } = $props;
+export const CardBody = Base(($props, $slots) => {
+  $props.component = "card-body";
 
-  return View({ ...restProps, component }, ...slots);
-}
+  return View($props, $slots);
+});
 
 /**
  * @type {import('./types').CardHeader}
  */
-export function CardHeader($props, ...slots) {
-  const { component = "card-header", ...restProps } = $props;
+export const CardHeader = Base(($props, $slots) => {
+  $props.component = "card-header";
 
-  return View({ ...restProps, component }, ...slots);
-}
+  return View($props, $slots);
+});
 
 /**
  * @type {import('./types').CardTitle}
  */
-export function CardTitle($props, ...slots) {
-  const { component = "card-title", ...restProps } = $props;
-  return View({ ...restProps, component }, ...slots);
-}
+export const CardTitle = Base(($props, $slots) => {
+  $props.component = "card-title";
+
+  return View($props, $slots);
+});
 
 /**
  * @type {import('./types').CardFooter}
  */
-export function CardFooter($props, ...slots) {
-  const { component = "card-footer", ...restProps } = $props;
-  return View({ ...restProps  , component }, ...slots);
-}
+export const CardFooter = Base(($props, $slots) => {
+  $props.component = "card-footer";
+
+  return View($props, $slots);
+});
 
 /**
  * @type {import('./types').CardActions}
  */
-export function CardActions($props, ...slots) {
-  const { component = "card-actions", ...restProps } = $props;
-  return View({ ...restProps, component }, ...slots);
-}
+export const CardActions = Base(($props, $slots) => {
+  $props.component = "card-actions";
+
+  return View($props, $slots);
+});

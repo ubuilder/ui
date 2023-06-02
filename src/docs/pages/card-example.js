@@ -15,21 +15,19 @@ const RepoCard = ({
   issueCount,
   date,
 }) => {
-  return Card(
-    {},
-    CardBody(
-      {},
+  return Card([
+    CardBody([
       CardTitle({ mb: "xs" }, title),
       description,
-      View({ style: "display: flex; gap: 8px" }, [
-        Badge({ color: "primary", me: "sm" }),
+      View({ style: "display: flex; gap: 8px", mt: "sm" }, [
+        Badge({ color: "primary", me: "xxs" }),
         language,
         View({}, stars + " Stars"),
         View({}, issueCount + " issue needs help"),
         View({}, "Updated " + date),
-      ])
-    )
-  );
+      ]),
+    ]),
+  ]);
 };
 
 export default () => {

@@ -1,74 +1,53 @@
-export function Table($props, slots) {
-  const { component = "table", tag = "table", ...restProps } = $props;
+import { Base } from "../utils.js";
+import { View } from "./View.js";
 
-  const props = {
-    ...restProps,
-    component: component + "-wrapper",
-  };
+export const Table = Base(($props, $slots) => {
+  const { component = "table" } = $props;
 
-  return View(props, [View({ tag, component }, slots)]);
-}
+  $props.component = component + "-wrapper";
 
-export function TableHead($props, slots) {
-  const { component = "table-head", tag = "thead", ...restProps } = $props;
+  return View($props, [View({ tag: "table", component }, $slots)]);
+});
 
-  const props = {
-    ...restProps,
-    tag,
-    component,
-  };
+export const TableHead = Base(($props, $slots) => {
+  $props.tag = "thead";
+  $props.component = "table-head";
 
-  return View(props, slots);
-}
-export function TableBody($props, slots) {
-  const { component = "table-body", tag = "tbody", ...restProps } = $props;
+  return View($props, $slots);
+});
 
-  const props = {
-    ...restProps,
-    tag,
-    component,
-  };
+export const TableBody = Base(($props, $slots) => {
+  $props.tag = "tbody";
+  $props.component = "table-body";
 
-  return View(props, slots);
-}
+  return View($props, $slots);
+});
 
-export function TableCell($props, slots) {
-  const {
-    component = "table-cell",
-    head,
-    tag = head ? "th" : "td",
-    ...restProps
-  } = $props;
+export const TableCell = Base(($props, $slots) => {
+  $props.tag = $props.head ? "th" : "td";
+  $props.component = "table-cell";
 
-  const props = {
-    ...restProps,
-    tag,
-    component,
-  };
+  delete $props.head;
 
-  return View(props, slots);
-}
+  return View($props, $slots);
+});
 
-export function TableFoot($props, slots) {
-  const { component = "table-foot", tag = "tfoot", ...restProps } = $props;
+export const TableActions = Base(($props, $slots) => {
+  $props.component = "table-actions";
 
-  const props = {
-    ...restProps,
-    tag,
-    component,
-  };
+  return View($props, $slots);
+});
 
-  return View(props, slots);
-}
+export const TableFoot = Base(($props, $slots) => {
+  $props.tag = "tfoot";
+  $props.component = "table-foot";
 
-export function TableRow($props, slots) {
-  const { component = "table-row", tag = "tr", ...restProps } = $props;
+  return View($props, $slots);
+});
 
-  const props = {
-    ...restProps,
-    tag,
-    component,
-  };
+export const TableRow = Base(($props, $slots) => {
+  $props.tag = "tr";
+  $props.component = "table-row";
 
-  return View(props, slots);
-}
+  return View($props, $slots);
+});

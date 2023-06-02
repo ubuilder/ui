@@ -12,6 +12,11 @@ export function getContext($el, name) {
 
 export function attr($el, key, value) {
   if (typeof value === "undefined") {
+    const result = $el.getAttribute(key);
+
+    if (result === "false") return false;
+    if (result === "true") return true;
+
     return $el.getAttribute(key);
   }
 
@@ -26,7 +31,7 @@ export function attr($el, key, value) {
 export function getAttr($el, key) {
   const value = attr($el, key);
 
-  if (value == "") return true;
+  if (value === "") return true;
   if (!value) return false;
 
   return value;

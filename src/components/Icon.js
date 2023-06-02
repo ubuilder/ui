@@ -1,13 +1,15 @@
+import { Base } from "../utils.js";
 import { View } from "./View.js";
 
 /**
  * @type {import('./types').Icon}
  */
-export function Icon({ name, size }) {
-  return View({
+export const Icon = Base(({ name, size = "md" }) => {
+  const result = View({
     tag: "span",
-    onMount,
     component: "icon",
-    jsProps: name,
+    cssProps: { size },
+    name,
   });
-}
+  return result;
+});
