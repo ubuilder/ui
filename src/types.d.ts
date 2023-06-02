@@ -111,3 +111,32 @@ export type Card = View<{ title: string }>;
  * Badge Component
  */
 export type Badge = View<{ size: Sizes; color: Colors }>;
+
+/**
+ * Input Component
+ */
+export type Input = View<{
+  value: string;
+  type: string;
+  placeholder: string;
+  readonly: boolean;
+  disabled: boolean;
+  label: string;
+}>;
+
+/**
+ * Icon Component
+ *
+ * todo: add color
+ */
+export type Icon = View<{ size: Sizes; name: string }>;
+
+/**
+ * Modal Component
+ */
+export type Modal = View<{ open: boolean; persistent: boolean }>;
+
+/**
+ * ModalBody Component
+ */
+export type ModalBody = View<{}>;

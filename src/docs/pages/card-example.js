@@ -1,6 +1,10 @@
-import { Badge } from "../../src/Badge.js";
-import { Card, CardBody, CardTitle } from "../../src/Card.js";
-import { View } from "../../src/View.js";
+import {
+  Badge,
+  Card,
+  CardBody,
+  CardTitle,
+  View,
+} from "../../components/index.js";
 import { DocPage } from "../components/DocPage.js";
 
 const RepoCard = ({

@@ -1,4 +1,4 @@
-import { View } from "../../src/View.js";
+import { View } from "../../components/index.js";
 
 export function Section(
   { component = "section", title, description },

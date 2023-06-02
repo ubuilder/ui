@@ -1,7 +1,16 @@
-import { Accordion, Accordions } from "../../src/Accordion.js";
-import { Button, ButtonGroup } from "../../src/Button.js";
-import { Card, CardActions, CardBody, CardFooter } from "../../src/Card.js";
-import { View } from "../../src/View.js";
+import {
+  Accordion,
+  AccordionBody,
+  Accordions,
+} from "../../components/Accordion.js";
+import { Button, ButtonGroup } from "../../components/Button.js";
+import {
+  Card,
+  CardActions,
+  CardBody,
+  CardFooter,
+} from "../../components/Card.js";
+import { View } from "../../components/View.js";
 import { DocPage } from "../components/DocPage.js";
 
 let value = "initial";
@@ -31,18 +40,16 @@ function Input($props, slots) {
 
 export default function () {
   return DocPage({ name: "Accordion Example" }, [
-    Card({ title: "Card" }, [
+    Card({ title: "Card", onInit: "value = 0;" }, [
       CardBody({}, [
-        Accordions({ persistent: true }, [
+        Accordions({ persistent: false }, [
           Accordion({
             header: [
               "Hello",
               Button(
                 {
                   color: "primary",
-                  onClick() {
-                    alert("click on button");
-                  },
+                  onClick: `alert("click on button")`,
                 },
                 "Hi"
               ),
@@ -101,13 +108,27 @@ export default function () {
                     "Hello",
                     Button(
                       {
+                        id: "button-new-project",
                         color: "primary",
-                        onClick() {
-                          alert("click on button");
-                        },
+                        // onClick: `console.log('HELLO', $event, $el)`,
+                        onInit: `
+                        // $("#button-new-project").on('click', () => {
+                        //   console.log('should create new project')
+                        // })
+                        `,
                       },
                       "Hi"
                     ),
+
+                    // ---- generated component
+                    // (function ($el){
+                    //   $el.addEventListener('click', ($event) => {
+                    //     // ------- user code
+                    //     console.log('HELLO', $event, $el)
+                    //     // ----- end user code
+                    //   })
+                    // }())
+                    // // ----- end component
                   ],
                   body: [
                     Input({
@@ -126,7 +147,7 @@ export default function () {
                 }),
                 Accordion({
                   header: "Hello",
-                  body: [
+                  body: AccordionBody([
                     Input({
                       value,
                       label: "Name",
@@ -139,7 +160,7 @@ export default function () {
                       value,
                       label: "Age",
                     }),
-                  ],
+                  ]),
                 }),
                 Accordion({
                   header: "Hello",
@@ -167,9 +188,7 @@ export default function () {
             value,
             label: "Text:",
             placeholder: "Type Something...",
-            onInput(e) {
-              value = e.target.value;
-            },
+            onInput: "value = $event.target.value",
           }),
         ]),
       ]),
@@ -180,9 +199,7 @@ export default function () {
             Button(
               {
                 color: "primary",
-                onClick() {
-                  alert("input value is: " + value);
-                },
+                onClick: `alert("input value is: " + value)`,
               },
               "Next"
             ),

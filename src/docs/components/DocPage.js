@@ -1,6 +1,8 @@
 import { renderScripts, renderTemplate, html } from "@ulibs/router";
-import { Button } from "../../src/Button.js";
-import { View } from "../../src/View.js";
+import { Button, View } from "../../components/index.js";
+
+const prefix = "/";
+// const prefix = "/components";
 
 export function DocPage(
   { component = "page", name = "", ...restProps },
@@ -12,9 +14,7 @@ export function DocPage(
       Button(
         {
           color: "dark",
-          onClick() {
-            document.body.classList.toggle("dark");
-          },
+          onClick: `document.body.classList.toggle("dark")`,
         },
         "Dark"
       ),
@@ -25,10 +25,12 @@ export function DocPage(
 
   const template = renderTemplate(page);
   const script = renderScripts(page);
+
+  const scriptGlobal = View({ tag: "script", src: prefix + "ulibs.js" });
   const style = View({
     tag: "link",
     rel: "stylesheet",
-    href: "/components/styles.css",
+    href: prefix + "styles.css",
   });
   const title = View({ tag: "title" }, `UBuilder / Components / ` + name);
 
@@ -37,8 +39,9 @@ export function DocPage(
     box-shadow: 0 1px 1px -1px var(--color-base-content);
   }`;
 
+  console.log(script);
   return html({
     head: [title, style, View({ tag: "style" }, customCss)],
-    body: [template, script && View({ tag: "script" }, script)],
+    body: [template, scriptGlobal, script && View({ tag: "script" }, script)],
   });
 }

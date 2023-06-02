@@ -45,7 +45,7 @@ export function CardTitle($props, ...slots) {
  */
 export function CardFooter($props, ...slots) {
   const { component = "card-footer", ...restProps } = $props;
-  return View({ ...restProps, component }, ...slots);
+  return View({ ...restProps  , component }, ...slots);
 }
 
 /**
