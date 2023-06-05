@@ -28,6 +28,6 @@
     "rollup": "^3.23.0"
   },
   "dependencies": {
-    "@ulibs/router": "^0.0.2-next.9"
+    "@ulibs/router": "^0.0.2"
   }
 }
