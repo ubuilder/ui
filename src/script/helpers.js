@@ -62,3 +62,26 @@ export function queryAttr($el, key, callback) {
 export function register(name, component) {
   queryAttr(document, name, component);
 }
+
+export function writable(value) {
+  let cbs = [];
+  let _value = value;
+  return {
+    subscribe(cb) {
+      cb(_value);
+
+      cbs.push(cb);
+      return () => {
+        cbs = cbs.filter((x) => x !== cb);
+      };
+    },
+    set(val) {
+      _value = val;
+      cbs.forEach((cb) => cb(_value));
+    },
+    update(setter) {
+      _value = setter(_value);
+      cbs.forEach((cb) => cb(_value));
+    },
+  };
+}

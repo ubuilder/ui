@@ -1,6 +1,6 @@
 import { getAttr, queryAttr, register, removeAttr, setAttr } from "./helpers";
 
-function Modal($el) {
+export function Modal($el) {
   // close on backdrop click
 
   queryAttr($el, "u-modal-backdrop", (el) => {
