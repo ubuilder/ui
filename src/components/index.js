@@ -7,3 +7,4 @@ export * from "./Input.js";
 export * from "./Modal.js";
 export * from "./Table.js";
 export * from "./View.js";
+export * from "./BreadCrumb.js";
