@@ -3,7 +3,13 @@ import express from "express";
 const app = express();
 
 app.get("/styles.css", (req, res) => {
-  res.sendFile("/home/hadi/git/ulibs/components/src/styles.css");
+  const file = fs.readFileSync('./src/styles.css')
+  res.sendFile(file);
+});
+
+app.get("/ulibs.js", (req, res) => {
+  const file = fs.readFileSync('./build/ulibs.js')
+  res.sendFile(file);
 });
 app.use("/components", express.static("./build"));
 
