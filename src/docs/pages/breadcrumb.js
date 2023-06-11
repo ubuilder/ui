@@ -2,11 +2,11 @@ import { Breadcrumb, BreadcrumbItem, View } from "../../components/index.js";
 import { DocPage } from "../components/DocPage.js";
 
 const breadcrumb = ({ title, description }) => {
-  return [Breadcrumb([View({ style: "display: flex; gap: 8px", mt: "sm" },[
-    BreadcrumbItem({ href: "/" }, "Home"),
-    BreadcrumbItem({ href: "/blog" }, "Blog"),
+  return [Breadcrumb([
+    BreadcrumbItem({ href: "/", active:true}, "Home"),
+    BreadcrumbItem({ href: "/blog", disabled:true}, "Blog"),
     BreadcrumbItem({ href: "/blog/post-1" }, "Post 1"),
-  ])])];
+  ])];
 };
 
 export default function () {
