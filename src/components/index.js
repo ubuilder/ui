@@ -8,3 +8,4 @@ export * from "./Modal.js";
 export * from "./Table.js";
 export * from "./View.js";
 export * from "./BreadCrumb.js";
+export * from "./Avatar.js";

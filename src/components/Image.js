@@ -6,14 +6,11 @@ import { View } from "./View.js";
  */
 export const Image = Base(($props, $slots) => {
   $props.component = "image";
+  $props.tag = "img"
 
   const src = $props.src;
-  delete $props["src"];
 
   const alt = $props.alt;
-  delete $props["alt"];
 
-  const className = ["image", $props.class].filter(Boolean).join(" ");
-
-  return View({ ...$props, class: className, src, alt });
+  return View({ ...$props, src, alt });
 });

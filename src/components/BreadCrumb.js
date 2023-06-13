@@ -8,7 +8,17 @@ export const Breadcrumb = Base(($props, $slots) => {
   $props.component = "breadcrumb";
   $props["aria-label"] = "breadcrumb";
 
-  return View({...$props, tag: 'nav'}, $slots);
+  return View({...$props, tag: 'ol'}, $slots);
+});
+
+
+/**
+ * @type {import('./types').Breadcrumb}
+ */
+export const BreadcrumbItemWrapper = Base(($props, $slots) => {
+  $props.component = "breadcrumb-item-wrapper";
+
+  return View({...$props, tag: 'li'}, $slots);
 });
 
 /**
@@ -16,17 +26,26 @@ export const Breadcrumb = Base(($props, $slots) => {
  */
 export const BreadcrumbItem = Base(($props, $slots) => {
   $props.component = "breadcrumb-item";
-  $props.href = $props.href || "#";  
-  if ($props.active) {
-    $props.active = "";
-    $props.component +="-active"
-  }
-  
-  if ($props.disabled) {
-    $props.disabled = "true";
-    $props.href = "#";
-    $props.component +="-disabled"
+  const {
+    active = false,
+    disabled = false,
+    ...restProps
+  } = $props;
+
+  const props = {
+    ...restProps,
+    tag: 'a',
+    cssProps: {
+      active,
+      disabled
+    },
   }
 
-  return View({...$props, tag: 'a'}, $slots);
+  $props.href = $props.href || "#";  
+  
+  if ($props.disabled) {
+    $props.href = "#";
+  }
+
+  return View(props, $slots);
 });

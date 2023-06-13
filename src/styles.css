@@ -1184,7 +1184,7 @@ h6 {
   padding: var(--size-xs) var(--size-md);
   margin-bottom: var(--size-md);
   list-style: none;
-  background-color:  var(--color-light-100);
+  background-color:  var(--color-base-100);
   border-radius: var(--size-xxs);
 }
 
@@ -1194,7 +1194,7 @@ h6 {
   display: inline-block;
   padding-right: var(--size-xxs);
   padding-left: var(--size-xxs);
-  color: var(--color-light-400);
+  color: var(--color-secondary-600);
   content: "/";
 }
 
@@ -1211,9 +1211,75 @@ h6 {
 }
 
 [u-breadcrumb-item-disabled]{
-  color: var(--color-light-400);
+  color: var(--color-base-400);
   pointer-events: none;
   text-decoration: none;
+}
+
+/* #endregion */
+
+/* #region Breadcrumb */
+
+[u-avatar] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--color-base-100);
+  font-size: var(--size-md);
+  text-transform: uppercase;
+}
+
+[u-avatar-size=xs] {
+  width: calc(3 * var(--size-xs));
+  height: calc(3 * var(--size-xs));
+}
+[u-avatar-size=sm] {
+  width: calc(3 * var(--size-sm));
+  height: calc(3 * var(--size-sm));
+}
+[u-avatar-size=md] {
+  width: calc(3 * var(--size-md));
+  height: calc(3 * var(--size-md));
+}
+[u-avatar-size=lg] {
+  width: calc(3 * var(--size-lg));
+  height: calc(3 * var(--size-lg));
+}
+[u-avatar-size=xl] {
+  width: calc(3 * var(--size-xl));
+  height: calc(3 * var(--size-xl));
+}
+
+[u-avatar-color=primary] {
+  background-color: var(--color-primary-500);
+}
+[u-avatar-color=secondary] {
+  background-color: var(--color-secondary-500);
+}
+[u-avatar-color=success] {
+  background-color: var(--color-success-500);
+}
+[u-avatar-color=info] {
+  background-color: var(--color-info-500);
+}
+[u-avatar-color=warning] {
+  background-color: var(--color-warning-500);
+}
+[u-avatar-color=error] {
+  background-color: var(--color-error-500);
+}
+[u-avatar-color=dark] {
+  background-color: var(--color-dark-300);
+}
+[u-avatar-color=light] {
+  background-color: var(--color-light-300);
+}
+
+[u-avatar]>[u-image]{
+  border-radius: 50%;
+  width: inherit;
+  height: inherit;
 }
 
 /* #endregion */
