@@ -27,7 +27,7 @@ export const Avatar = Base(($props, $slots) => {
   }
 
   const content = src
-    ? View(props, Image({src, alt }))
+    ? View(props, Image({src, alt, component: component+"-image"}))
     : View(props, $slots)
     
   return content;
