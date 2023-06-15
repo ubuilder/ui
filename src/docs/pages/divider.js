@@ -1,16 +1,19 @@
-import { Divider, View } from "../../components/index.js";
+import {
+  Divider,
+  View
+} from "../../components/index.js";
+
 import { DocPage } from "../components/DocPage.js";
 
 const divider = ({ title, description }) => {
-  return Divider({}, "something");
+  return View({},[
+    View("something goes here"),
+    Divider({color: "error"}),
+    View("something goes here"),
+    Divider({color: "success"}),
+    ])
 };
 
-export default () => {
-  return DocPage(
-    { name: "divider" },
-    divider({
-      title: "simple divider",
-      description: "description",
-    })
-  );
-};
+export default function () {
+  return DocPage({ name: "divider" }, [divider("simple-divider", "desc....")]);
+}

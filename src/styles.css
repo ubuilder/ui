@@ -1153,7 +1153,7 @@ h6 {
 }
 /* #endregion  */
 
-/* #region View (Padding) */
+/* #region spinner */
 
 [u-spinner-size=xs] {
   --spinner-size: calc(var(--size-xs) * 4);
@@ -1215,3 +1215,192 @@ h6 {
 }
 
 /* #endregion  */
+
+/* #region Breadcrumb */
+
+[u-breadcrumb] {
+  display: flex;
+  flex-wrap: wrap;
+  padding: var(--size-xs) var(--size-md);
+  margin-bottom: var(--size-md);
+  list-style: none;
+  background-color:  var(--color-base-100);
+  border-radius: var(--size-xxs);
+}
+
+[u-breadcrumb-item-disabled]::before,
+[u-breadcrumb-item-active]::before,
+[u-breadcrumb-item]::before {
+  display: inline-block;
+  padding-right: var(--size-xxs);
+  padding-left: var(--size-xxs);
+  color: var(--color-secondary-600);
+  content: "/";
+}
+
+[u-breadcrumb-item-disabled],
+[u-breadcrumb-item-active],
+[u-breadcrumb-item]{
+  display: flex;
+  color: var(--color-primary-400);
+  text-decoration: none;
+}
+
+[u-breadcrumb-item-active]{
+  color: var(--color-error-400);
+}
+
+[u-breadcrumb-item-disabled]{
+  color: var(--color-base-400);
+  pointer-events: none;
+  text-decoration: none;
+}
+
+/* #endregion */
+
+/* #region Breadcrumb */
+
+[u-avatar-size=xs] {
+  --avatar-width: calc(3 * var(--size-xs));
+  --avatar-height: calc(3 * var(--size-xs));
+}
+[u-avatar-size=sm] {
+  --avatar-width: calc(3 * var(--size-sm));
+  --avatar-height: calc(3 * var(--size-sm));
+}
+[u-avatar-size=md] {
+  --avatar-width: calc(3 * var(--size-md));
+  --avatar-height: calc(3 * var(--size-md));
+}
+[u-avatar-size=lg] {
+  --avatar-width: calc(3 * var(--size-lg));
+  --avatar-height: calc(3 * var(--size-lg));
+}
+[u-avatar-size=xl] {
+  --avatar-width: calc(3 * var(--size-xl));
+  --avatar-height: calc(3 * var(--size-xl));
+}
+
+[u-avatar-color=primary] {
+  --avatar-bg: var(--color-primary-500);
+}
+[u-avatar-color=secondary] {
+  --avatar-bg: var(--color-secondary-500);
+}
+[u-avatar-color=success] {
+  --avatar-bg: var(--color-success-500);
+}
+[u-avatar-color=info] {
+  --avatar-bg: var(--color-info-500);
+}
+[u-avatar-color=warning] {
+  --avatar-bg: var(--color-warning-500);
+}
+[u-avatar-color=error] {
+  --avatar-bg: var(--color-error-500);
+}
+[u-avatar-color=dark] {
+  --avatar-bg: var(--color-dark-300);
+}
+[u-avatar-color=light] {
+  --avatar-bg: var(--color-light-300);
+}
+
+[u-avatar] {
+  display: inline-flex;
+  width: var(--avatar-width);
+  height: var(--avatar-height);
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--color-base-100);
+  font-size: var(--size-md);
+  text-transform: uppercase;
+  background-color: var(--avatar-bg);
+}
+
+[u-avatar-image]{
+  border-radius: 50%;
+  width: inherit;
+  height: inherit;
+}
+
+/* #endregion */
+
+/* #region divider */
+
+[u-divider-color=primary] {
+  --divider-bg: var(--color-primary-500);
+}
+[u-divider-color=secondary] {
+  --divider-bg: var(--color-secondary-500);
+}
+[u-divider-color=success] {
+  --divider-bg: var(--color-success-500);
+}
+[u-divider-color=info] {
+  --divider-bg: var(--color-info-500);
+}
+[u-divider-color=warning] {
+  --divider-bg: var(--color-warning-500);
+}
+[u-divider-color=error] {
+  --divider-bg: var(--color-error-500);
+}
+[u-divider-color=dark] {
+  --divider-bg: var(--color-dark-300);
+}
+[u-divider-color=light] {
+  --divider-bg: var(--color-light-300);
+}
+
+[u-divider] {
+  border: none;
+  height: 1px;
+  margin: var(--size-sm) 0;
+  background-color: var(--divider-bg);
+}
+
+/* #endregion */
+
+
+/* #region progress */
+
+[u-progress-bar-color=primary] {
+  --progress-bar-color: var(--color-primary-500);
+}
+[u-progress-bar-color=secondary] {
+  --progress-bar-color: var(--color-secondary-500);
+}
+[u-progress-bar-color=success] {
+  --progress-bar-color: var(--color-success-500);
+}
+[u-progress-bar-color=info] {
+  --progress-bar-color: var(--color-info-500);
+}
+[u-progress-bar-color=warning] {
+  --progress-bar-color: var(--color-warning-500);
+}
+[u-progress-bar-color=error] {
+  --progress-bar-color: var(--color-error-500);
+}
+[u-progress-bar-color=dark] {
+  --progress-bar-color: var(--color-dark-300);
+}
+[u-progress-bar-color=light] {
+  --progress-bar-color: var(--color-light-300);
+}
+
+[u-progress]{
+  height: var(--size-sm);
+  background-color: var(--color-base-100);
+  border-radius: var(--size-xxs);
+  overflow: hidden;
+}
+
+[u-progress-bar]{
+  height: 100%;
+  background-color: var(--progress-bar-color);
+}
+
+/* #endregion */

@@ -7,26 +7,26 @@ import { View } from "./View.js";
  */
 export const Progress = Base(($props, $slots) => {
   const {
-    tag = "div",
     component = "progress",
-    color = "primary",
-    size = "md",
     value = 0,
-    indeterminate = false,
-    label,
+    color = "primary",
     ...restProps
   } = $props;
 
   const props = {
     ...restProps,
-    tag,
-    label,
     component,
+  };
+
+  const progressProps = {
+    component: component + "-bar",
     cssProps: {
-      color,
-      size
+      color
     },
   };
 
-  return View(props, $slots);
+  return View(
+    props,
+    View({...progressProps, style: "width:"+`${value}%`})
+  );
 });
