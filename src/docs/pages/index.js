@@ -21,5 +21,10 @@ export default () =>
       ),
       tag("li", {}, tag("a", { href: "/components/table" }, "Table & Modal")),
       tag("li", {}, tag("a", { href: "/components/view" }, "View")),
+      tag("li", {}, tag("a", { href: "/components/divider" }, "Divider")),
+      tag("li", {}, tag("a", { href: "/components/spinner" }, "Spinner")),
+      tag("li", {}, tag("a", { href: "/components/breadcrumb" }, "Breadcrumb")),
+      tag("li", {}, tag("a", { href: "/components/avatar" }, "Avatar")),
+      tag("li", {}, tag("a", { href: "/components/progress" }, "Progress")),
     ]),
   ]);

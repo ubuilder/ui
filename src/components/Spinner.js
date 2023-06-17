@@ -2,25 +2,27 @@ import { Base } from "../utils.js";
 import { View } from "./View.js";
 
 /**
+ *
  * @type {import('./types').Spinner}
  */
 export const Spinner = Base(($props, $slots) => {
-  $props.component = "spinner";
+  const {
+    tag = "div",
+    component = "spinner",
+    size = "md",
+    color = "light",
+    ...restProps
+  } = $props;
 
-  const size = $props.size;
-  delete $props["size"];
+  const props = {
+    ...restProps,
+    tag,
+    component,
+    cssProps: {
+      color,
+      size,
+    },
+  };
 
-  const color = $props.color;
-  delete $props["color"];
-
-  const className = [
-    "spinner",
-    size && `spinner-${size}`,
-    color && `spinner-${color}`,
-    $props.class,
-  ]
-    .filter(Boolean)
-    .join(" ");
-
-  return View({ ...$props, class: className });
+  return View(props, $slots);
 });
