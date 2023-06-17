@@ -1156,19 +1156,19 @@ h6 {
 /* #region spinner */
 
 [u-spinner-size=xs] {
-  --spinner-size: calc(var(--size-xs) * 4);
+  --spinner-size: var(--size-xs);
 }
 [u-spinner-size=sm] {
-  --spinner-size: calc(var(--size-sm) * 4);
+  --spinner-size: var(--size-sm);
 }
 [u-spinner-size=md] {
-  --spinner-size: calc(var(--size-md) * 4);
+  --spinner-size: var(--size-md);
 }
 [u-spinner-size=lg] {
-  --spinner-size: calc(var(--size-lg) * 4);
+  --spinner-size: var(--size-lg);
 }
 [u-spinner-size=xl] {
-  --spinner-size: calc(var(--size-xl) * 4);
+  --spinner-size: var(--size-xl);
 }
 
 [u-spinner-color=primary] {
@@ -1200,8 +1200,8 @@ h6 {
   display: inline-block;
   border-style: solid;
   border-radius: 50%;
-  width: var(--spinner-size);
-  height: var(--spinner-size);
+  width: calc(var(--spinner-size) * 4);
+  height: calc(var(--spinner-size) * 4);
   border-width: var(--size-xxs);
   border-color: var(--spinner-bg);
   border-top-color: transparent;
@@ -1261,24 +1261,19 @@ h6 {
 /* #region Breadcrumb */
 
 [u-avatar-size=xs] {
-  --avatar-width: calc(3 * var(--size-xs));
-  --avatar-height: calc(3 * var(--size-xs));
+  --avatar-width: var(--size-xs);
 }
 [u-avatar-size=sm] {
-  --avatar-width: calc(3 * var(--size-sm));
-  --avatar-height: calc(3 * var(--size-sm));
+  --avatar-width: var(--size-sm);
 }
 [u-avatar-size=md] {
-  --avatar-width: calc(3 * var(--size-md));
-  --avatar-height: calc(3 * var(--size-md));
+  --avatar-width: var(--size-md);
 }
 [u-avatar-size=lg] {
-  --avatar-width: calc(3 * var(--size-lg));
-  --avatar-height: calc(3 * var(--size-lg));
+  --avatar-width: var(--size-lg);
 }
 [u-avatar-size=xl] {
-  --avatar-width: calc(3 * var(--size-xl));
-  --avatar-height: calc(3 * var(--size-xl));
+  --avatar-width: var(--size-xl);
 }
 
 [u-avatar-color=primary] {
@@ -1308,8 +1303,8 @@ h6 {
 
 [u-avatar] {
   display: inline-flex;
-  width: var(--avatar-width);
-  height: var(--avatar-height);
+  width: calc(3 * var(--avatar-width));
+  height: calc(3 * var(--avatar-width));
   align-items: center;
   justify-content: center;
   border-radius: 50%;
