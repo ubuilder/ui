@@ -249,27 +249,51 @@ h6 {
 
 [u-button-color=primary] {
   --button-bg: var(--color-primary-500);
+  --button-hover: var(--color-primary-600);
+  --button-active: var(--color-primary-400);
+  --button-content: var(--color-primary-content);
 }
 [u-button-color=secondary] {
   --button-bg: var(--color-secondary-500);
+  --button-hover: var(--color-secondary-600);
+  --button-active: var(--color-secondary-400);
+  --button-content: var(--color-secondary-content);
 }
 [u-button-color=success] {
   --button-bg: var(--color-success-500);
+  --button-hover: var(--color-success-600);
+  --button-active: var(--color-success-400);
+  --button-content: var(--color-success-content);
 }
 [u-button-color=info] {
   --button-bg: var(--color-info-500);
+  --button-hover: var(--color-info-600);
+  --button-active: var(--color-info-400);
+  --button-content: var(--color-info-content);
 }
 [u-button-color=warning] {
   --button-bg: var(--color-warning-500);
+  --button-hover: var(--color-warning-600);
+  --button-active: var(--color-warning-400);
+  --button-content: var(--color-warning-content);
 }
 [u-button-color=error] {
   --button-bg: var(--color-error-500);
+  --button-hover: var(--color-error-600);
+  --button-active: var(--color-error-400);
+  --button-content: var(--color-error-content);
 }
 [u-button-color=dark] {
   --button-bg: var(--color-dark-300);
+  --button-hover: var(--color-dark-400);
+  --button-active: var(--color-dark-200);
+  --button-content: var(--color-dark-content);
 }
 [u-button-color=light] {
   --button-bg: var(--color-light-300);
+  --button-hover: var(--color-light-400);
+  --button-active: var(--color-light-200);
+  --button-content: var(--color-light-content);
 }
 
 [u-button-group] {
