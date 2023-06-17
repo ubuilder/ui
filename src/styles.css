@@ -1224,15 +1224,15 @@ h6 {
   display: inline-block;
   border-style: solid;
   border-radius: 50%;
-  width: calc(var(--spinner-size) * 4);
-  height: calc(var(--spinner-size) * 4);
-  border-width: var(--size-xxs);
+  width: var(--spinner-size);
+  height: var(--spinner-size);
+  border-width: calc(var(--size-xxs) * 0.5);
   border-color: var(--spinner-bg);
   border-top-color: transparent;
-  animation: spinner 0.6s linear infinite;
+  animation: u-spinner-animation 0.6s linear infinite;
 }
 
-@keyframes spinner {
+@keyframes u-spinner-animation {
   to {
     transform: rotate(360deg);
   }
@@ -1252,8 +1252,6 @@ h6 {
   border-radius: var(--size-xxs);
 }
 
-[u-breadcrumb-item-disabled]::before,
-[u-breadcrumb-item-active]::before,
 [u-breadcrumb-item]::before {
   display: inline-block;
   padding-right: var(--size-xxs);
@@ -1262,8 +1260,6 @@ h6 {
   content: "/";
 }
 
-[u-breadcrumb-item-disabled],
-[u-breadcrumb-item-active],
 [u-breadcrumb-item]{
   display: flex;
   color: var(--color-primary-400);
@@ -1285,19 +1281,19 @@ h6 {
 /* #region Breadcrumb */
 
 [u-avatar-size=xs] {
-  --avatar-width: var(--size-xs);
+  --avatar-size: var(--size-xs);
 }
 [u-avatar-size=sm] {
-  --avatar-width: var(--size-sm);
+  --avatar-size: var(--size-sm);
 }
 [u-avatar-size=md] {
-  --avatar-width: var(--size-md);
+  --avatar-size: var(--size-md);
 }
 [u-avatar-size=lg] {
-  --avatar-width: var(--size-lg);
+  --avatar-size: var(--size-lg);
 }
 [u-avatar-size=xl] {
-  --avatar-width: var(--size-xl);
+  --avatar-size: var(--size-xl);
 }
 
 [u-avatar-color=primary] {
@@ -1327,13 +1323,13 @@ h6 {
 
 [u-avatar] {
   display: inline-flex;
-  width: calc(3 * var(--avatar-width));
-  height: calc(3 * var(--avatar-width));
+  width: calc(3 * var(--avatar-size));
+  height: calc(3 * var(--avatar-size));
   align-items: center;
   justify-content: center;
   border-radius: 50%;
   color: var(--color-base-100);
-  font-size: var(--size-md);
+  font-size: var(--avatar-size);
   text-transform: uppercase;
   background-color: var(--avatar-bg);
 }
