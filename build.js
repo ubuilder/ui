@@ -42,3 +42,10 @@ for (let file of files) {
 const css = sass.compile("./src/styles/index.scss");
 writeFileSync("./build/styles.css", css.css);
 // cpSync("./src/styles.css", "./build/styles.css");
+
+if (!existsSync("./dist")) {
+  mkdirSync("./dist");
+}
+
+writeFileSync("./dist/styles.css", css.css);
+cpSync("./ulibs.js", "./dist/ulibs.js");
