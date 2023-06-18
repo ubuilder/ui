@@ -1,0 +1,11 @@
+[u-icon] {
+  --icon-size: var(--size-md);
+
+  stroke-width: 1px;
+  width: var(--icon-size);
+  height: var(--icon-size);
+}
+
+@include variant(icon-size, $all-sizes) using ($size) {
+  --icon-size: #{var(--size-#{$size})};
+}

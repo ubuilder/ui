@@ -1,0 +1,20 @@
+/* #region divider */
+@include color-variants(divider) using ($color) {
+  --divider-bg: #{var(--color-#{$color}-500)};
+}
+
+[u-divider-color="dark"] {
+  --divider-bg: var(--color-dark-300);
+}
+[u-divider-color="light"] {
+  --divider-bg: var(--color-light-300);
+}
+
+[u-divider] {
+  border: none;
+  height: 1px;
+  margin: var(--size-sm) 0;
+  background-color: var(--divider-bg);
+}
+
+/* #endregion */

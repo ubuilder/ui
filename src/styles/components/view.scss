@@ -1,0 +1,68 @@
+@include variant("view-m", $all-sizes) using ($size) {
+  margin: var(--size-#{$size});
+}
+@include variant("view-mx", $all-sizes) using ($size) {
+  margin-left: var(--size-#{$size});
+  margin-right: var(--size-#{$size});
+}
+@include variant("view-my", $all-sizes) using ($size) {
+  margin-top: var(--size-#{$size});
+  margin-bottom: var(--size-#{$size});
+}
+@include variant("view-mt", $all-sizes) using ($size) {
+  margin-top: var(--size-#{$size});
+}
+@include variant("view-mb", $all-sizes) using ($size) {
+  margin-bottom: var(--size-#{$size});
+}
+@include variant("view-ms", $all-sizes) using ($size) {
+  margin-left: var(--size-#{$size});
+}
+@include variant("view-me", $all-sizes) using ($size) {
+  margin-right: var(--size-#{$size});
+}
+
+.u-view-m-auto {
+  margin: auto;
+}
+.u-view-mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+.u-view-ms-auto {
+  margin-left: auto;
+}
+.u-view-me-auto {
+  margin-right: auto;
+}
+.u-view-mt-auto {
+  margin-top: auto;
+}
+.u-view-mb-auto {
+  margin-bottom: auto;
+}
+
+/* #region View (Padding) */
+@include variant("view-p", $all-sizes) using ($size) {
+  padding: var(--size-#{$size});
+}
+@include variant("view-px", $all-sizes) using ($size) {
+  padding-left: var(--size-#{$size});
+  padding-right: var(--size-#{$size});
+}
+@include variant("view-py", $all-sizes) using ($size) {
+  padding-top: var(--size-#{$size});
+  padding-bottom: var(--size-#{$size});
+}
+@include variant("view-pt", $all-sizes) using ($size) {
+  padding-top: var(--size-#{$size});
+}
+@include variant("view-pb", $all-sizes) using ($size) {
+  padding-bottom: var(--size-#{$size});
+}
+@include variant("view-ps", $all-sizes) using ($size) {
+  padding-left: var(--size-#{$size});
+}
+@include variant("view-pe", $all-sizes) using ($size) {
+  padding-right: var(--size-#{$size});
+}

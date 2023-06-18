@@ -1,0 +1,26 @@
+[u-input-wrapper] {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: var(--size-xxs);
+  margin-bottom: var(--size-sm);
+}
+
+[u-label] {
+  font-size: calc(var(--size-md) * 0.8);
+  font-weight: bold;
+  line-height: var(--size-md);
+}
+[u-input] {
+  border: none;
+  background-color: var(--color-base-100);
+  padding: var(--size-xs) var(--size-sm);
+  box-shadow: 0 0 1px var(--color-base-content);
+  color: var(--color-base-content);
+}
+
+[u-input]:focus {
+  background-color: var(--color-base-200);
+  outline: none;
+  box-shadow: 0 0 0px 1px var(--color-primary-600);
+}

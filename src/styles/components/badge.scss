@@ -1,0 +1,22 @@
+[u-badge] {
+  --badge-bg: var(--color-default-bg);
+  --badge-content: var(--color-default-content);
+
+  --badge-size: var(--size-md);
+  border-radius: var(--badge-size);
+  padding: 0 calc(var(--badge-size) / 2);
+  font-size: calc(var(--badge-size) * 0.8);
+  line-height: var(--badge-size);
+
+  background-color: var(--badge-bg);
+  color: var(--badge-content);
+}
+
+@include size-variants(badge) using ($size) {
+  --badge-size: #{var(--size-#{$size})};
+}
+
+@include color-variants(badge) using ($color) {
+  --badge-bg: #{var(--color-#{$color}-500)};
+  --badge-content: #{var(--color-#{$color}-content)};
+}

@@ -1,0 +1,18 @@
+@mixin variant($name, $list) {
+  @each $item in $list {
+    [u-#{$name}="#{$item}"] {
+      @content ($item);
+    }
+  }
+}
+
+@mixin color-variants($component) {
+  @include variant($component + "-color", $colors) using($color) {
+    @content ($color);
+  }
+}
+@mixin size-variants($component) {
+  @include variant($component + "-size", $sizes) using($size) {
+    @content ($size);
+  }
+}
