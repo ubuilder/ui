@@ -49,3 +49,4 @@ if (!existsSync("./dist")) {
 
 writeFileSync("./dist/styles.css", css.css);
 cpSync("./ulibs.js", "./dist/ulibs.js");
+cpSync("./ulibs.js", "./build/ulibs.js");
