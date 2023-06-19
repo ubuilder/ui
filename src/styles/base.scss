@@ -73,12 +73,13 @@
   --size-5xl: calc(8 * var(--size-base));
   --size-6xl: calc(12 * var(--size-base));
 
-  --size-content-xs: 304px;
-  --size-content-sm: 432px;
-  --size-content-md: 688px;
-  --size-content-lg: 928px;
-  --size-content-xl: 1152px;
+  --size-container-xs: 540px;
+  --size-container-sm: 728px;
+  --size-container-md: 952px;
+  --size-container-lg: 1160px;
+  --size-container-xl: 1400px;
 }
+
 /* #endregion */
 
 /* #region Dark */

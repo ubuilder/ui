@@ -1,0 +1,113 @@
+// Container
+[u-container] {
+  --container-size: 100%;
+  width: var(--container-size);
+}
+
+// @include size-variants(container) using ($size) {
+//   --container-size: var(--size-container-#{$size});
+// }
+
+@include breakpoint("xs") {
+  [u-container-size="xs"] {
+    --container-size: var(--size-container-xs);
+  }
+  [u-container-size="sm"] {
+    --container-size: var(--size-container-xs);
+  }
+  [u-container-size="md"] {
+    --container-size: var(--size-container-xs);
+  }
+  [u-container-size="lg"] {
+    --container-size: var(--size-container-xs);
+  }
+  [u-container-size="xl"] {
+    --container-size: var(--size-container-xs);
+  }
+}
+
+@include breakpoint("sm") {
+  [u-container-size="sm"] {
+    --container-size: var(--size-container-sm);
+  }
+  [u-container-size="md"] {
+    --container-size: var(--size-container-sm);
+  }
+  [u-container-size="lg"] {
+    --container-size: var(--size-container-sm);
+  }
+  [u-container-size="xl"] {
+    --container-size: var(--size-container-sm);
+  }
+}
+
+@include breakpoint("md") {
+  [u-container-size="md"] {
+    --container-size: var(--size-container-md);
+  }
+  [u-container-size="lg"] {
+    --container-size: var(--size-container-md);
+  }
+  [u-container-size="xl"] {
+    --container-size: var(--size-container-md);
+  }
+}
+@include breakpoint("lg") {
+  [u-container-size="lg"] {
+    --container-size: var(--size-container-lg);
+  }
+  [u-container-size="xl"] {
+    --container-size: var(--size-container-lg);
+  }
+}
+
+@include breakpoint("xl") {
+  [u-container-size="xl"] {
+    --container-size: var(--size-container-xl);
+  }
+}
+
+// @each $key, $value in $breakpoints {
+//   @media (min-width: #{$value}px) {
+//     @include size-variants(container) using ($size) {
+//       --container-size: #{var(--size-container-#{$key})};
+//     }
+//   }
+// }
+
+// Row
+[u-row] {
+  --row-gutter: var(--size-md);
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  margin-left: calc(var(--row-gutter) / -2);
+  margin-right: calc(var(--row-gutter) / -2);
+
+  margin-top: calc(var(--row-gutter) / -2);
+  margin-bottom: calc(var(--row-gutter) / -2);
+
+  //
+}
+
+@include variant(row-gutter, $sizes) using ($size) {
+  --row-gutter: #{var(--size-#{$size})};
+}
+
+// Col
+[u-col] {
+  --cols: 12;
+  padding-left: calc(var(--row-gutter) / 2);
+  padding-right: calc(var(--row-gutter) / 2);
+
+  padding-top: calc(var(--row-gutter) / 2);
+  padding-bottom: calc(var(--row-gutter) / 2);
+
+  width: calc(var(--cols) * 100% / 12);
+}
+
+$col-sizes: (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+@include variant(col-cols, $col-sizes) using ($size) {
+  --cols: #{$size};
+}

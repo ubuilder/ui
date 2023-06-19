@@ -16,3 +16,16 @@
     @content ($size);
   }
 }
+
+@mixin breakpoint($size) {
+  @media (min-width: #{map-get($breakpoints, $size)}px) {
+    @content;
+  }
+}
+@mixin breakpoints() {
+  @each $size, $value in $breakpoints {
+    @include breakpoint($size) {
+      @content ($size);
+    }
+  }
+}
