@@ -2,8 +2,8 @@
 [u-container] {
   --container-size: 100%;
   width: var(--container-size);
+  padding: var(--size-md);
 }
-
 
 @include breakpoint("xs") {
   [u-container-size="xs"] {
