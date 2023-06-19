@@ -31,19 +31,33 @@ export function classname(component, cssProps = {}, globalClasses = "") {
   let classes = [];
 
   if (component) {
-    classes.push([prefix, component].join("-"));
+    classes.push([prefix, paramCase(component)].join("-"));
   } else {
     classes.push(prefix);
+  }
+
+  function paramCase(str) {
+    return str
+      .split("")
+      .map((char) => {
+        if ((char >= "A") & (char <= "Z")) {
+          return "-" + char.toLowerCase();
+        }
+        return char;
+      })
+      .join("");
   }
 
   Object.keys(cssProps).map((key) => {
     let value = cssProps[key];
 
+    console.log("classname: ", key, paramCase(key));
+
     if (typeof value === "number" || typeof value === "string") {
-      classes.push([prefix, component, key, value].join("-"));
+      classes.push([prefix, component, paramCase(key), value].join("-"));
     }
     if (value === true) {
-      classes.push([prefix, component, key].join("-"));
+      classes.push([prefix, component, paramCase(key)].join("-"));
     }
   });
 

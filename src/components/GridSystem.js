@@ -26,12 +26,35 @@ export const Row = Base(($props, $slots) => {
 
 export const Col = Base(($props, $slots) => {
   $props.component = $props.component ?? "col";
-  $props.cols = $props.cols ?? 12;
 
   $props.cssProps = {
-    cols: $props.cols,
+    col: $props.col,
+    colXs: $props.colXs,
+    colSm: $props.colSm,
+    colMd: $props.colMd,
+    colLg: $props.colLg,
+    colXl: $props.colXl,
+
+    offset: $props.offset,
+    offsetXs: $props.offsetXs,
+    offsetSm: $props.offsetSm,
+    offsetMd: $props.offsetMd,
+    offsetLg: $props.offsetLg,
+    offsetXl: $props.offsetXl,
   };
-  delete $props["cols"];
+  delete $props["col"];
+
+  delete $props["colXs"];
+  delete $props["colMd"];
+  delete $props["colLg"];
+  delete $props["colSm"];
+  delete $props["colXl"];
+
+  delete $props["offsetXs"];
+  delete $props["offsetMd"];
+  delete $props["offsetLg"];
+  delete $props["offsetSm"];
+  delete $props["offsetXl"];
 
   return View($props, $slots);
 });

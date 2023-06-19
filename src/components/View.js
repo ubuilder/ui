@@ -49,11 +49,19 @@ export const View = Base(($props, $slots) => {
 
   for (let prop in cssProps) {
     if (cssProps[prop])
-      cssAttributes[classname(component + "-" + prop)] = cssProps[prop];
+      if (cssProps[prop] === true) {
+        cssAttributes[classname(component + "-" + prop)] = "";
+      } else {
+        cssAttributes[classname(component + "-" + prop)] = cssProps[prop];
+      }
   }
   for (let prop in viewCssProps) {
     if (viewCssProps[prop])
-      cssAttributes[classname("view-" + prop)] = viewCssProps[prop];
+      if (viewCssProps[prop] === true) {
+        cssAttributes[classname("view-" + prop)] = "";
+      } else {
+        cssAttributes[classname("view-" + prop)] = viewCssProps[prop];
+      }
   }
 
   const props = {
