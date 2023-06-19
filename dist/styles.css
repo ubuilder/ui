@@ -672,10 +672,6 @@ h6 {
   flex: 1;
 }
 
-[u-col-col="0"] {
-  --col: 0;
-}
-
 [u-col-col="1"] {
   --col: 1;
 }
@@ -722,10 +718,6 @@ h6 {
 
 [u-col-col="12"] {
   --col: 12;
-}
-
-[u-col-offset="0"] {
-  --offset: 0;
 }
 
 [u-col-offset="1"] {
@@ -777,9 +769,46 @@ h6 {
 }
 
 @media (min-width: 576px) {
-  [u-col-col-xs="0"] {
-    --col: 0;
+  [u-col-col-xs=""] {
+    flex: 1;
   }
+  [u-col-col-xs="0"] {
+    --col: unset;
+  }
+}
+@media (min-width: 768px) {
+  [u-col-col-sm=""] {
+    flex: 1;
+  }
+  [u-col-col-sm="0"] {
+    --col: unset;
+  }
+}
+@media (min-width: 992px) {
+  [u-col-col-md=""] {
+    flex: 1;
+  }
+  [u-col-col-md="0"] {
+    --col: unset;
+  }
+}
+@media (min-width: 1200px) {
+  [u-col-col-lg=""] {
+    flex: 1;
+  }
+  [u-col-col-lg="0"] {
+    --col: unset;
+  }
+}
+@media (min-width: 1440px) {
+  [u-col-col-xl=""] {
+    flex: 1;
+  }
+  [u-col-col-xl="0"] {
+    --col: unset;
+  }
+}
+@media (min-width: 576px) {
   [u-col-col-xs="1"] {
     --col: 1;
   }
@@ -815,9 +844,6 @@ h6 {
   }
   [u-col-col-xs="12"] {
     --col: 12;
-  }
-  [u-col-offset-xs="0"] {
-    --offset: 0;
   }
   [u-col-offset-xs="1"] {
     --offset: 1;
@@ -857,9 +883,6 @@ h6 {
   }
 }
 @media (min-width: 768px) {
-  [u-col-col-sm="0"] {
-    --col: 0;
-  }
   [u-col-col-sm="1"] {
     --col: 1;
   }
@@ -895,9 +918,6 @@ h6 {
   }
   [u-col-col-sm="12"] {
     --col: 12;
-  }
-  [u-col-offset-sm="0"] {
-    --offset: 0;
   }
   [u-col-offset-sm="1"] {
     --offset: 1;
@@ -937,9 +957,6 @@ h6 {
   }
 }
 @media (min-width: 992px) {
-  [u-col-col-md="0"] {
-    --col: 0;
-  }
   [u-col-col-md="1"] {
     --col: 1;
   }
@@ -975,9 +992,6 @@ h6 {
   }
   [u-col-col-md="12"] {
     --col: 12;
-  }
-  [u-col-offset-md="0"] {
-    --offset: 0;
   }
   [u-col-offset-md="1"] {
     --offset: 1;
@@ -1017,9 +1031,6 @@ h6 {
   }
 }
 @media (min-width: 1200px) {
-  [u-col-col-lg="0"] {
-    --col: 0;
-  }
   [u-col-col-lg="1"] {
     --col: 1;
   }
@@ -1055,9 +1066,6 @@ h6 {
   }
   [u-col-col-lg="12"] {
     --col: 12;
-  }
-  [u-col-offset-lg="0"] {
-    --offset: 0;
   }
   [u-col-offset-lg="1"] {
     --offset: 1;
@@ -1097,9 +1105,6 @@ h6 {
   }
 }
 @media (min-width: 1440px) {
-  [u-col-col-xl="0"] {
-    --col: 0;
-  }
   [u-col-col-xl="1"] {
     --col: 1;
   }
@@ -1135,9 +1140,6 @@ h6 {
   }
   [u-col-col-xl="12"] {
     --col: 12;
-  }
-  [u-col-offset-xl="0"] {
-    --offset: 0;
   }
   [u-col-offset-xl="1"] {
     --offset: 1;

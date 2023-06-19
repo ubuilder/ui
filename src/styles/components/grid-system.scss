@@ -4,9 +4,6 @@
   width: var(--container-size);
 }
 
-// @include size-variants(container) using ($size) {
-//   --container-size: var(--size-container-#{$size});
-// }
 
 @include breakpoint("xs") {
   [u-container-size="xs"] {
@@ -67,14 +64,6 @@
   }
 }
 
-// @each $key, $value in $breakpoints {
-//   @media (min-width: #{$value}px) {
-//     @include size-variants(container) using ($size) {
-//       --container-size: #{var(--size-container-#{$key})};
-//     }
-//   }
-// }
-
 // Row
 [u-row] {
   --row-gutter: var(--size-md);
@@ -113,13 +102,22 @@
   flex: 1;
 }
 
-$col-sizes: (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+$col-sizes: (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
 @include variant(col-col, $col-sizes) using ($size) {
   --col: #{$size};
 }
 
 @include variant(col-offset, $col-sizes) using ($size) {
   --offset: #{$size};
+}
+
+@include breakpoints() using ($breakpoint) {
+  [u-col-col-#{$breakpoint}=""] {
+    flex: 1;
+  }
+  [u-col-col-#{$breakpoint}="0"] {
+    --col: unset;
+  }
 }
 
 @include breakpoints using ($breakpoint) {
