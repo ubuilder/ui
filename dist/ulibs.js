@@ -309,8 +309,41 @@
 
   register("u-modal", Modal);
 
+  function Form($el) {
+    $el.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const entries = new FormData($el);
+      const data = Object.fromEntries(entries);
+
+      console.log($el.action);
+
+      const result = await fetch(
+        window.location.pathname.substring(
+          0,
+          window.location.pathname.length - 1
+        ) +
+          "?" +
+          $el.getAttribute("u-action"),
+        {
+          method: $el.method,
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      ).then((res) => res.json());
+
+      alert(result);
+    });
+    //
+  }
+
+  register("u-form", Form);
+
   exports.Accordion = Accordion;
   exports.Bind = Bind;
+  exports.Form = Form;
   exports.Icon = Icon;
   exports.Modal = Modal;
 

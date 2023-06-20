@@ -10,6 +10,8 @@ export function extract(...params) {
     if (typeof params[1] !== "undefined") {
       if (Array.isArray(params[1])) {
         $slots = params[1];
+      } else if (typeof params[1] === "function") {
+        $slots = params[1];
       } else {
         $slots = [params[1]];
       }
@@ -20,6 +22,8 @@ export function extract(...params) {
 
   if (Array.isArray(params[0])) {
     $slots = params[0];
+  } else if (typeof params[1] === "function") {
+    $slots = params[1];
   } else {
     $slots = [params[0]];
   }

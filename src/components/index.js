@@ -5,6 +5,7 @@ export * from "./Card.js";
 export * from "./GridSystem.js";
 export * from "./Icon.js";
 export * from "./Input.js";
+export * from "./Form.js";
 export * from "./Modal.js";
 export * from "./Table.js";
 export * from "./View.js";

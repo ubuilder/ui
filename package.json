@@ -29,7 +29,7 @@
     "rollup": "^3.23.0"
   },
   "dependencies": {
-    "@ulibs/router": "^0.0.2",
+    "@ulibs/router": "^0.0.9",
     "sass": "^1.63.4"
   }
 }

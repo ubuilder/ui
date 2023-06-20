@@ -41,10 +41,21 @@ export function DocPage(
 
   return html({
     head: [
-      View({tag: 'meta', charset: 'UTF-8'}),
-      View({tag: 'meta', 'http-equiv': 'X-UA-Compatible', content: 'IE=edge'}),
-      View({tag: 'meta', 'name': 'viewport', content: 'width=device-width, initial-scale=1.0'}),
-      title, style, View({ tag: "style" }, customCss)],
+      View({ tag: "meta", charset: "UTF-8" }),
+      View({
+        tag: "meta",
+        "http-equiv": "X-UA-Compatible",
+        content: "IE=edge",
+      }),
+      View({
+        tag: "meta",
+        name: "viewport",
+        content: "width=device-width, initial-scale=1.0",
+      }),
+      title,
+      style,
+      View({ tag: "style" }, customCss),
+    ],
     body: [template, scriptGlobal, script && View({ tag: "script" }, script)],
   });
 }
