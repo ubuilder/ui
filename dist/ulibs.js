@@ -316,11 +316,12 @@
       const entries = new FormData($el);
       const data = Object.fromEntries(entries);
 
-      const url =
-        window.location.pathname.substring(
-          0,
-          window.location.pathname.length - 1
-        ) +
+      const pathname = window.location.pathname.endsWith('/') ? window.location.pathname.substring(
+        0,
+        window.location.pathname.length - 1
+      ) : window.location.pathname;
+      
+      const url =pathname +
         "?" +
         $el.getAttribute("u-action");
 
