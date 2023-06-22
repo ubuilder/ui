@@ -615,7 +615,8 @@ h6 {
 
 [u-container] {
   --container-size: 100%;
-  width: var(--container-size);
+  width: 100%;
+  max-width: var(--container-size);
   padding-left: var(--size-md);
   padding-right: var(--size-md);
 }
