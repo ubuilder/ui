@@ -40,6 +40,36 @@
   //   margin-bottom: var(--size-md);
 }
 
+// radio
+[u-radio-input] {
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid var(--color-primary);
+  margin-right: var(--size-xxs);
+}
+
+[u-radio] {
+  display: block;
+  margin-bottom: var(--size-xxs);
+}
+
+[u-radio-inline] {
+  display: inline-block;
+  margin-right: var(--size-sm);
+}
+
+[u-radio-group-wrapper] {
+  @extend [u-form-field];
+}
+
+[u-radio-group-wrapper-label] {
+  @extend [u-form-field-label];
+}
+
+[u-radio-group] {
+  //   margin-bottom: var(--size-md);
+}
+
 // input
 
 [u-input-wrapper] {

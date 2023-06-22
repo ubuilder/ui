@@ -318,6 +318,11 @@
 
       const pathname = window.location.pathname;
 
+      $el.querySelectorAll("[multiple]").forEach((el) => {
+        console.log(el);
+        data[el.getAttribute("name")] = entries.getAll(el.getAttribute("name"));
+      });
+
       const url = pathname.endsWith("/")
         ? pathname.substring(0, pathname.length - 1)
         : pathname + "?" + $el.getAttribute("u-action");

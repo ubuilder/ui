@@ -3,28 +3,13 @@ import {
   Checkbox,
   CheckboxGroup,
   Form,
-  Icon,
   Input,
+  Radio,
+  RadioGroup,
   View,
 } from "../../components/index.js";
 import { DocPage } from "../components/DocPage.js";
 import { Section } from "../components/Section.js";
-import { tag } from "@ulibs/router";
-
-// function Icon({ name }) {
-//   return View({
-//     tag: "span",
-//     onMount($el, props) {
-//       fetch(`https://unpkg.com/@tabler/icons@2.19.0/icons/${props}.svg`)
-//         .then((res) => res.text())
-//         .then((svg) => {
-//           $el.outerHTML = svg.replace("icon icon-tabler", "u-icon");
-//         });
-//     },
-//     component: "icon",
-//     jsProps: name,
-//   });
-// }
 
 export default function () {
   return DocPage({ name: "Checkbox" }, [
@@ -38,6 +23,18 @@ export default function () {
         Checkbox({ name: "language", inline: true, label: "Html" }),
         Checkbox({ name: "language", inline: true, label: "Css" }),
         Checkbox({ name: "language", inline: true, label: "Js" }),
+      ])
+    ),
+    Section(
+      { title: "Radio", description: "This is Radio component" },
+      View([
+        Radio({ name: "gender", label: "Male", value: "male" }),
+        Radio({ name: "gender", label: "Female", value: "female" }),
+      ]),
+      View([
+        Radio({ name: "language", inline: true, label: "Html", value: "html" }),
+        Radio({ name: "language", inline: true, label: "Css", value: "css" }),
+        Radio({ name: "language", inline: true, label: "Js", value: "js" }),
       ])
     ),
     Section(
@@ -56,7 +53,7 @@ export default function () {
 
         CheckboxGroup({
           name: "items-2",
-
+          value: ["Item 4"],
           label: "Choose items",
           items: ["Item 1", "Item 2", "Item 3", "Item 4"],
         }),
@@ -67,11 +64,18 @@ export default function () {
           value: "user",
         }),
 
-        CheckboxGroup({
-          name: "items-3",
-          value: ["Item 3", "Item 2"],
-          label: "Choose items",
-          items: ["Item 1", "Item 2", "Item 3", "Item 4"],
+        RadioGroup({
+          name: "language",
+          value: 3,
+          label: "Choose a Language",
+          text: (item) => item.text,
+          key: (item) => item.id,
+          items: [
+            { text: "HTML", id: 1 },
+            { text: "CSS", id: 2 },
+            { text: "JS", id: 3 },
+            { text: "Svelte", id: 4 },
+          ],
           inline: true,
         }),
 
