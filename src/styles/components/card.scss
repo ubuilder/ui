@@ -1,48 +1,46 @@
+/* #region Card */
+[u-card] {
+  box-shadow: 0 0 1px var(--color-base-content);
+  border-radius: var(--size-xxs);
+  background-color: var(--color-base-100);
+  overflow: hidden;
+  width: 100%;
+}
 
-  /* #region Card */
-  [u-card] {
-    box-shadow: 0 0 1px var(--color-base-content);
-    border-radius: var(--size-xxs);
-    background-color: var(--color-base-100);
-    overflow: hidden;
-  }
-  
-  [u-card-body] {
-    padding: var(--size-md);
-  }
-  
-  [u-card-header] {
-    padding: var(--size-xs) var(--size-md);
-    box-shadow: 0 1px 1px -1px  var(--color-base-content);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-top-right-radius: var(--size-xxs);
-    border-top-left-radius: var(--size-xxs);
-  }
-  
-  [u-card-footer] {
-    padding: var(--size-xs) var(--size-md);
-    background-color: var(--color-base-200);
-    box-shadow: 0 -1px 1px -1px  var(--color-base-content);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom-right-radius: var(--size-xxs);
-    border-bottom-left-radius: var(--size-xxs);
-  }
-  
-  [u-card-title] {
-    font-size: calc(var(--size-lg) * 0.8);
-    line-height: var(--size-lg);
-  }
-  
-  [u-card-actions] {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: end;
-  }
-  /* #endregion */
-  
-  
+[u-card-body] {
+  padding: var(--size-md);
+}
+
+[u-card-header] {
+  padding: var(--size-xs) var(--size-md);
+  box-shadow: 0 1px 1px -1px var(--color-base-content);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top-right-radius: var(--size-xxs);
+  border-top-left-radius: var(--size-xxs);
+}
+
+[u-card-footer] {
+  padding: var(--size-xs) var(--size-md);
+  background-color: var(--color-base-200);
+  box-shadow: 0 -1px 1px -1px var(--color-base-content);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom-right-radius: var(--size-xxs);
+  border-bottom-left-radius: var(--size-xxs);
+}
+
+[u-card-title] {
+  font-size: calc(var(--size-lg) * 0.8);
+  line-height: var(--size-lg);
+}
+
+[u-card-actions] {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+/* #endregion */

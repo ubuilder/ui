@@ -486,6 +486,7 @@ h6 {
   border-radius: var(--size-xxs);
   background-color: var(--color-base-100);
   overflow: hidden;
+  width: 100%;
 }
 
 [u-card-body] {
