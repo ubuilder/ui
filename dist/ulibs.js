@@ -316,14 +316,11 @@
       const entries = new FormData($el);
       const data = Object.fromEntries(entries);
 
-      const pathname = window.location.pathname.endsWith('/') ? window.location.pathname.substring(
-        0,
-        window.location.pathname.length - 1
-      ) : window.location.pathname;
-      
-      const url =pathname +
-        "?" +
-        $el.getAttribute("u-action");
+      const pathname = window.location.pathname;
+
+      const url = pathname.endsWith("/")
+        ? pathname.substring(0, pathname.length - 1)
+        : pathname + "?" + $el.getAttribute("u-action");
 
       const result = await fetch(url, {
         method: $el.method,
