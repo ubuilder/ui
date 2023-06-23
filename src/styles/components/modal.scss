@@ -1,7 +1,7 @@
 [u-modal] {
   opacity: 0;
   transition: all 0.2s ease;
-  --modal-size: var(--size-content-md);
+  --modal-size: var(--size-container-md);
   --modal-margin: var(--size-md);
 
   position: fixed;
@@ -27,7 +27,7 @@
 }
 
 @include size-variants(modal) using($size) {
-  --modal-size: #{var(--size-content-#{$size})};
+  --modal-size: #{var(--size-container-#{$size})};
 }
 
 [u-modal-open] {

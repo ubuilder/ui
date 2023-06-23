@@ -1351,7 +1351,7 @@ h6 {
 [u-modal] {
   opacity: 0;
   transition: all 0.2s ease;
-  --modal-size: var(--size-content-md);
+  --modal-size: var(--size-container-md);
   --modal-margin: var(--size-md);
   position: fixed;
   width: 100%;
@@ -1375,23 +1375,23 @@ h6 {
 }
 
 [u-modal-size=xs] {
-  --modal-size: var(--size-content-xs);
+  --modal-size: var(--size-container-xs);
 }
 
 [u-modal-size=sm] {
-  --modal-size: var(--size-content-sm);
+  --modal-size: var(--size-container-sm);
 }
 
 [u-modal-size=md] {
-  --modal-size: var(--size-content-md);
+  --modal-size: var(--size-container-md);
 }
 
 [u-modal-size=lg] {
-  --modal-size: var(--size-content-lg);
+  --modal-size: var(--size-container-lg);
 }
 
 [u-modal-size=xl] {
-  --modal-size: var(--size-content-xl);
+  --modal-size: var(--size-container-xl);
 }
 
 [u-modal-open] {
