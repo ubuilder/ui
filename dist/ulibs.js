@@ -318,6 +318,7 @@
 
       const pathname = window.location.pathname;
 
+      // Checkbox Group
       $el.querySelectorAll("[multiple]").forEach((el) => {
         console.log(el);
         data[el.getAttribute("name")] = entries.getAll(el.getAttribute("name"));

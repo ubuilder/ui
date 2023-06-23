@@ -1,8 +1,12 @@
 [u-progress] {
-  height: var(--size-sm);
-  background-color: var(--color-base-100);
+  height: var(--size-xs);
+  background-color: var(--color-base-300);
   border-radius: var(--size-xxs);
   overflow: hidden;
+}
+
+.dark [u-progress] {
+  background-color: var(--color-base-200);
 }
 
 [u-progress-bar] {
@@ -15,8 +19,8 @@
 }
 
 [u-progress-bar-color="dark"] {
-  --progress-bar-color: var(--color-dark-300);
+  --progress-bar-color: var(--color-dark-400);
 }
 [u-progress-bar-color="light"] {
-  --progress-bar-color: var(--color-light-300);
+  --progress-bar-color: var(--color-light-100);
 }

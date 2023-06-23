@@ -1,10 +1,17 @@
 /* #region Card */
 [u-card] {
-  box-shadow: 0 0 1px var(--color-base-content);
+  --card-border-color: var(--color-base-300);
+
+  border: 1px solid var(--card-border-color);
   border-radius: var(--size-xxs);
   background-color: var(--color-base-100);
   overflow: hidden;
   width: 100%;
+}
+
+.dark [u-card] {
+  background-color: var(--color-base-200);
+  border-color: var(--card-border-color);
 }
 
 [u-card-body] {
@@ -13,7 +20,7 @@
 
 [u-card-header] {
   padding: var(--size-xs) var(--size-md);
-  box-shadow: 0 1px 1px -1px var(--color-base-content);
+  border-bottom: 1px solid var(--card-border-color);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -24,7 +31,7 @@
 [u-card-footer] {
   padding: var(--size-xs) var(--size-md);
   background-color: var(--color-base-200);
-  box-shadow: 0 -1px 1px -1px var(--color-base-content);
+  border-top: 1px solid var(--card-border-color);
   display: flex;
   align-items: center;
   justify-content: space-between;
