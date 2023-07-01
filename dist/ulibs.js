@@ -316,14 +316,11 @@
       const entries = new FormData($el);
       const data = Object.fromEntries(entries);
 
-      const pathname = window.location.pathname.endsWith('/') ? window.location.pathname.substring(
-        0,
-        window.location.pathname.length - 1
-      ) : window.location.pathname;
-      
-      const url =pathname +
-        "?" +
-        $el.getAttribute("u-action");
+      const pathname = window.location.pathname;
+
+      const url = pathname.endsWith("/")
+        ? pathname.substring(0, pathname.length - 1)
+        : pathname + "?" + $el.getAttribute("u-action");
 
       const result = await fetch(url, {
         method: $el.method,
@@ -340,11 +337,51 @@
 
   register("u-form", Form);
 
+  function Tab($el) {
+      let tabItems = [];
+      let tabPanels = [];
+      let activeTab  = 0;
+
+      queryAttr($el, 'u-tab-list',    (el)=>{
+
+      });
+      queryAttr($el, 'u-tab-content', (el)=>{
+
+      });
+      queryAttr($el, 'u-tab-item',    (el)=>{
+          tabItems.push(el);
+          let index = tabItems.indexOf(el);
+          if(getAttr(el, 'u-tab-item-active')){
+              activeTab = index;
+          }
+          el.onclick = (event)=>{
+              queryAttr($el, 'u-tab-item-active', (e)=>{
+                  removeAttr(e, 'u-tab-item-active');
+              });
+              queryAttr($el, 'u-tab-panel-active', (el)=>{
+                  removeAttr(el, 'u-tab-panel-active');
+              });
+              setAttr(el, 'u-tab-item-active', true);
+              setAttr(tabPanels[index], 'u-tab-panel-active', true);
+          };
+
+      });
+      queryAttr($el, 'u-tab-panel',   (el)=>{
+          tabPanels.push(el);
+
+      });
+      setAttr(tabPanels[activeTab], 'u-tab-panel-active', true);
+      setAttr(tabItems[activeTab], 'u-tab-item-active', true);
+      
+  }
+  register("u-tab", Tab);
+
   exports.Accordion = Accordion;
   exports.Bind = Bind;
   exports.Form = Form;
   exports.Icon = Icon;
   exports.Modal = Modal;
+  exports.Tab = Tab;
 
   return exports;
 

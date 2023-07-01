@@ -2228,3 +2228,53 @@ h6 {
 [u-view-pe="6xl"] {
   padding-right: var(--size-6xl);
 }
+
+[u-tab] {
+  box-sizing: border-box;
+  display: block;
+  border: 1px solid var(--color-base-400);
+}
+
+[u-tab-item] {
+  padding: var(--size-xs) var(--size-md);
+  border-radius: var(--size-xxs) var(--size-xxs) 0.1rem 0.1rem;
+  border: 1px solid transparent;
+  border-bottom: 2px solid transparent;
+  background-color: inherit;
+}
+
+[u-tab-item]:hover {
+  border-right: 1px solid var(--color-dark-400);
+  border-left: 1px solid var(--color-dark-400);
+  border-top: 1px solid var(--color-dark-400);
+}
+
+[u-tab-item-active] {
+  background-color: var(--color-base-100);
+  border-bottom: 2px solid var(--color-primary-500);
+  margin-bottom: -1px;
+}
+
+[u-tab-panel] {
+  width: 100%;
+  display: none;
+}
+
+[u-tab-panel-active] {
+  display: block;
+}
+
+[u-tab-list] {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: var(--size-xs);
+  border-bottom: 1px solid var(--color-base-400);
+  padding-bottom: 0px;
+  background-color: var(--color-base-300);
+}
+
+[u-tab-content] {
+  width: 100%;
+  padding: var(--size-xs);
+}

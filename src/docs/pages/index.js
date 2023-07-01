@@ -26,5 +26,6 @@ export default () =>
       tag("li", {}, tag("a", { href: "/components/breadcrumb" }, "Breadcrumb")),
       tag("li", {}, tag("a", { href: "/components/avatar" }, "Avatar")),
       tag("li", {}, tag("a", { href: "/components/progress" }, "Progress")),
+      tag("li", {}, tag("a", { href: "/components/tab" }, "Tab")),
     ]),
   ]);
