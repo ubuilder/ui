@@ -8,35 +8,13 @@ import {
   Card,
   CardActions,
   CardBody,
+  Input,
   CardFooter,
-} from "../../components/Card.js";
+} from "../../components/index.js";
 import { View } from "../../components/View.js";
 import { DocPage } from "../components/DocPage.js";
 
-let value = "initial";
-
-function Input($props, slots) {
-  const { value, component = "input", type, label, ...restProps } = $props;
-
-  const props = {
-    ...restProps,
-    component,
-    tag: "input",
-  };
-
-  if (!value) {
-    if (type === "number") {
-      props.value = 0;
-    } else {
-      props.value = "";
-    }
-  }
-
-  return View({ component: component + "-wrapper" }, [
-    label && View({ tag: "label", component: "label" }, label),
-    View(props, slots),
-  ]);
-}
+let value = "";
 
 export default function () {
   return DocPage({ name: "Accordion Example" }, [

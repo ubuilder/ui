@@ -29,7 +29,7 @@
 }
 
 [u-breadcrumb-item-disabled] {
-  color: var(--color-base-400);
+  opacity: 0.5;
   pointer-events: none;
   text-decoration: none;
 }

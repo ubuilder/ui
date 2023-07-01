@@ -38,11 +38,13 @@ export const Checkbox = Base(($props, $slots) => {
   const value = $props.value;
   const checked = $props.checked;
   const label = $props.label;
+  const multiple = $props.multiple;
 
   delete $props["name"];
   delete $props["value"];
   delete $props["checked"];
   delete $props["label"];
+  delete $props["multiple"];
 
   $props.cssProps = {
     inline: $props.inline,
@@ -56,6 +58,7 @@ export const Checkbox = Base(($props, $slots) => {
       name,
       value,
       checked,
+      multiple,
       component: $props.component + "-input",
     }),
     label &&
@@ -113,8 +116,101 @@ export const CheckboxGroup = Base(($props, $slots) => {
         Checkbox({
           name,
           inline,
+          multiple: true,
           value: getKey(item),
+          label: getText(item),
           checked: value.includes(getKey(item)),
+        })
+      )
+    ),
+  ]);
+});
+
+export const Radio = Base(($props, $slots) => {
+  $props.component = $props.component ?? "radio";
+  $props.tag = "label";
+
+  const name = $props.name;
+  const value = $props.value;
+  const checked = $props.checked;
+  const label = $props.label;
+
+  delete $props["name"];
+  delete $props["value"];
+  delete $props["checked"];
+  delete $props["label"];
+
+  $props.cssProps = {
+    inline: $props.inline,
+  };
+  delete $props["inline"];
+
+  return View($props, [
+    View({
+      tag: "input",
+      type: "radio",
+      name,
+      value,
+      checked,
+      component: $props.component + "-input",
+    }),
+    label &&
+      View({ tag: "span", component: $props.component + "-text" }, label),
+  ]);
+});
+
+export const RadioGroup = Base(($props, $slots) => {
+  const items = $props.items ?? [];
+  delete $props["items"];
+
+  const value = $props["value"] ?? [];
+  delete $props["value"];
+
+  const text = $props["text"];
+  const key = $props["key"];
+  delete $props["text"];
+  delete $props["key"];
+
+  const inline = $props["inline"];
+  delete $props["inline"];
+
+  const name = $props["name"];
+
+  const component = $props["component"] ?? "radio-group";
+  $props.component = component + "-wrapper";
+
+  function getKey(item) {
+    if (key) {
+      if (typeof key === "string") {
+        return item[key];
+      }
+      if (typeof key === "function") {
+        return key(item);
+      }
+    }
+    return item;
+  }
+  function getText(item) {
+    if (text) {
+      if (typeof text === "string") {
+        return item[text];
+      }
+      if (typeof text === "function") {
+        return text(item);
+      }
+    }
+    return item;
+  }
+
+  return FormField($props, [
+    View(
+      { tag: "div", component },
+      Each({ items }, ({ item }) =>
+        Radio({
+          name,
+          inline,
+          value: getKey(item),
+          checked: value === getKey(item),
           label: getText(item),
         })
       )

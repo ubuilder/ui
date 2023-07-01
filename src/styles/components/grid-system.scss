@@ -1,66 +1,15 @@
 // Container
 [u-container] {
   --container-size: 100%;
-  width: var(--container-size);
-  padding: var(--size-md);
+  width: 100%;
+  max-width: var(--container-size);
+  padding-left: var(--size-md);
+  padding-right: var(--size-md);
 }
 
-@include breakpoint("xs") {
-  [u-container-size="xs"] {
-    --container-size: var(--size-container-xs);
-  }
-  [u-container-size="sm"] {
-    --container-size: var(--size-container-xs);
-  }
-  [u-container-size="md"] {
-    --container-size: var(--size-container-xs);
-  }
-  [u-container-size="lg"] {
-    --container-size: var(--size-container-xs);
-  }
-  [u-container-size="xl"] {
-    --container-size: var(--size-container-xs);
-  }
-}
-
-@include breakpoint("sm") {
-  [u-container-size="sm"] {
-    --container-size: var(--size-container-sm);
-  }
-  [u-container-size="md"] {
-    --container-size: var(--size-container-sm);
-  }
-  [u-container-size="lg"] {
-    --container-size: var(--size-container-sm);
-  }
-  [u-container-size="xl"] {
-    --container-size: var(--size-container-sm);
-  }
-}
-
-@include breakpoint("md") {
-  [u-container-size="md"] {
-    --container-size: var(--size-container-md);
-  }
-  [u-container-size="lg"] {
-    --container-size: var(--size-container-md);
-  }
-  [u-container-size="xl"] {
-    --container-size: var(--size-container-md);
-  }
-}
-@include breakpoint("lg") {
-  [u-container-size="lg"] {
-    --container-size: var(--size-container-lg);
-  }
-  [u-container-size="xl"] {
-    --container-size: var(--size-container-lg);
-  }
-}
-
-@include breakpoint("xl") {
-  [u-container-size="xl"] {
-    --container-size: var(--size-container-xl);
+@include breakpoints() using ($breakpoint) {
+  [u-container-size="#{$breakpoint}"] {
+    --container-size: #{var(--size-container-#{$breakpoint})};
   }
 }
 
