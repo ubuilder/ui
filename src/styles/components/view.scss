@@ -1,3 +1,230 @@
+// #region width
+@include variant('view-w', $all-sizes) using ($size) {
+  width: var(--size-#{$size});
+}
+
+[u-view-w="auto"] {
+  width: auto;
+}
+
+[u-view-w="0"] {
+  width: 0;
+}
+
+[u-view-w="50"] {
+  width: 50%;
+}
+
+[u-view-w="100"] {
+  width: 100%;
+}
+// #endregion
+
+// #region height
+@include variant('view-h', $all-sizes) using ($size) {
+  height: var(--size-#{$size});
+}
+
+[u-view-h="auto"] {
+  height: auto;
+}
+
+[u-view-h="0"] {
+  height: 0;
+}
+
+[u-view-h="50"] {
+  height: 50%;
+}
+[u-view-h="100"] {
+  height: 100%;
+}
+// #endregion
+
+// #region gap
+@include variant('view-gap', $sizes) using ($size) {
+  gap: var(--size-#{$size});
+}
+[u-view-gap="0"] {
+  gap: 0;
+}
+// #endregion
+
+// #region displays
+$displays: ('flex', 'inline-flex', 'block', 'none', 'inline-block', 'contents', 'grid', 'inline');
+
+@include variant('view-d', $displays) using ($display) {
+  display: #{$display};
+}
+
+@include breakpoints() using ($breakpoint) {
+  @include variant(view-d-#{$breakpoint}, $displays) using ($display) {
+    display: #{$display};
+  }
+}
+// #endregion
+
+// #region border
+
+@include variant(view-border-color, $colors) using ($color) {
+  --view-border-color: var(--color-#{$color}-500);
+}
+
+[u-view-border] {
+  border: calc(var(--view-border-width, 4px) / 4) solid var(--view-border-color, var(--color-base-900));
+}
+
+[u-view-border="0"] {
+  --view-border-width: 0;
+}
+
+@include variant(view-border-size, $sizes) using ($size) {
+  --view-border-width: var(--size-#{$size});
+}
+
+@include variant(view-border-radius, $sizes) using ($size) {
+  border-radius: calc(var(--size-#{$size}) / 2);
+}
+
+// #endregion
+
+// #region colors
+
+@include variant(view-bg-color, $colors) using ($color) {
+  background-color: var(--color-#{$color}-500);
+}
+
+[u-view-bg-color="dark"] {
+  background-color: var(--color-dark-200);
+}
+
+[u-view-bg-color="light"] {
+  background-color: var(--color-light-100);
+}
+
+@include variant(view-text-color, $colors) using ($color) {
+  color: var(--color-#{$color}-500);
+}
+
+[u-view-text-color="dark"] {
+  color: var(--color-dark-200);
+}
+
+[u-view-text-color="light"] {
+  color: var(--color-light-100);
+}
+
+// #endregion
+
+// #region flex
+
+[u-view-align="start"] {
+  align-items: start;
+}
+
+[u-view-align="center"] {
+  align-items: center;
+}
+
+[u-view-align="end"] {
+  align-items: end;
+}
+
+[u-view-align="baseline"] {
+  align-items: baseline;
+}
+
+[u-view-align="stretch"] {
+  align-items: stretch;
+}
+
+[u-view-align-self="start"] {
+  align-self: start;
+}
+
+[u-view-align-self="center"] {
+  align-self: center;
+}
+
+[u-view-align-self="end"] {
+  align-self: end;
+}
+
+[u-view-align-self="baseline"] {
+  align-self: baseline;
+}
+
+[u-view-align-self="stretch"] {
+  align-self: stretch;
+}
+
+[u-view-justify="start"] {
+  justify-content: start;
+}
+
+[u-view-justify="center"] {
+  justify-content: center;
+}
+
+[u-view-justify="end"] {
+  justify-content: end;
+}
+
+[u-view-justify="between"] {
+  justify-content: space-between;
+}
+
+[u-view-justify="around"] {
+  justify-content: space-around;
+}
+[u-view-justify="evenly"] {
+  justify-content: space-evenly;
+}
+
+
+[u-view-justify-self="start"] {
+  justify-self: start;
+}
+
+[u-view-justify-self="center"] {
+  justify-self: center;
+}
+
+[u-view-justify-self="end"] {
+  justify-self: end;
+}
+
+[u-view-justify-self="between"] {
+  justify-self: space-between;
+}
+
+[u-view-justify-self="around"] {
+  justify-self: space-around;
+}
+[u-view-justify-self="evenly"] {
+  justify-self: space-evenly;
+}
+
+$flex-directions: ('row', 'column', 'row-reverse', 'column-reverse');
+@include variant(view-flex-direction, $flex-directions) using($direction) {
+  flex-direction: #{$direction};
+}
+
+@include breakpoints() using ($breakpoint) {
+  @include variant(view-flex-direction-#{$breakpoint}, $flex-directions) using($direction) {
+    flex-direction: #{$direction};
+  }
+}
+
+[u-view-wrap] {
+  flex-wrap: wrap;
+}
+
+// #endregion
+
+
+
+// #region margin
 @include variant("view-m", $all-sizes) using ($size) {
   margin: var(--size-#{$size});
 }
@@ -41,8 +268,9 @@
 [u-view-mb="auto"] {
   margin-bottom: auto;
 }
+// #endregion
 
-/* #region View (Padding) */
+/* #region Padding */
 @include variant("view-p", $all-sizes) using ($size) {
   padding: var(--size-#{$size});
 }
@@ -66,3 +294,4 @@
 @include variant("view-pe", $all-sizes) using ($size) {
   padding-right: var(--size-#{$size});
 }
+// #endregion

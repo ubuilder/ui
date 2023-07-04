@@ -1,6 +1,22 @@
 import { tag } from "@ulibs/router";
 import { classname, Base } from "../utils.js";
 
+//* background color (primary, secondary, success, info, warning, danger, light, dark)
+//* text color (primary, secondary, success, info, warning, danger, light, dark)
+//* borderRadius (xs, sm, md, lg, xl)
+//* borderColor (primary, secondary, success, info, warning, danger, light, dark)
+//* borderSize (xs, sm, md, lg, xl)
+// border directions (Not implemented)
+//* d (display) (flex, inline, block, grid, contents, inline-flex, inline-block, none)
+//* align items (start, center, end, baseline, stretch)
+//* justify content (start, center, end, between, evenly, around)
+//* flex direction (row, column, row-reverse, column-reverse)
+//* gap (0, sm, md, lg, xl)
+//* wrap (true, false) 
+//* width (0, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl, 6xl, auto, 50, 100)
+//* height (0, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl, 6xl, auto, 50, 100)
+
+
 let id = 0;
 
 /**
@@ -25,6 +41,32 @@ export const View = Base(($props, $slots) => {
     pt,
     mb,
     pb,
+    w,
+    h,
+    d,
+    dXs,
+    dSm,
+    dMd,
+    dLg,
+    dXl,
+    gap,
+    align,
+    alignSelf,
+    justify,
+    justifySelf,
+    flexDirection,
+    flexDirectionXs,
+    flexDirectionSm,
+    flexDirectionMd,
+    flexDirectionLg,
+    flexDirectionXl,
+    bgColor,
+    textColor,
+    borderSize,
+    border,
+    borderColor,
+    borderRadius,
+    wrap,
     ...restProps
   } = $props;
 
@@ -43,6 +85,32 @@ export const View = Base(($props, $slots) => {
     pt,
     mb,
     pb,
+    w,
+    h,
+    d,
+    dXs,
+    dSm,
+    dMd,
+    dLg,
+    dXl,
+    gap,
+    align,
+    wrap,
+    flexDirection,
+    flexDirectionXs,
+    flexDirectionSm,
+    flexDirectionMd,
+    flexDirectionLg,
+    flexDirectionXl,
+    alignSelf,
+    justify,
+    justifySelf,
+    bgColor,
+    textColor,
+    borderSize,
+    border,
+    borderColor,
+    borderRadius,
   };
 
   const cssAttributes = {};
