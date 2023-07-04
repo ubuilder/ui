@@ -1,16 +1,32 @@
 import { tag } from "@ulibs/router";
 import { classname, Base } from "../utils.js";
 
-//* background color (primary, secondary, success, info, warning, danger, light, dark)
-//* text color (primary, secondary, success, info, warning, danger, light, dark)
+// Not implemented
+// border directions (only border bottom, ....)
+
+
+
+//* bgColor (primary, secondary, success, info, warning, danger, light, dark)
+//* textColor (primary, secondary, success, info, warning, danger, light, dark)
 //* borderRadius (xs, sm, md, lg, xl)
 //* borderColor (primary, secondary, success, info, warning, danger, light, dark)
 //* borderSize (xs, sm, md, lg, xl)
-// border directions (Not implemented)
-//* d (display) (flex, inline, block, grid, contents, inline-flex, inline-block, none)
-//* align items (start, center, end, baseline, stretch)
-//* justify content (start, center, end, between, evenly, around)
-//* flex direction (row, column, row-reverse, column-reverse)
+//* d(flex, inline, block, grid, contents, inline-flex, inline-block, none)
+//* dXs (flex, inline, block, grid, contents, inline-flex, inline-block, none)
+//* dSm (flex, inline, block, grid, contents, inline-flex, inline-block, none)
+//* dMd (flex, inline, block, grid, contents, inline-flex, inline-block, none)
+//* dLg (flex, inline, block, grid, contents, inline-flex, inline-block, none)
+//* dXl (flex, inline, block, grid, contents, inline-flex, inline-block, none)
+//* align (start, center, end, baseline, stretch)
+//* alignSelf (start, center, end, baseline, stretch)
+//* justify (start, center, end, between, evenly, around)
+//* justifySelf (start, center, end, between, evenly, around)
+//* flexDirection (row, column, row-reverse, column-reverse)
+//* flexDirectionXs (row, column, row-reverse, column-reverse)
+//* flexDirectionSm (row, column, row-reverse, column-reverse)
+//* flexDirectionMd (row, column, row-reverse, column-reverse)
+//* flexDirectionLg (row, column, row-reverse, column-reverse)
+//* flexDirectionXl (row, column, row-reverse, column-reverse)
 //* gap (0, sm, md, lg, xl)
 //* wrap (true, false) 
 //* width (0, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl, 6xl, auto, 50, 100)
