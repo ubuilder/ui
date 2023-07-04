@@ -29,8 +29,8 @@ import { classname, Base } from "../utils.js";
 //* flexDirectionXl (row, column, row-reverse, column-reverse)
 //* gap (0, sm, md, lg, xl)
 //* wrap (true, false) 
-//* width (0, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl, 6xl, auto, 50, 100)
-//* height (0, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl, 6xl, auto, 50, 100)
+//* w (width) (0, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl, 6xl, auto, 50, 100)
+//* h (height) (0, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl, 6xl, auto, 50, 100)
 
 
 let id = 0;
