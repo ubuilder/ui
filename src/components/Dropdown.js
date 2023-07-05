@@ -1,6 +1,7 @@
 import { Base } from "../utils.js";
 import { View } from "./View.js";
 import { Icon } from "./Icon.js";
+import { Button } from "./Button.js";
 
 
 /**
@@ -17,16 +18,17 @@ export const Dropdown = Base(($props, $slots) => {
     ...restProps
   } = $props;
 
+
   const props = {
     ...restProps,
     component,
     arrow,
     trigger,
-    "x-data": "{ open: true, trigger: 'click', timeout: undefined, toggle(){if(open) return this.close() else return this.open()},open(){this.open = true},close(){this.open = false},}",
+    "x-data": "{ open: false, trigger: 'hover', timeout: undefined, toggle(){if(this.open){ return this.close()} else{ return this.show()}},show(){this.open = true; console.log('open', this.open)},close(){this.open = false; console.log('close', this.open)},}",
     "x-ref": "dropdown",
-    ":click": "toggle()",
-    ":hover": "if(trigger == 'hover'){clearTimeout(timeout); open()}",
-    ":hover.outside": "timeout = setTimout(()=>{close()},300)",
+    "@click": "toggle()",
+    "@hover": "if(trigger == 'hover'){clearTimeout(timeout); open()}",
+    "@hover.outside": "timeout = setTimout(()=>{close()},300)",
     cssProps: {
       size,
     },    
@@ -70,22 +72,9 @@ export const DropdownItem = Base(($props, $slots) => {
     },    
   }
 
-  if(href) {
-    props.tag = 'a' 
-    props.href = href
-  }else{
-    props.tag = 'button'
-  }
+  $slots = [icon && Icon({name: icon}), label && View({tag: 'span'}, label) , $slots]
 
-  if(icon){
-    $slots = [Icon({name: icon}), $slots]
-  }else if(label){
-    $slots = [View(label) , $slots]
-  }else if(icon && label){
-    $slots = [Icon({name: icon}), View(label) , $slots]
-  }
-
-  let content = View(props, $slots)
+  let content = href? View({...props, tag: 'a', href}, $slots) : Button(props, $slots)
   return content;
 });
 
@@ -105,9 +94,9 @@ export const DropdownPanel = Base(($props, $slots)=>{
     ...restProps,
     component,
     "x-show": "open",
-    ":click.outside": "close()",
-    ":hover": "clearTimeout(timeout)",
-    ":hover.outside": "if(trigger == 'hover') {timeout = setTimeout(()=>{close()}, 300)}",
+    "@click.outside": "close()",
+    "@hover": "clearTimeout(timeout)",
+    "@hover.outside": "if(trigger == 'hover') {timeout = setTimeout(()=>{close()}, 300)}",
     cssProps : {
       size: size,
     }
@@ -140,9 +129,12 @@ const DropdownLabel = Base(($props, $slots)=>{
 
 
   $props = [
-    text, 
-    View({style: 'display: inline', "x-show": "open"}, Icon({name: "arrow-down"})), 
-    View({style: 'display: inline', "x-show": "!open"}, Icon({name: "arrow-up"})), 
+    View({tag:'span'}, text),
+    arrow?
+    [
+      View({tag: 'span',"u-arrow-down": "true", "x-show": "!open"}, '>'), 
+      View({tag: 'span',"u-arrow-up": "true" , "x-show": "open" }, '<'), 
+    ]:'',
     $slots
   ]
 
