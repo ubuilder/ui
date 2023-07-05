@@ -229,6 +229,8 @@ export const Input = Base(($props, $slots) => {
     name,
     type,
     value,
+    placeholder,
+    required,
     ...restProps
   } = $props;
 
@@ -241,9 +243,11 @@ export const Input = Base(($props, $slots) => {
 
   const inputProps = {
     name,
-    component: component,
+    component,
     type,
     value,
+    placeholder,
+    required,
     tag: "input",
   };
 

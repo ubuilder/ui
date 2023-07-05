@@ -1,6 +1,38 @@
 import { tag } from "@ulibs/router";
 import { classname, Base } from "../utils.js";
 
+// Not implemented
+// border directions (only border bottom, ....)
+
+
+
+//* bgColor (primary, secondary, success, info, warning, danger, light, dark)
+//* textColor (primary, secondary, success, info, warning, danger, light, dark)
+//* borderRadius (xs, sm, md, lg, xl)
+//* borderColor (primary, secondary, success, info, warning, danger, light, dark)
+//* borderSize (xs, sm, md, lg, xl)
+//* d(flex, inline, block, grid, contents, inline-flex, inline-block, none)
+//* dXs (flex, inline, block, grid, contents, inline-flex, inline-block, none)
+//* dSm (flex, inline, block, grid, contents, inline-flex, inline-block, none)
+//* dMd (flex, inline, block, grid, contents, inline-flex, inline-block, none)
+//* dLg (flex, inline, block, grid, contents, inline-flex, inline-block, none)
+//* dXl (flex, inline, block, grid, contents, inline-flex, inline-block, none)
+//* align (start, center, end, baseline, stretch)
+//* alignSelf (start, center, end, baseline, stretch)
+//* justify (start, center, end, between, evenly, around)
+//* justifySelf (start, center, end, between, evenly, around)
+//* flexDirection (row, column, row-reverse, column-reverse)
+//* flexDirectionXs (row, column, row-reverse, column-reverse)
+//* flexDirectionSm (row, column, row-reverse, column-reverse)
+//* flexDirectionMd (row, column, row-reverse, column-reverse)
+//* flexDirectionLg (row, column, row-reverse, column-reverse)
+//* flexDirectionXl (row, column, row-reverse, column-reverse)
+//* gap (0, sm, md, lg, xl)
+//* wrap (true, false) 
+//* w (width) (0, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl, 6xl, auto, 50, 100)
+//* h (height) (0, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl, 6xl, auto, 50, 100)
+
+
 let id = 0;
 
 /**
@@ -25,6 +57,32 @@ export const View = Base(($props, $slots) => {
     pt,
     mb,
     pb,
+    w,
+    h,
+    d,
+    dXs,
+    dSm,
+    dMd,
+    dLg,
+    dXl,
+    gap,
+    align,
+    alignSelf,
+    justify,
+    justifySelf,
+    flexDirection,
+    flexDirectionXs,
+    flexDirectionSm,
+    flexDirectionMd,
+    flexDirectionLg,
+    flexDirectionXl,
+    bgColor,
+    textColor,
+    borderSize,
+    border,
+    borderColor,
+    borderRadius,
+    wrap,
     ...restProps
   } = $props;
 
@@ -43,6 +101,32 @@ export const View = Base(($props, $slots) => {
     pt,
     mb,
     pb,
+    w,
+    h,
+    d,
+    dXs,
+    dSm,
+    dMd,
+    dLg,
+    dXl,
+    gap,
+    align,
+    wrap,
+    flexDirection,
+    flexDirectionXs,
+    flexDirectionSm,
+    flexDirectionMd,
+    flexDirectionLg,
+    flexDirectionXl,
+    alignSelf,
+    justify,
+    justifySelf,
+    bgColor,
+    textColor,
+    borderSize,
+    border,
+    borderColor,
+    borderRadius,
   };
 
   const cssAttributes = {};
