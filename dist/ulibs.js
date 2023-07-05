@@ -318,15 +318,12 @@
 
       const pathname = window.location.pathname;
 
-<<<<<<< HEAD
-=======
       // Checkbox Group
       $el.querySelectorAll("[multiple]").forEach((el) => {
         console.log(el);
         data[el.getAttribute("name")] = entries.getAll(el.getAttribute("name"));
       });
 
->>>>>>> 2e2d3915f8ffdb99d7b1a2ef8f2ed0ed5829a5d0
       const url = pathname.endsWith("/")
         ? pathname.substring(0, pathname.length - 1)
         : pathname + "?" + $el.getAttribute("u-action");
