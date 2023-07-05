@@ -1,0 +1,19 @@
+[u-dropdown]{
+    position: relative;
+}
+
+[u-dropdown-label]{
+    box-shadow:  0 0.5rem 1rem rgba(0,0,0,.15);
+    cursor: pointer;
+}
+
+[u-dropdown-panel]{
+    display: flex;
+    flex-direction: column;
+    box-shadow:  0 0.5rem 1rem rgba(0,0,0,.15);
+}
+
+[u-dropdown-item]:hover{
+    background-color: var(--color-base-content);
+    cursor: pointer;
+}

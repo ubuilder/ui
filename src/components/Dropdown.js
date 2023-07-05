@@ -22,22 +22,7 @@ export const Dropdown = Base(($props, $slots) => {
     component,
     arrow,
     trigger,
-    "x-data": 
-    `{
-      open: ${open},
-      trigger: ${trigger},
-      timeout: undefined,
-      toggle(){
-        if(open) return this.close()
-        else return this.open()
-      },
-      open(){
-        this.open = true
-      },
-      close(){
-        this.open = false
-      },
-    }`,
+    "x-data": "{ open: true, trigger: 'click', timeout: undefined, toggle(){if(open) return this.close() else return this.open()},open(){this.open = true},close(){this.open = false},}",
     "x-ref": "dropdown",
     ":click": "toggle()",
     ":hover": "if(trigger == 'hover'){clearTimeout(timeout); open()}",
@@ -52,20 +37,23 @@ export const Dropdown = Base(($props, $slots) => {
     props["x-on:hover"] = "open()"
   }
 
-  $slots = [DropdownLabel({label ,arrow }), $slots]
+  $slots = [DropdownLabel({text: label ,arrow }), $slots]
 
   let content = View(props, $slots)
   return content;
 });
 
 
+
+
 /**
  * @type {import('./types').DropdownItems}
  */
-export const DropdownItems = Base(($props, $slots) => {
+export const DropdownItem = Base(($props, $slots) => {
 
   const {
     component = "dropdown-item",
+    label = undefined,
     size = "md",
     href = undefined,
     icon = undefined,
@@ -75,7 +63,7 @@ export const DropdownItems = Base(($props, $slots) => {
   const props = {
     ...restProps,
     component,
-    link,
+    href,
     icon,
     cssProps: {
       size,
@@ -85,12 +73,17 @@ export const DropdownItems = Base(($props, $slots) => {
   if(href) {
     props.tag = 'a' 
     props.href = href
+  }else{
+    props.tag = 'button'
   }
 
   if(icon){
     $slots = [Icon({name: icon}), $slots]
+  }else if(label){
+    $slots = [View(label) , $slots]
+  }else if(icon && label){
+    $slots = [Icon({name: icon}), View(label) , $slots]
   }
-
 
   let content = View(props, $slots)
   return content;
@@ -100,7 +93,7 @@ export const DropdownItems = Base(($props, $slots) => {
 /**
  * @type {import { DropdownPanel } from "./types";}
  */
-const DropdownPanel = Base(($props, $slots)=>{
+export const DropdownPanel = Base(($props, $slots)=>{
 
   const {
     component = 'dropdown-panel',
@@ -110,6 +103,7 @@ const DropdownPanel = Base(($props, $slots)=>{
 
   const props = {
     ...restProps,
+    component,
     "x-show": "open",
     ":click.outside": "close()",
     ":hover": "clearTimeout(timeout)",
@@ -138,6 +132,7 @@ const DropdownLabel = Base(($props, $slots)=>{
 
   const props = {
     ...restProps,
+    component,
     cssProps : {
       size: size,
     }
@@ -146,12 +141,13 @@ const DropdownLabel = Base(($props, $slots)=>{
 
   $props = [
     text, 
-    Icon({name: "arrow-down", "x-show": "open"}), 
-    Icon({name: "arrow-up", "x-show": "!open"}), 
+    View({style: 'display: inline', "x-show": "open"}, Icon({name: "arrow-down"})), 
+    View({style: 'display: inline', "x-show": "!open"}, Icon({name: "arrow-up"})), 
     $slots
   ]
 
 
   return View(props, $props)
 })
+
 
