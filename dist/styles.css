@@ -1269,6 +1269,10 @@ h6 {
   width: var(--icon-size);
   height: var(--icon-size);
 }
+[u-icon] > svg {
+  width: 100%;
+  height: 100%;
+}
 
 [u-icon-size="0"] {
   --icon-size: var(--size-0);

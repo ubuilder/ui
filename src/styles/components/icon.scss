@@ -4,7 +4,13 @@
   stroke-width: 1px;
   width: var(--icon-size);
   height: var(--icon-size);
+
+  & > svg {
+    width: 100%;
+    height: 100%;
+  }
 }
+
 
 @include variant(icon-size, $all-sizes) using ($size) {
   --icon-size: #{var(--size-#{$size})};

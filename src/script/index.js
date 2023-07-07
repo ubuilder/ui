@@ -98,6 +98,7 @@ function icon(Alpine) {
   });
 }
 
+// Handle checkbox and checkbox group
 function checkbox(Alpine) {
   console.log("function checkbox");
   Alpine.directive("checkbox", (el) => {
