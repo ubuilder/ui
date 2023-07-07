@@ -54,6 +54,7 @@ export function DocPage(
       }),
       title,
       style,
+      View({ tag: "script", src: "//unpkg.com/alpinejs" ,defer: true }),
       View({ tag: "style" }, customCss),
     ],
     body: [template, scriptGlobal, script && View({ tag: "script" }, script)],
