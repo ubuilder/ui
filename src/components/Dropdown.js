@@ -24,11 +24,11 @@ export const Dropdown = Base(($props, $slots) => {
     component,
     arrow,
     trigger,
-    "x-data": "{ open: false, trigger: 'hover', timeout: undefined, toggle(){if(this.open){ return this.close()} else{ return this.show()}},show(){this.open = true; console.log('open', this.open)},close(){this.open = false; console.log('close', this.open)},}",
-    "x-ref": "dropdown",
-    "@click": "toggle()",
-    "@hover": "if(trigger == 'hover'){clearTimeout(timeout); open()}",
-    "@hover.outside": "timeout = setTimout(()=>{close()},300)",
+    "u-data": "{ open: false, trigger: 'hover', timeout: undefined, toggle(){if(this.open){ return this.close()} else{ return this.show()}},show(){this.open = true; console.log('open', this.open)},close(){this.open = false; console.log('close', this.open)},}",
+    "u-ref": "dropdown",
+    "u-on:click": "toggle()",
+    "u-on:hover": "if(trigger == 'hover'){clearTimeout(timeout); open()}",
+    "u-on:hover.outside": "timeout = setTimout(()=>{close()},300)",
     cssProps: {
       size,
     },    
@@ -36,7 +36,7 @@ export const Dropdown = Base(($props, $slots) => {
 
 
   if(trigger == 'hover'){
-    props["x-on:hover"] = "open()"
+    props["u-on:hover"] = "open()"
   }
 
   $slots = [DropdownLabel({text: label ,arrow }), $slots]
@@ -93,7 +93,7 @@ export const DropdownPanel = Base(($props, $slots)=>{
   const props = {
     ...restProps,
     component,
-    "x-show": "open",
+    "u-show": "open",
     "@click.outside": "close()",
     "@hover": "clearTimeout(timeout)",
     "@hover.outside": "if(trigger == 'hover') {timeout = setTimeout(()=>{close()}, 300)}",
@@ -132,8 +132,8 @@ const DropdownLabel = Base(($props, $slots)=>{
     View({tag:'span'}, text),
     arrow?
     [
-      View({tag: 'span',"u-arrow-down": "true", "x-show": "!open"}, '>'), 
-      View({tag: 'span',"u-arrow-up": "true" , "x-show": "open" }, '<'), 
+      View({tag: 'span',"u-arrow-down": "true", "u-show": "!open"}, '>'), 
+      View({tag: 'span',"u-arrow-up": "true" , "u-show": "open" }, '<'), 
     ]:'',
     $slots
   ]
