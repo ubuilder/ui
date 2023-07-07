@@ -1,33 +1,41 @@
 [u-tab] {
+    --tab-panel-bg-color: var(--color-base-200);
+    --tab-border-color: var(--color-base-400);
     box-sizing: border-box;
     display: block ;
-    border: 1px solid var(--color-base-400);
+    border: 1px solid var(--tab-border-color);
+}
+.dark [u-tab] {
+    --tab-panel-bg-color: var(--color-base-100);
 }
 
 [u-tab-item] {
-    padding: var(--size-xs) var(--size-md);
-    border-radius: var(--size-xxs) var(--size-xxs) 0.1rem 0.1rem;
+    padding: var(--size-xxs) var(--size-sm);
+    border-radius: var(--size-xxs) var(--size-xxs) 0 0;
+
     border: 1px solid transparent;
-    border-bottom: 2px solid transparent;
+    border-bottom: 1px solid var(--tab-border-color);
     background-color: inherit;
     color: var(--color-base-900);
-
+    margin-bottom: -1px;
 }
+
 [u-tab-item]:hover {
-    border-right: 1px solid var(--color-dark-400);
-    border-left: 1px solid var(--color-dark-400);
-    border-top: 1px solid var(--color-dark-400);
+    border: 1px solid var(--tab-border-color);
+    border-bottom-color: transparent;
 }
 
 [u-tab-item-active] {
-    background-color: var(--color-base-100);
-    border-bottom: 2px solid var(--color-primary-500);
-    margin-bottom: -1px;
+    background-color: var(--tab-panel-bg-color);
+    border: 1px solid var(--tab-border-color);
+    border-bottom-color: transparent;
 }
 
 [u-tab-panel] {
     width: 100%;
     display: none;
+    padding: var(--size-xs);
+    background-color: var(--tab-panel-bg-color);
 
 }
 
@@ -39,14 +47,13 @@
     display:  flex;
     flex-direction: row;
     width: 100%;
-    padding: var(--size-xs);
-    border-bottom: 1px solid var(--color-base-400) ;
+    padding: var(--size-xxs);
+    border-bottom: 1px solid var(--tab-border-color) ;
     padding-bottom: 0px;
     background-color: var(--color-base-300);
 }
 
 [u-tab-content] {
     width: 100%;
-    padding: var(--size-xs);
 }
  
