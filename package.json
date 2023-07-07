@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build:pages": "node build.js",
-    "build:js": "rollup -f iife -i src/script/index.js -o ./ulibs.js",
+    "build:js": "rollup -f iife -i src/script/index.js -o ./ulibs.js -p @rollup/plugin-node-resolve",
     "build": "npm run build:pages && npm run build:js",
     "dev:nodemon": "nodemon -e .sass,.scss -w ./src -w ./src/docs --exec npm run dev",
     "dev": "npm run build && node serve.js"
@@ -29,7 +29,9 @@
     "rollup": "^3.23.0"
   },
   "dependencies": {
+    "@rollup/plugin-node-resolve": "^15.1.0",
     "@ulibs/router": "^0.0.9",
+    "alpinejs": "^3.12.3",
     "sass": "^1.63.4"
   }
 }

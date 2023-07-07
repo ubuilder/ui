@@ -150,6 +150,7 @@ export const View = Base(($props, $slots) => {
 
   const props = {
     [classname(component)]: "",
+    [classname('data')]: '',
     ...restProps,
     ...cssAttributes,
   };

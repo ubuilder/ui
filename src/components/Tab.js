@@ -37,8 +37,8 @@ export const TabList = Base(($props, $slots) => {
   const props = {
     ...restProps,
     component,
-    horizontal,
     cssProps: {
+      horizontal,
       size,
     },    
   }
@@ -83,9 +83,9 @@ export const TabItem = Base(($props, $slots) => {
     component,
     cssProps: {
       size,
+      active
     },    
   }
-  if(active) props['u-tab-item-active'] = true
 
   return Button(props, label? label : $slots)
 });
