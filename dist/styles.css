@@ -2986,10 +2986,7 @@ h6 {
 
 [u-dropdown-panel] {
   color: var(--color-base-content);
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  margin-top: var(--size-lg);
+  position: static;
   display: flex;
   flex-direction: column;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
