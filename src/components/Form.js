@@ -111,7 +111,7 @@ export const CheckboxGroup = Base(($props, $slots) => {
 
   return FormField($props, [
     View(
-      { tag: "div", component },
+      { tag: "div", component, name },
       Each({ items }, ({ item }) =>
         Checkbox({
           name,

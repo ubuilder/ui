@@ -1,6 +1,108 @@
-import { register } from "./helpers";
+export function Form(Alpine) {
+  const handlers = {
+    input: (el) => ({ name: el.name, value: () => el.value }),
+    checkbox: (el) => {
+      // multiple
 
-export function Form($el) {
+      const parent = el.parentElement;
+
+      if (parent.hasAttribute("u-checkbox-group-wrapper")) {
+        return;
+      } else {
+        const checkbox = el.querySelector("[u-checkbox-input]");
+
+        return {
+          name: checkbox.name,
+          value: () => checkbox.checked,
+        };
+      }
+    },
+    "checkbox-group": (el) => {
+      // el._model.get
+      const name = el.getAttribute("name");
+
+      return {
+        name,
+        value: () => {
+          let value = [];
+
+          el.querySelectorAll("[u-checkbox-input").forEach((item) => {
+            console.log({ item });
+            console.log("item ", item.checked, item.value);
+
+            if (item.checked) {
+              console.log("item is checked", item.value);
+              value = [...value, item.value];
+            }
+          });
+          console.log({ value });
+          return value;
+        },
+      };
+    },
+  };
+
+  Alpine.directive("form", (el) => {
+    const fields = {};
+
+    let inputs = ["input", "checkbox", "checkbox-group"];
+
+    for (let input of inputs) {
+      el.querySelectorAll(`[u-${input}]`).forEach((el) => {
+        const { name, value } = handlers[input](el);
+
+        fields[name] = value;
+      });
+    }
+
+    Alpine.bind(el, {
+      "u-data"() {
+        let result = {};
+
+        for (let field in fields) {
+          result[field] = fields[field]();
+        }
+        return result;
+      },
+    });
+
+    Alpine.bind(el, {
+      async "u-on:submit"(event) {
+        const value = {};
+        event.preventDefault();
+
+        Object.keys(fields).map((key) => {
+          console.log(key, "fields: ", fields);
+          value[key] = fields[key]();
+        });
+
+        const pathname = window.location.pathname;
+
+        const url = pathname.endsWith("/")
+          ? pathname.substring(0, pathname.length - 1)
+          : pathname + "?" + el.getAttribute("action");
+
+        try {
+          // support function call
+          console.log("function call");
+          const result = await fetch(url, {
+            method: "POST", // el.method,
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(value),
+          }).then((res) => res.json());
+
+          console.log({ result });
+        } catch (err) {
+          console.log(err);
+        }
+      },
+    });
+  });
+}
+
+/** export function Form($el) {
   $el.addEventListener("submit", async (event) => {
     event.preventDefault();
 
@@ -33,3 +135,4 @@ export function Form($el) {
 }
 
 register("u-form", Form);
+*/

@@ -24,6 +24,11 @@ export default () =>
       tag("li", {}, tag("a", { href: "/components/divider" }, "Divider")),
       tag("li", {}, tag("a", { href: "/components/spinner" }, "Spinner")),
       tag("li", {}, tag("a", { href: "/components/breadcrumb" }, "Breadcrumb")),
+      tag("li", {}, tag("a", { href: "/components/form" }, "Form")),
+      tag("li", {}, tag("a", { href: "/components/checkbox" }, "Checkbox & Radio")),
+      tag("li", {}, tag("a", { href: "/components/grid" }, "Grid")),
+
+
       tag("li", {}, tag("a", { href: "/components/avatar" }, "Avatar")),
       tag("li", {}, tag("a", { href: "/components/progress" }, "Progress")),
       tag("li", {}, tag("a", { href: "/components/tab" }, "Tab")),

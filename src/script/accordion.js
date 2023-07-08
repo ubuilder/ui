@@ -1,39 +1,58 @@
-import {
-  queryAttr,
-  query,
-  toggleAttr,
-  removeAttr,
-  register,
-  getAttr,
-} from "./helpers";
+export function Accordion(Alpine) {
+  Alpine.directive("accordion", (el) => {
+    Alpine.bind(el, {
+      "u-id"() {
+        return ["accordion"];
+      },
+    });
+  });
 
-const header = "u-accordion-header";
-const content = "u-accordion-content";
-const headerOpen = "u-accordion-header-open";
-const contentOpen = "u-accordion-content-open";
+  Alpine.directive("accordion-header", (el) => {
+    Alpine.bind(el, {
+      "u-bind:id"() {
+        return this.$id("accordion");
+      },
+      "u-on:click"() {
+        this.$data.toggle(this.$id("accordion"));
+      },
+      "u-bind:u-accordion-header-open"() {
+        return this.$data.isOpen(this.$id("accordion"));
+      },
+    });
+  });
 
-export function Accordion($el) {
-  queryAttr($el, header, (el) => {
-    el.onclick = () => {
-      const persistent = getAttr($el, "persistent");
-      const id = getAttr(el, "id");
+  Alpine.directive("accordion-content", (el) => {
+    Alpine.bind(el, {
+      "u-bind:id"() {
+        return this.$id("accordion");
+      },
+      "u-bind:u-accordion-content-open"() {
+        return this.$data.isOpen(this.$id("accordion"));
+      },
+    });
+  });
 
-      console.log({ persistent });
-      if (!persistent) {
-        // remove open attribute
-        queryAttr($el, headerOpen, (el) => removeAttr(el, headerOpen, ""));
-        queryAttr($el, contentOpen, (el) => removeAttr(el, contentOpen, ""));
-      }
-
-      // toggle open of header
-      toggleAttr(el, headerOpen);
-
-      // toggle open of related content
-      query($el, `[${content}][id="${id}"]`, (el) =>
-        toggleAttr(el, contentOpen)
-      );
-    };
+  Alpine.directive("accordions", (el) => {
+    Alpine.bind(el, {
+      "u-data"() {
+        return {
+          open: {},
+          persistent: el.getAttribute("persistent"),
+          toggle: (id) => {
+            if (this.$data.persistent) {
+              console.log("persistent", "close others");
+            }
+            if (this.$data.open[id]) {
+              delete this.$data.open[id];
+            } else {
+              this.$data.open[id] = true;
+            }
+          },
+          isOpen(id) {
+            return this.$data.open[id];
+          },
+        };
+      },
+    });
   });
 }
-
-register("u-accordions", Accordion);

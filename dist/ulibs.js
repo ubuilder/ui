@@ -3098,6 +3098,226 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   // packages/alpinejs/builds/module.js
   var module_default = src_default;
 
+  function Accordion(Alpine) {
+    Alpine.directive("accordion", (el) => {
+      Alpine.bind(el, {
+        "u-id"() {
+          return ["accordion"];
+        },
+      });
+    });
+
+    Alpine.directive("accordion-header", (el) => {
+      Alpine.bind(el, {
+        "u-bind:id"() {
+          return this.$id("accordion");
+        },
+        "u-on:click"() {
+          this.$data.toggle(this.$id("accordion"));
+        },
+        "u-bind:u-accordion-header-open"() {
+          return this.$data.isOpen(this.$id("accordion"));
+        },
+      });
+    });
+
+    Alpine.directive("accordion-content", (el) => {
+      Alpine.bind(el, {
+        "u-bind:id"() {
+          return this.$id("accordion");
+        },
+        "u-bind:u-accordion-content-open"() {
+          return this.$data.isOpen(this.$id("accordion"));
+        },
+      });
+    });
+
+    Alpine.directive("accordions", (el) => {
+      Alpine.bind(el, {
+        "u-data"() {
+          return {
+            open: {},
+            persistent: el.getAttribute("persistent"),
+            toggle: (id) => {
+              if (this.$data.persistent) {
+                console.log("persistent", "close others");
+              }
+              if (this.$data.open[id]) {
+                delete this.$data.open[id];
+              } else {
+                this.$data.open[id] = true;
+              }
+            },
+            isOpen(id) {
+              return this.$data.open[id];
+            },
+          };
+        },
+      });
+    });
+  }
+
+  function Icon(Alpine) {
+    Alpine.directive("icon", (el) => {
+      const iconName = el.getAttribute("name");
+
+      Alpine.bind(el, {
+        "u-data"() {
+          return {
+            init() {
+              fetch(
+                `https://unpkg.com/@tabler/icons@2.19.0/icons/${iconName}.svg`
+              )
+                .then((res) => res.text())
+                .then((svg) => {
+                  el.innerHTML = svg;
+                });
+            },
+          };
+        },
+      });
+    });
+  }
+
+  function Form(Alpine) {
+    const handlers = {
+      input: (el) => ({ name: el.name, value: () => el.value }),
+      checkbox: (el) => {
+        // multiple
+
+        const parent = el.parentElement;
+
+        if (parent.hasAttribute("u-checkbox-group-wrapper")) {
+          return;
+        } else {
+          const checkbox = el.querySelector("[u-checkbox-input]");
+
+          return {
+            name: checkbox.name,
+            value: () => checkbox.checked,
+          };
+        }
+      },
+      "checkbox-group": (el) => {
+        // el._model.get
+        const name = el.getAttribute("name");
+
+        return {
+          name,
+          value: () => {
+            let value = [];
+
+            el.querySelectorAll("[u-checkbox-input").forEach((item) => {
+              console.log({ item });
+              console.log("item ", item.checked, item.value);
+
+              if (item.checked) {
+                console.log("item is checked", item.value);
+                value = [...value, item.value];
+              }
+            });
+            console.log({ value });
+            return value;
+          },
+        };
+      },
+    };
+
+    Alpine.directive("form", (el) => {
+      const fields = {};
+
+      let inputs = ["input", "checkbox", "checkbox-group"];
+
+      for (let input of inputs) {
+        el.querySelectorAll(`[u-${input}]`).forEach((el) => {
+          const { name, value } = handlers[input](el);
+
+          fields[name] = value;
+        });
+      }
+
+      Alpine.bind(el, {
+        "u-data"() {
+          let result = {};
+
+          for (let field in fields) {
+            result[field] = fields[field]();
+          }
+          return result;
+        },
+      });
+
+      Alpine.bind(el, {
+        async "u-on:submit"(event) {
+          const value = {};
+          event.preventDefault();
+
+          Object.keys(fields).map((key) => {
+            console.log(key, "fields: ", fields);
+            value[key] = fields[key]();
+          });
+
+          const pathname = window.location.pathname;
+
+          const url = pathname.endsWith("/")
+            ? pathname.substring(0, pathname.length - 1)
+            : pathname + "?" + el.getAttribute("action");
+
+          try {
+            // support function call
+            console.log("function call");
+            const result = await fetch(url, {
+              method: "POST", // el.method,
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(value),
+            }).then((res) => res.json());
+
+            console.log({ result });
+          } catch (err) {
+            console.log(err);
+          }
+        },
+      });
+    });
+  }
+
+  /** export function Form($el) {
+    $el.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const entries = new FormData($el);
+      const data = Object.fromEntries(entries);
+
+      const pathname = window.location.pathname;
+
+      // Checkbox Group
+      $el.querySelectorAll("[multiple]").forEach((el) => {
+        console.log(el);
+        data[el.getAttribute("name")] = entries.getAll(el.getAttribute("name"));
+      });
+
+      const url = pathname.endsWith("/")
+        ? pathname.substring(0, pathname.length - 1)
+        : pathname + "?" + $el.getAttribute("u-action");
+
+      const result = await fetch(url, {
+        method: $el.method,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }).then((res) => res.json());
+
+      alert(result);
+    });
+    //
+  }
+
+  register("u-form", Form);
+  */
+
   function attr($el, key, value) {
     if (typeof value === "undefined") {
       const result = $el.getAttribute(key);
@@ -3391,179 +3611,81 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   // export * from "./form";
 
 
-  function accordion(Alpine) {
-    console.log("function accordion", Alpine.prefixed('accordions'));
-    Alpine.directive("accordions", (el) => {
-      console.log("accordions", el);
-
-      Alpine.bind(el, {
-        "u-data"() {
-          return {
-            open: {},
-            toggle: (id) => {
-              // TODO: support persistent
-              // if(isPersistent) {
-
-              // }
-              if (this.$data.open[id]) {
-                delete this.$data.open[id];
-              } else {
-                this.$data.open[id] = true;
-              }
-              console.log(this.$data.open);
-            },
-            isOpen(id) {
-              return this.$data.open[id];
-            },
-          };
-        },
-      });
-
-      // let id=0
-
-      const accordions = el.querySelectorAll("[u-accordion]");
-      let id = 0;
-
-      accordions.forEach((accordion) => {
-        const myId = id++;
-        console.log('register accordion', accordion);
-
-        Alpine.bind(accordion.querySelector("[u-accordion-header]"), {
-          "u-init"() {
-            console.log(
-              "init",
-              this,
-              this.$el.getAttribute("u-accordion-header-open")
-            );
-          },
-          "u-on:click"() {
-            this.$data.toggle(myId);
-          },
-          "u-bind:u-accordion-header-open"() {
-            return this.$data.isOpen(myId);
-          },
-        });
-
-        Alpine.bind(accordion.querySelector("[u-accordion-content]"), {
-          "u-bind:u-accordion-content-open"() {
-            return this.$data.isOpen(myId);
-          },
-        });
-      });
-    });
-  }
-
-  function icon(Alpine) {
-    console.log("function icon");
-    Alpine.directive("icon", (el, { expression }) => {
-      const iconName = el.getAttribute("name");
-      console.log(iconName);
-
-      Alpine.bind(el, {
-        "u-data"() {
-          return {
-            init() {
-              fetch(
-                `https://unpkg.com/@tabler/icons@2.19.0/icons/${iconName}.svg`
-              )
-                .then((res) => res.text())
-                .then((svg) => {
-                  el.innerHTML = svg;
-                });
-            },
-          };
-        },
-      });
-    });
-  }
-
+  // Handle checkbox and checkbox group
   function checkbox(Alpine) {
-    console.log("function checkbox");
     Alpine.directive("checkbox", (el) => {
-      // checkbox
-      // checkbox-input
-      // checkbox-text
+      if (el.parentNode.hasAttribute("u-checkbox-group")) return;
+
+      const data = Alpine.$data(el, {
+        value: false,
+        name: "",
+      });
+
+      Alpine.bind(el, {
+        data,
+      });
+    });
+    Alpine.directive("checkbox-input", (el) => {
+      if (el.parentNode.parentNode.hasAttribute("u-checkbox-group")) return;
+
+      Alpine.bind(el, {
+        "u-init"() {
+          this.$data.name = el.getAttribute("name");
+        },
+        "u-on:change"(e) {
+          this.$data[el.getAttribute("name")] = e.target.checked;
+        },
+      });
+    });
+
+    Alpine.directive("checkbox-group", (el) => {
+      const name = el.getAttribute("name");
+      let value = [];
+
+      el._model = {
+        get() {
+          return value
+        } 
+      };
+
+      el.querySelectorAll("[u-checkbox-input]").forEach((item) => {
+        if (item.checked) {
+          value = [...value, item.value];
+        }
+
+        Alpine.bind(item, {
+          "u-on:change"(event) {
+            value = Array.from(this.$data[name]);
+
+            // toggle item
+            if (value.includes(event.target.value)) {
+              value = value.filter((x) => x !== event.target.value);
+            } else {
+              value = [...value, event.target.value];
+            }
+
+            this.$data[name] = value;
+          },
+        });
+      });
+
+      Alpine.bind(el, {
+        "u-init"() {
+          this.$data[name] = value;
+        },
+      });
     });
   }
 
   function input(Alpine) {
     console.log("function input");
     Alpine.directive("input", (el) => {
+      Alpine.bind(el, {
+        "u-on:input"(e) {
+          this.$data[el.getAttribute("name")] = e.target.value;
+        },
+      });
       // input
-    });
-  }
-
-  function form(Alpine) {
-    console.log("function form");
-
-    Alpine.directive("form", (el, a, b) => {
-      // add all elements to u-data
-
-      const fields = {};
-      el.querySelectorAll("[u-input]").forEach((input) => {
-        Alpine.bind(input, {
-          // 'u-model'() {
-          // return
-          // }
-          "u-on:input"(e) {
-            this.$data[input.getAttribute("name")] = e.target.value;
-          },
-        });
-
-        fields[input.getAttribute("name")] = input.value;
-      });
-      el.querySelectorAll("[u-checkbox-input]").forEach((input) => {
-        Alpine.bind(input, {
-          "u-on:change"(e) {
-            this.$data[input.getAttribute("name")] = e.target.checked;
-          },
-        });
-
-        fields[input.getAttribute("name")] = input.checked;
-      });
-
-      Alpine.bind(el, {
-        "u-data"() {
-          return {
-            //
-            ...fields,
-          };
-        },
-      });
-
-      Alpine.bind(el, {
-        async "u-on:submit"(event) {
-          const value = {};
-          event.preventDefault();
-
-          Object.keys(fields).map((key) => {
-            value[key] = this.$data[key];
-          });
-
-          console.log(this.$data, value);
-          const pathname = window.location.pathname;
-
-          const url = pathname.endsWith("/")
-            ? pathname.substring(0, pathname.length - 1)
-            : pathname + "?" + el.getAttribute("action");
-
-          try {
-            // support function call
-            console.log("function call");
-            const result = await fetch(url, {
-              method: "POST", // el.method,
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(value),
-            }).then((res) => res.json());
-
-            console.log({ result });
-          } catch (err) {
-            console.log(err);
-          }
-        },
-      });
     });
   }
 
@@ -3577,12 +3699,12 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     //     }
     //   })
     // })
-    
-    form(Alpine);
+
     checkbox(Alpine);
     input(Alpine);
-    accordion(Alpine);
-    icon(Alpine);
+    Form(Alpine);
+    Accordion(Alpine);
+    Icon(Alpine);
   }
 
   console.log("set prefix");
