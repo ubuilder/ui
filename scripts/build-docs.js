@@ -19,7 +19,7 @@ if (!existsSync("./build/ui")) {
 
 for (let file of files) {
   if (file.endsWith(".js")) {
-    import("./src/docs/pages/" + file).then((module) => {
+    import("../src/docs/pages/" + file).then((module) => {
       const page = renderTemplate(module.default({ prefix: "/ui/" }));
 
       if (file == "index.js") {
