@@ -62,7 +62,7 @@ jobs:
         uses: actions/upload-pages-artifact@v1
         with:
           # Upload build folder
-          path: "./build/components"
+          path: "./build/ui"
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
