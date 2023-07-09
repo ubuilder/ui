@@ -6,7 +6,7 @@ import {
 import { DocPage } from "../components/DocPage.js";
 
 const avatar = ({ title, description }) => {
-    return View({style: "display: flex; gap: 4px"},[
+    return View({d: 'flex', wrap: true, gap: 'xs'},[
         Avatar({color: "error", size: "xs"}, "EA"),
         Avatar({color: "success", size: "sm"}, "EA"),
         Avatar({color: "warning"}, "EA"),

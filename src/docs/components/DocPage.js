@@ -1,16 +1,13 @@
 import { renderScripts, renderTemplate, html } from "@ulibs/router";
 import { Button, View } from "../../components/index.js";
 
-// const prefix = "/";
-const prefix = "/components/";
-
 export function DocPage(
-  { component = "page", name = "", ...restProps },
+  { component = "page", name = "", prefix = '/components/', ...restProps },
   slots
 ) {
   const page = View({ component, ...restProps }, [
     View({ p: "xs", class: "border-bottom" }, [
-      Button({ link: true, href: "/components" }, "Back"),
+      Button({ link: true, onClick: 'navigation.back()' }, "Back"),
       Button(
         {
           color: "dark",
