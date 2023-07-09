@@ -2,7 +2,7 @@ import { renderScripts, renderTemplate, html } from "@ulibs/router";
 import { Button, View } from "../../components/index.js";
 
 export function DocPage(
-  { component = "page", name = "", prefix = '/components/', ...restProps },
+  { component = "page", name = "", prefix = '/ui/', ...restProps },
   slots
 ) {
   const page = View({ component, ...restProps }, [
