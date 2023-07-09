@@ -8,14 +8,14 @@
     "access": "public"
   },
   "scripts": {
-    "build:docs": "node build.js",
-    "build:css": "node build-css.js",
+    "build:docs": "node scripts/build-docs.js",
+    "build:css": "node scripts/build-css.js",
     "build:js": "rollup -f iife -i src/script/index.js -o ./dist/ulibs.js -p @rollup/plugin-node-resolve",
     "build": "npm run build:css && npm run build:js",
     "dev:nodemon": "nodemon -e .sass,.scss -w ./src -w ./src/docs --exec npm run build",
     "dev:css": "nodemon -e .scss -w ./src/styles --exec 'npm run build:css'",
     "dev:js": "nodemon -e .js -w ./src/script --exec 'npm run build:js'",
-    "dev:docs": "nodemon -e .js -w ./dist/* -w ./src/docs --exec 'node serve.js'",
+    "dev:docs": "nodemon -e .js -w ./dist/* -w ./src/docs --exec 'node scripts/serve.js'",
     "dev": "conc npm:dev:css npm:dev:js npm:dev:docs",
     "start": "http-server ./build -p 3002"
   },

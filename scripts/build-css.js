@@ -15,3 +15,5 @@ if (!existsSync("./dist")) {
 }
 
 writeFileSync("./dist/styles.css", css.css);
+
+console.log('created ', "./dist/styles.css")
