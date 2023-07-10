@@ -1,7 +1,3 @@
-// export * from "./accordion";
-// export * from "./icon";
-// export * from "./form";
-
 import Alpine from "alpinejs";
 import { Accordion } from "./accordion";
 import { Icon } from "./icon";
@@ -90,15 +86,7 @@ function input(Alpine) {
 }
 
 function ulibsPlugin(Alpine) {
-  console.log("function ulibsPlugin");
-
-  // Alpine.directive('view', (el) => {
-  //   Alpine.bind(el, {
-  //     'u-data'() {
-  //       return {}
-  //     }
-  //   })
-  // })
+  document.body.setAttribute('u-data', '')
 
   checkbox(Alpine);
   input(Alpine);
@@ -107,10 +95,11 @@ function ulibsPlugin(Alpine) {
   Icon(Alpine);
 }
 
-console.log("set prefix");
-Alpine.prefix("u-");
-Alpine.plugin(ulibsPlugin);
+document.addEventListener('DOMContentLoaded', () => {
+  Alpine.prefix("u-");
+  Alpine.plugin(ulibsPlugin);
+  
+  Alpine.start();
+  window.Alpine = Alpine;  
+})
 
-Alpine.start();
-
-window.Alpine = Alpine;

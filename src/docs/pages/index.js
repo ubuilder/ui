@@ -1,4 +1,4 @@
-import { tag } from "@ulibs/router";
+import { tag } from "../../core/index.js";
 import { View } from "../../components/index.js";
 
 export default ({prefix}) =>

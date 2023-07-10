@@ -6,7 +6,6 @@ import {
   rmSync,
   writeFileSync,
 } from "fs";
-import { renderTemplate } from "@ulibs/router";
 
 const files = readdirSync("./src/docs/pages");
 
@@ -20,7 +19,7 @@ if (!existsSync("./build/ui")) {
 for (let file of files) {
   if (file.endsWith(".js")) {
     import("../src/docs/pages/" + file).then((module) => {
-      const page = renderTemplate(module.default({ prefix: "/ui/" }));
+      const page = module.default({ prefix: "/ui/" }).toString();
 
       if (file == "index.js") {
         writeFileSync("./build/ui/" + "index.html", page);

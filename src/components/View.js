@@ -1,4 +1,4 @@
-import { tag } from "@ulibs/router";
+import { tag } from "../core/index.js";
 import { classname, Base } from "../utils.js";
 
 // Not implemented
@@ -149,8 +149,7 @@ export const View = Base(($props, $slots) => {
   }
 
   const props = {
-    [classname(component)]: "",
-    [classname('data')]: '',
+    [classname(component)]: component === 'view'? false :"",
     ...restProps,
     ...cssAttributes,
   };

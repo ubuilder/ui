@@ -3606,11 +3606,6 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   }
   register("u-tab", Tab);
 
-  // export * from "./accordion";
-  // export * from "./icon";
-  // export * from "./form";
-
-
   // Handle checkbox and checkbox group
   function checkbox(Alpine) {
     Alpine.directive("checkbox", (el) => {
@@ -3690,15 +3685,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   }
 
   function ulibsPlugin(Alpine) {
-    console.log("function ulibsPlugin");
-
-    // Alpine.directive('view', (el) => {
-    //   Alpine.bind(el, {
-    //     'u-data'() {
-    //       return {}
-    //     }
-    //   })
-    // })
+    document.body.setAttribute('u-data', '');
 
     checkbox(Alpine);
     input(Alpine);
@@ -3707,13 +3694,13 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     Icon(Alpine);
   }
 
-  console.log("set prefix");
-  module_default.prefix("u-");
-  module_default.plugin(ulibsPlugin);
-
-  module_default.start();
-
-  window.Alpine = module_default;
+  document.addEventListener('DOMContentLoaded', () => {
+    module_default.prefix("u-");
+    module_default.plugin(ulibsPlugin);
+    
+    module_default.start();
+    window.Alpine = module_default;  
+  });
 
   exports.Bind = Bind;
   exports.Modal = Modal;

@@ -1,4 +1,3 @@
-import { renderScripts, renderTemplate, tag } from "@ulibs/router";
 import express from "express";
 import connectLivereload from "connect-livereload";
 import livereload from "livereload";
@@ -6,12 +5,10 @@ import livereload from "livereload";
 import { readdirSync, readFileSync } from "fs";
 
 function render(component, theme = "dark") {
-  const template = renderTemplate(component);
-  const script = renderScripts(component);
 
   console.log(script);
-  return renderTemplate(
-    tag("html", {}, [
+
+  return tag("html", {}, [
       tag("head", {}, [
         tag("title", {}, "Test Page"),
         tag("link", { rel: "stylesheet", href: "/styles.css" }),
@@ -19,11 +16,10 @@ function render(component, theme = "dark") {
         // style
       ]),
       tag("body", { class: theme }, [
-        template,
-        script && tag("script", {}, script),
+        component.toString(),
+        script && tag("script", {}, component.toScript()),
       ]),
-    ])
-  );
+    ]).toString()
 }
 
 const app = express();
