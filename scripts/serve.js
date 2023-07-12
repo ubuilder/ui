@@ -15,7 +15,7 @@ function layout(props, slots) {
         View({ tag: "style" }, style),
         View({ tag: "script", defer: true, async: true }, script),
       ],
-      test: true,
+      'u-routing': true,
     },
     slots
   );
@@ -58,7 +58,7 @@ router.addPage(prefix + ":component", {
       );
 
       return {
-        component: result.default,
+        component: (...args) => View({'u-routing': true}, result.default(...args)),
       };
     } catch (err) {
       console.log("err: ", err);

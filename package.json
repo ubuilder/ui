@@ -39,6 +39,7 @@
     "alpinejs": "^3.12.3",
     "concurrently": "^8.2.0",
     "http-server": "^14.1.1",
+    "morphdom": "^2.7.0",
     "sass": "^1.63.4"
   }
 }

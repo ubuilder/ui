@@ -3,9 +3,11 @@ import { Accordion } from "./accordion";
 import { Icon } from "./icon";
 import { Form } from "./form";
 import { Modal } from "./modal";
+import { ClientSideRouting } from "./routing";
 
 export * from "./bind";
 export * from "./tab";
+
 
 // Handle checkbox and checkbox group
 function checkbox(Alpine) {
@@ -40,9 +42,9 @@ function checkbox(Alpine) {
 
     el._model = {
       get() {
-        return value
-      } 
-    }
+        return value;
+      },
+    };
 
     el.querySelectorAll("[u-checkbox-input]").forEach((item) => {
       if (item.checked) {
@@ -86,21 +88,21 @@ function input(Alpine) {
 }
 
 function ulibsPlugin(Alpine) {
-  document.body.setAttribute('u-data', '')
+  document.body.setAttribute("u-data", "");
 
+  ClientSideRouting(Alpine);
   checkbox(Alpine);
   input(Alpine);
   Form(Alpine);
   Accordion(Alpine);
   Icon(Alpine);
-  Modal(Alpine)
+  Modal(Alpine);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   Alpine.prefix("u-");
   Alpine.plugin(ulibsPlugin);
-  
-  Alpine.start();
-  window.Alpine = Alpine;  
-})
 
+  Alpine.start();
+  window.Alpine = Alpine;
+});

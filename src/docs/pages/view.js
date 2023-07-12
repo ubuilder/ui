@@ -5,12 +5,9 @@ import { Section } from "../components/Section.js";
 export default function () {
   return DocPage({ name: "View" }, [
     Section({ title: "View", description: "This is View component" }, [
-      Button({ onClick: 'alert("clicked")' }, "Click"),
+      Button({ onClick: "alert('clicked')" }, "Click"),
     ]),
     Section({title: 'width', description: 'You can change width of all elements using w property'}, [
-
-
-
 
       View({border: true, m: 'xs', borderColor: 'primary', w: 0}, 'Width = 0'),
       View({border: true, m: 'xs', borderColor: 'secondary', w: 50}, 'Width = 50'),

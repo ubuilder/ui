@@ -50,11 +50,11 @@ export function DocPage(
     },
     [
       View({ p: "xs", class: "border-bottom header" }, [
-        Button({ link: true, onClick: "navigation.back()" }, "Back"),
+        Button({ link: true, 'u-on:click': "$routing.back()" }, "Back"),
         Button(
           {
             color: "dark",
-            onClick: `document.body.classList.toggle("dark")`,
+            'u-on:click': `el => document.body.classList.toggle('dark')`,
           },
           "Dark"
         ),
