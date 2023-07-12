@@ -2,9 +2,9 @@ import Alpine from "alpinejs";
 import { Accordion } from "./accordion";
 import { Icon } from "./icon";
 import { Form } from "./form";
+import { Modal } from "./modal";
 
 export * from "./bind";
-export * from "./modal";
 export * from "./tab";
 
 // Handle checkbox and checkbox group
@@ -93,6 +93,7 @@ function ulibsPlugin(Alpine) {
   Form(Alpine);
   Accordion(Alpine);
   Icon(Alpine);
+  Modal(Alpine)
 }
 
 document.addEventListener('DOMContentLoaded', () => {
