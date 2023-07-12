@@ -21,6 +21,7 @@ for (let file of files) {
     import("../src/docs/pages/" + file).then((module) => {
       const page = module.default({ prefix: "/ui/" }).toString();
 
+      if(!page) return;
       if (file == "index.js") {
         writeFileSync("./build/ui/" + "index.html", page);
       } else {
