@@ -3107,6 +3107,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       });
     });
 
+    
     Alpine.directive("accordion-header", (el) => {
       Alpine.bind(el, {
         "u-bind:id"() {
@@ -3317,6 +3318,63 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
   register("u-form", Form);
   */
+
+  function Modal(Alpine) {
+    console.log('modal init');
+
+    Alpine.directive('modal-backdrop', (el) => {
+      Alpine.bind(el, {
+        'u-on:click'() {
+          const isOpen = el.parentNode.hasAttribute('u-modal-open');
+
+          if(isOpen) {
+            this.$modal.close();
+          }
+        }
+      });
+    });
+
+    Alpine.directive('modal-content', (el) => {
+      Alpine.bind(el, {
+        'u-on:click.stop'() {
+          // 
+        }
+      });
+    });
+
+    Alpine.directive('modal', el => {
+
+      console.log('modal directive');
+      
+      Alpine.bind(el, {
+        'u-data'() {
+          return {
+            close() {
+              el.removeAttribute('u-modal-open');
+            },
+          }
+        }
+      });
+    });
+
+    Alpine.magic('modal', (...args) => {
+      return {
+        open(name) {
+          const el = document.querySelector(`[name="${name}"]`);
+
+          el.setAttribute('u-modal-open', '');
+        },
+        close() {
+
+          const el = document.querySelector(`[u-modal-open]`);
+
+          if(el) {
+            el.removeAttribute('u-modal-open');
+          }
+        }
+      }
+    });
+  }
 
   function attr($el, key, value) {
     if (typeof value === "undefined") {
@@ -3536,37 +3594,6 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
   register("u-bind", Bind);
 
-  function Modal($el) {
-    // close on backdrop click
-
-    queryAttr($el, "u-modal-backdrop", (el) => {
-      console.log("add event listener");
-      el.onclick = () => {
-        Modal.close($el);
-      };
-    });
-    queryAttr($el, "u-modal-content", (el) => {
-      console.log("add event listener2");
-
-      // el.onclick = (event) => {
-      //   event.stop_propagation();
-      // };
-    });
-  }
-
-  Modal.close = (el) => {
-    const persistent = getAttr(el, "persistent");
-    if (persistent) return;
-
-    removeAttr(el, "u-modal-open");
-  };
-
-  Modal.open = (el) => {
-    setAttr(el, "u-modal-open");
-  };
-
-  register("u-modal", Modal);
-
   function Tab($el) {
       let tabItems = [];
       let tabPanels = [];
@@ -3692,6 +3719,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     Form(Alpine);
     Accordion(Alpine);
     Icon(Alpine);
+    Modal(Alpine);
   }
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -3703,7 +3731,6 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   });
 
   exports.Bind = Bind;
-  exports.Modal = Modal;
   exports.Tab = Tab;
 
   return exports;
