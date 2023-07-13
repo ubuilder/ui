@@ -8,14 +8,14 @@ function layout(props, slots) {
   const script = fs.readFileSync("./dist/ulibs.js", "utf-8");
   const style = fs.readFileSync("./dist/styles.css", "utf-8");
 
+  console.log({script})
   return View(
     {
       htmlHead: [
-        View({ tag: "title" }, "Hello World 2"),
         View({ tag: "style" }, style),
         View({ tag: "script", defer: true, async: true }, script),
       ],
-      test: true,
+      'u-routing': true,
     },
     slots
   );
@@ -58,7 +58,7 @@ router.addPage(prefix + ":component", {
       );
 
       return {
-        component: result.default,
+        component: (...args) => View({'u-routing': true}, result.default(...args)),
       };
     } catch (err) {
       console.log("err: ", err);

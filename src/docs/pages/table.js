@@ -61,15 +61,7 @@ export default function () {
     function editUser(id) {
         console.log('should edit user with id: ' + id)
     }
-    function openAddModal() {
-        document.getElementById('add-user-modal').setAttribute('u-modal-open', true)
-
-    }
-    function closeAddModal() {
     
-        document.getElementById('add-user-modal').removeAttribute('u-modal-open')
-    }
-
     function addUser() {
         console.log('should add user')
     }
@@ -79,7 +71,7 @@ export default function () {
     [
       CardHeader([
         CardTitle("List of Users"),
-        Button({ onClick: "openAddModal()" }, [
+        Button({ onClick: "$modal.open('add-user')" }, [
           Icon({ name: "plus" }),
           "Add User",
         ]),
@@ -125,12 +117,12 @@ export default function () {
     ]
   );
 
-  const modal = Modal({ id: "add-user-modal", open: false }, [
+  const modal = Modal({ name: "add-user", open: false }, [
     ModalBody("Add user"),
     CardFooter([
       CardActions([
         ButtonGroup([
-          Button({ onClick: "closeAddModal()" }, "Cancel"),
+          Button({ onClick: "$modal.close()" }, "Cancel"),
           Button(
             { onClick: "addUser(); closeAddModal()", color: "primary" },
             "Next"

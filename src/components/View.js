@@ -1,4 +1,4 @@
-import { tag } from "@ulibs/router";
+import { tag } from "../core/index.js";
 import { classname, Base } from "../utils.js";
 
 // Not implemented
@@ -149,41 +149,26 @@ export const View = Base(($props, $slots) => {
   }
 
   const props = {
-    [classname(component)]: "",
-    [classname('data')]: '',
+    [classname(component)]: component === 'view'? false :"",
     ...restProps,
     ...cssAttributes,
   };
 
-  let scripts = [];
-
   for (let key in props) {
+
     if (key.startsWith("on") && key[2] >= "A" && key[2] <= "Z") {
       let event = key.substring(2).toLocaleLowerCase();
-      let code = props[key].toString();
+
+
+      if (event === "init") {
+        props['u-init'] = props[key]
+      } else {
+        props['u-on:' + event] = props[key]
+      }
 
       delete props[key];
 
-      if (event === "init") {
-        continue;
-      }
-
-      scripts.push(
-        `/* ${key} */ try {$el.addEventListener("${event}", ($event) => {\n\t${code}\n});}catch(err){console.log("Error: on (${key} of ${props.id})", err)}`
-      );
     }
-  }
-
-  if (scripts.length > 0) {
-    if (!props.id) props.id = component + "_" + id++;
-    props.script =
-      (props.script ?? "") +
-      `;\n(() => {
-  const $el = document.getElementById("${props.id}")
-  /* onInit */ ${restProps.onInit ?? ""}
-
-  ${scripts.join("\n")}
-})();`;
   }
 
   return tag(tagName, props, $slots);

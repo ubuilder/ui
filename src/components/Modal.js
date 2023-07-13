@@ -10,6 +10,7 @@ export const Modal = Base(($props, slots) => {
     component = "modal",
     open = false,
     persistent,
+    name,
     ...restProps
   } = $props;
 
@@ -18,21 +19,7 @@ export const Modal = Base(($props, slots) => {
     component,
     cssProps: { open },
     persistent,
-    // jsProps: { open, persistent },
-    // onMount($el, $props) {
-    //   const props = JSON.parse($props);
-
-    //   if (props.open) {
-    //     $el.classList.add("u-modal-open");
-    //   }
-
-    //   // close modal
-    //   $el.querySelector(".u-modal-backdrop").addEventListener("click", () => {
-    //     console.log(props);
-    //     if (props.persistent) return;
-    //     $el.classList.remove("u-modal-open");
-    //   });
-    // },
+    name
   };
 
   return View(props, [

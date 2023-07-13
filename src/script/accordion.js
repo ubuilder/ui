@@ -7,6 +7,7 @@ export function Accordion(Alpine) {
     });
   });
 
+  
   Alpine.directive("accordion-header", (el) => {
     Alpine.bind(el, {
       "u-bind:id"() {
