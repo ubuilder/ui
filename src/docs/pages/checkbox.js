@@ -25,15 +25,7 @@ export default function () {
     ),
     Section(
       { title: "Radio", description: "This is Radio component" },
-      View([
-        Radio({ name: "gender", label: "Male", value: "male" }),
-        Radio({ name: "gender", label: "Female", value: "female" }),
-      ]),
-      View([
-        Radio({ name: "language", inline: true, label: "Html", value: "html" }),
-        Radio({ name: "language", inline: true, label: "Css", value: "css" }),
-        Radio({ name: "language", inline: true, label: "Js", value: "js" }),
-      ])
+      'Always use RadioGroup'
     ),
     Section(
       {
