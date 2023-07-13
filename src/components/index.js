@@ -16,3 +16,4 @@ export * from "./Avatar.js";
 export * from "./Progress.js";
 export * from "./Tab.js";
 export * from "./Dropdown.js";
+export * from "./AutoComplete.js";
