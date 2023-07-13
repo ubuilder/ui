@@ -2,6 +2,7 @@ import Alpine from "alpinejs";
 import { Accordion } from "./accordion";
 import { Icon } from "./icon";
 import { Form } from "./form";
+import { AutoComplete } from "./autoComplete";
 import { Modal } from "./modal";
 import { ClientSideRouting } from "./routing";
 import { Popup } from "./popup";
@@ -29,6 +30,9 @@ function ulibsPlugin(Alpine) {
   Form(Alpine);
   Accordion(Alpine);
   Icon(Alpine);
+
+  AutoComplete(Alpine)
+  
   Modal(Alpine);
 }
 

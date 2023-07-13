@@ -33,6 +33,7 @@ export default ({prefix}) =>
       tag("li", {}, tag("a", { href: `${prefix}progress` }, "Progress")),
       tag("li", {}, tag("a", { href: `${prefix}tab` }, "Tab")),
       tag("li", {}, tag("a", { href: `${prefix}dropdown` }, "Dropdown")),
+      tag("li", {}, tag("a", { href: `${prefix}auto-complete` }, "Auto Complete")),
       tag("li", {}, tag("a", { href: `${prefix}login` }, "Login")),
       tag("li", {}, tag("a", { href: `${prefix}signup` }, "Signup")),
     ]),
