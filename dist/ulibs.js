@@ -10279,6 +10279,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     Form(Alpine);
     Accordion(Alpine);
     Icon(Alpine);
+
     AutoComplete(Alpine);
     
     Modal(Alpine);
