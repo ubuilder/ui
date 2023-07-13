@@ -1,5 +1,6 @@
 import { Base, classname } from "../utils.js";
 import { FormField } from './FormField.js';
+import { Row } from "./GridSystem.js";
 import { View } from "./View.js";
 
 /**
@@ -7,11 +8,12 @@ import { View } from "./View.js";
 */
 export const Form = Base(($props, $slots) => {
   $props.tag = "form";
-  $props.component = $props.component ?? "form";
+  // $props.component = $props.component ?? "form";
   $props.method = $props.method ?? "POST";
   $props[classname("action")] = $props.action ?? "POST";
+  $props[classname('form')] = true;
 
-  return View($props, $slots);
+  return Row($props, $slots);
 });
 
 /**

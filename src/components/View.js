@@ -168,6 +168,10 @@ export const View = Base(($props, $slots) => {
 
       delete props[key];
 
+    } else {
+      if(props[key] === true) {
+        props[key] = ''
+      } 
     }
   }
 

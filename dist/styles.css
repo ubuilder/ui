@@ -606,7 +606,7 @@ h6 {
 }
 
 /* #endregion */
-[u-form-field-label], [u-textarea-label], [u-select-label], [u-input-label], [u-radio-group-label], [u-checkbox-group-label] {
+[u-form-field-label] {
   font-size: calc(var(--size-md) * 0.8);
   font-weight: bold;
   line-height: var(--size-md);
@@ -615,8 +615,8 @@ h6 {
   color: var(--color-base-900);
 }
 
-[u-form-field], [u-textarea-wrapper], [u-select-wrapper], [u-input-wrapper], [u-radio-group-wrapper], [u-checkbox-group-wrapper] {
-  margin-bottom: var(--size-sm);
+[u-form-field] {
+  margin-bottom: var(--size-xs);
 }
 
 [u-checkbox-input], [u-checkbox-group-item-input] {
@@ -936,6 +936,7 @@ h6 {
 }
 
 [u-col] {
+  align-self: stretch;
   padding-left: calc(var(--row-gutter) / 4);
   padding-right: calc(var(--row-gutter) / 4);
   padding-top: calc(var(--row-gutter) / 4);
