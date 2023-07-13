@@ -8871,7 +8871,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       let input = el.querySelector('input');
       new TomSelect(input, {
           maxItems: null,
-          valueField: 'x',
+          valueField: 'value',
           labelField: 'text',
           searchField: 'text',
           options: evaluate("items"),
