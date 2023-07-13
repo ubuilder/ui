@@ -1,6 +1,6 @@
 {
   "name": "@ulibs/ui",
-  "version": "0.0.2-next.10",
+  "version": "0.0.2-next.11",
   "description": "",
   "main": "index.js",
   "type": "module",
@@ -13,15 +13,9 @@
     "build:js": "rollup -f iife -i src/script/index.js -o ./dist/ulibs.js -p @rollup/plugin-node-resolve",
     "build": "npm run build:css && npm run build:js",
     "dev:nodemon": "nodemon -e .sass,.scss -w ./src -w ./src/docs --exec npm run build",
-<<<<<<< HEAD
     "dev:css": "nodemon -e .scss -w ./src/styles --exec npm run build:css",
     "dev:js": "nodemon -e .js -w ./src/script --exec npm run build:js",
     "dev:docs": "nodemon -e .js -w ./dist/* -w ./src/docs --exec node scripts/serve.js",
-=======
-    "dev:css": "nodemon -e .scss -w ./src/styles --exec 'npm run build:css'",
-    "dev:js": "nodemon -e .js -w ./src/script --exec 'npm run build:js'",
-    "dev:docs": "nodemon -e .js -w ./dist/ulibs.js -w ./dist/styles.css -w ./src/docs -w ./src/components --exec 'node scripts/serve.js'",
->>>>>>> c620cb2a00b588c1d71f3909ca25a3ce0ec3a1d9
     "dev": "conc npm:dev:css npm:dev:js npm:dev:docs",
     "start": "http-server ./build -p 3002"
   },
@@ -45,12 +39,9 @@
     "alpinejs": "^3.12.3",
     "concurrently": "^8.2.0",
     "http-server": "^14.1.1",
-<<<<<<< HEAD
     "sass": "^1.63.4",
-    "tom-select": "^2.2.2"
-=======
+    "tom-select": "^2.2.2",
     "morphdom": "^2.7.0",
-    "sass": "^1.63.4"
->>>>>>> c620cb2a00b588c1d71f3909ca25a3ce0ec3a1d9
+    "tippy.js": "^6.3.7"
   }
 }

@@ -204,7 +204,7 @@ export const RadioGroup = Base(($props, $slots) => {
 
   return FormField($props, [
     View(
-      { tag: "div", component },
+      { tag: "div", component, name },
       Each({ items }, ({ item }) =>
         Radio({
           name,
@@ -262,4 +262,127 @@ export const Input = Base(($props, $slots) => {
   }
 
   return FormField(wrapperProps, [View(inputProps, $slots)]);
+});
+
+export const Textarea = Base(($props, $slots) => {
+  // return View({}, [
+  // ])
+  const {name, label, placeholder, value = '', component = 'textarea', ...restProps} = $props
+
+
+  const props = {...restProps, component, label}
+
+  const textareaProps = { tag: 'textarea', placeholder, name, component: component + '-input'}
+  
+  return FormField(props, [View(textareaProps, value)]);
+});
+
+export const Select = Base(($props, $slots) => {
+  // select component
+  const {
+    key,
+    text,
+    name,
+    label,
+    multiple = false,
+    placeholder = undefined,
+    items = [],
+    value = multiple ? [] : undefined,
+    ...restProps
+  } = $props;
+
+  const props = {
+    ...restProps,
+    component: "select",
+    label,
+  };
+
+  const selectProps = {
+    tag: "select",
+    component: "select-input",
+    value,
+    name,
+    multiple,
+  };
+
+  function getKey(item) {
+    if (key) {
+      if (typeof key === "string") {
+        return item[key];
+      }
+      if (typeof key === "function") {
+        return key(item);
+      }
+    }
+    return item;
+  }
+  function getText(item) {
+    if (text) {
+      if (typeof text === "string") {
+        return item[text];
+      }
+      if (typeof text === "function") {
+        return text(item);
+      }
+    }
+    return item;
+  }
+
+  return FormField(props, [
+    View(
+      selectProps,
+      // props,
+
+      [
+        placeholder &&
+          View(
+            {
+              component: "select-placeholder",
+              tag: "option",
+              value: "",
+              hidden: true,
+              selected: true,
+              disabled: true,
+            },
+            placeholder
+          ),
+        ...items.map((item) =>
+          View(
+            {
+              tag: "option",
+              value: getKey(item),
+              selected: multiple
+                ? value.includes(getKey(item))
+                : value === getKey(item),
+            },
+            getText(item)
+          )
+        ),
+      ]
+    ),
+  ]);
+});
+
+export const FileUpload = Base(($props, $slots) => {
+  // file upload
+});
+
+export const Editor = Base(($props, $slots) => {
+  // Editor component
+});
+
+export const Autocomplete = Base(($props, $slots) => {
+  // Autocomplete
+});
+
+export const Datepicker = Base(($props, $slots) => {
+  // Datepicker
+});
+
+export const Switch = Base(($props, $slots) => {
+  // Switch component
+});
+
+export const Slider = Base(($props, $slots) => {
+  // Slider
 });

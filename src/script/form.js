@@ -26,7 +26,7 @@ export function Form(Alpine) {
         value: () => {
           let value = [];
 
-          el.querySelectorAll("[u-checkbox-input").forEach((item) => {
+          el.querySelectorAll("[u-checkbox-input]").forEach((item) => {
             console.log({ item });
             console.log("item ", item.checked, item.value);
 
@@ -40,12 +40,66 @@ export function Form(Alpine) {
         },
       };
     },
+    "radio-group": (el) => {
+      
+      const name = el.getAttribute("name");
+
+      return {
+        name,
+        value: () => {
+          let value = '';
+
+          el.querySelectorAll("[u-radio-input]").forEach((item) => {
+            console.log({ item });
+            console.log("item ", item.checked, item.value);
+
+            if (item.checked) {
+              value = item.value
+            }
+          });
+          console.log({ value });
+          return value;
+        },
+      };
+    },
+    "select": (el) => {
+      const select = el.querySelector('[u-select-input]');
+
+      const name = select.getAttribute('name');
+      const multiple = select.getAttribute('multiple');
+
+
+      return {
+        name,
+        value() {
+          if(multiple) {
+            const selected = Array.from(select.selectedOptions).map(option => option.value).filter(x => !!x)
+
+            return selected
+          } else {
+            const selected = select.selectedOptions[0].value
+
+            return selected; 
+          }
+        }        
+      }
+    },
+    'textarea'(el) {
+      const textarea = el.querySelector('[u-textarea-input]');
+
+      const name = textarea.getAttribute('name')
+
+      return {
+        name,
+        value: () => textarea.value
+      }
+    }
   };
 
   Alpine.directive("form", (el) => {
     const fields = {};
 
-    let inputs = ["input", "checkbox", "checkbox-group"];
+    let inputs = ["input", "checkbox", "checkbox-group", 'radio-group', 'select', 'textarea'];
 
     for (let input of inputs) {
       el.querySelectorAll(`[u-${input}]`).forEach((el) => {

@@ -3208,7 +3208,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           value: () => {
             let value = [];
 
-            el.querySelectorAll("[u-checkbox-input").forEach((item) => {
+            el.querySelectorAll("[u-checkbox-input]").forEach((item) => {
               console.log({ item });
               console.log("item ", item.checked, item.value);
 
@@ -3222,12 +3222,66 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           },
         };
       },
+      "radio-group": (el) => {
+        
+        const name = el.getAttribute("name");
+
+        return {
+          name,
+          value: () => {
+            let value = '';
+
+            el.querySelectorAll("[u-radio-input]").forEach((item) => {
+              console.log({ item });
+              console.log("item ", item.checked, item.value);
+
+              if (item.checked) {
+                value = item.value;
+              }
+            });
+            console.log({ value });
+            return value;
+          },
+        };
+      },
+      "select": (el) => {
+        const select = el.querySelector('[u-select-input]');
+
+        const name = select.getAttribute('name');
+        const multiple = select.getAttribute('multiple');
+
+
+        return {
+          name,
+          value() {
+            if(multiple) {
+              const selected = Array.from(select.selectedOptions).map(option => option.value).filter(x => !!x);
+
+              return selected
+            } else {
+              const selected = select.selectedOptions[0].value;
+
+              return selected; 
+            }
+          }        
+        }
+      },
+      'textarea'(el) {
+        const textarea = el.querySelector('[u-textarea-input]');
+
+        const name = textarea.getAttribute('name');
+
+        return {
+          name,
+          value: () => textarea.value
+        }
+      }
     };
 
     Alpine.directive("form", (el) => {
       const fields = {};
 
-      let inputs = ["input", "checkbox", "checkbox-group"];
+      let inputs = ["input", "checkbox", "checkbox-group", 'radio-group', 'select', 'textarea'];
 
       for (let input of inputs) {
         el.querySelectorAll(`[u-${input}]`).forEach((el) => {
@@ -9738,6 +9792,221 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       });
     }
 
+  // tooltip
+  // popover
+  // dropdown
+  // sidebar/navbar items
+  // import tippy from "tippy.js/dist/tippy.esm"
+
+  function Popup(Alpine) {
+
+      // use @floating-ui/dom similar to yesvelte
+      Alpine.directive('popup', (el, {}, {evaluate, cleanup}) => {
+          el.getAttribute('trigger');
+          el.getAttribute('placement');
+          el.getAttribute('target');
+
+          // let targetEl;
+
+          // if(target) {
+          //     targetEl = evaluate(target) ?? el.previousElementSibling
+          // } else {
+          //     targetEl = el.previousElementSibling;
+          // }
+
+          // let instance = tippy(targetEl, {
+          //     // hideOnClick: true,
+          //     arrow: true,
+          //     // placement: placement,
+          //     // trigger: trigger,
+          //     content: (reference) => reference.innerHTML
+          // })[0]
+
+          // cleanup(() => {
+          //     instance.destroy()
+          // })        
+      });
+  }
+
+  function Checkbox(Alpine) {
+      Alpine.directive("checkbox", (el) => {
+        if (el.parentNode.hasAttribute("u-checkbox-group")) return;
+    
+        const data = Alpine.$data(el, {
+          value: false,
+          name: "",
+        });
+    
+        Alpine.bind(el, {
+          data,
+        });
+      });
+      Alpine.directive("checkbox-input", (el) => {
+        if (el.parentNode.parentNode.hasAttribute("u-checkbox-group")) return;
+    
+        Alpine.bind(el, {
+          "u-init"() {
+            this.$data.name = el.getAttribute("name");
+          },
+          "u-on:change"(e) {
+            this.$data[el.getAttribute("name")] = e.target.checked;
+          },
+        });
+      });
+    
+      Alpine.directive("checkbox-group", (el) => {
+        const name = el.getAttribute("name");
+        let value = [];
+    
+        el._model = {
+          get() {
+            return value;
+          },
+        };
+    
+        el.querySelectorAll("[u-checkbox-input]").forEach((item) => {
+          if (item.checked) {
+            value = [...value, item.value];
+          }
+    
+          Alpine.bind(item, {
+            "u-on:change"(event) {
+              value = Array.from(this.$data[name]);
+    
+              // toggle item
+              if (value.includes(event.target.value)) {
+                value = value.filter((x) => x !== event.target.value);
+              } else {
+                value = [...value, event.target.value];
+              }
+    
+              this.$data[name] = value;
+            },
+          });
+        });
+    
+        Alpine.bind(el, {
+          "u-init"() {
+            this.$data[name] = value;
+          },
+        });
+      });
+    }
+
+  function Radio(Alpine) {
+      Alpine.directive("radio", (el) => {
+        if (el.parentNode.hasAttribute("u-radio-group")) return;
+    
+        const data = Alpine.$data(el, {
+          value: false,
+          name: "",
+        });
+    
+        Alpine.bind(el, {
+          data,
+        });
+      });
+    
+
+      Alpine.directive("radio-group", (el) => {
+        const name = el.getAttribute("name");
+        let value = [];
+    
+        el._model = {
+          get() {
+            return value;
+          },
+        };
+    
+        el.querySelectorAll("[u-radio-input]").forEach((item) => {
+          if (item.checked) {
+            value = [...value, item.value];
+          }
+    
+          Alpine.bind(item, {
+            "u-on:change"(event) {
+              this.$data[name] = event.target.value;
+            },
+          });
+        });
+    
+        Alpine.bind(el, {
+          "u-init"() {
+            this.$data[name] = value;
+          },
+        });
+      });
+    }
+
+  function Input(Alpine) {
+      console.log("function input");
+      Alpine.directive("input", (el) => {
+        Alpine.bind(el, {
+          "u-on:input"(e) {
+            this.$data[el.getAttribute("name")] = e.target.value;
+          },
+        });
+        // input
+      });
+    }
+
+  function Select(Alpine) {
+      Alpine.directive('select-input', el => {
+
+          const multiple = el.getAttribute('multiple');
+          const name = el.getAttribute('name');
+
+          Alpine.bind(el, {
+              'u-data'() {
+                  return {
+                      [name]: multiple ? [] : undefined
+                  }
+              }
+          });
+
+          // on change 
+          Alpine.bind(el, {
+              'u-on:change'(e) {
+                  console.log('change');
+                  const value = e.target.value;
+                  console.log('change to ', value);
+              
+                  if(multiple) {
+
+                      console.log('multiple');
+                      const selectedValues = Array.from(this.$data[name]);
+
+                      if(selectedValues.includes(value)) {
+                          selectedValues = selectedValues.filter(x => x !== value);
+                      } else {
+                          selectedValues = [...selectedValues, value];
+                      }
+                      console.log(selectedValues);
+                      this.$data[name] = selectedValues;
+
+                  } else {
+                      console.log(value);
+                      this.$data[name] = value;
+                  }
+              }
+          });
+          
+      });
+  }
+
+  function Textarea(Alpine) {
+      Alpine.directive('textarea-input', (el) => {
+
+
+          // 
+          Alpine.bind(el, {
+              'u-on:input'(e) {
+                  this.$data[el.getAttribute('name')] = e.target.value;
+              }
+          });
+      });
+  }
+
   function attr($el, key, value) {
     if (typeof value === "undefined") {
       const result = $el.getAttribute(key);
@@ -9995,90 +10264,18 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   }
   register("u-tab", Tab);
 
-  // Handle checkbox and checkbox group
-  function checkbox(Alpine) {
-    Alpine.directive("checkbox", (el) => {
-      if (el.parentNode.hasAttribute("u-checkbox-group")) return;
-
-      const data = Alpine.$data(el, {
-        value: false,
-        name: "",
-      });
-
-      Alpine.bind(el, {
-        data,
-      });
-    });
-    Alpine.directive("checkbox-input", (el) => {
-      if (el.parentNode.parentNode.hasAttribute("u-checkbox-group")) return;
-
-      Alpine.bind(el, {
-        "u-init"() {
-          this.$data.name = el.getAttribute("name");
-        },
-        "u-on:change"(e) {
-          this.$data[el.getAttribute("name")] = e.target.checked;
-        },
-      });
-    });
-
-    Alpine.directive("checkbox-group", (el) => {
-      const name = el.getAttribute("name");
-      let value = [];
-
-      el._model = {
-        get() {
-          return value;
-        },
-      };
-
-      el.querySelectorAll("[u-checkbox-input]").forEach((item) => {
-        if (item.checked) {
-          value = [...value, item.value];
-        }
-
-        Alpine.bind(item, {
-          "u-on:change"(event) {
-            value = Array.from(this.$data[name]);
-
-            // toggle item
-            if (value.includes(event.target.value)) {
-              value = value.filter((x) => x !== event.target.value);
-            } else {
-              value = [...value, event.target.value];
-            }
-
-            this.$data[name] = value;
-          },
-        });
-      });
-
-      Alpine.bind(el, {
-        "u-init"() {
-          this.$data[name] = value;
-        },
-      });
-    });
-  }
-
-  function input(Alpine) {
-    console.log("function input");
-    Alpine.directive("input", (el) => {
-      Alpine.bind(el, {
-        "u-on:input"(e) {
-          this.$data[el.getAttribute("name")] = e.target.value;
-        },
-      });
-      // input
-    });
-  }
-
   function ulibsPlugin(Alpine) {
     document.body.setAttribute("u-data", "");
 
+    window.process = {env: {}};
+
+    Popup(Alpine);
     ClientSideRouting(Alpine);
-    checkbox(Alpine);
-    input(Alpine);
+    Checkbox(Alpine);
+    Radio(Alpine);
+    Select(Alpine);
+    Input(Alpine);
+    Textarea(Alpine);
     Form(Alpine);
     Accordion(Alpine);
     Icon(Alpine);
