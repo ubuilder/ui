@@ -8871,7 +8871,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       let input = el.querySelector('input');
       new TomSelect(input, {
           maxItems: null,
-          valueField: 'value',
+          valueField: 'x',
           labelField: 'text',
           searchField: 'text',
           options: evaluate("items"),
@@ -10244,6 +10244,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     Form(Alpine);
     Accordion(Alpine);
     Icon(Alpine);
+
     AutoComplete(Alpine);
     
     Modal(Alpine);
