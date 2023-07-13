@@ -1,18 +1,6 @@
 export function Checkbox(Alpine) {
-    Alpine.directive("checkbox", (el) => {
-      if (el.parentNode.hasAttribute("u-checkbox-group")) return;
-  
-      const data = Alpine.$data(el, {
-        value: false,
-        name: "",
-      });
-  
-      Alpine.bind(el, {
-        data,
-      });
-    });
+   
     Alpine.directive("checkbox-input", (el) => {
-      if (el.parentNode.parentNode.hasAttribute("u-checkbox-group")) return;
   
       Alpine.bind(el, {
         "u-init"() {
@@ -34,7 +22,7 @@ export function Checkbox(Alpine) {
         },
       };
   
-      el.querySelectorAll("[u-checkbox-input]").forEach((item) => {
+      el.querySelectorAll("[u-checkbox-group-item-input]").forEach((item) => {
         if (item.checked) {
           value = [...value, item.value];
         }

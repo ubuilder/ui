@@ -76,15 +76,17 @@ export default function () {
         }),
         Textarea({
             name: 'description',
+            label: 'Description',
             value: 'This is description',
             placeholder: 'Enter Description...'
         }),
         CheckboxGroup({
           name: "group",
           items: ["one", "two", "three", "four"],
+          value: ['one','three'],
           label: "Checkbox group",
         }),
-        Checkbox({ name: "remember_me", label: "Remember me" }),
+        Checkbox({ name: "remember_me", text: "Remember me" }),
 
         View({ border: true, p: "sm", mb: "sm" }, [
           View([
@@ -96,6 +98,8 @@ export default function () {
             ]),
             View(["Gender: ", View({ tag: "span", "u-text": "gender" })]),
             View(["Color: ", View({ tag: "span", "u-text": "color" })]),
+            View(["Colors: ", View({ tag: "span", "u-text": "JSON.stringify(colors)" })]),
+
             View(['Description: ', View({tag: 'span', 'u-text': 'description'})]),
             View([
               "Group: ",

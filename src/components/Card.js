@@ -2,8 +2,8 @@ import { Base } from "../utils.js";
 import { View } from "./View.js";
 
 /**
- * @type {import('./types').Card}
- */
+* @type {import('.').Card}
+*/
 export const Card = Base(($props, $slots) => {
   $props.component = "card";
 
@@ -14,8 +14,8 @@ export const Card = Base(($props, $slots) => {
 });
 
 /**
- * @type {import('./types').CardBody}
- */
+* @type {import('.').CardBody}
+*/
 export const CardBody = Base(($props, $slots) => {
   $props.component = "card-body";
 
@@ -23,8 +23,8 @@ export const CardBody = Base(($props, $slots) => {
 });
 
 /**
- * @type {import('./types').CardHeader}
- */
+* @type {import('.').CardHeader}
+*/
 export const CardHeader = Base(($props, $slots) => {
   $props.component = "card-header";
 
@@ -32,8 +32,8 @@ export const CardHeader = Base(($props, $slots) => {
 });
 
 /**
- * @type {import('./types').CardTitle}
- */
+* @type {import('.').CardTitle}
+*/
 export const CardTitle = Base(($props, $slots) => {
   $props.component = "card-title";
 
@@ -41,8 +41,8 @@ export const CardTitle = Base(($props, $slots) => {
 });
 
 /**
- * @type {import('./types').CardFooter}
- */
+* @type {import('.').CardFooter}
+*/
 export const CardFooter = Base(($props, $slots) => {
   $props.component = "card-footer";
 
@@ -50,8 +50,8 @@ export const CardFooter = Base(($props, $slots) => {
 });
 
 /**
- * @type {import('./types').CardActions}
- */
+* @type {import('.').CardActions}
+*/
 export const CardActions = Base(($props, $slots) => {
   $props.component = "card-actions";
 

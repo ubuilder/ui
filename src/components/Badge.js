@@ -3,9 +3,8 @@ import { View } from "./View.js";
 
 
 /**
- *
- * @type {import('./types').Badge}
- */
+* @type {import('.').Badge}
+*/
 export const Badge = Base(($props, $slots) => {
   const {
     tag = "span",

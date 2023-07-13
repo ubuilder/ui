@@ -2,9 +2,8 @@ import { Base } from "../utils.js";
 import { View } from "./View.js";
 
 /**
- *
- * @type {import('./types').Modal}
- */
+* @type {import('.').Modal}
+*/
 export const Modal = Base(($props, slots) => {
   const {
     component = "modal",
@@ -29,8 +28,8 @@ export const Modal = Base(($props, slots) => {
 });
 
 /**
- * @type {import('./types').ModalBody}
- */
+* @type {import('.').ModalBody}
+*/
 export const ModalBody = Base(($props, slots) => {
   const { component = "modal-body", ...restProps } = $props;
 

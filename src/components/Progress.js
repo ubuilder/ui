@@ -2,9 +2,8 @@ import { Base } from "../utils.js";
 import { View } from "./View.js";
 
 /**
- *
- * @type {import('./types').Progress}
- */
+* @type {import('.').Progress}
+*/
 export const Progress = Base(($props, $slots) => {
   const {
     component = "progress",

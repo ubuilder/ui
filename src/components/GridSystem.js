@@ -1,6 +1,9 @@
 import { Base } from "../utils.js";
 import { View } from "./View.js";
 
+/**
+* @type {import('.').Container}
+*/
 export const Container = Base(($props, $slots) => {
   $props.component = $props.component ?? "container";
 
@@ -12,6 +15,9 @@ export const Container = Base(($props, $slots) => {
   return View($props, $slots);
 });
 
+/**
+* @type {import('.').Row}
+*/
 export const Row = Base(($props, $slots) => {
   $props.component = $props.component ?? "row";
   $props.gutter = $props.gutter ?? "md";
@@ -24,6 +30,9 @@ export const Row = Base(($props, $slots) => {
   return View($props, $slots);
 });
 
+/**
+* @type {import('.').Col}
+*/
 export const Col = Base(($props, $slots) => {
   $props.component = $props.component ?? "col";
 

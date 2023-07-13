@@ -16,12 +16,22 @@
   height: 1rem;
   border: 1px solid var(--color-primary);
   border-radius: var(--size-xxs);
-  margin-right: var(--size-xxs);
+  margin-right: var(--size-xs);
 }
+
+
+[u-checkbox-group-item-input] {
+  @extend [u-checkbox-input];
+}
+
+// [u-checkbox-group-text] {
+  // @extend [u-checkbox-text];
+// }
 
 [u-checkbox] {
   display: block;
   margin-bottom: var(--size-xxs);
+  margin-right: var(--size-sm);
 }
 
 [u-checkbox-inline] {
@@ -33,25 +43,42 @@
   @extend [u-form-field];
 }
 
-[u-checkbox-group-wrapper-label] {
+[u-checkbox-group-label] {
   @extend [u-form-field-label];
 }
 
 [u-checkbox-group] {
+  display: flex;
+  flex-direction: column;
+}
+
+[u-checkbox-group-inline] {
+  flex-direction: row;
+}
+
+[u-checkbox-group-item] {
+  @extend [u-checkbox];
+  display: inline-flex;
+  align-items: center;
+
   //   margin-bottom: var(--size-md);
 }
 
 // radio
-[u-radio-input] {
+[u-radio-group-item-input] {
   width: 1rem;
   height: 1rem;
   border: 1px solid var(--color-primary);
   margin-right: var(--size-xxs);
 }
 
-[u-radio] {
-  display: block;
+[u-radio-group-item] {
+
+  display: inline-flex;
+  align-items: center;
+
   margin-bottom: var(--size-xxs);
+  margin-right: var(--size-sm);
 }
 
 [u-radio-inline] {
@@ -63,26 +90,33 @@
   @extend [u-form-field];
 }
 
-[u-radio-group-wrapper-label] {
+
+[u-radio-group] {
+  display: flex;
+  flex-direction: column;
+}
+
+[u-radio-group-inline] {
+  flex-direction: row;
+}
+
+
+[u-radio-group-label] {
   @extend [u-form-field-label];
 }
 
-[u-radio-group] {
+[u-radio-group-input] {
   //   margin-bottom: var(--size-md);
+
 }
 
 // input
 
 [u-input-wrapper] {
   @extend [u-form-field];
-  // display: flex;
-  // flex-direction: column;
-  // width: 100%;
-  // gap: var(--size-xxs);
-  // margin-bottom: var(--size-sm);
 }
 
-[u-input-wrapper-label] {
+[u-input-label] {
   @extend [u-form-field-label];
 }
 
@@ -108,6 +142,82 @@
 }
 
 [u-input]:focus {
+  background-color: var(--color-base-200);
+  outline: none;
+  box-shadow: 0 0 4px 0px var(--color-primary-500);
+}
+
+// Select
+[u-select-wrapper] {
+  @extend [u-form-field];
+}
+
+[u-select-label] {
+  @extend [u-form-field-label];
+}
+
+[u-select] {
+  background-color: var(--color-base-100);
+  padding: var(--size-xxs) var(--size-sm);
+  border: 1px solid var(--color-base-300);
+  border-radius: calc(var(--size-xxs) / 2);
+  color: var(--color-base-900);
+
+  font-size: calc(var(--size-lg) * 0.6);
+  line-height: var(--size-lg);
+
+  width: 100%;
+}
+
+[u-select][multiple] {
+  padding: 0;
+
+  option {
+    font-size: calc(var(--size-lg) * 0.6);
+    line-height: var(--size-lg);
+    padding: var(--size-xxs);
+  }
+}
+
+.dark [u-select] {
+  background-color: var(--color-base-300);
+  border-color: var(--color-base-400);
+}
+
+[u-select]:focus {
+  background-color: var(--color-base-200);
+  outline: none;
+  box-shadow: 0 0 4px 0px var(--color-primary-500);
+}
+// Textarea
+[u-textarea-wrapper] {
+  @extend [u-form-field];
+}
+
+[u-textarea-label] {
+  @extend [u-form-field-label];
+}
+
+[u-textarea] {
+  width: 100%;
+  background-color: var(--color-base-100);
+  padding: var(--size-xxs) var(--size-sm);
+  border: 1px solid var(--color-base-300);
+  border-radius: calc(var(--size-xxs) / 2);
+  color: var(--color-base-900);
+
+  font-size: calc(var(--size-md) * 0.6);
+  line-height: var(--size-md);
+
+  width: 100%;
+}
+
+.dark [u-textarea] {
+  background-color: var(--color-base-300);
+  border-color: var(--color-base-400);
+}
+
+[u-textarea]:focus {
   background-color: var(--color-base-200);
   outline: none;
   box-shadow: 0 0 4px 0px var(--color-primary-500);

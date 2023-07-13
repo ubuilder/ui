@@ -1,5 +1,5 @@
 import { Router } from "@ulibs/router";
-import {  View } from "../index.js";
+import {  View } from "../src/components/index.js";
 import fs from "fs";
 
 const router = Router({ dev: true, reloadTimeout: 1000 });
@@ -8,7 +8,6 @@ function layout(props, slots) {
   const script = fs.readFileSync("./dist/ulibs.js", "utf-8");
   const style = fs.readFileSync("./dist/styles.css", "utf-8");
 
-  console.log({script})
   return View(
     {
       htmlHead: [
@@ -25,9 +24,7 @@ const prefix = "/components/";
 
 router.addPage('/', {
   async load() {
-    console.log('load')
       const result = await import("../src/docs/pages/index.js")
-        console.log(result, prefix)
       return {
         component: result.default,
         prefix,
@@ -35,7 +32,6 @@ router.addPage('/', {
     
   },
   page: ({component, ...props}) => {
-    console.log({component, props})
     if(!component) return;
     return component(props)
     
