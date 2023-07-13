@@ -65,7 +65,6 @@ export default function () {
     function addUser() {
         console.log('should add user')
     }
-
     `,
     },
     [
