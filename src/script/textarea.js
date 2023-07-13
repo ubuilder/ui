@@ -1,5 +1,5 @@
 export function Textarea(Alpine) {
-    Alpine.directive('textarea-input', (el) => {
+    Alpine.directive('textarea', (el) => {
 
 
         // 

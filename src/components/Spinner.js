@@ -2,9 +2,8 @@ import { Base } from "../utils.js";
 import { View } from "./View.js";
 
 /**
- *
- * @type {import('./types').Spinner}
- */
+* @type {import('.').Spinner}
+*/
 export const Spinner = Base(($props, $slots) => {
   const {
     tag = "div",

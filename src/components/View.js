@@ -36,8 +36,8 @@ import { classname, Base } from "../utils.js";
 let id = 0;
 
 /**
- * @type {import('./types').View}
- */
+* @type {import('.').View}
+*/
 export const View = Base(($props, $slots) => {
   const {
     tag: tagName = "div",

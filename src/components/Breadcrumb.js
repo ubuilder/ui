@@ -2,8 +2,8 @@ import { Base } from "../utils.js";
 import { View } from "./View.js";
 
 /**
- * @type {import('./types').Breadcrumb}
- */
+* @type {import('.').Breadcrumb}
+*/
 export const Breadcrumb = Base(($props, $slots) => {
   $props.component = "breadcrumb";
   $props["aria-label"] = "breadcrumb";
@@ -12,8 +12,8 @@ export const Breadcrumb = Base(($props, $slots) => {
 });
 
 /**
- * @type {import('./types').BreadcrumbItem}
- */
+* @type {import('.').BreadcrumbItem}
+*/
 export const BreadcrumbItem = Base(($props, $slots) => {
   
   const {

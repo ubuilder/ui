@@ -2,8 +2,8 @@ import { Base } from "../utils.js";
 import { View } from "./View.js";
 
 /**
- * @type {import('./types').Button}
- */
+* @type {import('.').Button}
+*/
 export const Button = Base(($props, $slots) => {
   const {
     href,
@@ -31,8 +31,8 @@ export const Button = Base(($props, $slots) => {
 });
 
 /**
- * @type {import('./types').ButtonGroup}
- */
+* @type {import('.').ButtonGroup}
+*/
 export const ButtonGroup = Base(($props, $slots) => {
   const { component = "button-group", compact = false, ...restProps } = $props;
 

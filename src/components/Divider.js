@@ -2,9 +2,8 @@ import { Base } from "../utils.js";
 import { View } from "./View.js";
 
 /**
- *
- * @type {import('./types').Divider}
- */
+* @type {import('.').Divider}
+*/
 export const Divider = Base(($props, $slots) => {
   const {
     tag = "hr",

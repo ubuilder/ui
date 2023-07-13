@@ -3,8 +3,8 @@ import { View } from "./View.js";
 import { Button } from './Button.js'
 
 /**
- * @type {import('./types').Tab}
- */
+* @type {import('.').Tab}
+*/
 export const Tab = Base(($props, $slots) => {
   const {
     component = "tab",
@@ -24,8 +24,8 @@ export const Tab = Base(($props, $slots) => {
 });
 
 /**
- * @type {import('./types').TabList}
- */
+* @type {import('.').TabList}
+*/
 export const TabList = Base(($props, $slots) => {
   const {
     component = "tab-list",
@@ -46,8 +46,8 @@ export const TabList = Base(($props, $slots) => {
   return View(props, $slots)
 });
 /**
- * @type {import('./types').TabPanel}
- */
+* @type {import('.').TabPanel}
+*/
 export const TabPanel = Base(($props, $slots) => {
   const {
     component = "tab-panel",
@@ -67,8 +67,8 @@ export const TabPanel = Base(($props, $slots) => {
 });
 
 /**
- * @type {import('./types').TabItem}
- */
+* @type {import('.').TabItem}
+*/
 export const TabItem = Base(($props, $slots) => {
   const {
     component = "tab-item",
@@ -91,8 +91,8 @@ export const TabItem = Base(($props, $slots) => {
 });
 
 /**
- * @type {import('./types').TabContent}
- */
+* @type {import('.').TabContent}
+*/
 export const TabContent = Base(($props, $slots) => {
   const {
     component = "tab-content",

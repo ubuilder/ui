@@ -2,20 +2,12 @@ export function Form(Alpine) {
   const handlers = {
     input: (el) => ({ name: el.name, value: () => el.value }),
     checkbox: (el) => {
-      // multiple
+      const checkbox = el.querySelector("[u-checkbox-input]");
 
-      const parent = el.parentElement;
-
-      if (parent.hasAttribute("u-checkbox-group-wrapper")) {
-        return;
-      } else {
-        const checkbox = el.querySelector("[u-checkbox-input]");
-
-        return {
-          name: checkbox.name,
-          value: () => checkbox.checked,
-        };
-      }
+      return {
+        name: checkbox.name,
+        value: () => checkbox.checked,
+      };
     },
     "checkbox-group": (el) => {
       // el._model.get
@@ -26,35 +18,30 @@ export function Form(Alpine) {
         value: () => {
           let value = [];
 
-          el.querySelectorAll("[u-checkbox-input]").forEach((item) => {
-            console.log({ item });
-            console.log("item ", item.checked, item.value);
-
+          el.querySelectorAll("[u-checkbox-group-item-input]").forEach((item) => {
             if (item.checked) {
-              console.log("item is checked", item.value);
               value = [...value, item.value];
             }
           });
-          console.log({ value });
+          
           return value;
         },
       };
     },
     "radio-group": (el) => {
-      
       const name = el.getAttribute("name");
 
       return {
         name,
         value: () => {
-          let value = '';
+          let value = "";
 
-          el.querySelectorAll("[u-radio-input]").forEach((item) => {
+          el.querySelectorAll("[u-radio-group-input]").forEach((item) => {
             console.log({ item });
             console.log("item ", item.checked, item.value);
 
             if (item.checked) {
-              value = item.value
+              value = item.value;
             }
           });
           console.log({ value });
@@ -62,47 +49,52 @@ export function Form(Alpine) {
         },
       };
     },
-    "select": (el) => {
-      const select = el.querySelector('[u-select-input]');
-
-      const name = select.getAttribute('name');
-      const multiple = select.getAttribute('multiple');
-
+    select: (el) => {
+      const name = el.getAttribute("name");
+      const multiple = el.getAttribute("multiple");
 
       return {
         name,
         value() {
-          if(multiple) {
-            const selected = Array.from(select.selectedOptions).map(option => option.value).filter(x => !!x)
+          if (multiple) {
+            const selected = Array.from(el.selectedOptions)
+              .map((option) => option.value)
+              .filter((x) => !!x);
 
-            return selected
+            return selected;
           } else {
-            const selected = select.selectedOptions[0].value
+            const selected = el.selectedOptions[0].value;
 
-            return selected; 
+            return selected;
           }
-        }        
-      }
+        },
+      };
     },
-    'textarea'(el) {
-      const textarea = el.querySelector('[u-textarea-input]');
-
-      const name = textarea.getAttribute('name')
+    textarea(el) {
+      const name = el.getAttribute("name");
 
       return {
         name,
-        value: () => textarea.value
-      }
-    }
+        value: () => el.value,
+      };
+    },
   };
 
   Alpine.directive("form", (el) => {
     const fields = {};
 
-    let inputs = ["input", "checkbox", "checkbox-group", 'radio-group', 'select', 'textarea'];
+    let inputs = [
+      "input",
+      "checkbox",
+      "checkbox-group",
+      "radio-group",
+      "select",
+      "textarea",
+    ];
 
     for (let input of inputs) {
       el.querySelectorAll(`[u-${input}]`).forEach((el) => {
+        console.log('initialize', input)
         const { name, value } = handlers[input](el);
 
         fields[name] = value;

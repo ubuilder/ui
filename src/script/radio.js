@@ -23,7 +23,7 @@ export function Radio(Alpine) {
         },
       };
   
-      el.querySelectorAll("[u-radio-input]").forEach((item) => {
+      el.querySelectorAll("[u-radio-group-item-input]").forEach((item) => {
         if (item.checked) {
           value = [...value, item.value];
         }
