@@ -6,6 +6,7 @@ import Alpine from "alpinejs";
 import { Accordion } from "./accordion";
 import { Icon } from "./icon";
 import { Form } from "./form";
+import { AutoComplete } from "./autoComplete";
 
 export * from "./bind";
 export * from "./modal";
@@ -105,6 +106,8 @@ function ulibsPlugin(Alpine) {
   Form(Alpine);
   Accordion(Alpine);
   Icon(Alpine);
+  AutoComplete(Alpine)
+  
 }
 
 console.log("set prefix");
