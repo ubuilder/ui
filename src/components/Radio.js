@@ -86,7 +86,7 @@ export const RadioGroup = Base(($props, $slots) => {
             name,
             value: getKey(item),
             text: getText(item),
-            checked: value.includes(getKey(item)),
+            checked: value === getKey(item),
           })
         )
       ),
