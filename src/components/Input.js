@@ -1,11 +1,9 @@
-import { Base } from '../utils.js';
-import { FormField } from './FormField.js';
-import { View } from './View.js';
+import { Base } from "../utils.js";
+import { FormField } from "./FormField.js";
+import { View } from "./View.js";
 
-/**
-* 
-*/
-export const Input = Base(($props, $slots) => {
+export const Input = Base({
+  render($props, $slots) {
     const {
       component = "input",
       label,
@@ -16,14 +14,14 @@ export const Input = Base(($props, $slots) => {
       required,
       ...restProps
     } = $props;
-  
+
     const props = {
       ...restProps,
       component,
       name,
       label,
     };
-  
+
     const inputProps = {
       name,
       component,
@@ -33,7 +31,7 @@ export const Input = Base(($props, $slots) => {
       required,
       tag: "input",
     };
-  
+
     if (!value) {
       if (type === "number") {
         inputProps.value = 0;
@@ -43,8 +41,7 @@ export const Input = Base(($props, $slots) => {
     } else {
       inputProps.value = value;
     }
-  
+
     return FormField(props, View(inputProps));
-  });
-  
-  
+  },
+});

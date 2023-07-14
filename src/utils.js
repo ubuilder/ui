@@ -69,7 +69,7 @@ export function classname(component, cssProps = {}, globalClasses = "") {
   return classes.filter(Boolean).join(" ");
 }
 
-export function Base(callback) {
+export function Base({render}) {
   return (...$) => {
     const { $props = {}, $slots = [] } = extract(...$);
 
@@ -80,6 +80,6 @@ export function Base(callback) {
       }
     }
 
-    return callback(props, $slots);
+    return render(props, $slots);
   };
 }
