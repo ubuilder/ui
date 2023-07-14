@@ -10052,75 +10052,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
               }     
           });
       });
-
   }
-  // export function Tab(Alpine) {
-  //   Alpine.directive("tab-list", (el) => {
-  //     Alpine.bind({
-  //       "u-id"() {
-  //         return ["tab-item"];
-  //       },
-  //     });
-  //   });
-
-  //   Alpine.directive("tab-content", (el) => {
-  //     Alpine.bind({
-  //       "u-id"() {
-  //         return ["tab-panel"];
-  //       },
-  //     });
-  //   });
-
-  //   Alpine.directive("tab-panel", (el) => {
-  //     Alpine.bind(el, {
-  //         'u-bind:id'() {
-  //             return this.$id('tab-panel')
-  //         },
-  //     //   "u-bind:u-tab-panel-active"() {
-  //     //     return this.$data.isActive(el.getAttribute('id'));
-  //     //   },
-  //     });
-  //   });
-
-  //   Alpine.directive("tab", (el, {}, {effect}) => {
-  //     console.log("u-tab found");
-  //     effect((...args) => {
-  //         console.log('effect', {args})
-  //     })
-      
-  //     //
-  //     Alpine.bind(el, {
-  //       "u-data"() {
-  //         return {
-  //           active: undefined,
-  //           activate: (id) => {
-  //             this.$data.active = +id.replace('tab-item-', '');
-  //           },
-  //         };
-  //       },
-  //     });
-  //   });
-
-  //   Alpine.directive("tab-item", (el) => {
-  //     Alpine.bind(el, {
-  //         // init() {
-  //         //     console.log(el, el.hasAttribute('u-tab-item-active'))
-  //         //     if(el.hasAttribute('u-tab-item-active')) {
-  //         //         this.$data.activate(el.getAttribute('id'))
-  //         //     }
-  //         // },
-  //       "u-bind:id"() {
-  //         return this.$id("tab-item");
-  //       },
-  //       "u-on:click"() {
-  //         this.$data.activate(el.getAttribute('id'));
-  //       },
-  //     //   "u-bind:u-tab-item-active"() {
-  //     //     return this.$data.isActive(el.getAttribute('id'));
-  //     //   },
-  //     });
-  //   });
-  // }
 
   function attr($el, key, value) {
     if (typeof value === "undefined") {
@@ -10336,8 +10268,6 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   }
 
   register("u-bind", Bind);
-
-  // export * from "./tab";
 
   function ulibsPlugin(Alpine) {
     document.body.setAttribute("u-data", "");
