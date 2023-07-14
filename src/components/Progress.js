@@ -2,7 +2,7 @@ import { Base } from "../utils.js";
 import { View } from "./View.js";
 
 /**
-* @type {import('.').Progress}
+* 
 */
 export const Progress = Base(($props, $slots) => {
   const {

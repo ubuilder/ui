@@ -3,7 +3,7 @@ import { FormField } from './FormField.js';
 import { View } from './View.js';
 
 /**
-* @type {import('.').Input}
+* 
 */
 export const Input = Base(($props, $slots) => {
     const {

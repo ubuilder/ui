@@ -3,7 +3,7 @@ import { FormField } from './FormField.js';
 import { View } from './View.js';
 
 /**
-* @type {import('.').Select}
+* 
 */
 export const Select = Base(($props, $slots) => {
     // select component

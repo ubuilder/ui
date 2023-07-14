@@ -24,7 +24,10 @@
   "author": "",
   "license": "ISC",
   "exports": {
-    ".": "./src/components/index.js",
+    ".": {
+      "import": "./src/components/index.js",
+      "types": "./src/components/index.d.ts"
+    },
     "./styles.css": "./dist/styles.css",
     "./ulibs.js": "./dist/ulibs.js"
   },

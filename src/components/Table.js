@@ -2,7 +2,7 @@ import { Base } from "../utils.js";
 import { View } from "./View.js";
 
 /**
-* @type {import('.').Table}
+* 
 */
 export const Table = Base(($props, $slots) => {
   const { component = "table" } = $props;
@@ -13,7 +13,7 @@ export const Table = Base(($props, $slots) => {
 });
 
 /**
-* @type {import('.').TableHead}
+* 
 */
 export const TableHead = Base(($props, $slots) => {
   $props.tag = "thead";
@@ -23,7 +23,7 @@ export const TableHead = Base(($props, $slots) => {
 });
 
 /**
-* @type {import('.').TableBody}
+* 
 */
 export const TableBody = Base(($props, $slots) => {
   $props.tag = "tbody";
@@ -33,7 +33,7 @@ export const TableBody = Base(($props, $slots) => {
 });
 
 /**
-* @type {import('.').TableCell}
+* 
 */
 export const TableCell = Base(($props, $slots) => {
   $props.tag = $props.head ? "th" : "td";
@@ -45,7 +45,7 @@ export const TableCell = Base(($props, $slots) => {
 });
 
 /**
-* @type {import('.').TableActions}
+* 
 */
 export const TableActions = Base(($props, $slots) => {
   $props.component = "table-actions";
@@ -54,7 +54,7 @@ export const TableActions = Base(($props, $slots) => {
 });
 
 /**
-* @type {import('.').TableFoot}
+* 
 */
 export const TableFoot = Base(($props, $slots) => {
   $props.tag = "tfoot";
@@ -64,7 +64,7 @@ export const TableFoot = Base(($props, $slots) => {
 });
 
 /**
-* @type {import('.').TableRow}
+* 
 */
 export const TableRow = Base(($props, $slots) => {
   $props.tag = "tr";
