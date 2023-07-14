@@ -25,10 +25,10 @@ export default function () {
           align: "end",
           gap: "xs",
           code: `[
-  Avatar({ src: 'https://avatars.githubusercontent.com/u/67925134?s=96&v=4' }, 'AV')
+  Avatar({ src: 'https://avatars.githubusercontent.com/u/67925134?s=96&v=4' })
 ]`,
         },
-        [Avatar({ src: 'https://avatars.githubusercontent.com/u/67925134?s=96&v=4' }, "AV")]
+        [Avatar({ src: 'https://avatars.githubusercontent.com/u/67925134?s=96&v=4' })]
       ),
     ]),
 
