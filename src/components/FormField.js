@@ -3,10 +3,7 @@ import { Base } from "../utils.js";
 import { View } from "./View.js";
 import { Col } from "./GridSystem.js";
 
-/**
- * @type {import('.').FormField}
- */
-export const FormField = Base(($props, $slots) => {
+export const FormField = Base({render($props, $slots) {
   const { component = "form-field", name, label, col=12, ...restProps } = $props;
 
   const props = { tag: "div", 'u-form-field': true, col, ...restProps };
@@ -18,4 +15,4 @@ export const FormField = Base(($props, $slots) => {
   };
 
   return Col(props, [label && View(labelProps, label), $slots]);
-});
+}});
