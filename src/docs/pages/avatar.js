@@ -9,6 +9,7 @@ export default function () {
       Preview(
         {
           d: "flex",
+          wrap: true,
           align: "end",
           gap: "xs",
           code: `[
@@ -22,6 +23,7 @@ export default function () {
       Preview(
         {
           d: "flex",
+          wrap: true,
           align: "end",
           gap: "xs",
           code: `[
@@ -36,6 +38,7 @@ export default function () {
       Preview(
         {
           d: "flex",
+          wrap: true,
           align: "end",
           gap: "xs",
           code: `[
@@ -67,6 +70,7 @@ export default function () {
       Preview(
         {
           d: "flex",
+          wrap: true,
           align: "end",
           gap: "xs",
           code: `[
