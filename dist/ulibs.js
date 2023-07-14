@@ -4869,7 +4869,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
    *
    */
 
-  const setAttr$1 = (el, attrs) => {
+  const setAttr = (el, attrs) => {
     iterate(attrs, (val, attr) => {
       if (val == null) {
         el.removeAttribute(attr);
@@ -5501,7 +5501,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         var attrs = ['autocorrect', 'autocapitalize', 'autocomplete'];
         iterate$1(attrs, attr => {
           if (input.getAttribute(attr)) {
-            setAttr$1(control_input, {
+            setAttr(control_input, {
               [attr]: input.getAttribute(attr)
             });
           }
@@ -5544,10 +5544,10 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         passive: true
       };
       const listboxId = self.inputId + '-ts-dropdown';
-      setAttr$1(dropdown_content, {
+      setAttr(dropdown_content, {
         id: listboxId
       });
-      setAttr$1(focus_node, {
+      setAttr(focus_node, {
         role: 'combobox',
         'aria-haspopup': 'listbox',
         'aria-expanded': 'false',
@@ -5560,14 +5560,14 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
       if (label) {
         addEvent(label, 'click', label_click);
-        setAttr$1(label, {
+        setAttr(label, {
           for: control_id
         });
         const label_id = getId(label, self.inputId + '-ts-label');
-        setAttr$1(focus_node, {
+        setAttr(focus_node, {
           'aria-labelledby': label_id
         });
-        setAttr$1(dropdown_content, {
+        setAttr(dropdown_content, {
           'aria-labelledby': label_id
         });
       }
@@ -5580,13 +5580,13 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       }
 
       if ((settings.maxItems === null || settings.maxItems > 1) && self.is_select_tag) {
-        setAttr$1(input, {
+        setAttr(input, {
           multiple: 'multiple'
         });
       }
 
       if (settings.placeholder) {
-        setAttr$1(control_input, {
+        setAttr(control_input, {
           placeholder: settings.placeholder
         });
       } // if splitOn was not passed in, construct it from the delimiter to allow pasting universally
@@ -6450,10 +6450,10 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       this.clearActiveOption();
       if (!option) return;
       this.activeOption = option;
-      setAttr$1(this.focus_node, {
+      setAttr(this.focus_node, {
         'aria-activedescendant': option.getAttribute('id')
       });
-      setAttr$1(option, {
+      setAttr(option, {
         'aria-selected': 'true'
       });
       addClasses(option, 'active');
@@ -6504,13 +6504,13 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     clearActiveOption() {
       if (this.activeOption) {
         removeClasses(this.activeOption, 'active');
-        setAttr$1(this.activeOption, {
+        setAttr(this.activeOption, {
           'aria-selected': null
         });
       }
 
       this.activeOption = null;
-      setAttr$1(this.focus_node, {
+      setAttr(this.focus_node, {
         'aria-activedescendant': null
       });
     }
@@ -6540,7 +6540,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     inputState() {
       var self = this;
       if (!self.control.contains(self.control_input)) return;
-      setAttr$1(self.control_input, {
+      setAttr(self.control_input, {
         placeholder: self.settings.placeholder
       });
 
@@ -6549,7 +6549,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         self.isInputHidden = true;
       } else {
         if (self.settings.hidePlaceholder && self.items.length > 0) {
-          setAttr$1(self.control_input, {
+          setAttr(self.control_input, {
             placeholder: ''
           });
         }
@@ -6770,7 +6770,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
           if (j > 0) {
             option_el = option_el.cloneNode(true);
-            setAttr$1(option_el, {
+            setAttr(option_el, {
               id: option.$id + '-clone-' + j,
               'aria-selected': null
             });
@@ -7551,7 +7551,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       var self = this;
       if (self.isLocked || self.isOpen || self.settings.mode === 'multi' && self.isFull()) return;
       self.isOpen = true;
-      setAttr$1(self.focus_node, {
+      setAttr(self.focus_node, {
         'aria-expanded': 'true'
       });
       self.refreshState();
@@ -7586,7 +7586,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       }
 
       self.isOpen = false;
-      setAttr$1(self.focus_node, {
+      setAttr(self.focus_node, {
         'aria-expanded': 'false'
       });
       applyCSS(self.dropdown, {
@@ -7908,22 +7908,22 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
       if (templateName === 'option' || templateName === 'option_create') {
         if (data[self.settings.disabledField]) {
-          setAttr$1(html, {
+          setAttr(html, {
             'aria-disabled': 'true'
           });
         } else {
-          setAttr$1(html, {
+          setAttr(html, {
             'data-selectable': ''
           });
         }
       } else if (templateName === 'optgroup') {
         id = data.group[self.settings.optgroupValueField];
-        setAttr$1(html, {
+        setAttr(html, {
           'data-group': id
         });
 
         if (data.group[self.settings.disabledField]) {
-          setAttr$1(html, {
+          setAttr(html, {
             'data-disabled': ''
           });
         }
@@ -7931,18 +7931,18 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
       if (templateName === 'option' || templateName === 'item') {
         const value = get_hash(data[self.settings.valueField]);
-        setAttr$1(html, {
+        setAttr(html, {
           'data-value': value
         }); // make sure we have some classes if a template is overwritten
 
         if (templateName === 'item') {
           addClasses(html, self.settings.itemClass);
-          setAttr$1(html, {
+          setAttr(html, {
             'data-ts-item': ''
           });
         } else {
           addClasses(html, self.settings.optionClass);
-          setAttr$1(html, {
+          setAttr(html, {
             role: 'option',
             id: data.$id
           }); // update cache
@@ -9972,6 +9972,156 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       });
   }
 
+  function Tab(Alpine) {
+      Alpine.directive('tab', (el) => {
+
+          Alpine.bind(el, {
+              'u-id'() {
+                  return ['tab']
+              },
+              'u-data'() {
+                  return {
+                      active: undefined,
+                      activate(id) {
+                          id = +id.replace('tab-item-', '');
+                          this.$data.active = id;
+                      },
+                      isActive(id) {
+                          if(!this.$data.active) {
+                              this.$data.activate(id.replace('tab-panel', 'tab-item'));
+                          }
+                          console.log('isActive', id);
+                          return +id.replace('tab-item-', '').replace('tab-panel-', '') === this.$data.active
+                      }
+                  }
+              }
+          });                
+      });
+
+      Alpine.directive('tab-list', (el) => {
+          Alpine.bind(el, {
+              'u-id'() {
+                  return [this.$id('tab') + '-item']
+              }
+          });
+      });
+
+      Alpine.directive('tab-content', (el) => {
+          Alpine.bind(el, {
+              'u-id'() {
+                  return [this.$id('tab') + '-panel']
+              }
+          });
+      });
+
+
+      Alpine.directive('tab-item', (el) => {
+
+          
+          Alpine.bind(el, {
+              'u-init'() {
+                  if(el.hasAttribute('u-tab-item-active')) {
+                      this.$data.activate(el.id);
+                  }
+                  this.$watch('active', (value) => {
+                      const myId = +el.id.replace('tab-item-', '');
+                      if(value === myId) {
+                          el.setAttribute('u-tab-item-active', '');
+                      } else {
+                          el.removeAttribute('u-tab-item-active');
+                      }
+                  });
+          
+              },
+              'u-bind:id'() {
+                  return this.$id('tab-item') 
+              },
+              'u-on:click'() {
+                  return this.$data.activate(el.id)
+              }
+          });
+      });
+
+      Alpine.directive('tab-panel', (el) => {
+          Alpine.bind(el, {
+              'u-bind:id'() {
+                  return this.$id('tab-panel') 
+              },
+              'u-bind:u-tab-panel-active'() {
+                  return this.$data.isActive(el.id)
+              }     
+          });
+      });
+
+  }
+  // export function Tab(Alpine) {
+  //   Alpine.directive("tab-list", (el) => {
+  //     Alpine.bind({
+  //       "u-id"() {
+  //         return ["tab-item"];
+  //       },
+  //     });
+  //   });
+
+  //   Alpine.directive("tab-content", (el) => {
+  //     Alpine.bind({
+  //       "u-id"() {
+  //         return ["tab-panel"];
+  //       },
+  //     });
+  //   });
+
+  //   Alpine.directive("tab-panel", (el) => {
+  //     Alpine.bind(el, {
+  //         'u-bind:id'() {
+  //             return this.$id('tab-panel')
+  //         },
+  //     //   "u-bind:u-tab-panel-active"() {
+  //     //     return this.$data.isActive(el.getAttribute('id'));
+  //     //   },
+  //     });
+  //   });
+
+  //   Alpine.directive("tab", (el, {}, {effect}) => {
+  //     console.log("u-tab found");
+  //     effect((...args) => {
+  //         console.log('effect', {args})
+  //     })
+      
+  //     //
+  //     Alpine.bind(el, {
+  //       "u-data"() {
+  //         return {
+  //           active: undefined,
+  //           activate: (id) => {
+  //             this.$data.active = +id.replace('tab-item-', '');
+  //           },
+  //         };
+  //       },
+  //     });
+  //   });
+
+  //   Alpine.directive("tab-item", (el) => {
+  //     Alpine.bind(el, {
+  //         // init() {
+  //         //     console.log(el, el.hasAttribute('u-tab-item-active'))
+  //         //     if(el.hasAttribute('u-tab-item-active')) {
+  //         //         this.$data.activate(el.getAttribute('id'))
+  //         //     }
+  //         // },
+  //       "u-bind:id"() {
+  //         return this.$id("tab-item");
+  //       },
+  //       "u-on:click"() {
+  //         this.$data.activate(el.getAttribute('id'));
+  //       },
+  //     //   "u-bind:u-tab-item-active"() {
+  //     //     return this.$data.isActive(el.getAttribute('id'));
+  //     //   },
+  //     });
+  //   });
+  // }
+
   function attr($el, key, value) {
     if (typeof value === "undefined") {
       const result = $el.getAttribute(key);
@@ -10001,9 +10151,6 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
   function removeAttr($el, key) {
     attr($el, key, "");
-  }
-  function setAttr($el, key, value = true) {
-    attr($el, key, value);
   }
 
   function query($el, key, callback) {
@@ -10190,44 +10337,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
   register("u-bind", Bind);
 
-  function Tab($el) {
-      let tabItems = [];
-      let tabPanels = [];
-      let activeTab  = 0;
-
-      queryAttr($el, 'u-tab-list',    (el)=>{
-
-      });
-      queryAttr($el, 'u-tab-content', (el)=>{
-
-      });
-      queryAttr($el, 'u-tab-item',    (el)=>{
-          tabItems.push(el);
-          let index = tabItems.indexOf(el);
-          if(getAttr(el, 'u-tab-item-active')){
-              activeTab = index;
-          }
-          el.onclick = (event)=>{
-              queryAttr($el, 'u-tab-item-active', (e)=>{
-                  removeAttr(e, 'u-tab-item-active');
-              });
-              queryAttr($el, 'u-tab-panel-active', (el)=>{
-                  removeAttr(el, 'u-tab-panel-active');
-              });
-              setAttr(el, 'u-tab-item-active', true);
-              setAttr(tabPanels[index], 'u-tab-panel-active', true);
-          };
-
-      });
-      queryAttr($el, 'u-tab-panel',   (el)=>{
-          tabPanels.push(el);
-
-      });
-      setAttr(tabPanels[activeTab], 'u-tab-panel-active', true);
-      setAttr(tabItems[activeTab], 'u-tab-item-active', true);
-      
-  }
-  register("u-tab", Tab);
+  // export * from "./tab";
 
   function ulibsPlugin(Alpine) {
     document.body.setAttribute("u-data", "");
@@ -10245,6 +10355,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     Accordion(Alpine);
     Icon(Alpine);
 
+    Tab(Alpine);
     AutoComplete(Alpine);
     
     Modal(Alpine);
@@ -10259,7 +10370,6 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   });
 
   exports.Bind = Bind;
-  exports.Tab = Tab;
 
   return exports;
 

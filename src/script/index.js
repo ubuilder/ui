@@ -12,9 +12,9 @@ import { Radio } from "./radio";
 import { Input } from "./input";
 import { Select } from "./select";
 import { Textarea } from "./textarea";
+import { Tab } from "./tab";
 
 export * from "./bind";
-export * from "./tab";
 
 function ulibsPlugin(Alpine) {
   document.body.setAttribute("u-data", "");
@@ -32,6 +32,7 @@ function ulibsPlugin(Alpine) {
   Accordion(Alpine);
   Icon(Alpine);
 
+  Tab(Alpine);
   AutoComplete(Alpine)
   
   Modal(Alpine);

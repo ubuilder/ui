@@ -1,40 +1,82 @@
-import { getAttr, queryAttr, register, removeAttr, setAttr } from "./helpers";
 
-export function Tab($el) {
-    let tabItems = [];
-    let tabPanels = [];
-    let activeTab  = 0
+export function Tab(Alpine) {
+    Alpine.directive('tab', (el) => {
 
-    queryAttr($el, 'u-tab-list',    (el)=>{
-
+        Alpine.bind(el, {
+            'u-id'() {
+                return ['tab']
+            },
+            'u-data'() {
+                return {
+                    active: undefined,
+                    activate(id) {
+                        id = +id.replace('tab-item-', '')
+                        this.$data.active = id
+                    },
+                    isActive(id) {
+                        if(!this.$data.active) {
+                            this.$data.activate(id.replace('tab-panel', 'tab-item'));
+                        }
+                        console.log('isActive', id)
+                        return +id.replace('tab-item-', '').replace('tab-panel-', '') === this.$data.active
+                    }
+                }
+            }
+        })                
     })
-    queryAttr($el, 'u-tab-content', (el)=>{
 
+    Alpine.directive('tab-list', (el) => {
+        Alpine.bind(el, {
+            'u-id'() {
+                return [this.$id('tab') + '-item']
+            }
+        })
     })
-    queryAttr($el, 'u-tab-item',    (el)=>{
-        tabItems.push(el)
-        let index = tabItems.indexOf(el)
-        if(getAttr(el, 'u-tab-item-active')){
-            activeTab = index
-        }
-        el.onclick = (event)=>{
-            queryAttr($el, 'u-tab-item-active', (e)=>{
-                removeAttr(e, 'u-tab-item-active')
-            })
-            queryAttr($el, 'u-tab-panel-active', (el)=>{
-                removeAttr(el, 'u-tab-panel-active')
-            })
-            setAttr(el, 'u-tab-item-active', true);
-            setAttr(tabPanels[index], 'u-tab-panel-active', true)
-        }
 
+    Alpine.directive('tab-content', (el) => {
+        Alpine.bind(el, {
+            'u-id'() {
+                return [this.$id('tab') + '-panel']
+            }
+        })
     })
-    queryAttr($el, 'u-tab-panel',   (el)=>{
-        tabPanels.push(el)
 
+
+    Alpine.directive('tab-item', (el) => {
+
+        
+        Alpine.bind(el, {
+            'u-init'() {
+                if(el.hasAttribute('u-tab-item-active')) {
+                    this.$data.activate(el.id)
+                }
+                this.$watch('active', (value) => {
+                    const myId = +el.id.replace('tab-item-', '')
+                    if(value === myId) {
+                        el.setAttribute('u-tab-item-active', '')
+                    } else {
+                        el.removeAttribute('u-tab-item-active')
+                    }
+                })
+        
+            },
+            'u-bind:id'() {
+                return this.$id('tab-item') 
+            },
+            'u-on:click'() {
+                return this.$data.activate(el.id)
+            }
+        })
     })
-    setAttr(tabPanels[activeTab], 'u-tab-panel-active', true)
-    setAttr(tabItems[activeTab], 'u-tab-item-active', true)
-    
+
+    Alpine.directive('tab-panel', (el) => {
+        Alpine.bind(el, {
+            'u-bind:id'() {
+                return this.$id('tab-panel') 
+            },
+            'u-bind:u-tab-panel-active'() {
+                return this.$data.isActive(el.id)
+            }     
+        })
+    })
 }
-register("u-tab", Tab);

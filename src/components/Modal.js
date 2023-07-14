@@ -21,10 +21,11 @@ export const Modal = Base(($props, slots) => {
     name
   };
 
-  return View(props, [
-    View({ component: component + "-backdrop" }),
-    View({ component: component + "-content" }, slots),
-  ]);
+    return View(props, [
+      View({ component: component + "-backdrop" }),
+      View({ component: component + "-content" }, $slots),
+    ]);
+  },
 });
 
 /**

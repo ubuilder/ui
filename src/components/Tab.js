@@ -78,16 +78,18 @@ export const TabItem = Base(($props, $slots) => {
     ...restProps
   } = $props;
 
-  const props = {
-    ...restProps,
-    component,
-    cssProps: {
-      size,
-      active
-    },    
-  }
+    const props = {
+      ...restProps,
+      tag: 'button',
+      component,
+      cssProps: {
+        size,
+        active,
+      },
+    };
 
-  return Button(props, label? label : $slots)
+    return View(props, label ? label : $slots);
+  },
 });
 
 /**
