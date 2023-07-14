@@ -1,92 +1,113 @@
-import { Base } from '../utils.js';
-import { FormField } from './FormField.js';
-import { View } from './View.js';
-/**
-* 
-*/
-export const CheckboxInput = Base(($props, $slots) => {
-    const {component = 'checkbox', text, inline, value, name, checked, multiple, ...restProps} = $props
+import { Base } from "../utils.js";
+import { FormField } from "./FormField.js";
+import { View } from "./View.js";
+
+export const CheckboxInput = Base({
+  render($props, $slots) {
+    const {
+      component = "checkbox",
+      text,
+      inline,
+      value,
+      name,
+      checked,
+      multiple,
+      ...restProps
+    } = $props;
 
     const props = {
-        ...restProps,
-        tag: 'label',
-        component,
-        cssProps: {
-            inline
-        }
-    }
+      ...restProps,
+      tag: "label",
+      component,
+      cssProps: {
+        inline,
+      },
+    };
 
     const checkboxProps = {
-        name,
-        tag: "input",
-        type: "checkbox",
-        name,
-        value,
-        checked,
-        multiple,
-        component: component + "-input",
+      name,
+      tag: "input",
+      type: "checkbox",
+      name,
+      value,
+      checked,
+      multiple,
+      component: component + "-input",
+    };
 
-    }
-    
     return View(props, [
       View(checkboxProps),
-      text &&
-        View({ tag: "span", component: component + "-text" }, text),
+      text && View({ tag: "span", component: component + "-text" }, text),
     ]);
-  });
+  },
+});
 
-
-/**
-* 
-*/
-export const Checkbox = Base(($props, $slots) => {
-    const {component = 'checkbox', label, text, inline, value, name, checked, multiple, ...restProps} = $props
+export const Checkbox = Base({
+  render($props, $slots) {
+    const {
+      component = "checkbox",
+      label,
+      text,
+      inline,
+      value,
+      name,
+      checked,
+      multiple,
+      ...restProps
+    } = $props;
 
     const props = {
-        ...restProps,
-        tag: 'label',
-        component,
-        name,
-        label,
-        cssProps: {
-            inline
-        }
-    }
+      ...restProps,
+      tag: "label",
+      component,
+      name,
+      label,
+      cssProps: {
+        inline,
+      },
+    };
 
     const checkboxProps = {
-        name,
-        tag: "input",
-        type: "checkbox",
-        text,
-        name,
-        value,
-        checked,
-        multiple,
-        component,
-    }
-    
+      name,
+      tag: "input",
+      type: "checkbox",
+      text,
+      name,
+      value,
+      checked,
+      multiple,
+      component,
+    };
+
     return FormField(props, CheckboxInput(checkboxProps));
-  });
+  },
+});
 
+export const CheckboxGroup = Base({
+  render($props, $slots) {
+    const {
+      component = "checkbox-group",
+      label,
+      name,
+      items = [],
+      value = [],
+      text,
+      key,
+      inline = false,
+      ...restProps
+    } = $props;
 
-  /**
-* 
-*/
-export const CheckboxGroup = Base(($props, $slots) => {
-    const {component = 'checkbox-group', label, name, items = [], value = [], text, key, inline = false, ...restProps} = $props
-
-
-    const props = {...restProps, name, label, component}
+    const props = { ...restProps, name, label, component };
 
     const checkboxGroupProps = {
-        component,
-        tag: "div",
-        cssProps: {
-            inline,
-        },
-        name 
-    }
-      
+      component,
+      tag: "div",
+      cssProps: {
+        inline,
+      },
+      name,
+    };
+
     function getKey(item) {
       if (key) {
         if (typeof key === "string") {
@@ -109,13 +130,13 @@ export const CheckboxGroup = Base(($props, $slots) => {
       }
       return item;
     }
-  
+
     return FormField(props, [
       View(
         checkboxGroupProps,
-        items.map(item =>
+        items.map((item) =>
           CheckboxInput({
-            component: component + '-item',
+            component: component + "-item",
             name,
             value: getKey(item),
             text: getText(item),
@@ -124,5 +145,5 @@ export const CheckboxGroup = Base(($props, $slots) => {
         )
       ),
     ]);
-  });
-  
+  },
+});

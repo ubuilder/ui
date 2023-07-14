@@ -134,7 +134,7 @@ export type View<Props, Components = {}> = Component<
     h: WidthHeights;
     [x: string]: any;
   }
->;
+> & {extend: ((a: any, b: any) => string)}
 
 /**
  * Accordions Component
