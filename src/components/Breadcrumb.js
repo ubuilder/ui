@@ -1,9 +1,6 @@
 import { Base } from "../utils.js";
 import { View } from "./View.js";
 
-/**
- *
- */
 export const Breadcrumb = Base({
   render($props, $slots) {
     $props.component = "breadcrumb";
@@ -13,9 +10,6 @@ export const Breadcrumb = Base({
   },
 });
 
-/**
- *
- */
 export const BreadcrumbItem = Base({
   render($props, $slots) {
     const {

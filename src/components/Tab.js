@@ -1,6 +1,5 @@
 import { Base } from "../utils.js";
 import { View } from "./View.js";
-import { Button } from "./Button.js";
 
 export const Tab = Base({
   render($props, $slots) {

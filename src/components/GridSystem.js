@@ -1,9 +1,6 @@
 import { Base } from "../utils.js";
 import { View } from "./View.js";
 
-/**
- *
- */
 export const Container = Base({
   render($props, $slots) {
     $props.component = $props.component ?? "container";
