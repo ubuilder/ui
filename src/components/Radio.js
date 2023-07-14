@@ -3,7 +3,7 @@ import { View } from './View.js';
 import { FormField } from './FormField.js';
 
 /**
-* @type {import('.').Radio}
+* 
 */
 export const RadioInput = Base(($props, $slots) => {
     const {component = 'radio', text, inline, value, name, checked, multiple, ...restProps} = $props
@@ -37,7 +37,7 @@ export const RadioInput = Base(($props, $slots) => {
   });
 
 /**
-* @type {import('.').RadioGroup}
+* 
 */
 export const RadioGroup = Base(($props, $slots) => {
     const {component = 'radio-group', label, name, items = [], value = [], text, key, inline = false, ...restProps} = $props

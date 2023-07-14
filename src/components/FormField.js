@@ -4,7 +4,7 @@ import { View } from "./View.js";
 import { Col } from "./GridSystem.js";
 
 /**
- * @type {import('.').FormField}
+ * 
  */
 export const FormField = Base(($props, $slots) => {
   const { component = "form-field", name, label, col=12, ...restProps } = $props;

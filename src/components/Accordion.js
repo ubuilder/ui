@@ -2,7 +2,7 @@ import { Base } from "../utils.js";
 import { View } from "./View.js";
 
 /**
-* @type {import('.').Accordions}
+* 
 */
 export const Accordions = Base(($props, slots) => {
   const { component = "accordions", persistent = false, ...restProps } = $props;
@@ -16,9 +16,6 @@ export const Accordions = Base(($props, slots) => {
   return View(props, slots);
 });
 
-/**
-* @type {import('.').Accordion}
-*/
 export const Accordion = Base(($props, slots) => {
   const { component = "accordion", header, body, ...restProps } = $props;
 
@@ -37,7 +34,7 @@ export const Accordion = Base(($props, slots) => {
 });
 
 /**
-* @type {import('.').AccordionHeader}
+* 
 */
 export const AccordionHeader = Base(($props, slots) => {
   const { component = "accordion-header", title, ...restProps } = $props;
@@ -54,7 +51,7 @@ export const AccordionHeader = Base(($props, slots) => {
 });
 
 /**
-* @type {import('.').AccordionBody}
+* 
 */
 export const AccordionBody = Base(($props, slots) => {
   const { component = "accordion-body", ...restProps } = $props;

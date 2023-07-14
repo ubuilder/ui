@@ -3,7 +3,7 @@ import { FormField } from './FormField.js';
 import { View } from './View.js';
 
 /**
-* @type {import('.').Textarea}
+* 
 */
 export const Textarea = Base(($props, $slots) => {
     // return View({}, [

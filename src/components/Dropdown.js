@@ -5,7 +5,7 @@ import { Button } from "./Button.js";
 
 
 /**
-* @type {import('.').Dropdown}
+* 
 */
 export const Dropdown = Base(($props, $slots) => {
   const {
@@ -47,7 +47,7 @@ export const Dropdown = Base(($props, $slots) => {
 
 
 /**
-* @type {import('.').DropdownItem}
+* 
 */
 export const DropdownItem = Base(($props, $slots) => {
 
@@ -81,7 +81,7 @@ export const DropdownItem = Base(($props, $slots) => {
  * @type {import { DropdownPanel } from "./types";}
  */
 /**
-* @type {import('.').DropdownPanel}
+* 
 */
 export const DropdownPanel = Base(($props, $slots)=>{
 

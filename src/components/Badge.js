@@ -3,7 +3,7 @@ import { View } from "./View.js";
 
 
 /**
-* @type {import('.').Badge}
+* 
 */
 export const Badge = Base(($props, $slots) => {
   const {

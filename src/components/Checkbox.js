@@ -2,7 +2,7 @@ import { Base } from '../utils.js';
 import { FormField } from './FormField.js';
 import { View } from './View.js';
 /**
-* @type {import('.').Checkbox}
+* 
 */
 export const CheckboxInput = Base(($props, $slots) => {
     const {component = 'checkbox', text, inline, value, name, checked, multiple, ...restProps} = $props
@@ -37,7 +37,7 @@ export const CheckboxInput = Base(($props, $slots) => {
 
 
 /**
-* @type {import('.').Checkbox}
+* 
 */
 export const Checkbox = Base(($props, $slots) => {
     const {component = 'checkbox', label, text, inline, value, name, checked, multiple, ...restProps} = $props
@@ -70,7 +70,7 @@ export const Checkbox = Base(($props, $slots) => {
 
 
   /**
-* @type {import('.').CheckboxGroup}
+* 
 */
 export const CheckboxGroup = Base(($props, $slots) => {
     const {component = 'checkbox-group', label, name, items = [], value = [], text, key, inline = false, ...restProps} = $props

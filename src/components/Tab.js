@@ -3,7 +3,7 @@ import { View } from "./View.js";
 import { Button } from './Button.js'
 
 /**
-* @type {import('.').Tab}
+* 
 */
 export const Tab = Base(($props, $slots) => {
   const {
@@ -24,7 +24,7 @@ export const Tab = Base(($props, $slots) => {
 });
 
 /**
-* @type {import('.').TabList}
+* 
 */
 export const TabList = Base(($props, $slots) => {
   const {
@@ -46,7 +46,7 @@ export const TabList = Base(($props, $slots) => {
   return View(props, $slots)
 });
 /**
-* @type {import('.').TabPanel}
+* 
 */
 export const TabPanel = Base(($props, $slots) => {
   const {
@@ -67,7 +67,7 @@ export const TabPanel = Base(($props, $slots) => {
 });
 
 /**
-* @type {import('.').TabItem}
+* 
 */
 export const TabItem = Base(($props, $slots) => {
   const {
@@ -91,7 +91,7 @@ export const TabItem = Base(($props, $slots) => {
 });
 
 /**
-* @type {import('.').TabContent}
+* 
 */
 export const TabContent = Base(($props, $slots) => {
   const {

@@ -3,7 +3,7 @@ import { View } from "./View.js";
 import { Image } from "./Image.js";
 
 /**
-* @type {import('.').Avatar}
+* 
 */
 export const Avatar = Base(($props, $slots) => {
   const {
