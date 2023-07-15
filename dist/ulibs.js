@@ -10288,7 +10288,6 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   });
 
   exports.Bind = Bind;
-  exports.Tabs = Tabs;
 
   return exports;
 

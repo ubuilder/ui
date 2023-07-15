@@ -11,10 +11,10 @@ import { Radio } from "./radio";
 import { Input } from "./input";
 import { Select } from "./select";
 import { Textarea } from "./textarea";
-import { Tabs } from "./tab";
+import { Tabs } from "./tabs";
 
 export * from "./bind";
-export * from "./tab";
+
 
 function ulibsPlugin(Alpine) {
   document.body.setAttribute("u-data", "");
