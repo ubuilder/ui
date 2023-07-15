@@ -33,7 +33,6 @@ function ulibsPlugin(Alpine) {
   Accordion(Alpine);
   Icon(Alpine);
 
-  Tab(Alpine);
   AutoComplete(Alpine)
   
   Modal(Alpine);

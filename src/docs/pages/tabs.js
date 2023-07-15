@@ -1,7 +1,7 @@
 import { Button } from "../../components/Button.js";
 import { DocPage } from "../components/DocPage.js";
 import { Section } from "../components/Section.js";
-import { Tabs, TabsList, TabsPanel, TabsItem, TabsContent } from "../../components/Tabs.js";
+import { Tabs, TabsList, TabsPanel, TabsItem, TabsContent } from "../../components/index.js";
 
 export default function () {
   return DocPage({ name: "Tabs" }, [
@@ -22,10 +22,7 @@ export default function () {
                         TabsPanel({}, 'this is tabs panel for tabs3'),
                     ]
                 )
-            ]
-            )
-
-      
+        ])
     ]),
     Section({ title: "tabs", description: "active tabs3" }, [
         Tabs({}, 
@@ -68,8 +65,6 @@ export default function () {
                 )
             ]
             )
-
-      
     ]),
   ]);
 }
