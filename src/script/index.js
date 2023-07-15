@@ -11,6 +11,7 @@ import { Radio } from "./radio";
 import { Input } from "./input";
 import { Select } from "./select";
 import { Textarea } from "./textarea";
+import { Tabs } from "./tab";
 
 export * from "./bind";
 export * from "./tab";
@@ -34,6 +35,7 @@ function ulibsPlugin(Alpine) {
   AutoComplete(Alpine)
   
   Modal(Alpine);
+  Tabs(Alpine)
 }
 
 document.addEventListener("DOMContentLoaded", () => {

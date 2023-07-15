@@ -12,7 +12,7 @@ export default function () {
                     [
                         TabItem('tab1'),
                         TabItem('tab2'),
-                        TabItem('tab4'),
+                        TabItem('tab3'),
                     ]
                 ),
                 TabContent({}, 

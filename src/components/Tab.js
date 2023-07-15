@@ -7,7 +7,7 @@ import { Button } from './Button.js'
 */
 export const Tab = Base(($props, $slots) => {
   const {
-    component = "tab",
+    component = "tabs",
     size = "md",
     ...restProps
   } = $props;
@@ -28,7 +28,7 @@ export const Tab = Base(($props, $slots) => {
 */
 export const TabList = Base(($props, $slots) => {
   const {
-    component = "tab-list",
+    component = "tabs-list",
     horizontal = true,
     size = "md",
     ...restProps
@@ -50,7 +50,7 @@ export const TabList = Base(($props, $slots) => {
 */
 export const TabPanel = Base(($props, $slots) => {
   const {
-    component = "tab-panel",
+    component = "tabs-panel",
     size = "md",
     ...restProps
   } = $props;
@@ -71,7 +71,7 @@ export const TabPanel = Base(($props, $slots) => {
 */
 export const TabItem = Base(($props, $slots) => {
   const {
-    component = "tab-item",
+    component = "tabs-item",
     label ,
     active = false,
     size = "md",
@@ -86,6 +86,7 @@ export const TabItem = Base(($props, $slots) => {
       active
     },    
   }
+  if(active)props['u-tabs-item-active'] = "true"
 
   return Button(props, label? label : $slots)
 });
@@ -95,7 +96,7 @@ export const TabItem = Base(($props, $slots) => {
 */
 export const TabContent = Base(($props, $slots) => {
   const {
-    component = "tab-content",
+    component = "tabs-content",
     size = "md",
     ...restProps
   } = $props;
