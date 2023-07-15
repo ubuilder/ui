@@ -2,10 +2,12 @@ import {
   cpSync,
   existsSync,
   mkdirSync,
+  readFileSync,
   readdirSync,
   rmSync,
   writeFileSync,
 } from "fs";
+import { View } from "../src/components/View.js";
 
 const files = readdirSync("./src/docs/pages");
 
@@ -16,10 +18,25 @@ if (!existsSync("./build/ui")) {
   mkdirSync("./build/ui");
 }
 
+function layout(props, slots) {
+  // const script = readFileSync("./dist/ulibs.js", "utf-8");
+  // const style = readFileSync("./dist/styles.css", "utf-8");
+
+  return View(
+    {
+      htmlHead: [
+        View({ tag: "link", rel: 'stylesheet', href: '/ui/styles.css' }),
+        View({ tag: "script", src: '/ui/ulibs.js', defer: true, async: true }),
+      ],
+    },
+    slots
+  );
+}
+
 for (let file of files) {
   if (file.endsWith(".js")) {
     import("../src/docs/pages/" + file).then((module) => {
-      const page = module.default({ prefix: "/ui/" }).toString();
+      const page = layout({}, module.default({ prefix: "/ui/" })).toHtml();
 
       if(!page) return;
       if (file == "index.js") {

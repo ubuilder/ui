@@ -41,7 +41,7 @@ export default function ({ url, params, pathname } = {}) {
                 }),
               ]),
               Col({ col: true }, [
-                Checkbox({ name: "remember", label: "Remember Me" }),
+                Checkbox({ col:true, name: "remember", text: "Remember Me" }),
               ]),
               Col({ col: 0 }, [
                 Button({ color: "primary", type: "submit" }, "Login"),

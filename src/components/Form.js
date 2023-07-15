@@ -1,57 +1,50 @@
 import { Base, classname } from "../utils.js";
-import { FormField } from './FormField.js';
-import { View } from "./View.js";
+import { Row } from "./GridSystem.js";
 
-/**
-* @type {import('.').Form}
-*/
-export const Form = Base(($props, $slots) => {
-  $props.tag = "form";
-  $props.component = $props.component ?? "form";
-  $props.method = $props.method ?? "POST";
-  $props[classname("action")] = $props.action ?? "POST";
+export const Form = Base({
+  render($props, $slots) {
+    $props.tag = "form";
+    // $props.component = $props.component ?? "form";
+    $props.method = $props.method ?? "POST";
+    $props[classname("action")] = $props.action ?? "POST";
+    $props[classname("form")] = true;
 
-  return View($props, $slots);
+    return Row($props, $slots);
+  },
 });
 
-/**
-* @type {import('.').FileUpload}
-*/
-export const FileUpload = Base(($props, $slots) => {
-  // file upload
+export const FileUpload = Base({
+  render($props, $slots) {
+    // file upload
+  },
 });
 
-/**
-* @type {import('.').Editor}
-*/
-export const Editor = Base(($props, $slots) => {
-  // Editor component
+export const Editor = Base({
+  render($props, $slots) {
+    // Editor component
+  },
 });
 
-/**
-* @type {import('.').Autocomplete}
-*/
-export const Autocomplete = Base(($props, $slots) => {
-  // Autocomplete
+export const Autocomplete = Base({
+  render($props, $slots) {
+    // Autocomplete
+  },
 });
 
-/**
-* @type {import('.').Datepicker}
-*/
-export const Datepicker = Base(($props, $slots) => {
-  // Datepicker
+export const Datepicker = Base({
+  render($props, $slots) {
+    // Datepicker
+  },
 });
 
-/**
-* @type {import('.').Switch}
-*/
-export const Switch = Base(($props, $slots) => {
-  // Switch component
+export const Switch = Base({
+  render($props, $slots) {
+    // Switch component
+  },
 });
 
-/**
-* @type {import('.').Slider}
-*/
-export const Slider = Base(($props, $slots) => {
-  // Slider
+export const Slider = Base({
+  render($props, $slots) {
+    // Slider
+  },
 });

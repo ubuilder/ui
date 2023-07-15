@@ -1,3 +1,4 @@
+import { Container } from "../../components/GridSystem.js";
 import { Button, View } from "../../components/index.js";
 import { tag } from "../../core/tags.js";
 
@@ -5,7 +6,6 @@ export function DocPage(
   { component = "page", name = "", prefix = "/ui/", ...restProps },
   slots
 ) {
-
   const scriptGlobal = View({ tag: "script", src: prefix + "ulibs.js" });
   const style = View({
     tag: "link",
@@ -49,21 +49,25 @@ export function DocPage(
       ],
     },
     [
-      View({ p: "xs", class: "border-bottom header" }, [
-        Button({ link: true, 'u-on:click': "$routing.back()" }, "Back"),
-        Button(
-          {
-            color: "dark",
-            'u-on:click': `el => document.body.classList.toggle('dark')`,
-          },
-          "Dark"
-        ),
+      View(
+        { p: "xs", class: "border-bottom header" },
+        Container({ size: "xl", mx: "auto" }, [
+          Button({ link: true, "u-on:click": "$routing.back()" }, "Back"),
+          Button(
+            {
+              color: "dark",
+              "u-on:click": `el => document.body.classList.toggle('dark')`,
+            },
+            "Dark"
+          ),
+        ])
+      ),
+      Container({ size: "xl", mx: "auto" }, [
+        name && View({ tag: "h1", my: "md" }, name),
+        View({}, slots),
       ]),
-      name && View({ tag: "h1", ps: "sm", my: "md" }, name),
-      View({ p: "sm" }, slots),
     ]
   );
-
 
   return page;
 }

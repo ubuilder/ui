@@ -1,3 +1,4 @@
+import { Col, Container } from "../../components/GridSystem.js";
 import {
   Button,
   ButtonGroup,
@@ -18,21 +19,26 @@ export default function () {
   return DocPage({ name: "Button" }, [
     Section({ title: "input" }, [Input({ value: "Hello" })]),
     Section({ title: "form" }, [
-      Form([
-        Input({ name: "username" }),
-        Input({ name: "password" }),
+      Container({size: 'xl', mx: 'auto'},[
+        Form([
+          Input({ name: "username", col: 6 }),
+          Input({ name: "password", col: 6 }),
 
-        View({ border: true, p: "sm", mb: "sm" }, [
-          View([
-            View(["Username: ", View({ tag: "span", "u-text": "username" })]),
-            View(["password: ", View({ tag: "span", "u-text": "password" })]),
+          Col({ border: true, p: "sm", mb: "sm" }, [
+            View([
+              View(["Username: ", View({ tag: "span", "u-text": "username" })]),
+              View(["password: ", View({ tag: "span", "u-text": "password" })]),
+            ]),
           ]),
-        ]),
 
-        Button({ type: "submit" }, "Submit"),
-      ]),
+          Button({ type: "submit" }, "Submit"),
+        ]),
+      ])
+
     ]),
     Section({ title: "form + checkbox" }, [
+      Container({size: 'xl', mx: 'auto'}, [
+
       Form([
         Input({ name: "username" }),
         Input({ name: "password" }),
@@ -63,6 +69,7 @@ export default function () {
         Select({
             placeholder: 'Hello World!',
           name: "colors",
+          colSm: 6,
           multiple: true,
           value: [2,3],
         label: 'Colors',
@@ -75,6 +82,7 @@ export default function () {
           text: (item) => item.name,
         }),
         Textarea({
+            colSm: 6,
             name: 'description',
             label: 'Description',
             value: 'This is description',
@@ -88,7 +96,7 @@ export default function () {
         }),
         Checkbox({ name: "remember_me", text: "Remember me" }),
 
-        View({ border: true, p: "sm", mb: "sm" }, [
+        Col({ col: 12, border: true, p: "sm", mb: "sm" }, [
           View([
             View(["Username: ", View({ tag: "span", "u-text": "username" })]),
             View(["password: ", View({ tag: "span", "u-text": "password" })]),
@@ -114,6 +122,8 @@ export default function () {
 
         Button({ type: "submit", color: "primary" }, "Submit"),
       ]),
+    ])
+
     ]),
   ]);
 }

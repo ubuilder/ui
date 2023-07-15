@@ -11,6 +11,8 @@ type Tag = {
   toHead: () => string;
 };
 
+
+
 export type Colors =
   | "primary"
   | "secondary"
@@ -132,33 +134,33 @@ export type View<Props, Components = {}> = Component<
     h: WidthHeights;
     [x: string]: any;
   }
->;
+> & {extend: ((a: any, b: any) => string)}
 
 /**
  * Accordions Component
  */
-export type Accordions = View<{persistent: boolean}>;
+declare const Accordions: View<{persistent: boolean}>;
 
 /**
  * Accordion Component
  */
-export type Accordion = View<{header: Slot, body: Slot}>
+declare const Accordion: View<{header: Slot, body: Slot}>
 
 /**
  * AccordionHeader component
  */
-export type AccordionHeader = View<{title: string}>
+declare const AccordionHeader: View<{title: string}>
 
 /**
  * AccordionBody component
  */
-export type AccordionBody = View<{}>
+declare const AccordionBody: View<{}>
 
 
 /**
  * Avatar Component
  */
-export type Avatar = View<{
+declare const Avatar: View<{
   size: Sizes,
   color: Colors,
   src: string,
@@ -168,7 +170,7 @@ export type Avatar = View<{
 /**
  * Badge Component
  */
-export type Badge = View<{
+declare const Badge: View<{
   size: Sizes,
   color: Colors,
 }>
@@ -176,63 +178,63 @@ export type Badge = View<{
 /**
  * Breadcrumb Component
  */
-export type Breadcrumb = View<{}>
+declare const Breadcrumb: View<{}>
 
 /**
  * BreadcrumbItem Component
  */
-export type BreadcrumbItem = View<{active: boolean, disabled: boolean, href: string}>
+declare const BreadcrumbItem: View<{active: boolean, disabled: boolean, href: string}>
 
 
 /**
  * ButtonGroup Component
  */
-export type ButtonGroup = View<{ compact: boolean }>;
+declare const ButtonGroup: View<{ compact: boolean }>;
 
 /**
  * Button Component
  */
-export type Button = View<{ color: Colors; size: Sizes, link: boolean, href: string }>;
+declare const Button: View<{ color: Colors; size: Sizes, link: boolean, href: string }>;
 
 /**
  * CardHeader Component
  */
-export type CardHeader = View<{}>;
+declare const CardHeader: View<{}>;
 
 /**
  * CardTitle Component
  */
-export type CardTitle = View<{}>;
+declare const CardTitle: View<{}>;
 
 /**
  * CardFooter Component
  */
-export type CardFooter = View<{}>;
+declare const CardFooter: View<{}>;
 
 /**
  * CardBody Component
  */
-export type CardBody = View<{}>;
+declare const CardBody: View<{}>;
 
 /**
  * CardActions Component
  */
-export type CardActions = View<{}>;
+declare const CardActions: View<{}>;
 
 /**
  * Card Component
  */
-export type Card = View<{ title: string }>;
+declare const Card: View<{ title: string }>;
 
 /**
  * Divider Component
  */
-export type Divider = View<{ color: Colors }>;
+declare const Divider: View<{ color: Colors }>;
 
 /**
  * Input Component
  */
-export type Input = View<{
+declare const Input: View<{
   value: string;
   type: string;
   placeholder: string;
@@ -246,14 +248,14 @@ export type Input = View<{
  *
  * todo: add color
  */
-export type Icon = View<{ size: Sizes; name: string }>;
+declare const Icon: View<{ size: Sizes; name: string }>;
 
 /**
  * Modal Component
  */
-export type Modal = View<{ open: boolean; persistent: boolean }>;
+declare const Modal: View<{ open: boolean; persistent: boolean }>;
 
 /**
  * ModalBody Component
  */
-export type ModalBody = View<{}>;
+declare const ModalBody: View<{}>;

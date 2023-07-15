@@ -1,12 +1,9 @@
-import { Base } from '../utils.js';
-import { FormField } from './FormField.js';
-import { View } from './View.js';
+import { Base } from "../utils.js";
+import { FormField } from "./FormField.js";
+import { View } from "./View.js";
 
-/**
-* @type {import('.').Select}
-*/
-export const Select = Base(($props, $slots) => {
-    // select component
+export const Select = Base({
+  render($props, $slots) {
     const {
       key,
       text,
@@ -18,14 +15,14 @@ export const Select = Base(($props, $slots) => {
       value = multiple ? [] : undefined,
       ...restProps
     } = $props;
-  
+
     const props = {
       ...restProps,
       component: "select",
       name,
       label,
     };
-  
+
     const selectProps = {
       tag: "select",
       component: "select",
@@ -33,7 +30,7 @@ export const Select = Base(($props, $slots) => {
       name,
       multiple,
     };
-  
+
     function getKey(item) {
       if (key) {
         if (typeof key === "string") {
@@ -56,35 +53,35 @@ export const Select = Base(($props, $slots) => {
       }
       return item;
     }
-  
-    return FormField(props, View(
-        selectProps, [
-          placeholder &&
-            View(
-              {
-                component: "select-placeholder",
-                tag: "option",
-                value: "",
-                hidden: true,
-                selected: true,
-                disabled: true,
-              },
-              placeholder
-            ),
-          ...items.map((item) =>
-            View(
-              {
-                tag: "option",
-                value: getKey(item),
-                selected: multiple
-                  ? value.includes(getKey(item))
-                  : value === getKey(item),
-              },
-              getText(item)
-            )
+
+    return FormField(
+      props,
+      View(selectProps, [
+        placeholder &&
+          View(
+            {
+              component: "select-placeholder",
+              tag: "option",
+              value: "",
+              hidden: true,
+              selected: true,
+              disabled: true,
+            },
+            placeholder
           ),
-        ]
-      ),
+        ...items.map((item) =>
+          View(
+            {
+              tag: "option",
+              value: getKey(item),
+              selected: multiple
+                ? value.includes(getKey(item))
+                : value === getKey(item),
+            },
+            getText(item)
+          )
+        ),
+      ])
     );
-  });
-  
+  },
+});

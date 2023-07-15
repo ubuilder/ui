@@ -14,7 +14,6 @@ function layout(props, slots) {
         View({ tag: "style" }, style),
         View({ tag: "script", defer: true, async: true }, script),
       ],
-      'u-routing': true,
     },
     slots
   );

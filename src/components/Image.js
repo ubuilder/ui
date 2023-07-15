@@ -1,12 +1,11 @@
 import { Base } from "../utils.js";
 import { View } from "./View.js";
 
-/**
-* @type {import('.').Image}
-*/
-export const Image = Base(($props, $slots) => {
-  $props.component = $props.component ?? "image";
-  $props.tag = "img"
+export const Image = Base({
+  render($props, $slots) {
+    $props.component = $props.component ?? "image";
+    $props.tag = "img";
 
-  return View($props);
+    return View($props);
+  },
 });

@@ -606,7 +606,7 @@ h6 {
 }
 
 /* #endregion */
-[u-form-field-label], [u-textarea-label], [u-select-label], [u-input-label], [u-radio-group-label], [u-checkbox-group-label] {
+[u-form-field-label] {
   font-size: calc(var(--size-md) * 0.8);
   font-weight: bold;
   line-height: var(--size-md);
@@ -615,16 +615,70 @@ h6 {
   color: var(--color-base-900);
 }
 
-[u-form-field], [u-textarea-wrapper], [u-select-wrapper], [u-input-wrapper], [u-radio-group-wrapper], [u-checkbox-group-wrapper] {
-  margin-bottom: var(--size-sm);
+[u-form-field] {
+  margin-bottom: var(--size-xs);
 }
 
 [u-checkbox-input], [u-checkbox-group-item-input] {
-  width: 1rem;
-  height: 1rem;
-  border: 1px solid var(--color-primary);
+  position: absolute;
+  width: 0;
+  height: 0;
+  background-color: var(--color-base-100);
+  border: 1px solid var(--color-base-400);
+  accent-color: var(--color-primary-500);
+  border: 1px solid var(--color-primary-500);
   border-radius: var(--size-xxs);
   margin-right: var(--size-xs);
+}
+
+[u-checkbox-text], [u-checkbox-group-item-text] {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+[u-checkbox-text]::before, [u-checkbox-group-item-text]::before {
+  content: "";
+  background-color: var(--color-base-100);
+  transition: all 0.3s ease;
+  margin-right: var(--size-xs);
+  border-radius: var(--size-xxs);
+  width: var(--size-sm);
+  height: var(--size-sm);
+  border: 1px solid var(--color-base-700);
+}
+
+.dark [u-checkbox-text]::before, .dark [u-checkbox-group-item-text]::before {
+  background-color: var(--color-base-300);
+}
+
+[u-checkbox-input]:focus ~ [u-checkbox-text]::before, [u-checkbox-input]:focus ~ [u-checkbox-group-item-text]::before, [u-checkbox-group-item-input]:focus ~ [u-checkbox-text]::before, [u-checkbox-group-item-input]:focus ~ [u-checkbox-group-item-text]::before {
+  box-shadow: 0 0 0 3px var(--color-primary-200);
+}
+
+[u-checkbox-text]::after, [u-checkbox-group-item-text]::after {
+  content: "";
+  display: none;
+  position: absolute;
+}
+
+[u-checkbox-input]:checked ~ [u-checkbox-text]::after, [u-checkbox-input]:checked ~ [u-checkbox-group-item-text]::after, [u-checkbox-group-item-input]:checked ~ [u-checkbox-text]::after, [u-checkbox-group-item-input]:checked ~ [u-checkbox-group-item-text]::after {
+  display: block;
+}
+
+[u-checkbox-text]::after, [u-checkbox-group-item-text]::after {
+  left: 6px;
+  top: 4px;
+  width: 4px;
+  height: 9px;
+  border: solid white;
+  border-width: 0 4px 4px 0;
+  transform: rotate(45deg);
+}
+
+[u-checkbox-input]:checked ~ [u-checkbox-text]:before, [u-checkbox-input]:checked ~ [u-checkbox-group-item-text]:before, [u-checkbox-group-item-input]:checked ~ [u-checkbox-text]:before, [u-checkbox-group-item-input]:checked ~ [u-checkbox-group-item-text]:before {
+  content: "";
+  background-color: var(--color-primary-500);
 }
 
 [u-checkbox], [u-checkbox-group-item] {
@@ -652,11 +706,65 @@ h6 {
   align-items: center;
 }
 
-[u-radio-group-item-input] {
-  width: 1rem;
-  height: 1rem;
-  border: 1px solid var(--color-primary);
-  margin-right: var(--size-xxs);
+[u-radio-input], [u-radio-group-item-input] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  background-color: var(--color-base-100);
+  border: 1px solid var(--color-base-400);
+  accent-color: var(--color-primary-500);
+  border: 1px solid var(--color-primary-500);
+  border-radius: var(--size-sm);
+  margin-right: var(--size-xs);
+}
+
+[u-radio-text], [u-radio-group-item-text] {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+[u-radio-text]::before, [u-radio-group-item-text]::before {
+  content: "";
+  background-color: var(--color-base-100);
+  transition: all 0.3s ease;
+  margin-right: var(--size-xs);
+  border-radius: var(--size-xs);
+  width: var(--size-sm);
+  height: var(--size-sm);
+  border: 1px solid var(--color-base-700);
+}
+
+.dark [u-radio-text]::before, .dark [u-radio-group-item-text]::before {
+  background-color: var(--color-base-300);
+}
+
+[u-radio-input]:focus ~ [u-radio-text]::before, [u-radio-input]:focus ~ [u-radio-group-item-text]::before, [u-radio-group-item-input]:focus ~ [u-radio-text]::before, [u-radio-group-item-input]:focus ~ [u-radio-group-item-text]::before {
+  box-shadow: 0 0 0 3px var(--color-primary-200);
+}
+
+[u-radio-text]::after, [u-radio-group-item-text]::after {
+  content: "";
+  display: none;
+  position: absolute;
+}
+
+[u-radio-input]:checked ~ [u-radio-text]::after, [u-radio-input]:checked ~ [u-radio-group-item-text]::after, [u-radio-group-item-input]:checked ~ [u-radio-text]::after, [u-radio-group-item-input]:checked ~ [u-radio-group-item-text]::after {
+  display: block;
+}
+
+[u-radio-text]::after, [u-radio-group-item-text]::after {
+  left: 6px;
+  top: 8px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-base-200);
+}
+
+[u-radio-input]:checked ~ [u-radio-text]:before, [u-radio-input]:checked ~ [u-radio-group-item-text]:before, [u-radio-group-item-input]:checked ~ [u-radio-text]:before, [u-radio-group-item-input]:checked ~ [u-radio-group-item-text]:before {
+  content: "";
+  background-color: var(--color-primary-500);
 }
 
 [u-radio-group-item] {
@@ -681,6 +789,7 @@ h6 {
 }
 
 [u-input] {
+  transition: all 0.3s ease;
   background-color: var(--color-base-100);
   padding: var(--size-xxs) var(--size-sm);
   border: 1px solid var(--color-base-300);
@@ -703,10 +812,11 @@ h6 {
 [u-input]:focus {
   background-color: var(--color-base-200);
   outline: none;
-  box-shadow: 0 0 4px 0px var(--color-primary-500);
+  box-shadow: 0 0 0px 4px var(--color-primary-200);
 }
 
 [u-select] {
+  transition: all 0.3s ease;
   background-color: var(--color-base-100);
   padding: var(--size-xxs) var(--size-sm);
   border: 1px solid var(--color-base-300);
@@ -734,10 +844,11 @@ h6 {
 [u-select]:focus {
   background-color: var(--color-base-200);
   outline: none;
-  box-shadow: 0 0 4px 0px var(--color-primary-500);
+  box-shadow: 0 0 0px 4px var(--color-primary-200);
 }
 
 [u-textarea] {
+  transition: all 0.3s ease;
   width: 100%;
   background-color: var(--color-base-100);
   padding: var(--size-xxs) var(--size-sm);
@@ -757,7 +868,7 @@ h6 {
 [u-textarea]:focus {
   background-color: var(--color-base-200);
   outline: none;
-  box-shadow: 0 0 4px 0px var(--color-primary-500);
+  box-shadow: 0 0 0px 4px var(--color-primary-200);
 }
 
 [u-container] {
@@ -825,6 +936,7 @@ h6 {
 }
 
 [u-col] {
+  align-self: stretch;
   padding-left: calc(var(--row-gutter) / 4);
   padding-right: calc(var(--row-gutter) / 4);
   padding-top: calc(var(--row-gutter) / 4);

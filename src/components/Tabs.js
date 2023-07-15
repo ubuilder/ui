@@ -1,6 +1,5 @@
 import { Base } from "../utils.js";
 import { View } from "./View.js";
-import { Button } from './Button.js'
 
 /**
 * @type {import('.').Tabs}
@@ -12,15 +11,15 @@ export const Tabs = Base(($props, $slots) => {
     ...restProps
   } = $props;
 
-  const props = {
-    ...restProps,
-    component,
-    cssProps: {
-      size,
-    },    
-  }
-  
-  return View(props, $slots)
+    const props = {
+      ...restProps,
+      component,
+      cssProps: {
+        size,
+      },
+    };
+
+    return View(props, $slots);
 });
 
 /**
@@ -34,14 +33,14 @@ export const TabsList = Base(($props, $slots) => {
     ...restProps
   } = $props;
 
-  const props = {
-    ...restProps,
-    component,
-    cssProps: {
-      horizontal,
-      size,
-    },    
-  }
+    const props = {
+      ...restProps,
+      component,
+      cssProps: {
+        horizontal,
+        size,
+      },
+    };
 
   return View(props, $slots)
 });
@@ -88,7 +87,7 @@ export const TabsItem = Base(($props, $slots) => {
   }
   if(active)props['u-tabs-item-active'] = "true"
 
-  return Button(props, label? label : $slots)
+    return View(props, $slots);
 });
 
 /**
@@ -101,13 +100,17 @@ export const TabsContent = Base(($props, $slots) => {
     ...restProps
   } = $props;
 
-  const props = {
-    ...restProps,
-    component,
-    cssProps: {
-      size,
-    },    
-  }
+    const props = {
+      ...restProps,
+      tag: 'button',
+      component,
+      cssProps: {
+        size,
+        active,
+      },
+    };
 
-  return View(props, $slots)
+    return View(props, label ? label : $slots);
 });
+
+

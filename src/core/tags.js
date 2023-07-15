@@ -5,13 +5,13 @@ export function tag(tag, props = {}, ...slots) {
     props,
     slots,
     toString() {
-      renderTemplate(this);
+      return renderTemplate(this);
     },
     toHead() {
-      renderHead(this);
+      return renderHead(this);
     },
     toScript() {
-      renderScripts(this);
+      return renderScripts(this);
     },
     toHtml() {
       return `<!DOCTYPE html>
