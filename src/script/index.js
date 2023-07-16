@@ -13,6 +13,7 @@ import { Input } from "./input";
 import { Select } from "./select";
 import { Textarea } from "./textarea";
 import { Tabs } from "./tabs";
+import { Dropdown } from "./dropdown";
 
 export * from "./bind";
 
@@ -36,7 +37,8 @@ function ulibsPlugin(Alpine) {
   AutoComplete(Alpine)
   
   Modal(Alpine);
-  Tabs(Alpine)
+  Tabs(Alpine);
+  Dropdown(Alpine);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
