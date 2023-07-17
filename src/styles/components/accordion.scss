@@ -5,9 +5,6 @@
   flex-direction: column;
   border: 1px solid var(--accordion-border-color);
 }
-.dark [u-accordions] {
-  --accordion-border-color: var(--color-base-400);
-}
 
 [u-accordion] {
   border-bottom: 1px solid var(--accordion-border-color);

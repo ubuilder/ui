@@ -42,9 +42,6 @@
   border: 1px solid var(--color-base-700);
 }
 
-.dark [u-checkbox-text]::before {
-  background-color: var(--color-base-300);
-}
 
 [u-checkbox-input]:focus ~ [u-checkbox-text]::before {
 
@@ -151,9 +148,6 @@
   border: 1px solid var(--color-base-700);
 }
 
-.dark [u-radio-text]::before {
-  background-color: var(--color-base-300);
-}
 
 [u-radio-input]:focus ~ [u-radio-text]::before {
 
@@ -237,7 +231,7 @@
 [u-input] {
 
   transition: all 0.3s ease;
-  background-color: var(--color-base-100);
+  background-color: var(--color-base-200);
   padding: var(--size-xxs) var(--size-sm);
   border: 1px solid var(--color-base-300);
   border-radius: calc(var(--size-xxs) / 2);
@@ -252,11 +246,6 @@
   --input-size: var(--size-lg);
 }
 
-.dark [u-input] {
-  background-color: var(--color-base-300);
-  border-color: var(--color-base-400);
-}
-
 [u-input]:focus {
   background-color: var(--color-base-200);
   outline: none;
@@ -269,7 +258,7 @@
 [u-select] {
 
   transition: all 0.3s ease;
-  background-color: var(--color-base-100);
+  background-color: var(--color-base-200);
   padding: var(--size-xxs) var(--size-sm);
   border: 1px solid var(--color-base-300);
   border-radius: calc(var(--size-xxs) / 2);
@@ -291,16 +280,13 @@
   }
 }
 
-.dark [u-select] {
-  background-color: var(--color-base-300);
-  border-color: var(--color-base-400);
-}
-
 [u-select]:focus {
   background-color: var(--color-base-200);
   outline: none;
   box-shadow: 0 0 0px 4px var(--color-primary-200);
+
 }
+
 // Textarea
 
 
@@ -319,10 +305,6 @@
   width: 100%;
 }
 
-.dark [u-textarea] {
-  background-color: var(--color-base-300);
-  border-color: var(--color-base-400);
-}
 
 [u-textarea]:focus {
   background-color: var(--color-base-200);

@@ -3159,13 +3159,11 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   }
 
   function Icon(Alpine) {
-    Alpine.directive("icon", (el) => {
+    Alpine.directive("icon", (el, {}, {effect}) => {
       const iconName = el.getAttribute("name");
 
-      Alpine.bind(el, {
-        "u-data"() {
-          return {
-            init() {
+        effect(() =>{
+
               fetch(
                 `https://unpkg.com/@tabler/icons@2.19.0/icons/${iconName}.svg`
               )
@@ -3173,11 +3171,8 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
                 .then((svg) => {
                   el.innerHTML = svg;
                 });
-            },
-          };
-        },
+            });
       });
-    });
   }
 
   function Form(Alpine) {
@@ -9738,7 +9733,14 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         try {
           const html = await fetch(pathname).then((res) => res.text());
     
-          morphdom(document.getElementsByTagName("html")[0], html);
+          morphdom(document.getElementsByTagName("html")[0], html, {
+            onBeforeElUpdated(fromEl, toEl) {
+              // Do not update icon if name is same
+              if(fromEl.hasAttribute('u-icon') && fromEl.getAttribute('name') === toEl.getAttribute('name')) {
+                return false
+              }
+            }
+          });
     
         } catch (err) {
           console.log(err);
@@ -10295,8 +10297,8 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     module_default.prefix("u-");
     module_default.plugin(ulibsPlugin);
 
-    module_default.start();
     window.Alpine = module_default;
+    module_default.start();
   });
 
   exports.Bind = Bind;

@@ -42,6 +42,6 @@ document.addEventListener("DOMContentLoaded", () => {
   Alpine.prefix("u-");
   Alpine.plugin(ulibsPlugin);
 
-  Alpine.start();
   window.Alpine = Alpine;
+  Alpine.start();
 });
