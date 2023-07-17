@@ -51,7 +51,7 @@
   --color-dark-800: #a6b0cf;
   --color-dark-900: #c3cbe4;
   --color-light-100: #f8f8f8;
-  --color-light-200: #ffff;
+  --color-light-200: #ffffff;
   --color-light-300: #e9ebec;
   --color-light-400: #ced4da;
   --color-light-700: #9599ad;
@@ -824,10 +824,6 @@ h6 {
   background-color: var(--color-base-200);
   outline: none;
   box-shadow: 0 0 0px 4px var(--color-primary-200);
-}
-[u-select]:focus option:checked {
-  background-color: var(--color-primary-200);
-  color: var(--color-primary-content);
 }
 
 [u-textarea] {
@@ -3072,31 +3068,16 @@ h6 {
   padding-right: var(--size-6xl);
 }
 
-<<<<<<< HEAD
-[u-tab] {
-  --tab-panel-bg-color: var(--color-base-100);
-  --tab-border-color: var(--color-base-400);
-=======
 [u-tabs] {
-  --tabs-panel-bg-color: var(--color-base-200);
+  --tabs-panel-bg-color: var(--color-base-100);
   --tabs-border-color: var(--color-base-400);
->>>>>>> 76da15db9521ec8a50a22f5fdc1c697e6464bfb6
   box-sizing: border-box;
   display: block;
   border: 1px solid var(--tabs-border-color);
 }
 
-<<<<<<< HEAD
-[u-tab-item] {
-  padding: var(--size-xxs) var(--size-sm);
-=======
-.dark [u-tabs] {
-  --tabs-panel-bg-color: var(--color-base-100);
-}
-
 [u-tabs-item] {
   padding: var(--size-xs) var(--size-sm);
->>>>>>> 76da15db9521ec8a50a22f5fdc1c697e6464bfb6
   border-radius: var(--size-xxs) var(--size-xxs) 0 0;
   border: 1px solid transparent;
   border-bottom: 1px solid var(--tabs-border-color);
@@ -3199,10 +3180,6 @@ h6 {
 
 [u-dropdown-item]:hover {
   background-color: var(--color-base-200);
-}
-
-.dark [u-dropdown-item]:hover {
-  background-color: var(--color-base-300);
 }
 
 [u-dropdown-panel], [u-arrow-down], [u-arrow-up] {
