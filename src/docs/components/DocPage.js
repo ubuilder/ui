@@ -42,7 +42,7 @@ export function DocPage(
         }),
         title,
         style,
-        View({ tag: "script", src: "//unpkg.com/alpinejs", defer: true }),
+        // View({ tag: "script", src: "//unpkg.com/alpinejs", defer: true }),
         View({ tag: "style" }, customCss),
       ],
     },

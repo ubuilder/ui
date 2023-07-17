@@ -4864,7 +4864,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
    *
    */
 
-  const setAttr = (el, attrs) => {
+  const setAttr$1 = (el, attrs) => {
     iterate(attrs, (val, attr) => {
       if (val == null) {
         el.removeAttribute(attr);
@@ -5496,7 +5496,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         var attrs = ['autocorrect', 'autocapitalize', 'autocomplete'];
         iterate$1(attrs, attr => {
           if (input.getAttribute(attr)) {
-            setAttr(control_input, {
+            setAttr$1(control_input, {
               [attr]: input.getAttribute(attr)
             });
           }
@@ -5539,10 +5539,10 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         passive: true
       };
       const listboxId = self.inputId + '-ts-dropdown';
-      setAttr(dropdown_content, {
+      setAttr$1(dropdown_content, {
         id: listboxId
       });
-      setAttr(focus_node, {
+      setAttr$1(focus_node, {
         role: 'combobox',
         'aria-haspopup': 'listbox',
         'aria-expanded': 'false',
@@ -5555,14 +5555,14 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
       if (label) {
         addEvent(label, 'click', label_click);
-        setAttr(label, {
+        setAttr$1(label, {
           for: control_id
         });
         const label_id = getId(label, self.inputId + '-ts-label');
-        setAttr(focus_node, {
+        setAttr$1(focus_node, {
           'aria-labelledby': label_id
         });
-        setAttr(dropdown_content, {
+        setAttr$1(dropdown_content, {
           'aria-labelledby': label_id
         });
       }
@@ -5575,13 +5575,13 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       }
 
       if ((settings.maxItems === null || settings.maxItems > 1) && self.is_select_tag) {
-        setAttr(input, {
+        setAttr$1(input, {
           multiple: 'multiple'
         });
       }
 
       if (settings.placeholder) {
-        setAttr(control_input, {
+        setAttr$1(control_input, {
           placeholder: settings.placeholder
         });
       } // if splitOn was not passed in, construct it from the delimiter to allow pasting universally
@@ -6445,10 +6445,10 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       this.clearActiveOption();
       if (!option) return;
       this.activeOption = option;
-      setAttr(this.focus_node, {
+      setAttr$1(this.focus_node, {
         'aria-activedescendant': option.getAttribute('id')
       });
-      setAttr(option, {
+      setAttr$1(option, {
         'aria-selected': 'true'
       });
       addClasses(option, 'active');
@@ -6499,13 +6499,13 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     clearActiveOption() {
       if (this.activeOption) {
         removeClasses(this.activeOption, 'active');
-        setAttr(this.activeOption, {
+        setAttr$1(this.activeOption, {
           'aria-selected': null
         });
       }
 
       this.activeOption = null;
-      setAttr(this.focus_node, {
+      setAttr$1(this.focus_node, {
         'aria-activedescendant': null
       });
     }
@@ -6535,7 +6535,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     inputState() {
       var self = this;
       if (!self.control.contains(self.control_input)) return;
-      setAttr(self.control_input, {
+      setAttr$1(self.control_input, {
         placeholder: self.settings.placeholder
       });
 
@@ -6544,7 +6544,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         self.isInputHidden = true;
       } else {
         if (self.settings.hidePlaceholder && self.items.length > 0) {
-          setAttr(self.control_input, {
+          setAttr$1(self.control_input, {
             placeholder: ''
           });
         }
@@ -6765,7 +6765,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
           if (j > 0) {
             option_el = option_el.cloneNode(true);
-            setAttr(option_el, {
+            setAttr$1(option_el, {
               id: option.$id + '-clone-' + j,
               'aria-selected': null
             });
@@ -7546,7 +7546,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       var self = this;
       if (self.isLocked || self.isOpen || self.settings.mode === 'multi' && self.isFull()) return;
       self.isOpen = true;
-      setAttr(self.focus_node, {
+      setAttr$1(self.focus_node, {
         'aria-expanded': 'true'
       });
       self.refreshState();
@@ -7581,7 +7581,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       }
 
       self.isOpen = false;
-      setAttr(self.focus_node, {
+      setAttr$1(self.focus_node, {
         'aria-expanded': 'false'
       });
       applyCSS(self.dropdown, {
@@ -7903,22 +7903,22 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
       if (templateName === 'option' || templateName === 'option_create') {
         if (data[self.settings.disabledField]) {
-          setAttr(html, {
+          setAttr$1(html, {
             'aria-disabled': 'true'
           });
         } else {
-          setAttr(html, {
+          setAttr$1(html, {
             'data-selectable': ''
           });
         }
       } else if (templateName === 'optgroup') {
         id = data.group[self.settings.optgroupValueField];
-        setAttr(html, {
+        setAttr$1(html, {
           'data-group': id
         });
 
         if (data.group[self.settings.disabledField]) {
-          setAttr(html, {
+          setAttr$1(html, {
             'data-disabled': ''
           });
         }
@@ -7926,18 +7926,18 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
       if (templateName === 'option' || templateName === 'item') {
         const value = get_hash(data[self.settings.valueField]);
-        setAttr(html, {
+        setAttr$1(html, {
           'data-value': value
         }); // make sure we have some classes if a template is overwritten
 
         if (templateName === 'item') {
           addClasses(html, self.settings.itemClass);
-          setAttr(html, {
+          setAttr$1(html, {
             'data-ts-item': ''
           });
         } else {
           addClasses(html, self.settings.optionClass);
-          setAttr(html, {
+          setAttr$1(html, {
             role: 'option',
             id: data.$id
           }); // update cache
@@ -9974,88 +9974,6 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       });
   }
 
-  function Tab(Alpine) {
-      Alpine.directive('tab', (el) => {
-
-          Alpine.bind(el, {
-              'u-id'() {
-                  return ['tab']
-              },
-              'u-data'() {
-                  return {
-                      active: undefined,
-                      activate(id) {
-                          id = +id.replace('tab-item-', '');
-                          this.$data.active = id;
-                      },
-                      isActive(id) {
-                          if(!this.$data.active) {
-                              this.$data.activate(id.replace('tab-panel', 'tab-item'));
-                          }
-                          console.log('isActive', id);
-                          return +id.replace('tab-item-', '').replace('tab-panel-', '') === this.$data.active
-                      }
-                  }
-              }
-          });                
-      });
-
-      Alpine.directive('tab-list', (el) => {
-          Alpine.bind(el, {
-              'u-id'() {
-                  return [this.$id('tab') + '-item']
-              }
-          });
-      });
-
-      Alpine.directive('tab-content', (el) => {
-          Alpine.bind(el, {
-              'u-id'() {
-                  return [this.$id('tab') + '-panel']
-              }
-          });
-      });
-
-
-      Alpine.directive('tab-item', (el) => {
-
-          
-          Alpine.bind(el, {
-              'u-init'() {
-                  if(el.hasAttribute('u-tab-item-active')) {
-                      this.$data.activate(el.id);
-                  }
-                  this.$watch('active', (value) => {
-                      const myId = +el.id.replace('tab-item-', '');
-                      if(value === myId) {
-                          el.setAttribute('u-tab-item-active', '');
-                      } else {
-                          el.removeAttribute('u-tab-item-active');
-                      }
-                  });
-          
-              },
-              'u-bind:id'() {
-                  return this.$id('tab-item') 
-              },
-              'u-on:click'() {
-                  return this.$data.activate(el.id)
-              }
-          });
-      });
-
-      Alpine.directive('tab-panel', (el) => {
-          Alpine.bind(el, {
-              'u-bind:id'() {
-                  return this.$id('tab-panel') 
-              },
-              'u-bind:u-tab-panel-active'() {
-                  return this.$data.isActive(el.id)
-              }     
-          });
-      });
-  }
-
   function attr($el, key, value) {
     if (typeof value === "undefined") {
       const result = $el.getAttribute(key);
@@ -10085,6 +10003,9 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
   function removeAttr($el, key) {
     attr($el, key, "");
+  }
+  function setAttr($el, key, value = true) {
+    attr($el, key, value);
   }
 
   function query($el, key, callback) {
@@ -10119,6 +10040,150 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         cbs.forEach((cb) => cb(_value));
       },
     };
+  }
+
+  function Tabs(Alpine) {
+      console.log('Tabs Alpine');
+      Alpine.directive('tabs', (el, first, second)=>{
+          let tabItems = [];
+          let tabPanels = [];
+          let activeTab  = 0;
+          console.log('tab', el);
+          el.querySelectorAll('[u-tabs-item]').forEach((item) => {
+
+              tabItems.push(item);
+              let index = tabItems.indexOf(item);
+              if(getAttr(item, 'u-tabs-item-active')){
+                  activeTab = index;
+              }
+              item.onclick = (event)=>{
+                  queryAttr(el, 'u-tabs-item-active', (e)=>{
+                      removeAttr(e, 'u-tabs-item-active');
+                  });
+                  queryAttr(el, 'u-tabs-panel-active', (e)=>{
+                      removeAttr(e, 'u-tabs-panel-active');
+                  });
+                  setAttr(item, 'u-tabs-item-active', true);
+                  setAttr(tabPanels[index], 'u-tabs-panel-active', true);
+              };
+          },);
+
+          el.querySelectorAll('[u-tabs-panel]').forEach(panel => {
+              tabPanels.push(panel);
+          });
+          console.log(activeTab);
+
+          setAttr(tabPanels[activeTab], 'u-tabs-panel-active', true);
+          setAttr(tabItems[activeTab], 'u-tabs-item-active', true);
+      
+
+
+
+      });
+
+      // Alpine.directive('u-tabs-item', (el, {}, {})=>{
+      //     tabItems.push(el)
+      //     let index = tabItems.indexOf(el)
+      //     if(getAttr(el, 'u-tab-item-active')){
+      //         activeTab = index
+      //     }
+      //     el.onclick = (event)=>{
+      //         queryAttr($el, 'u-tab-item-active', (e)=>{
+      //             removeAttr(e, 'u-tab-item-active')
+      //         })
+      //         queryAttr($el, 'u-tab-panel-active', (el)=>{
+      //             removeAttr(el, 'u-tab-panel-active')
+      //         })
+      //         setAttr(el, 'u-tab-item-active', true);
+      //         setAttr(tabPanels[index], 'u-tab-panel-active', true)
+      //     }
+      // })
+
+      // Alpine.directive('u-tabs-panel', (el, {}, {})=>{
+      //     tabPanels.push(el)
+          
+      // })
+
+      // setAttr(tabPanels[activeTab], 'u-tab-panel-active', true)
+      // setAttr(tabItems[activeTab], 'u-tab-item-active', true)
+      
+  }
+
+  function Dropdown(Alpine){
+    Alpine.directive('dropdown', (el, {}, {Alpine})=>{
+      console.log('dropdown registerd');
+      Alpine.bind(el, ()=>({
+        "u-data"(){
+          return {
+            open: false, 
+            timeout: undefined, 
+            toggle(){
+              if(this.open){ 
+                  return this.close()
+              } else { 
+                  return this.show()
+              }
+            },
+            show(){
+              this.open = true; 
+              console.log('open', this.open);
+            },
+            close(){
+              this.open = false; 
+              console.log('close', this.open);
+            },
+          }  
+        },
+        "u-id": "['dropdown']",
+      }));
+    });
+    Alpine.directive('dropdown-click', (el, {}, {Alpine})=>{
+      console.log('dropdown registerd');
+      Alpine.bind(el, ()=>({
+        "u-on:click"(){
+          this.toggle();
+        },
+        "u-on:click.outside"(){
+          this.close();
+        }
+      }));
+    });
+    Alpine.directive('dropdown-hover', (el, {}, {Alpine})=>{
+      console.log('dropdown hover registered');
+      Alpine.bind(el, ()=>({
+        "u-on:mouseenter"(){
+          clearTimeout(this.timeout);
+          this.show();
+        },
+        "u-on:mouseleave"() {
+          this.timeout = setTimeout(()=>{
+            this.close();
+          },200);
+        },
+      }));
+    });
+
+    
+    // Alpine.directive('dropdown-item', (el, {}, {evaluate})=>{
+    //   Alpine.bind(el, () => ({
+        
+    //   }));
+    // })
+
+    Alpine.directive('dropdown-panel', (el, {}, {evaluate})=>{
+      Alpine.bind(el, () => ({
+        "u-show": "open",
+        "@click.outside"(){
+          this.close();
+        } ,
+        "@hover"() {
+          clearTimeout(this.timeout);
+        },
+        "@hover.outside"(){
+          this.timeout = setTimeout(()=>{close();}, 200);
+        },
+      }));
+    });
   }
 
   function condition(val, sections) {
@@ -10287,10 +10352,11 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     Accordion(Alpine);
     Icon(Alpine);
 
-    Tab(Alpine);
     AutoComplete(Alpine);
     
     Modal(Alpine);
+    Tabs(Alpine);
+    Dropdown(Alpine);
   }
 
   document.addEventListener("DOMContentLoaded", () => {

@@ -1,10 +1,10 @@
 import {
   View,
-  Tab,
-  TabPanel,
-  TabList,
-  TabContent,
-  TabItem,
+  Tabs,
+  TabsPanel,
+  TabsList,
+  TabsContent,
+  TabsItem,
 } from "../../components/index.js";
 import { Base } from "../../utils.js";
 
@@ -47,11 +47,11 @@ export const Preview = Base({
     }
 
     
-    return Tab([
-      TabList([TabItem("Preview"), TabItem("HTML"), TabItem('JS')]),
-      TabContent([
-        TabPanel([View($props, $slots)]),
-        TabPanel([
+    return Tabs([
+      TabsList([TabsItem("Preview"), TabsItem("HTML"), TabsItem('JS')]),
+      TabsContent([
+        TabsPanel([View($props, $slots)]),
+        TabsPanel([
           View({ tag: "pre", style: 'font-size: var(--size-xs); line-height: var(--size-sm); overflow: auto' }, [
             View({ tag: "code" }, [
                 getHTMLCode($slots)
@@ -62,7 +62,7 @@ export const Preview = Base({
             ]),
         ]),
     ]),
-    $props.code && TabPanel([
+    $props.code && TabsPanel([
         View({ tag: "pre", style: 'font-size: var(--size-xs); line-height: var(--size-sm); overflow: auto' }, [
             View({ tag: "code" }, [
                 $props.code
