@@ -50,8 +50,8 @@
   --color-dark-700: #9599ad;
   --color-dark-800: #a6b0cf;
   --color-dark-900: #c3cbe4;
-  --color-light-100: #ffff;
-  --color-light-200: #f8f8f8;
+  --color-light-100: #f8f8f8;
+  --color-light-200: #ffffff;
   --color-light-300: #e9ebec;
   --color-light-400: #ced4da;
   --color-light-700: #9599ad;
@@ -93,6 +93,12 @@
   --color-base-700: var(--color-dark-700);
   --color-base-800: var(--color-dark-800);
   --color-base-900: var(--color-dark-900);
+  --color-primary-200: #193354;
+  --color-primary-300: #234772;
+  --color-primary-400: #3c6cab;
+  --color-primary-500: #2677e1;
+  --color-primary-600: #1d5aaa;
+  --color-primary-700: #16519f;
   background-color: var(--color-base-100);
   color: var(--color-base-900);
 }
@@ -105,7 +111,7 @@
   --color-base-700: var(--color-light-700);
   --color-base-800: var(--color-light-800);
   --color-base-900: var(--color-light-900);
-  background-color: var(--color-base-200);
+  background-color: var(--color-base-100);
   color: var(--color-base-900);
 }
 
@@ -119,7 +125,7 @@
 body {
   font-size: calc(var(--size-md) * 0.8);
   line-height: var(--size-md);
-  background-color: var(--color-base-200);
+  background-color: var(--color-base-100);
   color: var(--color-base-900);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
@@ -161,10 +167,6 @@ h6 {
   display: flex;
   flex-direction: column;
   border: 1px solid var(--accordion-border-color);
-}
-
-.dark [u-accordions] {
-  --accordion-border-color: var(--color-base-400);
 }
 
 [u-accordion] {
@@ -517,14 +519,9 @@ h6 {
   --card-border-color: var(--color-base-300);
   border: 1px solid var(--card-border-color);
   border-radius: var(--size-xxs);
-  background-color: var(--color-base-100);
+  background-color: var(--color-base-200);
   overflow: hidden;
   width: 100%;
-}
-
-.dark [u-card] {
-  background-color: var(--color-base-200);
-  border-color: var(--card-border-color);
 }
 
 [u-card-body] {
@@ -648,10 +645,6 @@ h6 {
   border: 1px solid var(--color-base-700);
 }
 
-.dark [u-checkbox-text]::before, .dark [u-checkbox-group-item-text]::before {
-  background-color: var(--color-base-300);
-}
-
 [u-checkbox-input]:focus ~ [u-checkbox-text]::before, [u-checkbox-input]:focus ~ [u-checkbox-group-item-text]::before, [u-checkbox-group-item-input]:focus ~ [u-checkbox-text]::before, [u-checkbox-group-item-input]:focus ~ [u-checkbox-group-item-text]::before {
   box-shadow: 0 0 0 3px var(--color-primary-200);
 }
@@ -735,10 +728,6 @@ h6 {
   border: 1px solid var(--color-base-700);
 }
 
-.dark [u-radio-text]::before, .dark [u-radio-group-item-text]::before {
-  background-color: var(--color-base-300);
-}
-
 [u-radio-input]:focus ~ [u-radio-text]::before, [u-radio-input]:focus ~ [u-radio-group-item-text]::before, [u-radio-group-item-input]:focus ~ [u-radio-text]::before, [u-radio-group-item-input]:focus ~ [u-radio-group-item-text]::before {
   box-shadow: 0 0 0 3px var(--color-primary-200);
 }
@@ -790,7 +779,7 @@ h6 {
 
 [u-input] {
   transition: all 0.3s ease;
-  background-color: var(--color-base-100);
+  background-color: var(--color-base-200);
   padding: var(--size-xxs) var(--size-sm);
   border: 1px solid var(--color-base-300);
   border-radius: calc(var(--size-xxs) / 2);
@@ -804,11 +793,6 @@ h6 {
   --input-size: var(--size-lg);
 }
 
-.dark [u-input] {
-  background-color: var(--color-base-300);
-  border-color: var(--color-base-400);
-}
-
 [u-input]:focus {
   background-color: var(--color-base-200);
   outline: none;
@@ -817,7 +801,7 @@ h6 {
 
 [u-select] {
   transition: all 0.3s ease;
-  background-color: var(--color-base-100);
+  background-color: var(--color-base-200);
   padding: var(--size-xxs) var(--size-sm);
   border: 1px solid var(--color-base-300);
   border-radius: calc(var(--size-xxs) / 2);
@@ -834,11 +818,6 @@ h6 {
   font-size: calc(var(--size-lg) * 0.6);
   line-height: var(--size-lg);
   padding: var(--size-xxs);
-}
-
-.dark [u-select] {
-  background-color: var(--color-base-300);
-  border-color: var(--color-base-400);
 }
 
 [u-select]:focus {
@@ -858,11 +837,6 @@ h6 {
   font-size: calc(var(--size-md) * 0.6);
   line-height: var(--size-md);
   width: 100%;
-}
-
-.dark [u-textarea] {
-  background-color: var(--color-base-300);
-  border-color: var(--color-base-400);
 }
 
 [u-textarea]:focus {
@@ -1583,13 +1557,9 @@ h6 {
 
 [u-progress] {
   height: var(--size-xs);
-  background-color: var(--color-base-300);
+  background-color: var(--color-base-200);
   border-radius: var(--size-xxs);
   overflow: hidden;
-}
-
-.dark [u-progress] {
-  background-color: var(--color-base-200);
 }
 
 [u-progress-bar] {
@@ -1716,10 +1686,6 @@ h6 {
 }
 
 [u-table-head] {
-  background-color: var(--color-base-200);
-}
-
-.dark [u-table-head] {
   background-color: var(--color-base-300);
 }
 
@@ -3103,15 +3069,11 @@ h6 {
 }
 
 [u-tabs] {
-  --tabs-panel-bg-color: var(--color-base-200);
+  --tabs-panel-bg-color: var(--color-base-100);
   --tabs-border-color: var(--color-base-400);
   box-sizing: border-box;
   display: block;
   border: 1px solid var(--tabs-border-color);
-}
-
-.dark [u-tabs] {
-  --tabs-panel-bg-color: var(--color-base-100);
 }
 
 [u-tabs-item] {
@@ -3218,10 +3180,6 @@ h6 {
 
 [u-dropdown-item]:hover {
   background-color: var(--color-base-200);
-}
-
-.dark [u-dropdown-item]:hover {
-  background-color: var(--color-base-300);
 }
 
 [u-dropdown-panel], [u-arrow-down], [u-arrow-up] {

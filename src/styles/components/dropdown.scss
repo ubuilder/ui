@@ -62,10 +62,6 @@
     background-color: var(--color-base-200);
 }
 
-.dark [u-dropdown-item]:hover {
-    background-color: var(--color-base-300);
-}
-
 [u-dropdown-panel], [u-arrow-down], [u-arrow-up]{
     transition-property: all;
     transition-duration: 400ms;

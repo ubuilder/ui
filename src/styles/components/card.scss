@@ -4,14 +4,9 @@
 
   border: 1px solid var(--card-border-color);
   border-radius: var(--size-xxs);
-  background-color: var(--color-base-100);
+  background-color: var(--color-base-200);
   overflow: hidden;
   width: 100%;
-}
-
-.dark [u-card] {
-  background-color: var(--color-base-200);
-  border-color: var(--card-border-color);
 }
 
 [u-card-body] {
