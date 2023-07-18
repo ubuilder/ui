@@ -1,12 +1,9 @@
 [u-tabs] {
-    --tabs-panel-bg-color: var(--color-base-200);
+    --tabs-panel-bg-color: var(--color-base-100);
     --tabs-border-color: var(--color-base-400);
     box-sizing: border-box;
     display: block ;
     border: 1px solid var(--tabs-border-color);
-}
-.dark [u-tabs] {
-    --tabs-panel-bg-color: var(--color-base-100);
 }
 
 [u-tabs-item] {

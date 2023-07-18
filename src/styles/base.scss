@@ -59,8 +59,8 @@
   --color-dark-800: #a6b0cf;
   --color-dark-900: #c3cbe4;
 
-  --color-light-100: #ffff;
-  --color-light-200: #f8f8f8;
+  --color-light-100: #f8f8f8;
+  --color-light-200: #ffffff;
   --color-light-300: #e9ebec;
   --color-light-400: #ced4da;
 
@@ -110,6 +110,15 @@
   --color-base-800: var(--color-dark-800);
   --color-base-900: var(--color-dark-900);
 
+  --color-primary-200: #193354;
+  --color-primary-300: #234772;
+  --color-primary-400: #3c6cab;
+  --color-primary-500: #2677e1;
+  --color-primary-600: #1d5aaa;
+  --color-primary-700: #16519f;
+
+
+
   background-color: var(--color-base-100);
   color: var(--color-base-900);
 }
@@ -124,7 +133,7 @@
   --color-base-800: var(--color-light-800);
   --color-base-900: var(--color-light-900);
 
-  background-color: var(--color-base-200);
+  background-color: var(--color-base-100);
   color: var(--color-base-900);
 }
 
@@ -140,7 +149,7 @@ body {
   font-size: calc(var(--size-md) * 0.8);
   line-height: var(--size-md);
 
-  background-color: var(--color-base-200);
+  background-color: var(--color-base-100);
   color: var(--color-base-900);
 
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,

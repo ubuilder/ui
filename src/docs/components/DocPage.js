@@ -16,11 +16,9 @@ export function DocPage(
 
   const customCss = `
   .header {
-    background-color: var(--color-base-100);
-  }
-  .dark .header {
     background-color: var(--color-base-200);
   }
+
   .border-bottom {
     border-bottom: 1px solid var(--color-base-300);
   }`;
