@@ -32,7 +32,7 @@ export const Autocomplete = Base({
 });
 
 export const Datepicker = Base({
-  render($props, $slots) {
+  render($props, $slots) {Form
     // Datepicker
   },
 });

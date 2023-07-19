@@ -1,6 +1,9 @@
 export function Form(Alpine) {
   const handlers = {
     input: (el) => ({ name: el.name, value: () => el.value }),
+    "datepicker": (el) =>{
+      return ({ name: el.name, value: () => el.value })
+    },
     checkbox: (el) => {
       const checkbox = el.querySelector("[u-checkbox-input]");
 
@@ -90,6 +93,7 @@ export function Form(Alpine) {
       "radio-group",
       "select",
       "textarea",
+      "datepicker"
     ];
 
     for (let input of inputs) {

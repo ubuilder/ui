@@ -3183,6 +3183,9 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   function Form(Alpine) {
     const handlers = {
       input: (el) => ({ name: el.name, value: () => el.value }),
+      "datepicker": (el) =>{
+        return ({ name: el.name, value: () => el.value })
+      },
       checkbox: (el) => {
         const checkbox = el.querySelector("[u-checkbox-input]");
 
@@ -3272,6 +3275,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         "radio-group",
         "select",
         "textarea",
+        "datepicker"
       ];
 
       for (let input of inputs) {
@@ -9919,16 +9923,16 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     }
 
   function Input(Alpine) {
-      console.log("function input");
-      Alpine.directive("input", (el) => {
-        Alpine.bind(el, {
-          "u-on:input"(e) {
-            this.$data[el.getAttribute("name")] = e.target.value;
-          },
-        });
-        // input
+    console.log("function input");
+    Alpine.directive("input", (el) => {
+      Alpine.bind(el, {
+        "u-on:input"(e) {
+          this.$data[el.getAttribute("name")] = e.target.value;
+        },
       });
-    }
+      // input
+    });
+  }
 
   function Select(Alpine) {
       Alpine.directive('select', el => {
@@ -10184,6 +10188,17 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     });
   }
 
+  function DatePicker(Alpine) {
+      console.log("function date picker");
+      Alpine.directive("datepicker", (el) => {
+        Alpine.bind(el, {
+          "u-on:change"(e) {
+            this.$data[el.getAttribute("name")] = e.target.value;
+          },
+        });
+      });
+    }
+
   function condition(val, sections) {
     if (sections.length === 1) {
       return val;
@@ -10349,9 +10364,8 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     Form(Alpine);
     Accordion(Alpine);
     Icon(Alpine);
-
     AutoComplete(Alpine);
-    
+    DatePicker(Alpine);  
     Modal(Alpine);
     Tabs(Alpine);
     Dropdown(Alpine);

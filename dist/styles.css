@@ -788,7 +788,7 @@ h6 {
   flex-direction: row;
 }
 
-[u-input] {
+[u-input], .dark [u-datepicker], [u-datepicker] {
   transition: all 0.3s ease;
   background-color: var(--color-base-100);
   padding: var(--size-xxs) var(--size-sm);
@@ -804,12 +804,12 @@ h6 {
   --input-size: var(--size-lg);
 }
 
-.dark [u-input] {
+.dark [u-input], .dark [u-datepicker] {
   background-color: var(--color-base-300);
   border-color: var(--color-base-400);
 }
 
-[u-input]:focus {
+[u-input]:focus, [u-datepicker]:focus {
   background-color: var(--color-base-200);
   outline: none;
   box-shadow: 0 0 0px 4px var(--color-primary-200);
@@ -869,6 +869,20 @@ h6 {
   background-color: var(--color-base-200);
   outline: none;
   box-shadow: 0 0 0px 4px var(--color-primary-200);
+}
+
+[u-datepicker]::-webkit-calendar-picker-indicator {
+  background-color: transparent;
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.dark [u-datepicker]::-webkit-calendar-picker-indicator {
+  background-color: var(--color-base-900);
+  padding: var(--size-xxs);
+  border-radius: var(--size-xxs);
+  cursor: pointer;
 }
 
 [u-container] {

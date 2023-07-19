@@ -14,6 +14,7 @@ import { Select } from "./select";
 import { Textarea } from "./textarea";
 import { Tabs } from "./tabs";
 import { Dropdown } from "./dropdown";
+import { DatePicker } from "./date-picker";
 
 export * from "./bind";
 
@@ -33,9 +34,8 @@ function ulibsPlugin(Alpine) {
   Form(Alpine);
   Accordion(Alpine);
   Icon(Alpine);
-
   AutoComplete(Alpine)
-  
+  DatePicker(Alpine)  
   Modal(Alpine);
   Tabs(Alpine);
   Dropdown(Alpine);

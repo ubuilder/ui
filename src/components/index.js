@@ -21,3 +21,4 @@ export * from "./Textarea.js";
 export * from "./Tabs.js";
 export * from "./Dropdown.js";
 export * from "./AutoComplete.js";
+export * from "./DatePicker.js"

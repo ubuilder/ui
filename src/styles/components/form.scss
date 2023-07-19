@@ -267,7 +267,6 @@
 
 
 [u-select] {
-
   transition: all 0.3s ease;
   background-color: var(--color-base-100);
   padding: var(--size-xxs) var(--size-sm);
@@ -328,4 +327,28 @@
   background-color: var(--color-base-200);
   outline: none;
   box-shadow: 0 0 0px 4px var(--color-primary-200);
+}
+
+// date picker 
+
+[u-datepicker] {
+  @extend [u-input];
+}
+
+[u-datepicker]::-webkit-calendar-picker-indicator {
+  background-color: transparent;
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.dark [u-datepicker] {
+  @extend [u-input];
+}
+
+.dark [u-datepicker]::-webkit-calendar-picker-indicator {
+  background-color: var(--color-base-900);
+  padding: var(--size-xxs);
+  border-radius: var(--size-xxs);
+  cursor: pointer;
 }
