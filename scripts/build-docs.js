@@ -25,12 +25,8 @@ function layout(props, slots) {
   return View(
     {
       htmlHead: [
-        `<link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">`,
-                
-        View({ tag: "link", rel: 'stylesheet', href: '/ui/styles.css' }),
-        View({ tag: "script", src: '/ui/ulibs.js', defer: true, async: true }),
+        View({ tag: "link", rel: "stylesheet", href: "/ui/styles.css" }),
+        View({ tag: "script", src: "/ui/ulibs.js", defer: true, async: true }),
       ],
     },
     slots
@@ -42,7 +38,7 @@ for (let file of files) {
     import("../src/docs/pages/" + file).then((module) => {
       const page = layout({}, module.default({ prefix: "/ui/" })).toHtml();
 
-      if(!page) return;
+      if (!page) return;
       if (file == "index.js") {
         writeFileSync("./build/ui/" + "index.html", page);
       } else {
