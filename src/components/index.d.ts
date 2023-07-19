@@ -175,6 +175,9 @@ export type View<Props, Components = {}> = Component<
   }
 > & { extend: (a: any, b: any) => string };
 
+
+declare const tag: (tagName: string | { tag: string, props: Record<string, any>, slots: Slot[] } | Tag, props: Record<string,any>, ...slots: Slot[]) => Tag
+
 /**
  * Accordions Component
  */
