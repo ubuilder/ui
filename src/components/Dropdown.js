@@ -19,21 +19,17 @@ export const Dropdown = Base({
       ...restProps,
       component,
       arrow,
-      trigger,
-      "u-data":
-        "{ open: false, trigger: 'hover', timeout: undefined, toggle(){if(this.open){ return this.close()} else{ return this.show()}},show(){this.open = true; console.log('open', this.open)},close(){this.open = false; console.log('close', this.open)},}",
-      "u-ref": "dropdown",
-      "u-on:click": "toggle()",
-      "u-on:hover": "if(trigger == 'hover'){clearTimeout(timeout); open()}",
-      "u-on:hover.outside": "timeout = setTimout(()=>{close()},300)",
       cssProps: {
         size,
       },
     };
-
-    if (trigger == "hover") {
-      props["u-on:hover"] = "open()";
+    props['u-dropdown-click'] = 'true'
+    if(trigger == 'hover'){
+      props['u-dropdown-hover'] = 'true'
     }
+    
+
+  
 
     $slots = [DropdownLabel({ text: label, arrow }), $slots];
 
@@ -82,11 +78,6 @@ export const DropdownPanel = Base({
     const props = {
       ...restProps,
       component,
-      "u-show": "open",
-      "@click.outside": "close()",
-      "@hover": "clearTimeout(timeout)",
-      "@hover.outside":
-        "if(trigger == 'hover') {timeout = setTimeout(()=>{close()}, 300)}",
       cssProps: {
         size: size,
       },

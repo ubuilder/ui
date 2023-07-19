@@ -16,11 +16,9 @@ export function DocPage(
 
   const customCss = `
   .header {
-    background-color: var(--color-base-100);
-  }
-  .dark .header {
     background-color: var(--color-base-200);
   }
+
   .border-bottom {
     border-bottom: 1px solid var(--color-base-300);
   }`;
@@ -44,7 +42,7 @@ export function DocPage(
         }),
         title,
         style,
-        View({ tag: "script", src: "//unpkg.com/alpinejs", defer: true }),
+        // View({ tag: "script", src: "//unpkg.com/alpinejs", defer: true }),
         View({ tag: "style" }, customCss),
       ],
     },

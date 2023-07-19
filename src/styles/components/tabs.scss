@@ -1,0 +1,57 @@
+[u-tabs] {
+    --tabs-panel-bg-color: var(--color-base-100);
+    --tabs-border-color: var(--color-base-400);
+    box-sizing: border-box;
+    display: block ;
+    border: 1px solid var(--tabs-border-color);
+}
+
+[u-tabs-item] {
+    padding: var(--size-xs) var(--size-sm);
+    border-radius: var(--size-xxs) var(--size-xxs) 0 0;
+
+    border: 1px solid transparent;
+    border-bottom: 1px solid var(--tabs-border-color);
+    background-color: inherit;
+    color: var(--color-base-900);
+    margin-bottom: -1px;
+    cursor: pointer;
+}
+
+[u-tabs-item]:hover {
+    border: 1px solid var(--tabs-border-color);
+    border-bottom-color: transparent;
+}
+
+[u-tabs-item-active] {
+    background-color: var(--tabs-panel-bg-color);
+    border: 1px solid var(--tabs-border-color);
+    border-bottom-color: transparent;
+}
+
+[u-tabs-panel] {
+    width: 100%;
+    display: none;
+    padding: var(--size-xs);
+    background-color: var(--tabs-panel-bg-color);
+
+}
+
+[u-tabs-panel-active] {
+    display: block;
+}
+
+[u-tabs-list] {
+    display:  flex;
+    flex-direction: row;
+    width: 100%;
+    padding: var(--size-xxs);
+    border-bottom: 1px solid var(--tabs-border-color) ;
+    padding-bottom: 0px;
+    background-color: var(--color-base-300);
+}
+
+[u-tabs-content] {
+    width: 100%;
+}
+ 

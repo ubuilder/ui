@@ -12,9 +12,11 @@ import { Radio } from "./radio";
 import { Input } from "./input";
 import { Select } from "./select";
 import { Textarea } from "./textarea";
-import { Tab } from "./tab";
+import { Tabs } from "./tabs";
+import { Dropdown } from "./dropdown";
 
 export * from "./bind";
+
 
 function ulibsPlugin(Alpine) {
   document.body.setAttribute("u-data", "");
@@ -32,16 +34,17 @@ function ulibsPlugin(Alpine) {
   Accordion(Alpine);
   Icon(Alpine);
 
-  Tab(Alpine);
   AutoComplete(Alpine)
   
   Modal(Alpine);
+  Tabs(Alpine);
+  Dropdown(Alpine);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   Alpine.prefix("u-");
   Alpine.plugin(ulibsPlugin);
 
-  Alpine.start();
   window.Alpine = Alpine;
+  Alpine.start();
 });

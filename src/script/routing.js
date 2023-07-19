@@ -12,7 +12,14 @@ export function ClientSideRouting(Alpine) {
       try {
         const html = await fetch(pathname).then((res) => res.text());
   
-        morphdom(document.getElementsByTagName("html")[0], html);
+        morphdom(document.getElementsByTagName("html")[0], html, {
+          onBeforeElUpdated(fromEl, toEl) {
+            // Do not update icon if name is same
+            if(fromEl.hasAttribute('u-icon') && fromEl.getAttribute('name') === toEl.getAttribute('name')) {
+              return false
+            }
+          }
+        });
   
       } catch (err) {
         console.log(err)
