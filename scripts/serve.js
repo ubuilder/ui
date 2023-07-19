@@ -1,5 +1,5 @@
 import { Router } from "@ulibs/router";
-import {  View } from "../src/components/index.js";
+import { View } from "../src/components/index.js";
 import fs from "fs";
 
 const router = Router({ dev: true, reloadTimeout: 1500 });
@@ -11,6 +11,10 @@ function layout(props, slots) {
   return View(
     {
       htmlHead: [
+        `<link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">`,
+
         View({ tag: "style" }, style),
         View({ tag: "script", defer: true, async: true }, script),
       ],
@@ -21,21 +25,18 @@ function layout(props, slots) {
 
 const prefix = "/components/";
 
-router.addPage('/', {
+router.addPage("/", {
   async load() {
-      const result = await import("../src/docs/pages/index.js")
-      return {
-        component: result.default,
-        prefix,
-      };
-    
+    const result = await import("../src/docs/pages/index.js");
+    return {
+      component: result.default,
+      prefix,
+    };
   },
-  page: ({component, ...props}) => {
-    if(!component) return;
-    return component(props)
-    
-  }
-
+  page: ({ component, ...props }) => {
+    if (!component) return;
+    return component(props);
+  },
 });
 
 function Page404() {
@@ -53,7 +54,8 @@ router.addPage(prefix + ":component", {
       );
 
       return {
-        component: (...args) => View({'u-routing': true}, result.default(...args)),
+        component: (...args) =>
+          View({ "u-routing": true }, result.default(...args)),
       };
     } catch (err) {
       console.log("err: ", err);
@@ -68,7 +70,7 @@ router.addPage(prefix + ":component", {
   },
 });
 
-router.addLayout('/', {
+router.addLayout("/", {
   load() {
     return { prefix };
   },

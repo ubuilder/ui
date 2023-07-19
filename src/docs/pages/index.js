@@ -1,40 +1,53 @@
-import { tag } from "../../core/index.js";
-import { View } from "../../components/index.js";
-
-export default ({prefix}) =>
-  View({}, [
-    tag("a", { href: "/" }, "UBuilder"),
-    tag("h1", {}, "Components"),
-    tag("p", {}, "Documentation for Components package"),
-    tag("ul", {}, [
-      tag(
-        "li",
-        {},
-        tag("a", { href: `${prefix}accordion-example` }, "Accordion Example")
-      ),
-      tag("li", {}, tag("a", { href: `${prefix}button` }, "Button")),
-      tag("li", {}, tag("a", { href: `${prefix}card` }, "Card")),
-      tag(
-        "li",
-        {},
-        tag("a", { href: `${prefix}card-example` }, "Card Example")
-      ),
-      tag("li", {}, tag("a", { href: `${prefix}table` }, "Table & Modal")),
-      tag("li", {}, tag("a", { href: `${prefix}view` }, "View")),
-      tag("li", {}, tag("a", { href: `${prefix}divider` }, "Divider")),
-      tag("li", {}, tag("a", { href: `${prefix}spinner` }, "Spinner")),
-      tag("li", {}, tag("a", { href: `${prefix}breadcrumb` }, "Breadcrumb")),
-      tag("li", {}, tag("a", { href: `${prefix}form` }, "Form")),
-      tag("li", {}, tag("a", { href: `${prefix}checkbox` }, "Checkbox & Radio")),
-      tag("li", {}, tag("a", { href: `${prefix}grid` }, "Grid")),
+import { Col, Container, Row } from "../../components/GridSystem.js";
+import { View } from "../../components/View.js";
+import { Card, CardBody } from "../../components/index.js";
 
 
-      tag("li", {}, tag("a", { href: `${prefix}avatar` }, "Avatar")),
-      tag("li", {}, tag("a", { href: `${prefix}progress` }, "Progress")),
-      tag("li", {}, tag("a", { href: `${prefix}tabs` }, "Tabs")),
-      tag("li", {}, tag("a", { href: `${prefix}dropdown` }, "Dropdown")),
-      tag("li", {}, tag("a", { href: `${prefix}auto-complete` }, "Auto Complete")),
-      tag("li", {}, tag("a", { href: `${prefix}login` }, "Login")),
-      tag("li", {}, tag("a", { href: `${prefix}signup` }, "Signup")),
+
+
+
+export default ({ prefix }) => {
+  function Item({ slug, text }) {
+    return Col({ col: 12, colSm: 6, colLg: 4 }, [
+      
+      Card({ tag: 'a', d: 'block', href: `${prefix}${slug}`, style: 'text-decoration: none; color: var(--color-base-900)' }, [
+        CardBody(text)
+      ]),
+    ]);
+  }
+
+  return Container({ size: "xl", mx: "auto", my: "xl" }, [
+    // tag("a", { href: "/" }, "UBuilder"),
+    View({ tag: "h1" }, "Components"),
+    View({ tag: "h3", mb: "lg", mt: 'xxs', style: 'color: var(--color-base-800); font-weight: 400' }, "UI Components for NodeJS"),
+
+    View({mb: 'md', mt: 'sm', style: 'line-height: var(--size-lg)'}, 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi at numquam est ad unde. Quibusdam blanditiis tempora unde! Eum quam ex totam autem obcaecati fuga quidem dignissimos laudantium et? Nihil, consequatur voluptates reiciendis pariatur tenetur architecto cumque doloremque quas incidunt facilis exercitationem esse deleniti totam dolores dicta commodi suscipit eius.'),
+
+    Row([
+      Item({ slug: 'installation', text: 'Installation'}),
+
+      Col({w: 100}, View({tag: 'h3', pt: 'sm', style: 'font-weight: normal'}, 'Components')),
+      Item({ slug: `auto-complete`, text: "Autocomplete" }),
+      Item({ slug: `avatar`, text: "Avatar" }),      
+      Item({ slug: `breadcrumb`, text: "Breadcrumb" }),
+      Item({ slug: `button`, text: "Button" }),
+      Item({ slug: `card`, text: "Card" }),
+      Item({ slug: `checkbox`, text: "Checkbox & Radio" }),
+      Item({ slug: `divider`, text: "Divider" }),
+      Item({ slug: `dropdown`, text: "Dropdown" }),
+      Item({ slug: `grid`, text: "Grid" }),
+      Item({ slug: `progress`, text: "Progress" }),
+      Item({ slug: `spinner`, text: "Spinner" }),
+      Item({ slug: `tabs`, text: "Tabs" }),
+      Item({ slug: `view`, text: "View" }),
+
+      Col({w: 100}, View({tag: 'h3', pt: 'sm', style: 'font-weight: normal'}, 'Examples')),
+      Item({ slug: `accordion-example`, text: "Accordion Example" }),
+      Item({ slug: `card-example`, text: "Card Example" }),
+      Item({ slug: `form`, text: "Form" }),
+      Item({ slug: `login`, text: "Login" }),
+      Item({ slug: `signup`, text: "Signup" }),
+      Item({ slug: `table`, text: "Table & Modal" }),
     ]),
   ]);
+};
