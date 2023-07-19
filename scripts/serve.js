@@ -2,7 +2,7 @@ import { Router } from "@ulibs/router";
 import {  View } from "../src/components/index.js";
 import fs from "fs";
 
-const router = Router({ dev: true, reloadTimeout: 1000 });
+const router = Router({ dev: true, reloadTimeout: 1500 });
 
 function layout(props, slots) {
   const script = fs.readFileSync("./dist/ulibs.js", "utf-8");

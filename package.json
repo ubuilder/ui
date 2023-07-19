@@ -16,7 +16,7 @@
     "dev:nodemon": "nodemon -e .sass,.scss -w ./src -w ./src/docs --exec npm run build",
     "dev:css": "nodemon -e .scss -w ./src/styles --exec npm run build:css",
     "dev:js": "nodemon -e .js -w ./src/script --exec npm run build:js",
-    "dev:docs": "nodemon -e .js -w ./dist/* -w ./src/docs --exec node scripts/serve.js",
+    "dev:docs": "nodemon -e .js,.css -w ./dist -w ./src/docs --exec node scripts/serve.js",
     "dev": "conc npm:dev:css npm:dev:js npm:dev:docs",
     "start": "http-server ./build -p 3002"
   },
