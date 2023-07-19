@@ -49,7 +49,7 @@ export const RadioGroup = Base({
       label,
       name,
       items = [],
-      value = [],
+      value,
       text,
       key,
       inline = false,
