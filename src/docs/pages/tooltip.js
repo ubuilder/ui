@@ -8,24 +8,14 @@ import { View } from "../../components/View.js";
 export default function () {
   return DocPage({ name: "Tooltip" }, [
     Section({ title: "Tooltip", description: "simple Tooltip" }, [
-      Preview(
-        {
-          code: `
-Button(["Login", Tooltip("Hi, Welcome!")])
-  `,
-        },
-        [Button(["Login", Tooltip("Hi, Welcome!")])]
-      ),
+      Preview({
+        code: `Button(["Login", Tooltip("Hi, Welcome!")])`,
+      }),
     ]),
     Section({ title: "Arrow", description: "by default it has arrow" }, [
-      Preview(
-        {
-          code: `
-          [Button(["no arrow", Tooltip({ arrow: false }, "Hi, Welcome!")])]
-          `,
-        },
-        [Button(["no arrow", Tooltip({ arrow: false }, "Hi, Welcome!")])]
-      ),
+      Preview({
+        code: `Button(["no arrow", Tooltip({ arrow: false }, "Hi, Welcome!")])`,
+      }),
     ]),
     Section(
       {
@@ -34,49 +24,30 @@ Button(["Login", Tooltip("Hi, Welcome!")])
           "The default value is bottom, this also support rest of mixed placemnts like: top-start and so.",
       },
       [
-        Preview(
-          {
-            code: `
-            [
-              Button([
+        Preview({
+          code: `Button([
                 "bottom",
                 Tooltip({ placement: "bottom" }, "Hi, Welcome!"), //default is bottom
               ]),
               Button(["top", Tooltip({ placement: "top" }, "Hi, Welcome!")]),
               Button(["left", Tooltip({ placement: "left" }, "Hi, Welcome!")]),
               Button(["right", Tooltip({ placement: "right" }, "Hi, Welcome!")]),
-            ]`,
-          },
-          [
-            Button([
-              "bottom",
-              Tooltip({ placement: "bottom" }, "Hi, Welcome!"), //default is bottom
-            ]),
-            Button(["top", Tooltip({ placement: "top" }, "Hi, Welcome!")]),
-            Button(["left", Tooltip({ placement: "left" }, "Hi, Welcome!")]),
-            Button(["right", Tooltip({ placement: "right" }, "Hi, Welcome!")]),
-          ]
-        ),
+            `,
+        }),
       ]
     ),
     Section(
       { title: "trigger", description: "by default the trigger is hover" },
       [
-        Preview(
-          {
-            code: `
+        Preview({
+          code: `
             [
               Button(["hover", Tooltip({}, "Hi, Welcome!")]),
               Button(["click", Tooltip({ trigger: "click" }, "Hi, Welcome!")]),
             ]
         
   `,
-          },
-          [
-            Button(["hover", Tooltip({}, "Hi, Welcome!")]),
-            Button(["click", Tooltip({ trigger: "click" }, "Hi, Welcome!")]),
-          ]
-        ),
+        }),
       ]
     ),
     Section(
@@ -85,10 +56,8 @@ Button(["Login", Tooltip("Hi, Welcome!")])
         description: "it also can take components",
       },
       [
-        Preview(
-          {
-            code: `
-[
+        Preview({
+          code: `
   View({style: 'width: max-content;border: 2px solid gray', }, [
     "action",
     Tooltip({}, [
@@ -98,23 +67,10 @@ Button(["Login", Tooltip("Hi, Welcome!")])
       ]),
     ]),
   ]),
-]
   `,
-          },
-          [
-            View({ px: "md", py: "xxs", border: true, d: "inline-block" }, [
-              "action",
-              Tooltip({}, [
-                View([
-                  Button({ color: "error" }, "cancel"),
-                  Button({ color: "primary" }, "ok"),
-                ]),
-              ]),
-            ]),
-          ]
-        ),
+        }),
       ]
-    ),
+  ),
     Section(
       {
         title: "Different Target component",
@@ -122,18 +78,12 @@ Button(["Login", Tooltip("Hi, Welcome!")])
           "You can change target element by changing 'target' property, supports css like selectors",
       },
       [
-        Preview(
-          {
-            code: `[
+        Preview({
+          code: `
   Button({ id: "my-button" }, "action"),
   Tooltip({ target: "#my-button" }, "This tooltip is not child of the button"),
-]`,
-          },
-          [
-            Button({ id: "my-button" }, "action"),
-            Tooltip({ target: "#my-button" }, "This tooltip is not child of the button"),
-          ]
-        ),
+`,
+        }),
       ]
     ),
   ]);
