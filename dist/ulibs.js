@@ -3159,11 +3159,13 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   }
 
   function Icon(Alpine) {
-    Alpine.directive("icon", (el, {}, {effect}) => {
+    Alpine.directive("icon", (el) => {
       const iconName = el.getAttribute("name");
 
-        effect(() =>{
-
+      Alpine.bind(el, {
+        "u-data"() {
+          return {
+            init() {
               fetch(
                 `https://unpkg.com/@tabler/icons@2.19.0/icons/${iconName}.svg`
               )
@@ -3171,8 +3173,11 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
                 .then((svg) => {
                   el.innerHTML = svg;
                 });
-            });
+            },
+          };
+        },
       });
+    });
   }
 
   function Form(Alpine) {

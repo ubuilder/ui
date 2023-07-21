@@ -64,8 +64,8 @@
   --color-light-300: #e9ebec;
   --color-light-400: #ced4da;
 
-  --color-light-700: #9599ad;
-  --color-light-800: #545a6d;
+  --color-light-700: #82848d;
+  --color-light-800: #6c7286;
   --color-light-900: #495057;
 
   --color-base-100: var(--color-light-100);
@@ -84,11 +84,11 @@
   --size-md: calc(1 * var(--size-base));
   --size-lg: calc(1.5 * var(--size-base));
   --size-xl: calc(2 * var(--size-base));
-  --size-2xl: calc(3 * var(--size-base));
-  --size-3xl: calc(4 * var(--size-base));
-  --size-4xl: calc(6 * var(--size-base));
-  --size-5xl: calc(8 * var(--size-base));
-  --size-6xl: calc(12 * var(--size-base));
+  --size-2xl: calc(2.5 * var(--size-base));
+  --size-3xl: calc(3 * var(--size-base));
+  --size-4xl: calc(4 * var(--size-base));
+  --size-5xl: calc(6 * var(--size-base));
+  --size-6xl: calc(8 * var(--size-base));
 
   --size-container-xs: 540px;
   --size-container-sm: 728px;
@@ -145,6 +145,7 @@
   box-sizing: border-box;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 body {
   font-size: calc(var(--size-md) * 0.8);
   line-height: var(--size-md);
@@ -152,8 +153,7 @@ body {
   background-color: var(--color-base-100);
   color: var(--color-base-900);
 
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 @mixin font-size($size) {

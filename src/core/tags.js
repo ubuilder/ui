@@ -1,7 +1,12 @@
 import { renderHead, renderScripts, renderTemplate } from "./index.js";
-export function tag(tag, props = {}, ...slots) {
+export function tag(tagName, props = {}, ...slots) {
+
+  if(typeof tagName === 'object') {
+    return tag(tagName.tag, tagName.props, tagName.slots)
+  }
+  
   return {
-    tag,
+    tag: tagName,
     props,
     slots,
     toString() {

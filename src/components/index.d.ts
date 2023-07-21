@@ -11,8 +11,6 @@ type Tag = {
   toHead: () => string;
 };
 
-
-
 export type Colors =
   | "primary"
   | "secondary"
@@ -82,6 +80,47 @@ export type Displays =
   | "inline-block"
   | "none";
 
+export type ColSizes =
+  | 0
+  | 1
+  | 2
+  | 3
+  | 4
+  | 5
+  | 6
+  | 7
+  | 8
+  | 9
+  | 10
+  | 11
+  | 12
+  | true
+  | undefined;
+
+export type Col<Props = {}> = View<
+  Props & {
+    col: ColSizes;
+    colXs: ColSizes;
+    colSm: ColSizes;
+    colMd: ColSizes;
+    colLg: ColSizes;
+    colXl: ColSizes;
+    offset: ColSizes;
+    offsetXs: ColSizes;
+    offsetSm: ColSizes;
+    offsetMd: ColSizes;
+    offsetLg: ColSizes;
+    offsetXl: ColSizes;
+  }
+>;
+
+export type FormField<Props = {}> = Col<
+  Props & {
+    name: string;
+    label: string;
+  }
+>;
+
 export type View<Props, Components = {}> = Component<
   Props,
   Components,
@@ -134,57 +173,62 @@ export type View<Props, Components = {}> = Component<
     h: WidthHeights;
     [x: string]: any;
   }
-> & {extend: ((a: any, b: any) => string)}
+> & { extend: (a: any, b: any) => string };
+
+
+declare const tag: (tagName: string | { tag: string, props: Record<string, any>, slots: Slot[] } | Tag, props: Record<string,any>, ...slots: Slot[]) => Tag
 
 /**
  * Accordions Component
  */
-declare const Accordions: View<{persistent: boolean}>;
+declare const Accordions: View<{ persistent: boolean }>;
 
 /**
  * Accordion Component
  */
-declare const Accordion: View<{header: Slot, body: Slot}>
+declare const Accordion: View<{ header: Slot; body: Slot }>;
 
 /**
  * AccordionHeader component
  */
-declare const AccordionHeader: View<{title: string}>
+declare const AccordionHeader: View<{ title: string }>;
 
 /**
  * AccordionBody component
  */
-declare const AccordionBody: View<{}>
-
+declare const AccordionBody: View<{}>;
 
 /**
  * Avatar Component
  */
 declare const Avatar: View<{
-  size: Sizes,
-  color: Colors,
-  src: string,
-  alt: string
-}>
+  size: Sizes;
+  color: Colors;
+  src: string;
+  alt: string;
+}>;
 
 /**
  * Badge Component
  */
 declare const Badge: View<{
-  size: Sizes,
-  color: Colors,
-}>
+  size: Sizes;
+  color: Colors;
+}>;
 
 /**
  * Breadcrumb Component
  */
-declare const Breadcrumb: View<{}>
+declare const Breadcrumb: View<{}>;
 
 /**
  * BreadcrumbItem Component
  */
-declare const BreadcrumbItem: View<{active: boolean, disabled: boolean, href: string}>
-
+declare const BreadcrumbItem: View<{
+  active: boolean;
+  disabled: boolean;
+  href: string;
+}>;
 
 /**
  * ButtonGroup Component
@@ -194,7 +238,12 @@ declare const ButtonGroup: View<{ compact: boolean }>;
 /**
  * Button Component
  */
-declare const Button: View<{ color: Colors; size: Sizes, link: boolean, href: string }>;
+declare const Button: View<{
+  color: Colors;
+  size: Sizes;
+  link: boolean;
+  href: string;
+}>;
 
 /**
  * CardHeader Component
@@ -227,20 +276,96 @@ declare const CardActions: View<{}>;
 declare const Card: View<{ title: string }>;
 
 /**
+ * Col component
+ */
+declare const Col: Col;
+
+/**
+ * FormField component
+ */
+declare const FormField: FormField;
+
+/**
+ * Checkbox Component
+ */
+declare const Checkbox: FormField<{
+  text: string;
+  inline: boolean;
+  checked: boolean;
+}>;
+
+/**
+ * CheckboxGroup Component
+ */
+declare const CheckboxGroup: FormField<{
+  items: (string | object)[];
+  value: string[];
+  text: string | ((item: any) => string);
+  key: string | ((item: any) => string);
+  inline: boolean;
+}>;
+
+/**
+ * RadioGroup Component
+ */
+declare const RadioGroup: FormField<{
+  items: (string | object)[];
+  value: string;
+  text: string | ((item: any) => string);
+  key: string | ((item: any) => string);
+  inline: boolean;
+}>;
+
+/**
+ * Select Component
+ */
+declare const Select: FormField<{
+  items: (string | object)[];
+  placeholder: string;
+  multiple: boolean;
+  value: string | string[];
+  text: string | ((item: any) => string);
+  key: string | ((item: any) => string);
+}>;
+
+/**
+ * Form Component
+ */
+declare const Form: View<{
+  method: "GET" | "POST";
+  action: string;
+  gutter: Sizes;
+}>;
+
+/**
+ * Row Component
+ */
+declare const Row: View<{ gutter: Sizes }>;
+
+/**
+ * Container Component
+ */
+declare const Container: View<{ size: Sizes }>;
+
+/**
  * Divider Component
  */
 declare const Divider: View<{ color: Colors }>;
 
 /**
+ * Image Component
+ */
+declare const Image: View<{ src: string; alt: string }>;
+
+/**
  * Input Component
  */
-declare const Input: View<{
+declare const Input: FormField<{
   value: string;
   type: string;
   placeholder: string;
   readonly: boolean;
   disabled: boolean;
-  label: string;
 }>;
 
 /**
@@ -259,3 +384,119 @@ declare const Modal: View<{ open: boolean; persistent: boolean }>;
  * ModalBody Component
  */
 declare const ModalBody: View<{}>;
+
+/**
+ * Progress Component
+ */
+declare const Progress: View<{ color: Colors; value: number }>;
+
+/**
+ * Spinner Component
+ */
+declare const Spinner: View<{ color: Colors; size: Sizes }>;
+
+/**
+ * Table Component
+ */
+declare const Table: View<{}>;
+
+/**
+ * TableBody Component
+ */
+declare const TableBody: View<{}>;
+/**
+ * TableRow Component
+ */
+declare const TableRow: View<{}>;
+
+/**
+ * TableHead Component
+ */
+declare const TableHead: View<{}>;
+
+/**
+ * TableFoot Component
+ */
+declare const TableFoot: View<{}>;
+
+/**
+ * TableActions Component
+ * This is a wrapper element and acts like button grup
+ */
+declare const TableActions: View<{}>;
+
+/**
+ * TableCell Component
+ */
+declare const TableCell: View<{ head: boolean }>;
+
+/**
+ * Tabs component
+ */
+declare const Tabs: View<{}>
+// declare const Tabs: View<{size: Sizes}>
+
+/**
+ * TabsPanel component
+ */
+declare const TabsPanel: View<{}>
+// declare const TabsPanel: View<{size: Sizes}>
+
+/**
+ * TabsContent component
+ */
+declare const TabsContent: View<{}>
+// declare const TabsContent: View<{size: Sizes}>
+
+/**
+ * TabsItem component
+ */
+declare const TabsItem: View<{active: boolean}>
+// declare const TabsItem: View<{active: boolean,size: Sizes, label: string}>
+
+/**
+ * TabsList component
+ */
+declare const TabsList: View<{}>
+// declare const TabsList: View<{horizontal: boolean, size: Sizes}>
+
+/**
+ * Textarea Component
+ */
+declare const Textarea: FormField<{placeholder: string, value: string, rows: number}>
+
+
+/**
+ * View Component
+ */
+declare const View: View<{}>;
+
+/**
+ * FileUpload Component
+ */
+declare const FileUpload: View<{todo: true}>
+
+/**
+ * Editor Component
+ */
+declare const Editor: View<{todo: true}>
+
+/**
+ * Autocomplete Component
+ */
+declare const Autocomplete: View<{todo: true}>
+
+/**
+ * Datepicker Component
+ */
+declare const Datepicker: View<{todo: true}>
+
+/**
+ * Switch Component
+ */
+declare const Switch: View<{todo: true}>
+
+/**
+ * Slider Component
+ */
+declare const Slider: View<{todo: true}>

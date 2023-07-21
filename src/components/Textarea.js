@@ -22,6 +22,7 @@ export const Textarea = Base({
       name,
       component,
       rows,
+      value
     };
 
     return FormField(props, View(textareaProps, value));
