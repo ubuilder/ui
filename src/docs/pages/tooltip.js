@@ -5,120 +5,6 @@ import { Col, Row } from "../../components/GridSystem.js";
 import { Tooltip } from "../../components/Tooltip.js";
 import { View } from "../../components/View.js";
 
-// export default function () {
-//   return DocPage({ name: "Tooltip" }, [
-//     Section({ title: "Tooltip", description: "simple Tooltip" }, [
-//         Row({gap: 'md', m: 'lg', p: 'lg'},[
-//             Tooltip({}, [
-//                 TooltipSource({}, [
-//                     Button('tooltip source 1')
-//                 ]),
-//                 TooltipContent({}, 'tooltip  1')
-//             ])
-//         ]),
-//         Row({gap: 'md', m: 'lg', p: 'lg'},[
-//             Tooltip({}, [
-//                 TooltipSource({}, [
-//                     Button('tooltip source 2 ')
-//                 ]),
-//                 TooltipContent({}, 'tooltip content 2')
-//             ])
-//         ]),
-//         Row({gap: 'md'},[
-//             Tooltip({}, [
-//                 TooltipSource({}, [
-//                     Button('tooltip source 2 ')
-//                 ]),
-//                 TooltipContent({}, 'tooltip content 2')
-//             ])
-//         ]),
-//         Row({gap: 'md'},[
-//             Tooltip({}, [
-//                 TooltipSource({}, [
-//                     Button('tooltip source 2 ')
-//                 ]),
-//                 TooltipContent({}, 'tooltip content 2')
-//             ])
-//         ]),
-//         Row({gap: 'md'},[
-//             Tooltip({}, [
-//                 TooltipSource({}, [
-//                     Button('tooltip source 2 ')
-//                 ]),
-//                 TooltipContent({}, 'tooltip content 2')
-//             ])
-//         ]),
-//         Row({gap: 'md'},[
-//             Tooltip({}, [
-//                 TooltipSource({}, [
-//                     Button('tooltip source 2 ')
-//                 ]),
-//                 TooltipContent({}, 'tooltip content 2')
-//             ])
-//         ]),
-//         Row({gap: 'md'},[
-//             Tooltip({}, [
-//                 TooltipSource({}, [
-//                     Button('tooltip source 2 ')
-//                 ]),
-//                 TooltipContent({}, 'tooltip content 2')
-//             ])
-//         ]),
-//         Row({gap: 'md'},[
-//             Tooltip({}, [
-//                 TooltipSource({}, [
-//                     Button('tooltip source 2 ')
-//                 ]),
-//                 TooltipContent({}, 'tooltip content 2')
-//             ])
-//         ]),
-//         Row({gap: 'md'},[
-//             Tooltip({}, [
-//                 TooltipSource({}, [
-//                     Button('tooltip source 2 ')
-//                 ]),
-//                 TooltipContent({}, 'tooltip content 2')
-//             ])
-//         ]),
-//         Row({gap: 'md'},[
-//             Tooltip({}, [
-//                 TooltipSource({}, [
-//                     Button('tooltip source 2 ')
-//                 ]),
-//                 TooltipContent({}, 'tooltip content 2')
-//             ])
-//         ]),
-//         Row({gap: 'md'},[
-//             Tooltip({}, [
-//                 TooltipSource({}, [
-//                     Button('tooltip source 2 ')
-//                 ]),
-//                 TooltipContent({}, 'tooltip content 2')
-//             ])
-//         ]),
-//         Row({gap: 'md'},[
-//             Tooltip({}, [
-//                 TooltipSource({}, [
-//                     Button('tooltip source 2 ')
-//                 ]),
-//                 TooltipContent({}, 'tooltip content 2')
-//             ])
-//         ]),
-//         Row({gap: 'md'},[
-//             Tooltip({}, [
-//                 TooltipSource({}, [
-//                     Button('tooltip source 2 ')
-//                 ]),
-//                 TooltipContent({}, 'tooltip content 2')
-//             ])
-//         ]),
-//     ]),
-//   ])
-// }
-
-
-
-
 
 export default function () {
   return DocPage({ name: "Tooltip" }, [
@@ -156,3 +42,40 @@ export default function () {
     ]),
   ]);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//previous usage
+//
+//
+// export default function () {
+//   return DocPage({ name: "Tooltip" }, [
+//     Section({ title: "Tooltip", description: "simple Tooltip" }, [
+//         Row({gap: 'md', m: 'lg', p: 'lg'},[
+//             Tooltip({}, [
+//                 TooltipSource({}, [
+//                     Button('tooltip source 1')
+//                 ]),
+//                 TooltipContent({}, 'tooltip  1')
+//             ])
+//         ]),
+//     ]),
+//   ])
+// }
+
+
+
