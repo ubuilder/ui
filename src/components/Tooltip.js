@@ -34,7 +34,9 @@ export const Tooltip = Base({
 
     
     let content =  View(props,  $slots)
-    if(arrow)content =  View(props, [$slots, TooltipArrow([View({tag: 'div', "u-tooltip-arrow-inside": ''})])])
+    if(arrow)content = View(props, [$slots, TooltipArrow({}, '')])
+    //for later updates
+    // if(arrow)content =  View(props, [$slots, TooltipArrow([View({tag: 'div', "u-tooltip-arrow-inside": ''},'')])])
     
     return content
   }
