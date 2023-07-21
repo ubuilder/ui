@@ -11596,168 +11596,126 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     });
   };
 
-  // import { createPopper } from "@popperjs/core";
-  // import tippy from "tippy.js";
-
-  //tooltip using floatinf-ui
+  //tooltip using floating-ui
   function Tooltip(Alpine) {
-    Alpine.directive("tooltip", (el, {}, { Alpine }) => {
+    Alpine.directive("tooltip", (el) => {
       el.parentNode.setAttribute("u-tooltip-reference", "");
+
+      const offsetValue = el.getAttribute("u-tooltip-offset") ?? 0;
+      const placement = el.getAttribute("u-tooltip-placement") ?? "bottom";
+      const margin = el.getAttribute("u-tooltip-margin") ?? 4;
+      const arrowMargin = el.getAttribute("u-tooltip-arrow-margin") ?? 4;
+      const trigger = el.getAttribute("u-tooltip-trigger") ?? "hover";
+
+      const arrowEl = el.querySelector("u-tooltip-arrow");
+
+      let timer;
+      let cleanUp;
+
       Alpine.bind(el.parentNode, () => ({
         "u-data"() {
+       
           return {
-            source: null,
-            target: null,
-            arrow: null,
-            cleanUp: null,
-            offset: 0,
-            placement: 'bottom',
-            margin: 4,
-            arrowMargin: 4,
-            trigger: 'hover',
-            updatePosition(source, target, arrowEl){
+            source: el.parentNode,
+            target: el,
+            arrow: arrowEl,
+            offset: arrowEl ? 6 : offsetValue,
+            placement,
+            margin,
+            arrowMargin,
+            trigger,
+            show: false,
+            updatePosition(source, target, arrowEl) {
               computePosition(source, target, {
                 placement: this.placement,
                 middleware: [
                   offset(this.offset),
                   flip(),
-                  shift({padding: this.margin}),
-                  arrowEl? arrow({element: arrowEl, padding: this.arrowMargin}): '',
+                  shift({ padding: this.margin }),
+                  arrowEl
+                    ? arrow({ element: arrowEl, padding: this.arrowMargin })
+                    : "",
                 ],
-              }).then(({x, y, placement, middlewareData}) => {
+              }).then(({ x, y, placement, middlewareData }) => {
                 Object.assign(target.style, {
                   left: `${x}px`,
                   top: `${y}px`,
                 });
 
                 // Accessing the data
-                if(!arrowEl)return
-                const {x: arrowX, y: arrowY} = middlewareData.arrow;
-               
+                if (!arrowEl) return;
+                const { x: arrowX, y: arrowY } = middlewareData.arrow;
+
                 const staticSide = {
-                  top: 'bottom',
-                  right: 'left',
-                  bottom: 'top',
-                  left: 'right',
-                }[placement.split('-')[0]];
-               
+                  top: "bottom",
+                  right: "left",
+                  bottom: "top",
+                  left: "right",
+                }[placement.split("-")[0]];
+
                 Object.assign(arrowEl.style, {
-                  left: arrowX != null ? `${arrowX}px` : '',
-                  top: arrowY != null ? `${arrowY}px` : '',
-                  right: '',
-                  bottom: '',
-                  [staticSide]: '-4px',
+                  left: arrowX != null ? `${arrowX}px` : "",
+                  top: arrowY != null ? `${arrowY}px` : "",
+                  right: "",
+                  bottom: "",
+                  [staticSide]: "-4px",
                 });
               });
             },
-            show() {
-              this.target.style.display = 'block';
-              this.cleanUp = autoUpdate(this.source, this.target, ()=>{
-                this.updatePosition(this.source, this.target, this.arrow);
-              });
-            },
-            hide() {
-              this.target.style.display = 'none';
-              this.cleanUp();
-            },
+
             toggle() {
-              if (this.target.style.display == '' ||this.target.style.display == 'none'){
-                this.show();
-              }else {
-                this.hide();
-                
-              }
+              this.show = !this.show;
+              
             },
           };
         },
-        "u-init"(){
-          this.source = el.parentNode;
-        },
-        
-        
+        'u-init'() {
+          // change display based on this.show
+          Alpine.effect(() => {
+            clearTimeout(timer);
+
+            if (this.show) {
+              this.target.style.display = "block";
+              cleanUp = autoUpdate(this.source, this.target, () => {
+                this.updatePosition(this.source, this.target, this.arrow);
+              });
+            } else {
+              timer = setTimeout(() => {
+                this.target.style.display = "none";
+                if(cleanUp) {
+                  cleanUp();
+                }
+              }, 150);
+            }
+          });
+        }
       }));
-      Alpine.bind(el, () => ({
-        "u-init"() {
-          this.target = el;
-          
-        },
-      }));
-      
-    });
-    
-    Alpine.directive("tooltip-arrow", (el, {}, { Alpine }) => {
-      Alpine.bind(el, () => ({
-        "u-init"() {
-          this.arrow = el;
-          this.offset = 6;
-        },
-      }));
-    });
-    Alpine.directive("tooltip-offset", (el, {expression}, { Alpine }) => {
-      Alpine.bind(el, () => ({
-        "u-init"() {
-          this.offset = expression;
-        },
-      }));
-    });
-    Alpine.directive("tooltip-placement", (el, {expression}, { Alpine }) => {
-      Alpine.bind(el, () => ({
-        "u-init"() {
-          this.placement = expression;
-        },
-      }));
-    });
-    Alpine.directive("tooltip-margin", (el, {expression}, { Alpine }) => {
-      Alpine.bind(el, () => ({
-        "u-init"() {
-          this.margin = expression;
-        },
-      }));
-    });
-    Alpine.directive("tooltip-arrow-margin", (el, {expression}, { Alpine }) => {
-      Alpine.bind(el, () => ({
-        "u-init"() {
-          this.arrowMargin = expression;
-        },
-      }));
-    });
-    Alpine.directive("tooltip-trigger", (el, {expression}, { Alpine }) => {
-      Alpine.bind(el, () => ({
-        "u-init"() {
-          this.trigger = expression;
-          if(this.trigger == 'click'){
-            Alpine.bind(this.source, () => ({
-              "u-on:focus"() {
-                this.show();
-              },
-              "u-on:blur"() {
-                this.hide();
-              },
-              "u-on:click"(){
-                // this.toggle();
-              }
-              
-            }));
-          }else {
-            Alpine.bind(this.source, () => ({
-              "u-on:mouseenter"() {
-                this.show();
-              },
-              "u-on:mouseleave"() {
-                this.hide();
-              },
-            }));
-          }
-        },
-      }));
+
+      if (trigger == "click") {
+        Alpine.bind(el.parentNode, () => ({
+          "u-on:focus"() {
+            this.show = true;
+          },
+          "u-on:blur"() {
+            this.show = false;
+            // this.hide();
+          },
+          "u-on:click"() {
+            // this.toggle();
+          },
+        }));
+      } else {
+        Alpine.bind(el.parentNode, () => ({
+          "u-on:mouseenter"() {
+            this.show = true;
+          },
+          "u-on:mouseleave"() {
+            this.show = false;
+          },
+        }));
+      }
     });
   }
-
-
-
-
-
-
 
   //tooltip using popperjs had some issues wiht new sintax
   //
@@ -11775,7 +11733,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   //         strategy: "fixed",
   //         modifiers: [
   //           arrow
-  //             ? 
+  //             ?
   //             {
   //                 name: "arrow",
   //                 options: {
@@ -11821,7 +11779,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   //       console.log('source', source)
   //       console.log('tartet', target)
   //       console.log('arrow', arrow)
-        
+
   //       PopperInitializer()
   //       Popper.setOptions((options) => ({
   //         ...options,
@@ -11879,12 +11837,12 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   //       },
   //       async "u-init"() {
   //         PopperInitializer()
-         
+
   //       },
   //     }));
   //   });
   //   Alpine.directive("tooltip-arrow", (el, {}, { Alpine }) => {
-      
+
   //         Alpine.bind(el, () => ({
   //           "u-init"() {
   //             console.log('arrow init', el)
@@ -11895,22 +11853,12 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   //       });
   // }
 
-
-
-
-
-
-
-
-
-
-
   //tooltip using popperjs
   //
   // export function Tooltip(Alpine) {
   //   Alpine.directive("tooltip", (el, {}, { Alpine , evaluate }) => {
   //     console.log("tooltip registerd");
-      
+
   //     Alpine.bind(el.parentElement, () => ({
   //       "u-data"() {
   //         return {
@@ -11922,9 +11870,9 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   //             if (this.Popper) this.Popper.destroy();
   //             this.Popper = createPopper(this.source, this.target, {
   //               placement: "left",
-              
+
   //               modifiers: [
-                 
+
   //                 this.arrow
   //                   ? {
   //                       name: "arrow",
@@ -11951,7 +11899,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   //                     offset: [0, 8],
   //                   },
   //                 },
-                  
+
   //               ],
   //             });
 
@@ -11963,7 +11911,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   //             console.log("source", this.source);
   //             console.log("tartet", this.target);
   //             console.log("arrow", this.arrow);
-              
+
   //             this.Popper.setOptions((options) => ({
   //               ...options,
   //               modifiers: [
@@ -12022,7 +11970,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   //   });
 
   //   Alpine.directive("tooltip-arrow", (el, {}, { Alpine }) => {
-      
+
   //     Alpine.bind(el, () => ({
   //       "u-init"() {
   //         console.log('arrow init')
@@ -12032,16 +11980,6 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   //     }));
   //   });
   // }
-
-
-
-
-
-
-
-
-
-
 
   //tooltip using Poperjs
   //
@@ -12094,7 +12032,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   //             strategy: "fixed",
   //             modifiers: [
   //               this.arrow
-  //                 ? 
+  //                 ?
   //                 {
   //                     name: "arrow",
   //                     options: {
@@ -12169,7 +12107,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   //   });
 
   //   Alpine.directive("tooltip-arrow", (el, {}, { Alpine }) => {
-      
+
   //     Alpine.bind(el, () => ({
   //       "u-init"() {
   //         this.arrow = el
@@ -12177,23 +12115,8 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   //       },
   //     }));
   //   });
-    
+
   // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   // //tooltip using floatinf-ui using old syntax
   //
@@ -12224,14 +12147,14 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
   //               // Accessing the data
   //               const {x: arrowX, y: arrowY} = middlewareData.arrow;
-               
+
   //               const staticSide = {
   //                 top: 'bottom',
   //                 right: 'left',
   //                 bottom: 'top',
   //                 left: 'right',
   //               }[placement.split('-')[0]];
-               
+
   //               Object.assign(arrowEl.style, {
   //                 left: arrowX != null ? `${arrowX}px` : '',
   //                 top: arrowY != null ? `${arrowY}px` : '',
@@ -12293,10 +12216,6 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   //     }));
   //   });
   // }
-
-
-
-
 
   //tooltip using tippy
   //

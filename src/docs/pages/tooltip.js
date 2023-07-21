@@ -2,11 +2,8 @@ import { Button } from "../../components/Button.js";
 import { DocPage } from "../components/DocPage.js";
 import { Section } from "../components/Section.js";
 import { Preview } from "../components/Preview.js";
-import { Col, Row } from "../../components/GridSystem.js";
 import { Tooltip } from "../../components/Tooltip.js";
 import { View } from "../../components/View.js";
-// import { Card, CardBody } from "../../components/index.js";
-
 
 export default function () {
   return DocPage({ name: "Tooltip" }, [
@@ -14,29 +11,20 @@ export default function () {
       Preview(
         {
           code: `
-Button({},[
-  "Login",
-  Tooltip('Hi, Welcome!')
-])
+Button(["Login", Tooltip("Hi, Welcome!")
   `,
         },
-        [
-          Button(["Login", Tooltip("Hi, Welcome!")
-        ]
-        )]
+        [Button(["Login", Tooltip("Hi, Welcome!")])]
       ),
     ]),
     Section({ title: "Arrow", description: "by default it has arrow" }, [
       Preview(
         {
           code: `
-Button({},[
-  "no arrow",
-  Tooltip({arrow: false}'Hi, Welcome!')
-])
-  `,
+          [Button(["no arrow", Tooltip({ arrow: false }, "Hi, Welcome!")])]
+          `,
         },
-        [Button(["no arrow", Tooltip({ arrow: false }, "Hi, Welcome!")])]
+        [Button(["no arrow", Tooltip({arrow: false}, "Hi, Welcome!")])]
       ),
     ]),
     Section(
@@ -49,25 +37,15 @@ Button({},[
         Preview(
           {
             code: `
-[
-  Button([
-    "bottom",
-    Tooltip({placement: 'bottom'},'Hi, Welcome!') //default is bottom
-  ]),
-  Button([
-    "top",
-    Tooltip({placement: 'top'},'Hi, Welcome!') 
-  ]),
-  Button([
-    "left",
-    Tooltip({placement: 'left'},'Hi, Welcome!')
-  ]),
-  Button([
-    "right",
-    Tooltip({placement: 'right'},'Hi, Welcome!') 
-  ]),    
-]
-  `,
+            [
+              Button([
+                "bottom",
+                Tooltip({ placement: "bottom" }, "Hi, Welcome!"), //default is bottom
+              ]),
+              Button(["top", Tooltip({ placement: "top" }, "Hi, Welcome!")]),
+              Button(["left", Tooltip({ placement: "left" }, "Hi, Welcome!")]),
+              Button(["right", Tooltip({ placement: "right" }, "Hi, Welcome!")]),
+            ]`,
           },
           [
             Button([
@@ -87,16 +65,11 @@ Button({},[
         Preview(
           {
             code: `
-  [
-    Button([
-      "hover",
-      Tooltip({},'Hi, Welcome!')
-    ]),
-    Button([
-      "click",
-      Tooltip({trigger: 'click'},'Hi, Welcome!')
-    ]),
-  ]
+            [
+              Button(["hover", Tooltip({}, "Hi, Welcome!")]),
+              Button(["click", Tooltip({ trigger: "click" }, "Hi, Welcome!")]),
+            ]
+        
   `,
           },
           [
@@ -129,7 +102,7 @@ Button({},[
   `,
           },
           [
-            View({style: 'width: max-content;border: 2px solid gray', }, [
+            View({ px: 'md', py: 'xxs', border: true, d: 'inline-block' }, [
               "action",
               Tooltip({}, [
                 View([
@@ -144,40 +117,3 @@ Button({},[
     ),
   ]);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//previous usage
-//
-//
-// export default function () {
-//   return DocPage({ name: "Tooltip" }, [
-//     Section({ title: "Tooltip", description: "simple Tooltip" }, [
-//         Row({gap: 'md', m: 'lg', p: 'lg'},[
-//             Tooltip({}, [
-//                 TooltipSource({}, [
-//                     Button('tooltip source 1')
-//                 ]),
-//                 TooltipContent({}, 'tooltip  1')
-//             ])
-//         ]),
-//     ]),
-//   ])
-// }
-
-
-

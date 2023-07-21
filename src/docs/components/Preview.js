@@ -39,11 +39,15 @@ export const Preview = Base({
 
         if(typeof json === 'string') return indent(level) + json + '\n';
 
+        if(!json) return '';
+
+        
+
         let selfClosing = false
         if(json.tag === 'img') selfClosing = true
-        if($slots.length === 0) selfClosing = true
+        if(json.slots.toString() === '') selfClosing = true
       
-        return indent(level) + `&#60${json.tag}${getAttributes(json.props)}${selfClosing ? '/':''}&#62;\n${selfClosing ? '' : getSlots(json.slots, level + 1)}${selfClosing ? '' :indent(level)}${selfClosing ? '' : '&#60;/'}${selfClosing ? '' : json.tag}${selfClosing ? '' : '&#62;\n'}`
+        return indent(level) + `&#60${json.tag}${getAttributes(json.props)}${selfClosing ? ' /':''}&#62;\n${selfClosing ? '' : getSlots(json.slots, level + 1)}${selfClosing ? '' :indent(level)}${selfClosing ? '' : '&#60;/'}${selfClosing ? '' : json.tag}${selfClosing ? '' : '&#62;\n'}`
     }
 
     

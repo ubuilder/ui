@@ -1,3 +1,5 @@
+import type {Placement} from '@floating-ui/core'
+
 type Slot = string | number | Tag;
 
 type Tag = {
@@ -465,6 +467,10 @@ declare const TabsList: View<{}>
  */
 declare const Textarea: FormField<{placeholder: string, value: string, rows: number}>
 
+/**
+ * Tooltip Component
+ */
+declare const Tooltip: View<{trigger: 'click' | 'hover', placement: Placement}>
 
 /**
  * View Component
