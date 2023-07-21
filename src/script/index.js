@@ -14,6 +14,7 @@ import { Select } from "./select";
 import { Textarea } from "./textarea";
 import { Tabs } from "./tabs";
 import { Dropdown } from "./dropdown";
+import { Tooltip } from "./tooltip";
 
 export * from "./bind";
 
@@ -39,6 +40,7 @@ function ulibsPlugin(Alpine) {
   Modal(Alpine);
   Tabs(Alpine);
   Dropdown(Alpine);
+  Tooltip(Alpine);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
