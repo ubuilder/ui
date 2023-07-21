@@ -1,6 +1,4 @@
 export function Modal(Alpine) {
-  console.log('modal init')
-
   Alpine.directive('modal-backdrop', (el) => {
     Alpine.bind(el, {
       'u-on:click'() {
@@ -23,8 +21,6 @@ export function Modal(Alpine) {
 
   Alpine.directive('modal', el => {
 
-    console.log('modal directive')
-    
     Alpine.bind(el, {
       'u-data'() {
         return {

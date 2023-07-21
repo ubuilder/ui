@@ -3098,7 +3098,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   // packages/alpinejs/builds/module.js
   var module_default = src_default;
 
-  function Accordion(Alpine) {
+  function Accordion$1(Alpine) {
     Alpine.directive("accordion", (el) => {
       Alpine.bind(el, {
         "u-id"() {
@@ -3158,7 +3158,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     });
   }
 
-  function Icon(Alpine) {
+  function Icon$1(Alpine) {
     Alpine.directive("icon", (el) => {
       const iconName = el.getAttribute("name");
 
@@ -3180,7 +3180,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     });
   }
 
-  function Form(Alpine) {
+  function Form$1(Alpine) {
     const handlers = {
       input: (el) => ({ name: el.name, value: () => el.value }),
       checkbox: (el) => {
@@ -8858,7 +8858,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   TomSelect.define('restore_on_backspace', restore_on_backspace);
   TomSelect.define('virtual_scroll', virtual_scroll);
 
-  function AutoComplete(Alpine){
+  function AutoComplete$1(Alpine){
 
     Alpine.directive('auto-complete', (el, {value, modifiers, expression, }, {Alpine, effect, evaluate, evaluateLater})=>{
 
@@ -8911,7 +8911,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
   }
 
-  function Modal(Alpine) {
+  function Modal$1(Alpine) {
     console.log('modal init');
 
     Alpine.directive('modal-backdrop', (el) => {
@@ -9727,7 +9727,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
   var morphdom = morphdomFactory(morphAttrs);
 
-  function ClientSideRouting(Alpine) {
+  function ClientSideRouting$1(Alpine) {
       function findAnchorTag(element) {
         if (element.tagName === "HTML") return null;
         if (element.tagName === "A") return element;
@@ -9797,7 +9797,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   // sidebar/navbar items
   // import tippy from "tippy.js/dist/tippy.esm"
 
-  function Popup(Alpine) {
+  function Popup$1(Alpine) {
 
       // use @floating-ui/dom similar to yesvelte
       Alpine.directive('popup', (el, {}, {evaluate, cleanup}) => {
@@ -9827,7 +9827,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       });
   }
 
-  function Checkbox(Alpine) {
+  function Checkbox$1(Alpine) {
      
       Alpine.directive("checkbox-input", (el) => {
     
@@ -9880,7 +9880,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       });
     }
 
-  function Radio(Alpine) {
+  function Radio$1(Alpine) {
       Alpine.directive("radio", (el) => {
         if (el.parentNode.hasAttribute("u-radio-group")) return;
     
@@ -9925,7 +9925,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       });
     }
 
-  function Input(Alpine) {
+  function Input$1(Alpine) {
       console.log("function input");
       Alpine.directive("input", (el) => {
         Alpine.bind(el, {
@@ -9937,7 +9937,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       });
     }
 
-  function Select(Alpine) {
+  function Select$1(Alpine) {
       Alpine.directive('select', el => {
 
           const multiple = el.getAttribute('multiple');
@@ -9966,7 +9966,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       });
   }
 
-  function Textarea(Alpine) {
+  function Textarea$1(Alpine) {
       Alpine.directive('textarea', (el) => {
 
 
@@ -10020,34 +10020,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     return query($el, `[${key}]`, callback);
   }
 
-  function register(name, component) {
-    queryAttr(document, name, component);
-  }
-
-  function writable(value) {
-    let cbs = [];
-    let _value = value;
-    return {
-      subscribe(cb) {
-        cb(_value);
-
-        cbs.push(cb);
-        return () => {
-          cbs = cbs.filter((x) => x !== cb);
-        };
-      },
-      set(val) {
-        _value = val;
-        cbs.forEach((cb) => cb(_value));
-      },
-      update(setter) {
-        _value = setter(_value);
-        cbs.forEach((cb) => cb(_value));
-      },
-    };
-  }
-
-  function Tabs(Alpine) {
+  function Tabs$1(Alpine) {
       console.log('Tabs Alpine');
       Alpine.directive('tabs', (el, first, second)=>{
           let tabItems = [];
@@ -10114,7 +10087,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       
   }
 
-  function Dropdown(Alpine){
+  function Dropdown$1(Alpine){
     Alpine.directive('dropdown', (el, {}, {Alpine})=>{
       console.log('dropdown registerd');
       Alpine.bind(el, ()=>({
@@ -11597,7 +11570,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   };
 
   //tooltip using floating-ui
-  function Tooltip(Alpine) {
+  function Tooltip$1(Alpine) {
     Alpine.directive("tooltip", (el) => {
       el.parentNode.setAttribute("u-tooltip-reference", "");
 
@@ -12258,156 +12231,6 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   //   });
   // }
 
-  function condition(val, sections) {
-    if (sections.length === 1) {
-      return val;
-    } else if (sections.length === 3) {
-      const [key, operator, value] = sections;
-      if (operator === "==") {
-        return val == value;
-      } else if (operator === "!=") {
-        return val != value;
-      }
-    }
-    return false;
-  }
-
-  function Bind($el) {
-    const bind = getAttr($el, "u-bind");
-    removeAttr($el, "u-bind");
-
-    const ctx = {};
-
-    if (bind) {
-      const props = JSON.parse(bind);
-
-      for (let key in props) {
-        ctx[key] = writable(props[key]);
-      }
-
-      query($el, "*", (el) => {
-        // ----------------------------------
-        if (el.hasAttribute("u-bind-value")) {
-          const key = el.getAttribute("u-bind-value");
-          el.removeAttribute("u-bind-value");
-          if (!ctx[key]) return;
-
-          const { subscribe, set } = ctx[key];
-
-          subscribe((val) => (el.value = val));
-
-          el.addEventListener("input", (ev) => {
-            set(ev.target.value);
-          });
-        }
-
-        // ----------------------------------
-        if (el.hasAttribute("u-bind-attr")) {
-          const code = el.getAttribute("u-bind-attr");
-          el.removeAttribute("u-bind-attr");
-
-          const [key, _eq, ...value] = code.split(" ");
-
-          if (!ctx[value[0]]) return;
-
-          const { subscribe, set } = ctx[value[0]];
-
-          subscribe((val) => {
-            const cond = condition(val, value);
-
-            if (value.length === 1) {
-              el.setAttribute(key, value);
-            } else {
-              if (cond) {
-                el.setAttribute(key, "");
-              } else {
-                el.removeAttribute(key);
-              }
-            }
-          });
-        }
-
-        // ----------------------------------
-        if (el.hasAttribute("u-bind-show")) {
-          const code = el.getAttribute("u-bind-show");
-          el.removeAttribute("u-bind-show");
-
-          const sections = code.split(" ");
-          const key = sections[0];
-
-          if (!ctx[key]) return;
-          const { subscribe, set } = ctx[key];
-
-          subscribe((val) => {
-            el.style.display = condition(val, sections) ? "" : "none";
-          });
-        }
-
-        // ----------------------------------
-        if (el.hasAttribute("u-bind-text")) {
-          const key = el.getAttribute("u-bind-text");
-          el.removeAttribute("u-bind-text");
-
-          if (!ctx[key]) return;
-
-          const { subscribe, set } = ctx[key];
-
-          if (el.textContent) {
-            set(el.textContent);
-          }
-
-          subscribe((val) => (el.textContent = val));
-        }
-        // ----------------------------------
-        if (el.hasAttribute("u-bind-html")) {
-          const key = el.getAttribute("u-bind-html");
-          el.removeAttribute("u-bind-html");
-
-          if (!ctx[key]) return;
-
-          const { subscribe, set } = ctx[key];
-
-          subscribe((val) => (el.innerHTML = val));
-        }
-
-        // ----------------------------------
-        Array.from(el.attributes).forEach((attribute) => {
-          if (attribute.name.startsWith("u-bind-")) {
-            const event = attribute.name.substring("u-bind-".length);
-            el.removeAttribute("u-bind-" + event);
-
-            const code = attribute.value;
-            el.addEventListener(event, () => {
-              const [key, operator, ...value] = code
-                .split(" ")
-                .map((str) => str.trim());
-
-              if (!ctx[key]) return;
-
-              if (value.length === 1) {
-                if (operator === "=") {
-                  if (!isNaN(value[0])) value[0] = +value[0];
-
-                  ctx[key].set(value[0]);
-                } else if (operator === "!=") {
-                  if (value[0] === key) {
-                    ctx[key].update((val) => !val);
-                  }
-                } else if (operator === "+=") {
-                  ctx[key].update((val) => +val + +value[0]);
-                } else if (operator === "-=") {
-                  ctx[key].update((val) => +val - +value[0]);
-                }
-              }
-            });
-          }
-        });
-      });
-    }
-  }
-
-  register("u-bind", Bind);
-
   function ulibsPlugin(Alpine) {
     document.body.setAttribute("u-data", "");
 
@@ -12440,7 +12263,21 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     module_default.start();
   });
 
-  exports.Bind = Bind;
+  exports.Accordion = Accordion$1;
+  exports.AutoComplete = AutoComplete$1;
+  exports.Checkbox = Checkbox$1;
+  exports.ClientSideRouting = ClientSideRouting$1;
+  exports.Dropdown = Dropdown$1;
+  exports.Form = Form$1;
+  exports.Icon = Icon$1;
+  exports.Input = Input$1;
+  exports.Modal = Modal$1;
+  exports.Popup = Popup$1;
+  exports.Radio = Radio$1;
+  exports.Select = Select$1;
+  exports.Tabs = Tabs$1;
+  exports.Textarea = Textarea$1;
+  exports.Tooltip = Tooltip$1;
 
   return exports;
 
