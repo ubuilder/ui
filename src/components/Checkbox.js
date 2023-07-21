@@ -49,10 +49,8 @@ export const Checkbox = Base({
       label,
       text,
       inline,
-      value,
       name,
       checked,
-      multiple,
       ...restProps
     } = $props;
 
@@ -73,9 +71,7 @@ export const Checkbox = Base({
       type: "checkbox",
       text,
       name,
-      value,
       checked,
-      multiple,
       component,
     };
 
