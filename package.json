@@ -39,11 +39,15 @@
     "rollup": "^3.23.0"
   },
   "dependencies": {
+    "@codemirror/lang-css": "^6.2.0",
+    "@codemirror/lang-html": "^6.4.5",
+    "@codemirror/lang-javascript": "^6.1.9",
     "@rollup/plugin-node-resolve": "^15.1.0",
     "@ulibs/router": "^0.0.13",
     "alpinejs": "^3.12.3",
     "concurrently": "^8.2.0",
     "http-server": "^14.1.1",
+    "mobiledoc-kit": "^0.15.0",
     "morphdom": "^2.7.0",
     "sass": "^1.63.4",
     "tippy.js": "^6.3.7",

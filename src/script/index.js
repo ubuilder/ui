@@ -14,6 +14,7 @@ import { Select } from "./select";
 import { Textarea } from "./textarea";
 import { Tabs } from "./tabs";
 import { Dropdown } from "./dropdown";
+import { CodeEditor } from './code-editor';
 
 export * from "./bind";
 
@@ -33,7 +34,7 @@ function ulibsPlugin(Alpine) {
   Form(Alpine);
   Accordion(Alpine);
   Icon(Alpine);
-
+  CodeEditor(Alpine);
   AutoComplete(Alpine)
   
   Modal(Alpine);
