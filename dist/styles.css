@@ -3188,3 +3188,29 @@ h6 {
   transition-duration: 400ms;
   transition-timing-function: ease-in;
 }
+
+[u-tooltip] {
+  box-sizing: border-box;
+  display: none;
+  width: max-content;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: calc(var(--size-xxs) / 2) var(--size-xs);
+  font-size: var(--size-sm);
+  color: var(--color-base-400);
+  background-color: var(--color-base-900);
+  z-index: 99;
+  border: 1px solid var(--color-base-400);
+  background-clip: padding-box;
+  border-radius: calc(var(--size-xxs) / 2);
+}
+
+[u-tooltip-arrow] {
+  z-index: -1;
+  position: absolute;
+  width: var(--size-xs);
+  height: var(--size-xs);
+  transform: rotate(45deg);
+  background-color: var(--color-base-900);
+}
