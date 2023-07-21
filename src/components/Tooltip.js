@@ -7,6 +7,7 @@ export const Tooltip = Base({
       component = "tooltip",
       size = "md",
       arrow = true,
+      target,
       offset,
       margin,
       placement = 'bottom',
@@ -19,6 +20,7 @@ export const Tooltip = Base({
       ...restProps,
       component,
       cssProps: {
+        target,        
         size,
         offset,
         placement,

@@ -54,7 +54,7 @@ export function DocPage(
           Button(
             {
               color: "dark",
-              "u-on:click": `el => document.body.classList.toggle('dark')`,
+              "u-on:click": `el => document.body.setAttribute('u-view-theme', document.body.getAttribute('u-view-theme') === 'dark' ? 'light' : 'dark')`,
             },
             "Dark"
           ),

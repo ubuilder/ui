@@ -1,4 +1,4 @@
-(function (exports) {
+(function () {
   'use strict';
 
   // packages/alpinejs/src/scheduler.js
@@ -3098,7 +3098,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   // packages/alpinejs/builds/module.js
   var module_default = src_default;
 
-  function Accordion$1(Alpine) {
+  function Accordion(Alpine) {
     Alpine.directive("accordion", (el) => {
       Alpine.bind(el, {
         "u-id"() {
@@ -3158,7 +3158,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     });
   }
 
-  function Icon$1(Alpine) {
+  function Icon(Alpine) {
     Alpine.directive("icon", (el) => {
       const iconName = el.getAttribute("name");
 
@@ -3180,7 +3180,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     });
   }
 
-  function Form$1(Alpine) {
+  function Form(Alpine) {
     const handlers = {
       input: (el) => ({ name: el.name, value: () => el.value }),
       checkbox: (el) => {
@@ -3200,12 +3200,14 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           value: () => {
             let value = [];
 
-            el.querySelectorAll("[u-checkbox-group-item-input]").forEach((item) => {
-              if (item.checked) {
-                value = [...value, item.value];
+            el.querySelectorAll("[u-checkbox-group-item-input]").forEach(
+              (item) => {
+                if (item.checked) {
+                  value = [...value, item.value];
+                }
               }
-            });
-            
+            );
+
             return value;
           },
         };
@@ -3219,14 +3221,10 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
             let value = "";
 
             el.querySelectorAll("[u-radio-group-input]").forEach((item) => {
-              console.log({ item });
-              console.log("item ", item.checked, item.value);
-
               if (item.checked) {
                 value = item.value;
               }
             });
-            console.log({ value });
             return value;
           },
         };
@@ -3276,7 +3274,6 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
       for (let input of inputs) {
         el.querySelectorAll(`[u-${input}]`).forEach((el) => {
-          console.log('initialize', input);
           const { name, value } = handlers[input](el);
 
           fields[name] = value;
@@ -3300,30 +3297,33 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           event.preventDefault();
 
           Object.keys(fields).map((key) => {
-            console.log(key, "fields: ", fields);
             value[key] = fields[key]();
           });
 
-          const pathname = window.location.pathname;
+          if (el.getAttribute("method") === "FUNCTION") {
+            const result = await window[el.getAttribute("action")](value);
 
-          const url = pathname.endsWith("/")
-            ? pathname.substring(0, pathname.length - 1)
-            : pathname + "?" + el.getAttribute("action");
+            console.log({result});
+          } else {
+            const pathname = window.location.pathname;
 
-          try {
-            // support function call
-            console.log("function call");
-            const result = await fetch(url, {
-              method: "POST", // el.method,
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(value),
-            }).then((res) => res.json());
+            const url = pathname.endsWith("/")
+              ? pathname.substring(0, pathname.length - 1)
+              : pathname + "?" + el.getAttribute("action");
 
-            console.log({ result });
-          } catch (err) {
-            console.log(err);
+            try {
+              const result = await fetch(url, {
+                method: "POST", // el.method,
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(value),
+              }).then((res) => res.json());
+
+              console.log({ result });
+            } catch (err) {
+              console.log(err);
+            }
           }
         },
       });
@@ -8858,7 +8858,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   TomSelect.define('restore_on_backspace', restore_on_backspace);
   TomSelect.define('virtual_scroll', virtual_scroll);
 
-  function AutoComplete$1(Alpine){
+  function AutoComplete(Alpine){
 
     Alpine.directive('auto-complete', (el, {value, modifiers, expression, }, {Alpine, effect, evaluate, evaluateLater})=>{
 
@@ -8911,9 +8911,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
   }
 
-  function Modal$1(Alpine) {
-    console.log('modal init');
-
+  function Modal(Alpine) {
     Alpine.directive('modal-backdrop', (el) => {
       Alpine.bind(el, {
         'u-on:click'() {
@@ -8936,8 +8934,6 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
     Alpine.directive('modal', el => {
 
-      console.log('modal directive');
-      
       Alpine.bind(el, {
         'u-data'() {
           return {
@@ -9727,7 +9723,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
   var morphdom = morphdomFactory(morphAttrs);
 
-  function ClientSideRouting$1(Alpine) {
+  function ClientSideRouting(Alpine) {
       function findAnchorTag(element) {
         if (element.tagName === "HTML") return null;
         if (element.tagName === "A") return element;
@@ -9773,7 +9769,6 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         });
     
         window.addEventListener("popstate", async function () {
-          console.log("popstate", window.location.pathname);
           await updateRoute(window.location.pathname);
         });
     
@@ -9797,7 +9792,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   // sidebar/navbar items
   // import tippy from "tippy.js/dist/tippy.esm"
 
-  function Popup$1(Alpine) {
+  function Popup(Alpine) {
 
       // use @floating-ui/dom similar to yesvelte
       Alpine.directive('popup', (el, {}, {evaluate, cleanup}) => {
@@ -9827,7 +9822,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       });
   }
 
-  function Checkbox$1(Alpine) {
+  function Checkbox(Alpine) {
      
       Alpine.directive("checkbox-input", (el) => {
     
@@ -9880,7 +9875,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       });
     }
 
-  function Radio$1(Alpine) {
+  function Radio(Alpine) {
       Alpine.directive("radio", (el) => {
         if (el.parentNode.hasAttribute("u-radio-group")) return;
     
@@ -9925,8 +9920,8 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       });
     }
 
-  function Input$1(Alpine) {
-      console.log("function input");
+  function Input(Alpine) {
+    
       Alpine.directive("input", (el) => {
         Alpine.bind(el, {
           "u-on:input"(e) {
@@ -9937,40 +9932,31 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       });
     }
 
-  function Select$1(Alpine) {
-      Alpine.directive('select', el => {
+  function Select(Alpine) {
+    Alpine.directive("select", (el) => {
+      const multiple = el.getAttribute("multiple");
+      const name = el.getAttribute("name");
 
-          const multiple = el.getAttribute('multiple');
-          const name = el.getAttribute('name');
-
-          // on change 
-          Alpine.bind(el, {
-              'u-on:change'(e) {
-                  console.log('select change', name, e, el.selectedOptions);
-                  if(multiple) {
-                      let selectedValues = Array.from(e.target.selectedOptions).map(x => x.value);
-
-                      console.log(selectedValues);
-
-                      this.$data[name] = selectedValues;
-                  } else {
-
-                      const value = el.selectedOptions[0].value;
-                      console.log(value);
-                      
-                      this.$data[name] = value;
-                  }
-              }
-          });
-          
+      // on change
+      Alpine.bind(el, {
+        "u-on:change"(e) {
+          if (multiple) {
+            const selectedValues = Array.from(e.target.selectedOptions).map(
+              (x) => x.value
+            );
+            this.$data[name] = selectedValues;
+          } else {
+            const value = el.selectedOptions[0].value;
+            this.$data[name] = value;
+          }
+        },
       });
+    });
   }
 
-  function Textarea$1(Alpine) {
+  function Textarea(Alpine) {
       Alpine.directive('textarea', (el) => {
 
-
-          // 
           Alpine.bind(el, {
               'u-on:input'(e) {
                   this.$data[el.getAttribute('name')] = e.target.value;
@@ -10020,13 +10006,12 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     return query($el, `[${key}]`, callback);
   }
 
-  function Tabs$1(Alpine) {
-      console.log('Tabs Alpine');
+  function Tabs(Alpine) {
       Alpine.directive('tabs', (el, first, second)=>{
           let tabItems = [];
           let tabPanels = [];
           let activeTab  = 0;
-          console.log('tab', el);
+
           el.querySelectorAll('[u-tabs-item]').forEach((item) => {
 
               tabItems.push(item);
@@ -10049,8 +10034,8 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           el.querySelectorAll('[u-tabs-panel]').forEach(panel => {
               tabPanels.push(panel);
           });
-          console.log(activeTab);
 
+          
           setAttr(tabPanels[activeTab], 'u-tabs-panel-active', true);
           setAttr(tabItems[activeTab], 'u-tabs-item-active', true);
       
@@ -10058,36 +10043,9 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
 
       });
-
-      // Alpine.directive('u-tabs-item', (el, {}, {})=>{
-      //     tabItems.push(el)
-      //     let index = tabItems.indexOf(el)
-      //     if(getAttr(el, 'u-tab-item-active')){
-      //         activeTab = index
-      //     }
-      //     el.onclick = (event)=>{
-      //         queryAttr($el, 'u-tab-item-active', (e)=>{
-      //             removeAttr(e, 'u-tab-item-active')
-      //         })
-      //         queryAttr($el, 'u-tab-panel-active', (el)=>{
-      //             removeAttr(el, 'u-tab-panel-active')
-      //         })
-      //         setAttr(el, 'u-tab-item-active', true);
-      //         setAttr(tabPanels[index], 'u-tab-panel-active', true)
-      //     }
-      // })
-
-      // Alpine.directive('u-tabs-panel', (el, {}, {})=>{
-      //     tabPanels.push(el)
-          
-      // })
-
-      // setAttr(tabPanels[activeTab], 'u-tab-panel-active', true)
-      // setAttr(tabItems[activeTab], 'u-tab-item-active', true)
-      
   }
 
-  function Dropdown$1(Alpine){
+  function Dropdown(Alpine){
     Alpine.directive('dropdown', (el, {}, {Alpine})=>{
       console.log('dropdown registerd');
       Alpine.bind(el, ()=>({
@@ -11570,108 +11528,104 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   };
 
   //tooltip using floating-ui
-  function Tooltip$1(Alpine) {
+  function Tooltip(Alpine) {
     Alpine.directive("tooltip", (el) => {
-      el.parentNode.setAttribute("u-tooltip-reference", "");
+      const target =
+        document.querySelector(el.getAttribute("u-tooltip-target")) ?? el.parentNode;
+      const floatingEl = el;
 
+      target.setAttribute('u-tooltip-reference', '');
+      
       const offsetValue = el.getAttribute("u-tooltip-offset") ?? 0;
       const placement = el.getAttribute("u-tooltip-placement") ?? "bottom";
       const margin = el.getAttribute("u-tooltip-margin") ?? 4;
       const arrowMargin = el.getAttribute("u-tooltip-arrow-margin") ?? 4;
       const trigger = el.getAttribute("u-tooltip-trigger") ?? "hover";
 
-      const arrowEl = el.querySelector("u-tooltip-arrow");
+      const arrowEl = el.querySelector("[u-tooltip-arrow]");
 
       let timer;
       let cleanUp;
 
+      function updatePosition() {
+        computePosition(target, floatingEl, {
+          placement,
+          middleware: [
+            offset(arrowEl ? 6 : offsetValue),
+            flip(),
+            shift({ padding: margin }),
+            arrowEl ? arrow({ element: arrowEl, padding: arrowMargin }) : "",
+          ],
+        }).then(({ x, y, placement, middlewareData }) => {
+          Object.assign(floatingEl.style, {
+            left: `${x}px`,
+            top: `${y}px`,
+          });
+
+          // Accessing the data
+          if (!arrowEl) return;
+          const { x: arrowX, y: arrowY } = middlewareData.arrow;
+
+          const staticSide = {
+            top: "bottom",
+            right: "left",
+            bottom: "top",
+            left: "right",
+          }[placement.split("-")[0]];
+
+          Object.assign(arrowEl.style, {
+            left: arrowX != null ? `${arrowX}px` : "",
+            top: arrowY != null ? `${arrowY}px` : "",
+            right: "",
+            bottom: "",
+            [staticSide]: "-4px",
+          });
+        });
+      }
+
       Alpine.bind(el.parentNode, () => ({
         "u-data"() {
-       
           return {
-            source: el.parentNode,
-            target: el,
-            arrow: arrowEl,
-            offset: arrowEl ? 6 : offsetValue,
-            placement,
-            margin,
-            arrowMargin,
-            trigger,
-            show: false,
-            updatePosition(source, target, arrowEl) {
-              computePosition(source, target, {
-                placement: this.placement,
-                middleware: [
-                  offset(this.offset),
-                  flip(),
-                  shift({ padding: this.margin }),
-                  arrowEl
-                    ? arrow({ element: arrowEl, padding: this.arrowMargin })
-                    : "",
-                ],
-              }).then(({ x, y, placement, middlewareData }) => {
-                Object.assign(target.style, {
-                  left: `${x}px`,
-                  top: `${y}px`,
-                });
+            show() {
+              clearTimeout(timer);
 
-                // Accessing the data
-                if (!arrowEl) return;
-                const { x: arrowX, y: arrowY } = middlewareData.arrow;
-
-                const staticSide = {
-                  top: "bottom",
-                  right: "left",
-                  bottom: "top",
-                  left: "right",
-                }[placement.split("-")[0]];
-
-                Object.assign(arrowEl.style, {
-                  left: arrowX != null ? `${arrowX}px` : "",
-                  top: arrowY != null ? `${arrowY}px` : "",
-                  right: "",
-                  bottom: "",
-                  [staticSide]: "-4px",
-                });
+              Object.assign(el.style, {
+                display: "block",
+              });
+              cleanUp = autoUpdate(target, floatingEl, () => {
+                updatePosition();
               });
             },
+            hide() {
+              clearTimeout(timer);
 
-            toggle() {
-              this.show = !this.show;
-              
-            },
-          };
-        },
-        'u-init'() {
-          // change display based on this.show
-          Alpine.effect(() => {
-            clearTimeout(timer);
-
-            if (this.show) {
-              this.target.style.display = "block";
-              cleanUp = autoUpdate(this.source, this.target, () => {
-                this.updatePosition(this.source, this.target, this.arrow);
-              });
-            } else {
               timer = setTimeout(() => {
-                this.target.style.display = "none";
-                if(cleanUp) {
+                Object.assign(el.style, {
+                  display: "none",
+                });
+                if (cleanUp) {
                   cleanUp();
                 }
               }, 150);
-            }
-          });
-        }
+            },
+            toggle() {
+              if (el.style.display === "block") {
+                hide(this);
+              } else {
+                show(this);
+              }
+            },
+          };
+        },
       }));
 
       if (trigger == "click") {
         Alpine.bind(el.parentNode, () => ({
           "u-on:focus"() {
-            this.show = true;
+            this.show();
           },
           "u-on:blur"() {
-            this.show = false;
-            // this.hide();
+            this.hide();
           },
           "u-on:click"() {
             // this.toggle();
@@ -11680,562 +11634,17 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       } else {
         Alpine.bind(el.parentNode, () => ({
           "u-on:mouseenter"() {
-            this.show = true;
+            this.show();
           },
           "u-on:mouseleave"() {
-            this.show = false;
+            this.hide();
           },
         }));
       }
     });
   }
 
-  //tooltip using popperjs had some issues wiht new sintax
-  //
-  // export function Tooltip(Alpine) {
-  //   Alpine.directive("tooltip", (el, {}, { Alpine , evaluate }) => {
-  //     console.log("tooltip registerd");
-  //     let source = el.parentElement;
-  //     let target = el;
-  //     let Popper = null;
-  //     let arrow = el.querySelector('[u-tooltip-arrow]');
-  //     let PopperInitializer = async function () {
-  //       if (Popper) Popper.destroy();
-  //       Popper = createPopper(source, target, {
-  //         placement: "right",
-  //         strategy: "fixed",
-  //         modifiers: [
-  //           arrow
-  //             ?
-  //             {
-  //                 name: "arrow",
-  //                 options: {
-  //                   element: arrow,
-  //                 },
-  //               }
-  //             : "",
-  //             {
-  //               name: 'computeStyles',
-  //               options: {
-  //                 gpuAcceleration: true, // true by default
-  //               },
-  //             },
-  //             {
-  //               name: 'computeStyles',
-  //               options: {
-  //                 adaptive: true, // true by default
-  //               },
-  //             },
-  //             {
-  //               name: 'computeStyles',
-  //               options: {
-  //                 roundOffsets: ({ x, y }) => ({
-  //                   x: Math.round(x + 2),
-  //                   y: Math.round(y + 2),
-  //                 }),
-  //               },
-  //             },
-  //         ],
-  //       });
-
-  //       const state = await Popper.setOptions({modifiers: [
-  //           {
-  //             name: 'offset',
-  //             options: {
-  //               offset: [0, 8],
-  //             },
-  //             }
-  //       ],});
-  //     };
-  //     function show() {
-  //       // Enable the event listeners
-  //       console.log('source', source)
-  //       console.log('tartet', target)
-  //       console.log('arrow', arrow)
-
-  //       PopperInitializer()
-  //       Popper.setOptions((options) => ({
-  //         ...options,
-  //         modifiers: [
-  //           ...options.modifiers,
-  //           { name: "eventListeners", enabled: true },
-  //         ],
-  //       }));
-
-  //       // Update its position
-  //       Popper.update();
-  //       Popper.forceUpdate();
-  //       target.style.display = "block";
-  //     }
-  //     function hide() {
-  //       // Disable the event listeners
-  //       Popper.setOptions((options) => ({
-  //         ...options,
-  //         modifiers: [
-  //           ...options.modifiers,
-  //           { name: "eventListeners", enabled: false },
-  //         ],
-  //       }));
-
-  //       target.style.display = "none";
-  //     }
-
-  //     Alpine.bind(el.parentElement, () => ({
-  //       "u-data"() {
-  //         return {
-  //           arrow,
-  //         };
-  //       },
-  //       "u-on:mouseenter"() {
-  //         show();
-  //       },
-  //       "u-on:focus"() {
-  //         show();
-  //       },
-  //       "u-on:mouseleave"() {
-  //         hide();
-  //       },
-  //       "u-on:blur"() {
-  //         hide();
-  //       },
-  //     }));
-
-  //     Alpine.bind(el, () => ({
-  //       "u-data"(){
-  //         return{
-  //           arrow: arrow,
-  //           PopperInitializer: PopperInitializer,
-  //           name: 'next jawad'
-  //         }
-  //       },
-  //       async "u-init"() {
-  //         PopperInitializer()
-
-  //       },
-  //     }));
-  //   });
-  //   Alpine.directive("tooltip-arrow", (el, {}, { Alpine }) => {
-
-  //         Alpine.bind(el, () => ({
-  //           "u-init"() {
-  //             console.log('arrow init', el)
-  //             this.arrow = el
-  //             this.PopperInitializer()
-  //           },
-  //         }));
-  //       });
-  // }
-
-  //tooltip using popperjs
-  //
-  // export function Tooltip(Alpine) {
-  //   Alpine.directive("tooltip", (el, {}, { Alpine , evaluate }) => {
-  //     console.log("tooltip registerd");
-
-  //     Alpine.bind(el.parentElement, () => ({
-  //       "u-data"() {
-  //         return {
-  //           source: el.parentElement,
-  //           target: el,
-  //           Popper: null,
-  //           arrow: null,
-  //           async PopperInitializer() {
-  //             if (this.Popper) this.Popper.destroy();
-  //             this.Popper = createPopper(this.source, this.target, {
-  //               placement: "left",
-
-  //               modifiers: [
-
-  //                 this.arrow
-  //                   ? {
-  //                       name: "arrow",
-  //                       options: {
-  //                         element: this.arrow,
-  //                       },
-  //                     }
-  //                   : "",
-  //                 {
-  //                   name: "computeStyles",
-  //                   options: {
-  //                     gpuAcceleration: true, // true by default
-  //                   },
-  //                 },
-  //                 {
-  //                   name: "computeStyles",
-  //                   options: {
-  //                     adaptive: true, // true by default
-  //                   },
-  //                 },
-  //                 {
-  //                   name: 'offset',
-  //                   options: {
-  //                     offset: [0, 8],
-  //                   },
-  //                 },
-
-  //               ],
-  //             });
-
-  //           },
-
-  //           show() {
-  //             // Enable the event listeners
-  //             this.PopperInitializer()
-  //             console.log("source", this.source);
-  //             console.log("tartet", this.target);
-  //             console.log("arrow", this.arrow);
-
-  //             this.Popper.setOptions((options) => ({
-  //               ...options,
-  //               modifiers: [
-  //                 ...options.modifiers,
-  //                 { name: "eventListeners", enabled: true },
-  //               ],
-  //             }));
-
-  //             // Update its position
-  //             this.Popper.update();
-  //             this.Popper.forceUpdate();
-  //             this.target.style.display = "block";
-  //           },
-  //           hide() {
-  //             // Disable the event listeners
-  //             this.Popper.setOptions((options) => ({
-  //               ...options,
-  //               modifiers: [
-  //                 ...options.modifiers,
-  //                 { name: "eventListeners", enabled: false },
-  //               ],
-  //             }));
-
-  //             this.target.style.display = "none";
-  //           },
-  //         };
-  //       },
-  //       "u-on:mouseenter"() {
-  //         this.show();
-  //       },
-  //       "u-on:focus"() {
-  //         this.show();
-  //       },
-  //       "u-on:mouseleave"() {
-  //         this.hide();
-  //       },
-  //       "u-on:blur"() {
-  //         this.hide();
-  //       },
-  //       "u-init"(){
-  //         console.log("parent init")
-  //       }
-  //     }));
-
-  //     Alpine.bind(el, () => ({
-  //       "u-data"(){
-  //         return{
-  //         }
-  //       },
-  //       async "u-init"() {
-  //         console.log('target init')
-  //         this.target = el
-  //         this.PopperInitializer()
-  //       },
-  //     }));
-  //   });
-
-  //   Alpine.directive("tooltip-arrow", (el, {}, { Alpine }) => {
-
-  //     Alpine.bind(el, () => ({
-  //       "u-init"() {
-  //         console.log('arrow init')
-  //         this.arrow = el
-  //         this.PopperInitializer()
-  //       },
-  //     }));
-  //   });
-  // }
-
-  //tooltip using Poperjs
-  //
-  // export function Tooltip(Alpine) {
-  //   Alpine.directive("tooltip", (el, {}, { Alpine }) => {
-  //     console.log("tooltip registerd");
-  //     Alpine.bind(el, () => ({
-  //       "u-data"() {
-  //         return {
-  //           source: null,
-  //           target: null,
-  //           Popper: null,
-  //           arrow: null,
-  //           PopperInitializer: null,
-  //           show() {
-
-  //             // Enable the event listeners
-  //             this.Popper.setOptions((options) => ({
-  //               ...options,
-  //               modifiers: [
-  //                 ...options.modifiers,
-  //                 { name: "eventListeners", enabled: true },
-  //               ],
-  //             }));
-
-  //             // Update its position
-  //             this.Popper.update();
-  //             this.Popper.forceUpdate();
-  //             this.target.style.display = "block";
-  //           },
-  //           hide() {
-  //             // Disable the event listeners
-  //             this.Popper.setOptions((options) => ({
-  //               ...options,
-  //               modifiers: [
-  //                 ...options.modifiers,
-  //                 { name: "eventListeners", enabled: false },
-  //               ],
-  //             }));
-
-  //             this.target.style.display = "none";
-  //           },
-  //         };
-  //       },
-  //       async "u-init"() {
-  //         this.PopperInitializer =async function () {
-  //           if (this.Popper) this.Popper.destroy();
-  //           this.Popper = createPopper(this.source, this.target, {
-  //             placement: "top",
-  //             strategy: "fixed",
-  //             modifiers: [
-  //               this.arrow
-  //                 ?
-  //                 {
-  //                     name: "arrow",
-  //                     options: {
-  //                       element: this.arrow,
-  //                     },
-  //                   }
-  //                 : "",
-  //                 {
-  //                   name: 'computeStyles',
-  //                   options: {
-  //                     gpuAcceleration: true, // true by default
-  //                   },
-  //                 },
-  //                 {
-  //                   name: 'computeStyles',
-  //                   options: {
-  //                     adaptive: true, // true by default
-  //                   },
-  //                 },
-  //                 {
-  //                   name: 'computeStyles',
-  //                   options: {
-  //                     roundOffsets: ({ x, y }) => ({
-  //                       x: Math.round(x + 2),
-  //                       y: Math.round(y + 2),
-  //                     }),
-  //                   },
-  //                 },
-  //             ],
-  //           });
-
-  //           const state = await this.Popper.setOptions({modifiers: [
-  //               {
-  //                 name: 'offset',
-  //                 options: {
-  //                   offset: [0, 8],
-  //                 },
-  //                 }
-  //           ],});
-  //         };
-  //       },
-  //     }));
-  //   });
-  //   Alpine.directive("tooltip-source", (el, {}, { Alpine }) => {
-  //     Alpine.bind(el, () => ({
-  //       "u-init"() {
-  //         this.source = el;
-  //         this.PopperInitializer()
-  //       },
-  //       "u-on:mouseenter"() {
-  //         this.show();
-  //       },
-  //       "u-on:focus"() {
-  //         this.show();
-  //       },
-  //       "u-on:mouseleave"() {
-  //         this.hide();
-  //       },
-  //       "u-on:blur"() {
-  //         this.hide();
-  //       },
-  //     }));
-  //   });
-
-  //   Alpine.directive("tooltip-content", (el, {}, { Alpine }) => {
-  //     Alpine.bind(el, () => ({
-  //       "u-init"() {
-  //         this.target = el
-  //         this.PopperInitializer()
-  //       },
-  //     }));
-  //   });
-
-  //   Alpine.directive("tooltip-arrow", (el, {}, { Alpine }) => {
-
-  //     Alpine.bind(el, () => ({
-  //       "u-init"() {
-  //         this.arrow = el
-  //         this.PopperInitializer()
-  //       },
-  //     }));
-  //   });
-
-  // }
-
-  // //tooltip using floatinf-ui using old syntax
-  //
-  // export function Tooltip(Alpine) {
-  //   Alpine.directive("tooltip", (el, {}, { Alpine }) => {
-  //     Alpine.bind(el, () => ({
-  //       "u-data"() {
-  //         return {
-  //           source: null,
-  //           target: null,
-  //           arrow: null,
-  //           cleanUp: null,
-  //           string: 'hellow world',
-  //           updatePosition(source, target, arrowEl){
-  //             computePosition(source, target, {
-  //               placement: 'top',
-  //               middleware: [
-  //                 offset(6),
-  //                 flip(),
-  //                 shift({padding: 5}),
-  //                 arrowEl? arrow({element: arrowEl}): '',
-  //               ],
-  //             }).then(({x, y, placement, middlewareData}) => {
-  //               Object.assign(target.style, {
-  //                 left: `${x}px`,
-  //                 top: `${y}px`,
-  //               });
-
-  //               // Accessing the data
-  //               const {x: arrowX, y: arrowY} = middlewareData.arrow;
-
-  //               const staticSide = {
-  //                 top: 'bottom',
-  //                 right: 'left',
-  //                 bottom: 'top',
-  //                 left: 'right',
-  //               }[placement.split('-')[0]];
-
-  //               Object.assign(arrowEl.style, {
-  //                 left: arrowX != null ? `${arrowX}px` : '',
-  //                 top: arrowY != null ? `${arrowY}px` : '',
-  //                 right: '',
-  //                 bottom: '',
-  //                 [staticSide]: '-4px',
-  //               });
-  //             })
-  //           },
-  //           show() {
-  //             this.target.style.display = 'block'
-  //             this.cleanUp = autoUpdate(this.source, this.target, ()=>{
-  //               console.log('this', this.string)
-  //               this.updatePosition(this.source, this.target, this.arrow)
-  //             })
-  //           },
-  //           hide() {
-  //             this.target.style.display = 'none'
-  //             this.cleanUp()
-  //           },
-  //         };
-  //       },
-  //       "u-init"(){
-
-  //       }
-  //     }));
-  //   });
-  //   Alpine.directive("tooltip-source", (el, {}, { Alpine }) => {
-  //     Alpine.bind(el, () => ({
-  //         "u-init"(){
-  //           this.source = el
-  //         },
-  //         "u-on:mouseenter"(){
-  //             this.show()
-  //         },
-  //         "u-on:focus"(){
-  //             this.show()
-  //         },
-  //         "u-on:mouseleave"(){
-  //             this.hide()
-  //         },
-  //         "u-on:blur"(){
-  //             this.hide()
-  //         },
-  //     }))
-  //   });
-  //   Alpine.directive("tooltip-content", (el, {}, { Alpine }) => {
-  //     Alpine.bind(el, () => ({
-  //       "u-init"() {
-  //         this.target = el;
-  //       },
-  //     }));
-  //   });
-  //   Alpine.directive("tooltip-arrow", (el, {}, { Alpine }) => {
-  //     Alpine.bind(el, () => ({
-  //       "u-init"() {
-  //         this.arrow = el;
-  //       },
-  //     }));
-  //   });
-  // }
-
-  //tooltip using tippy
-  //
-  // export function Tooltip(Alpine) {
-  //   Alpine.directive("tooltip", (el, {}, { Alpine }) => {
-  //     console.log("tooltip registerd");
-  //     Alpine.bind(el, () => ({
-  //       "u-data"() {
-  //         return {
-  //           source: null,
-  //           target: null,
-  //         };
-  //       },
-  //       "u-init"(){
-  //       }
-  //     }));
-  //   });
-  //   Alpine.directive("tooltip-source", (el, {}, { Alpine }) => {
-  //     Alpine.bind(el, () => ({
-  //         "u-init"(){
-  //           this.source = el
-  //         },
-  //     }))
-  //   });
-  //   Alpine.directive("tooltip-content", (el, {}, { Alpine }) => {
-  //     Alpine.bind(el, () => ({
-  //       "u-init"() {
-  //         this.target = el;
-  //           tippy(this.source,{
-  //             content: this.target.innerHTML,
-  //             placement: "top",
-  //             delay: 50, // ms
-  //             allowHTML:true,
-  //             trigger: 'click',
-  //             interactive: true,
-  //             theme: 'tomato'
-  //           })
-  //       },
-  //     }));
-  //   });
-  // }
-
-  function ulibsPlugin(Alpine) {
-    document.body.setAttribute("u-data", "");
-
-    window.process = {env: {}};
-
+  function components(Alpine) {
     Popup(Alpine);
     ClientSideRouting(Alpine);
     Checkbox(Alpine);
@@ -12246,9 +11655,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     Form(Alpine);
     Accordion(Alpine);
     Icon(Alpine);
-
     AutoComplete(Alpine);
-    
     Modal(Alpine);
     Tabs(Alpine);
     Dropdown(Alpine);
@@ -12256,29 +11663,15 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   }
 
   document.addEventListener("DOMContentLoaded", () => {
+    if(!document.body.hasAttribute('u-data')) {
+      document.body.setAttribute("u-data", "");
+    }
+    
     module_default.prefix("u-");
-    module_default.plugin(ulibsPlugin);
+    module_default.plugin(components);
 
     window.Alpine = module_default;
     module_default.start();
   });
 
-  exports.Accordion = Accordion$1;
-  exports.AutoComplete = AutoComplete$1;
-  exports.Checkbox = Checkbox$1;
-  exports.ClientSideRouting = ClientSideRouting$1;
-  exports.Dropdown = Dropdown$1;
-  exports.Form = Form$1;
-  exports.Icon = Icon$1;
-  exports.Input = Input$1;
-  exports.Modal = Modal$1;
-  exports.Popup = Popup$1;
-  exports.Radio = Radio$1;
-  exports.Select = Select$1;
-  exports.Tabs = Tabs$1;
-  exports.Textarea = Textarea$1;
-  exports.Tooltip = Tooltip$1;
-
-  return exports;
-
-})({});
+})();

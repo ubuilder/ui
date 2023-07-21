@@ -11,7 +11,7 @@ export default function () {
       Preview(
         {
           code: `
-Button(["Login", Tooltip("Hi, Welcome!")
+Button(["Login", Tooltip("Hi, Welcome!")])
   `,
         },
         [Button(["Login", Tooltip("Hi, Welcome!")])]
@@ -24,7 +24,7 @@ Button(["Login", Tooltip("Hi, Welcome!")
           [Button(["no arrow", Tooltip({ arrow: false }, "Hi, Welcome!")])]
           `,
         },
-        [Button(["no arrow", Tooltip({arrow: false}, "Hi, Welcome!")])]
+        [Button(["no arrow", Tooltip({ arrow: false }, "Hi, Welcome!")])]
       ),
     ]),
     Section(
@@ -102,7 +102,7 @@ Button(["Login", Tooltip("Hi, Welcome!")
   `,
           },
           [
-            View({ px: 'md', py: 'xxs', border: true, d: 'inline-block' }, [
+            View({ px: "md", py: "xxs", border: true, d: "inline-block" }, [
               "action",
               Tooltip({}, [
                 View([
@@ -111,6 +111,27 @@ Button(["Login", Tooltip("Hi, Welcome!")
                 ]),
               ]),
             ]),
+          ]
+        ),
+      ]
+    ),
+    Section(
+      {
+        title: "Different Target component",
+        description:
+          "You can change target element by changing 'target' property, supports css like selectors",
+      },
+      [
+        Preview(
+          {
+            code: `[
+  Button({ id: "my-button" }, "action"),
+  Tooltip({ target: "#my-button" }, "This tooltip is not child of the button"),
+]`,
+          },
+          [
+            Button({ id: "my-button" }, "action"),
+            Tooltip({ target: "#my-button" }, "This tooltip is not child of the button"),
           ]
         ),
       ]
