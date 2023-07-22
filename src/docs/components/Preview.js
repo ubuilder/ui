@@ -10,6 +10,8 @@ import {
 } from "../../components/index.js";
 import { Base } from "../../utils.js";
 
+import * as components from '../../components/index.js'
+
 let id = 0;
 
 export const Preview = Base({
@@ -78,7 +80,7 @@ export const Preview = Base({
     }
     </style>
     <script type="module">
-        import {View, Button, Avatar, Tooltip} from 'https://unpkg.com/@ulibs/ui@next/src/components/index.js'
+        import {${Object.keys(components).join(', ')}} from 'https://unpkg.com/@ulibs/ui@next/src/components/index.js'
 
         const page = View({d: 'inline-flex', p: 'sm', gap: 'xs'},${code.trim()})
 
