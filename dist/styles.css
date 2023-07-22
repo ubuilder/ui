@@ -1,7 +1,7 @@
 /* #region Root */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
 @import "https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css";
-:root {
+:root, [u-view-theme=light] {
   --color-primary-200: #97bced;
   --color-primary-300: #7fb0e8;
   --color-primary-400: #5593e6;
@@ -65,6 +65,9 @@
   --color-base-700: var(--color-light-700);
   --color-base-800: var(--color-light-800);
   --color-base-900: var(--color-light-900);
+}
+
+:root {
   --size-base: 1.5rem;
   --size-xxs: calc(0.25 * var(--size-base));
   --size-xs: calc(0.5 * var(--size-base));
@@ -86,7 +89,7 @@
 
 /* #endregion */
 /* #region Dark */
-.dark {
+[u-view-theme=dark] {
   --color-base-100: var(--color-dark-100);
   --color-base-200: var(--color-dark-200);
   --color-base-300: var(--color-dark-300);
@@ -104,7 +107,7 @@
   color: var(--color-base-900);
 }
 
-.light {
+[u-view-theme=light] {
   --color-base-100: var(--color-light-100);
   --color-base-200: var(--color-light-200);
   --color-base-300: var(--color-light-300);
@@ -3187,4 +3190,30 @@ h6 {
   transition-property: all;
   transition-duration: 400ms;
   transition-timing-function: ease-in;
+}
+
+[u-tooltip] {
+  box-sizing: border-box;
+  display: none;
+  width: max-content;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: calc(var(--size-xxs) / 2) var(--size-xs);
+  font-size: var(--size-sm);
+  color: var(--color-base-400);
+  background-color: var(--color-base-900);
+  z-index: 99;
+  border: 1px solid var(--color-base-400);
+  background-clip: padding-box;
+  border-radius: calc(var(--size-xxs) / 2);
+}
+
+[u-tooltip-arrow] {
+  z-index: -1;
+  position: absolute;
+  width: var(--size-xs);
+  height: var(--size-xs);
+  transform: rotate(45deg);
+  background-color: var(--color-base-900);
 }

@@ -18,12 +18,14 @@ export function Form(Alpine) {
         value: () => {
           let value = [];
 
-          el.querySelectorAll("[u-checkbox-group-item-input]").forEach((item) => {
-            if (item.checked) {
-              value = [...value, item.value];
+          el.querySelectorAll("[u-checkbox-group-item-input]").forEach(
+            (item) => {
+              if (item.checked) {
+                value = [...value, item.value];
+              }
             }
-          });
-          
+          );
+
           return value;
         },
       };
@@ -37,14 +39,10 @@ export function Form(Alpine) {
           let value = "";
 
           el.querySelectorAll("[u-radio-group-input]").forEach((item) => {
-            console.log({ item });
-            console.log("item ", item.checked, item.value);
-
             if (item.checked) {
               value = item.value;
             }
           });
-          console.log({ value });
           return value;
         },
       };
@@ -94,7 +92,6 @@ export function Form(Alpine) {
 
     for (let input of inputs) {
       el.querySelectorAll(`[u-${input}]`).forEach((el) => {
-        console.log('initialize', input)
         const { name, value } = handlers[input](el);
 
         fields[name] = value;
@@ -118,30 +115,33 @@ export function Form(Alpine) {
         event.preventDefault();
 
         Object.keys(fields).map((key) => {
-          console.log(key, "fields: ", fields);
           value[key] = fields[key]();
         });
 
-        const pathname = window.location.pathname;
+        if (el.getAttribute("method") === "FUNCTION") {
+          const result = await window[el.getAttribute("action")](value);
 
-        const url = pathname.endsWith("/")
-          ? pathname.substring(0, pathname.length - 1)
-          : pathname + "?" + el.getAttribute("action");
+          console.log({result});
+        } else {
+          const pathname = window.location.pathname;
 
-        try {
-          // support function call
-          console.log("function call");
-          const result = await fetch(url, {
-            method: "POST", // el.method,
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(value),
-          }).then((res) => res.json());
+          const url = pathname.endsWith("/")
+            ? pathname.substring(0, pathname.length - 1)
+            : pathname + "?" + el.getAttribute("action");
 
-          console.log({ result });
-        } catch (err) {
-          console.log(err);
+          try {
+            const result = await fetch(url, {
+              method: "POST", // el.method,
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(value),
+            }).then((res) => res.json());
+
+            console.log({ result });
+          } catch (err) {
+            console.log(err);
+          }
         }
       },
     });

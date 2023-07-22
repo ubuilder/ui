@@ -14,16 +14,10 @@ import { Select } from "./select";
 import { Textarea } from "./textarea";
 import { Tabs } from "./tabs";
 import { Dropdown } from "./dropdown";
+import { Tooltip } from "./tooltip";
 
-export * from "./bind";
-
-
-function ulibsPlugin(Alpine) {
-  document.body.setAttribute("u-data", "");
-
-  window.process = {env: {}}
-
-  Popup(Alpine)
+function components(Alpine) {
+  Popup(Alpine);
   ClientSideRouting(Alpine);
   Checkbox(Alpine);
   Radio(Alpine);
@@ -33,17 +27,20 @@ function ulibsPlugin(Alpine) {
   Form(Alpine);
   Accordion(Alpine);
   Icon(Alpine);
-
-  AutoComplete(Alpine)
-  
+  AutoComplete(Alpine);
   Modal(Alpine);
   Tabs(Alpine);
   Dropdown(Alpine);
+  Tooltip(Alpine);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  if(!document.body.hasAttribute('u-data')) {
+    document.body.setAttribute("u-data", "");
+  }
+  
   Alpine.prefix("u-");
-  Alpine.plugin(ulibsPlugin);
+  Alpine.plugin(components);
 
   window.Alpine = Alpine;
   Alpine.start();

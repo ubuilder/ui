@@ -54,9 +54,6 @@ export function classname(component, cssProps = {}, globalClasses = "") {
 
   Object.keys(cssProps).map((key) => {
     let value = cssProps[key];
-
-    console.log("classname: ", key, paramCase(key));
-
     if (typeof value === "number" || typeof value === "string") {
       classes.push([prefix, component, paramCase(key), value].join("-"));
     }

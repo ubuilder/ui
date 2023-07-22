@@ -71,7 +71,7 @@ export default function () {
       CardHeader([
         CardTitle("List of Users"),
         Button({ onClick: "$modal.open('add-user')" }, [
-          Icon({ name: "plus" }),
+          Icon("plus"),
           "Add User",
         ]),
       ]),
@@ -100,11 +100,11 @@ export default function () {
                 TableCell([
                   TableActions([
                     Button({ onClick: `editUser(${row.id})`, color: "info" }, [
-                      Icon({ name: "pencil" }),
+                      Icon("pencil"),
                     ]),
                     Button(
                       { onClick: `removeUser(${row.id})`, color: "error" },
-                      [Icon({ name: "trash" })]
+                      [Icon("trash")]
                     ),
                   ]),
                 ]),

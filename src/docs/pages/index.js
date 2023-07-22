@@ -39,6 +39,8 @@ export default ({ prefix }) => {
       Item({ slug: `progress`, text: "Progress" }),
       Item({ slug: `spinner`, text: "Spinner" }),
       Item({ slug: `tabs`, text: "Tabs" }),
+      Item({ slug: `tooltip`, text: "Tooltip" }),
+
       Item({ slug: `view`, text: "View" }),
 
       Col({w: 100}, View({tag: 'h3', pt: 'sm', style: 'font-weight: normal'}, 'Examples')),

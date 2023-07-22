@@ -47,7 +47,6 @@ export function ClientSideRouting(Alpine) {
       });
   
       window.addEventListener("popstate", async function () {
-        console.log("popstate", window.location.pathname);
         await updateRoute(window.location.pathname);
       });
   
