@@ -1,38 +1,41 @@
 export function Icon(Alpine) {
   Alpine.directive("icon", (el) => {
-    const iconName = el.getAttribute("name");
-    const model = el.getAttribute("model");
+    const iconName = el.textContent;
 
-    Alpine.bind(el, {
-      "u-modelable": "value",
-      'u-model': model,
-      "u-data"() {
-        return {
-          value: iconName,
-        };
-      },
-    });
-    Alpine.bind(el, {
-      "u-init"() {
-        
-        return this.$watch("value", async (value) => {
-          try {
-            const res = await fetch(`https://unpkg.com/@tabler/icons@2.19.0/icons/${value}.svg`)
-            const svg = await res.text()
+    const name = el.getAttribute("name");
 
-            if(svg.indexOf('Cannot') > -1) {
-              el.innerHTML = ''
-              // console.log('icon not loaded', value)
-            } else {
-              el.innerHTML = svg;
-            }
+    async function setIcon(value) {
+      try {
+        const res = await fetch(
+          `https://unpkg.com/@tabler/icons@2.19.0/icons/${value}.svg`
+        );
+        const svg = await res.text();
 
-          } catch (err) {
-            el.innerHTML = ''
-            //
-          }
-        });
-      },
-    });
+        if (svg.indexOf("Cannot") > -1) {
+          el.innerHTML = "";
+          // console.log('icon not loaded', value)
+        } else {
+          el.innerHTML = svg;
+        }
+      } catch (err) {
+        el.innerHTML = "";
+        //
+      }
+    }
+
+    if (name) {
+      Alpine.bind(el, {
+        "u-model": name,
+        "u-init"() {
+          this.$watch(name, (value) => setIcon(value));
+        },
+      });
+    } else {
+      Alpine.bind(el, {
+        "u-init"() {
+          setIcon(iconName);
+        },
+      });
+    }
   });
 }
