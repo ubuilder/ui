@@ -63,7 +63,7 @@ export function Tooltip(Alpine) {
       });
     }
 
-    Alpine.bind(el.parentNode, () => ({
+    Alpine.bind(target, () => ({
       "u-data"() {
         return {
           show() {
@@ -100,7 +100,7 @@ export function Tooltip(Alpine) {
     }));
 
     if (trigger == "click") {
-      Alpine.bind(el.parentNode, () => ({
+      Alpine.bind(target, () => ({
         "u-on:focus"() {
           this.show();
         },
@@ -112,7 +112,7 @@ export function Tooltip(Alpine) {
         },
       }));
     } else {
-      Alpine.bind(el.parentNode, () => ({
+      Alpine.bind(target, () => ({
         "u-on:mouseenter"() {
           this.show();
         },
