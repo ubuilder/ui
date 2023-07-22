@@ -32,8 +32,6 @@ export default () => DocPage({name: 'FormField'}, [
                     Button('H6'),
                 ])
             ])
-    
         ])
-
     ]),
 ])
