@@ -3202,13 +3202,18 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
   function Form(Alpine) {
     const handlers = {
-      input: (el) => ({ name: el.name, value: () => el.value }),
+      input: (el) => ({
+        name: el.name,
+        get: () => el.value,
+        set: (value) => (el.value = value),
+      }),
       checkbox: (el) => {
         const checkbox = el.querySelector("[u-checkbox-input]");
 
         return {
           name: checkbox.name,
-          value: () => checkbox.checked,
+          get: () => checkbox.checked,
+          set: (value) => (checkbox.checked = value),
         };
       },
       "checkbox-group": (el) => {
@@ -3217,7 +3222,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
         return {
           name,
-          value: () => {
+          get: () => {
             let value = [];
 
             el.querySelectorAll("[u-checkbox-group-item-input]").forEach(
@@ -3230,6 +3235,19 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
             return value;
           },
+          set(value) {
+            console.log("set value of checkbox group to", value);
+
+            el.querySelectorAll("[u-checkbox-group-item-input]").forEach(
+              (item) => {
+                if (value.includes(item.value)) {
+                  item.checked = true;
+                } else {
+                  item.checked = false;
+                }
+              }
+            );
+          },
         };
       },
       "radio-group": (el) => {
@@ -3237,15 +3255,23 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
         return {
           name,
-          value: () => {
+          get: () => {
             let value = "";
 
-            el.querySelectorAll("[u-radio-group-input]").forEach((item) => {
+            el.querySelectorAll("[u-radio-group-item-input]").forEach((item) => {
               if (item.checked) {
                 value = item.value;
               }
             });
             return value;
+          },
+          set: (value) => {
+            el.querySelectorAll("[u-radio-group-item-input]").forEach((item) => {
+              console.log("radio group", item.value, value);
+              if (item.value === value) {
+                item.checked = true;
+              }
+            });
           },
         };
       },
@@ -3255,7 +3281,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
         return {
           name,
-          value() {
+          get() {
             if (multiple) {
               const selected = Array.from(el.selectedOptions)
                 .map((option) => option.value)
@@ -3263,9 +3289,22 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
               return selected;
             } else {
-              const selected = el.selectedOptions[0].value;
+              const selected = el.selectedOptions[0];
 
-              return selected;
+              console.log(selected);
+              if (selected) return selected.value;
+              return undefined;
+            }
+          },
+          set(value) {
+            console.log("set value of select to", value);
+            if (Array.isArray(value)) {
+              Array.from(el.options).map((option) => {
+                if (value.includes(option.value)) option.selected = true;
+                else option.selected = false;
+              });
+            } else {
+              el.value = value;
             }
           },
         };
@@ -3275,28 +3314,36 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
         return {
           name,
-          value: () => el.value,
+          get: () => el.value,
+          set: (value) => (el.value = value),
         };
       },
     };
 
-    Alpine.directive("form", (el) => {
+    Alpine.directive("form", (el, {}, {evaluateLater}) => {
+      let actionFn;
+
+      let method = el.getAttribute('method');
+   
+      if(method === 'FUNCTION') {
+        actionFn = evaluateLater(el.getAttribute('action'));
+        // console.log(actionFn(el, el, value))
+        
+      }
+
       const fields = {};
 
-      let inputs = [
-        "input",
-        "checkbox",
-        "checkbox-group",
-        "radio-group",
-        "select",
-        "textarea",
-      ];
+      const formValue = JSON.parse(el.getAttribute("value") ?? "{}");
 
-      for (let input of inputs) {
+      for (let input in handlers) {
         el.querySelectorAll(`[u-${input}]`).forEach((el) => {
-          const { name, value } = handlers[input](el);
+          const { name, get, set } = handlers[input](el);
 
-          fields[name] = value;
+          if (typeof formValue[name] !== "undefined") {
+            set(formValue[name]);
+          }
+
+          fields[name] = { get, set };
         });
       }
 
@@ -3305,7 +3352,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           let result = {};
 
           for (let field in fields) {
-            result[field] = fields[field]();
+            result[field] = fields[field].get();
           }
           return result;
         },
@@ -3317,13 +3364,15 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           event.preventDefault();
 
           Object.keys(fields).map((key) => {
-            value[key] = fields[key]();
+            value[key] = fields[key].get();
           });
 
-          if (el.getAttribute("method") === "FUNCTION") {
-            const result = await window[el.getAttribute("action")](value);
+          if (el.getAttribute("method") === "FUNCTION") {          
 
-            console.log({result});
+            console.log(actionFn);
+            const result = await actionFn((v) => v, { scope: { '$value': value }, params: [value] });
+
+            console.log({ result });
           } else {
             const pathname = window.location.pathname;
 
@@ -3349,41 +3398,6 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       });
     });
   }
-
-  /** export function Form($el) {
-    $el.addEventListener("submit", async (event) => {
-      event.preventDefault();
-
-      const entries = new FormData($el);
-      const data = Object.fromEntries(entries);
-
-      const pathname = window.location.pathname;
-
-      // Checkbox Group
-      $el.querySelectorAll("[multiple]").forEach((el) => {
-        console.log(el);
-        data[el.getAttribute("name")] = entries.getAll(el.getAttribute("name"));
-      });
-
-      const url = pathname.endsWith("/")
-        ? pathname.substring(0, pathname.length - 1)
-        : pathname + "?" + $el.getAttribute("u-action");
-
-      const result = await fetch(url, {
-        method: $el.method,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      }).then((res) => res.json());
-
-      alert(result);
-    });
-    //
-  }
-
-  register("u-form", Form);
-  */
 
   /**
   * Tom Select v2.2.2
@@ -9944,6 +9958,10 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     
       Alpine.directive("input", (el) => {
         Alpine.bind(el, {
+          // initial value
+          'u-init'() {
+            this.$data[el.getAttribute('name')] = el.value;
+          },
           "u-on:input"(e) {
             this.$data[el.getAttribute("name")] = e.target.value;
           },
@@ -11554,6 +11572,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         document.querySelector(el.getAttribute("u-tooltip-target")) ?? el.parentNode;
       const floatingEl = el;
 
+      console.log(target);
       target.setAttribute('u-tooltip-reference', '');
       
       const offsetValue = el.getAttribute("u-tooltip-offset") ?? 0;
@@ -11603,7 +11622,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         });
       }
 
-      Alpine.bind(el.parentNode, () => ({
+      Alpine.bind(target, () => ({
         "u-data"() {
           return {
             show() {
@@ -11640,7 +11659,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       }));
 
       if (trigger == "click") {
-        Alpine.bind(el.parentNode, () => ({
+        Alpine.bind(target, () => ({
           "u-on:focus"() {
             this.show();
           },
@@ -11652,7 +11671,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           },
         }));
       } else {
-        Alpine.bind(el.parentNode, () => ({
+        Alpine.bind(target, () => ({
           "u-on:mouseenter"() {
             this.show();
           },
