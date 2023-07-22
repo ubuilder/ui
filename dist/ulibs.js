@@ -3165,7 +3165,6 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       const name = el.getAttribute("name");
 
       async function setIcon(value) {
-        console.log("set icon");
         try {
           const res = await fetch(
             `https://unpkg.com/@tabler/icons@2.19.0/icons/${value}.svg`
@@ -3187,12 +3186,10 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       if (name) {
         Alpine.bind(el, {
           "u-model": name,
-
           "u-init"() {
             this.$watch(name, (value) => setIcon(value));
           },
         });
-        
       } else {
         Alpine.bind(el, {
           "u-init"() {
