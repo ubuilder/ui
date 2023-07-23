@@ -18,6 +18,7 @@ export const Preview = Base({
     const code = $props.code;
     const prefix = $props.prefix ?? '/ui/';
     const height = $props.height;
+    const width = $props.width;
     
     function indent(level) {
       return Array.from({ length: level + 1 }).join("  ");
@@ -86,9 +87,9 @@ export const Preview = Base({
         TabsList([TabsItem("Preview"), TabsItem("HTML"), TabsItem("JS")]),
         TabsContent([
           TabsPanel(
-            { style: `position: relative; padding: 0; min-height: 100px; height: ${height}px` },
+            { style: `padding: 0; min-height: 100px; overflow-x: auto;` },
             [
-              View({id: 'preview-html-' + id}),
+              View({id: 'preview-html-' + id, w: 100, style: `position: relative; height: ${height}px; min-width: ${width}px`}),
             ]
           ),
           TabsPanel([

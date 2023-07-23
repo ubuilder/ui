@@ -40,7 +40,6 @@ export default ({ theme, prefix }) =>
 
     Section({ title: "Container (static)" }, [
       Preview({
-        height: 800,
         code: `AlertContainer({name: 'my-alert-container'}, [
             Alert({title: 'First', icon: 'check'}, 'First Alert'),
             Alert({title: 'Second', color: 'error'}, 'Second Alert'),
@@ -56,7 +55,7 @@ export default ({ theme, prefix }) =>
       },
       [
         Preview({
-          height: 800,
+          height: 800, width: 600,
           code: `AlertContainer({name: 'my-alert-container-2', placement: 'top-end'}, [
             Alert({title: 'First', icon: 'check'}, 'First Alert'),
             Alert({title: 'Second', color: 'error'}, 'Second Alert'),
@@ -71,7 +70,7 @@ export default ({ theme, prefix }) =>
         description: "You can use $alert magic to add new alerts",
       },
       [
-        Preview({height: 800, code: `[
+        Preview({height: 800, width: 600, code: `[
           View([
             Button(
               {
