@@ -5,8 +5,6 @@ import {
   TabsList,
   TabsContent,
   TabsItem,
-  Icon,
-  Spinner,
 } from "../../components/index.js";
 import { Base } from "../../utils.js";
 
@@ -71,8 +69,6 @@ export const Preview = Base({
 
     const page = View({d: 'inline-flex', p: 'sm', gap: 'xs'},[${code.trim()}])
 
-
-    console.log('execute script', page)
     document.getElementById("preview-html-${id}").innerHTML = page.toString()
     document.getElementById("preview-code-${id}").innerHTML = page.toString().replace(/</g, "\\n&#60;").replace(/>/g, "&#62;\\n\\t").replace(/\\n/g, '<br/>')
 `
@@ -83,24 +79,7 @@ export const Preview = Base({
         htmlHead: [
           View({type: 'module', tag: 'script'}, script)
         ],
-        // script: `
-        // document.domain = "${host}";
-        // window.addEventListener('message', event => {
-        //   function removeSpinner(id) {
-        //     document.querySelector("#preview-spinner-" + id).style.display = 'none'
-            
-        // }
-        //   if (event.data.type === 'code') { 
-              
-        //       document.querySelector('#preview-code-' + event.data.id).innerHTML = event
-        //         .data.page.toString().replace(/</g, "\\n&#60;").replace(/>/g, "&#62;\\n\\t").replace(/\\n/g, '<br/>')
-
-        //     removeSpinner(event.data.id)
-        //     } else {
-        //       // The data was NOT sent from your site!
-        //       return;
-        //     }
-        //   });`,
+     
       },
       [
         TabsList([TabsItem("Preview"), TabsItem("HTML"), TabsItem("JS")]),
@@ -111,7 +90,6 @@ export const Preview = Base({
               View({id: 'preview-html-' + id}),
             ]
           ),
-          // TabsPanel([View($props, $slots)]),
           TabsPanel([
             View(
               {
@@ -120,13 +98,7 @@ export const Preview = Base({
                   "font-size: var(--size-xs); line-height: var(--size-sm); overflow: auto",
               },
               [
-                View({ tag: "code", id: "preview-code-" + id }, [
-                  // getHTMLCode(code)
-                  //   $slots
-                  //     .join("\n")
-                  //     .replace(/</g, "\n&#60;")
-                  //     .replace(/>/g, "&#62;\n\t"),
-                ]),
+                View({ tag: "code", id: "preview-code-" + id })
               ]
             ),
           ]),
