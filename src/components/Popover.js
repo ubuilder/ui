@@ -2,7 +2,7 @@ import { Base } from "../utils.js";
 import { View } from "./View.js";
 
 export const Popover = Base({
-  render($props, $slots){
+  render($props, $slots) {
     const {
       component = "popover",
       size = "md",
@@ -10,12 +10,13 @@ export const Popover = Base({
       target,
       offset,
       margin,
-      placement = 'bottom',
+      placement = "bottom",
       arrowMargin,
       flip = true,
       shift = true,
       persistant = true,
-      trigger = "click",//click, hover
+      focusAble = true,
+      trigger = "click", //click, hover
       ...restProps
     } = $props;
 
@@ -23,7 +24,7 @@ export const Popover = Base({
       ...restProps,
       component,
       cssProps: {
-        target,        
+        target,
         size,
         offset,
         placement,
@@ -33,13 +34,17 @@ export const Popover = Base({
         flip,
         shift,
       },
-    };    
-    
-    return View(props, [
-      arrow ? View({component: component + '-arrow'}) : [],
-      persistant ? View({component : component + "-edge"}): [],
-      $slots
-    ])
-  }
-});
+    };
 
+    return View(props, [
+      arrow ? View({ component: component + "-arrow" }) : [],
+      persistant
+        ? View({
+            component: component + "-edge",
+            ...(focusAble ? { "u-tooltip-focus-able": "" } : ""),
+          })
+        : [],
+      $slots,
+    ]);
+  },
+});
