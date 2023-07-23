@@ -1,4 +1,5 @@
-import { EditorView, keymap, lineNumbers } from '@codemirror/view'
+import {  keymap, lineNumbers } from '@codemirror/view'
+import { EditorState } from '@codemirror/state'
 import {defaultKeymap} from "@codemirror/commands"
 import { javascript } from '@codemirror/lang-javascript'
 import { css } from '@codemirror/lang-css'
@@ -6,7 +7,10 @@ import { html } from '@codemirror/lang-html'
 import {StateEffect, StateField} from "@codemirror/state"
 import {Decoration} from "@codemirror/view"
 
+
 import {autocompletion} from "@codemirror/autocomplete"
+import { EditorView, basicSetup } from 'codemirror'
+console.log('basicSetup: ', basicSetup)
 
 // Our list of completions (can be static, since the editor
 /// will do filtering based on context).
@@ -14,7 +18,6 @@ const completions = [
     {label: "{{ID}}", type: "constant", info: 'This is help', apply: '{{id}}'},
     {label: "{{Name}}", type: "constant", info: 'This is help', apply: '{{name}}'},
     {label: "{{Username}}", type: "constant", info: 'This is help', apply: '{{username}}'},
-
 ]
 
 function myCompletions(context) {
@@ -40,6 +43,7 @@ export function CodeEditor(Alpine) {
         const lang = el.getAttribute('lang')
         const name = el.getAttribute('name')
         let doc = el.getAttribute('value')
+        const readonly = el.getAttribute('readonly')
         
         const languages = {
             jsx: javascript({jsx: true}),
@@ -61,6 +65,8 @@ export function CodeEditor(Alpine) {
             doc,
             dispatch: onUpdate,
             extensions: [
+                // basicSetup,
+                // EditorState.readOnly.of(readonly),
                 keymap.of(defaultKeymap), 
                 lineNumbers(), 
                 languages[lang] ?? languages['js'], // default language is js

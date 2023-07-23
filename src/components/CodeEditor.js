@@ -1,4 +1,6 @@
-import { FormField } from "./FormField";
+import { Base } from "../utils.js";
+import { FormField } from "./FormField.js";
+import { View } from "./View.js";
 
 export const CodeEditor = Base({
     render($props, $slots) {
