@@ -42,7 +42,7 @@
     "@floating-ui/dom": "^1.4.5",
     "@rollup/plugin-node-resolve": "^15.1.0",
     "@rollup/plugin-replace": "^5.0.2",
-    "@ulibs/router": "^0.0.19",
+    "@ulibs/router": "^0.0.20",
     "alpinejs": "^3.12.3",
     "concurrently": "^8.2.0",
     "http-server": "^14.1.1",
