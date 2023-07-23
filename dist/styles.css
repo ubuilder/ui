@@ -3217,3 +3217,42 @@ h6 {
   transform: rotate(45deg);
   background-color: var(--color-base-900);
 }
+
+[u-popover] {
+  box-sizing: border-box;
+  display: none;
+  width: max-content;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: calc(var(--size-xxs) / 2) var(--size-xs);
+  font-size: var(--size-sm);
+  color: var(--color-base-400);
+  background-color: var(--color-base-900);
+  z-index: 99;
+  border: 1px solid var(--color-base-400);
+  background-clip: padding-box;
+  border-radius: calc(var(--size-xxs) / 2);
+}
+
+[u-popover-arrow] {
+  z-index: -1;
+  position: absolute;
+  width: var(--size-xs);
+  height: var(--size-xs);
+  transform: rotate(45deg);
+  background-color: var(--color-base-900);
+}
+
+[u-popover-edge] {
+  box-sizing: content-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  border-color: transparent;
+  border-style: solid;
+  opacity: 0;
+}
