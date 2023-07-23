@@ -15,6 +15,7 @@ import { Textarea } from "./textarea";
 import { Tabs } from "./tabs";
 import { Dropdown } from "./dropdown";
 import { Tooltip } from "./tooltip";
+import { Popover } from "./popover";
 
 function components(Alpine) {
   Popup(Alpine);
@@ -32,6 +33,7 @@ function components(Alpine) {
   Tabs(Alpine);
   Dropdown(Alpine);
   Tooltip(Alpine);
+  Popover(Alpine);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
