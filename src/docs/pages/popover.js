@@ -21,7 +21,8 @@ export default function () {
       },
       [
         Preview({
-          code: `Button(["click me", Popover("Hi, it is popover")])`,
+          code: `
+  Button(["click me", Popover("Hi, it is popover")])`,
         }),
       ]
     ),
@@ -32,7 +33,8 @@ export default function () {
       },
       [
         Preview({
-          code: `Button(["hover me", Popover({trigger: 'hover'},"Hi, it is popover")])`,
+          code: `
+  Button(["hover me", Popover({trigger: 'hover'},"Hi, it is popover")])`,
         }),
       ]
     ),
@@ -44,7 +46,8 @@ export default function () {
       },
       [
         Preview({
-          code: `Button(["hover, none-persistant", Popover({trigger: 'hover',persistant: 'false' },"Hi, it is popover")])`,
+          code: `
+  Button(["hover, none-persistant", Popover({trigger: 'hover',persistant: 'false' },"Hi, it is popover")])`,
         }),
       ]
     ),
@@ -55,7 +58,8 @@ export default function () {
       },
       [
         Preview({
-          code: `Button(["hover, none-persistant, arrow", Popover({trigger: 'hover',persistant: 'false', arrow: 'true' },"Hi, it is popover")])`,
+          code: `
+  Button(["hover, none-persistant, arrow", Popover({trigger: 'hover',persistant: 'false', arrow: 'true' },"Hi, it is popover")])`,
         }),
       ]
     ),
@@ -68,10 +72,10 @@ export default function () {
       [
         Preview({
           code: `
-          Button(["hover, persistant, arrow, top", Popover({trigger: 'hover',persistant: 'true', arrow: 'true', placement: 'top' },"Hi, it is popover")]),
-          Button(["hover, persistant, arrow, left", Popover({trigger: 'hover',persistant: 'true', arrow: 'true', placement: 'left' },"Hi, it is popover")]),
-          Button(["hover, persistant, arrow, bottom", Popover({trigger: 'hover',persistant: 'true', arrow: 'true', placement: 'bottom' },"Hi, it is popover")]),
-          Button(["hover, persistant, arrow, right", Popover({trigger: 'hover',persistant: 'true', arrow: 'true', placement: 'right' },"Hi, it is popover")]),
+  Button(["hover, persistant, arrow, top", Popover({trigger: 'hover',persistant: 'true', arrow: 'true', placement: 'top' },"Hi, it is popover")]),
+  Button(["hover, persistant, arrow, left", Popover({trigger: 'hover',persistant: 'true', arrow: 'true', placement: 'left' },"Hi, it is popover")]),
+  Button(["hover, persistant, arrow, bottom", Popover({trigger: 'hover',persistant: 'true', arrow: 'true', placement: 'bottom' },"Hi, it is popover")]),
+  Button(["hover, persistant, arrow, right", Popover({trigger: 'hover',persistant: 'true', arrow: 'true', placement: 'right' },"Hi, it is popover")]),
           `,
         }),
       ]
@@ -84,19 +88,19 @@ export default function () {
       [
         Preview({
           code: `
-          Button([
-            "hover, persistant",
-            Popover({ trigger: "hover", persistant: "true" }, [
-              View([
-                View("this is view1"),
-                Popover({ trigger: "hover", persistant: "true" }, "popover"),
-              ]),
-              View([
-                View("this is view2"),
-                Popover({ trigger: "hover", persistant: "true" }, "popover"),
-              ]),
-            ]),
-          ]),
+  Button([
+    "hover, persistant",
+    Popover({ trigger: "hover", persistant: "true" }, [
+      View([
+        View("this is view1"),
+        Popover({ trigger: "hover", persistant: "true" }, "popover"),
+      ]),
+      View([
+        View("this is view2"),
+        Popover({ trigger: "hover", persistant: "true" }, "popover"),
+      ]),
+    ]),
+  ]),
           `,
         }),
       ]
@@ -110,13 +114,13 @@ export default function () {
       [
         Preview({
           code: `
-          Button([
-            "tooltip only",
-            Popover(
-              { trigger: "hover", focusAble: false, arrow: true },
-              Input({ name: "test" })
-            ),
-          ]),
+  Button([
+    "tooltip only",
+    Popover(
+      { trigger: "hover", focusAble: false, arrow: true },
+      Input({ name: "test" })
+    ),
+  ]),
           `,
         }),
       ]
@@ -129,39 +133,36 @@ export default function () {
       [
         Preview({
           code: `
-          View({ border: "sm", style: "width: max-content" }, [
-            "hover, persistant",
-            Popover({ trigger: "hover", persistant: "true" }, [
-              Container({ size: "xl", mx: "auto" }, [
-                View({ tag: "h3" }, "Login form"),
-  
-                Form([
-                  Col([
-                    Row([
-                      View({ tag: "div", style: "display: block" }, "Username"),
-                      Input({ name: "username" }),
-                    ]),
-                    Row([View("password"), Input({ name: "password"})]),
-  
-                    Row({ border: true, p: "sm", mb: "sm" }, [
-                      View([
-                        View([
-                          "Username: ",
-                          View({ tag: "span", "u-text": "username" }),
-                        ]),
-                        View([
-                          "password: ",
-                          View({ tag: "span", "u-text": "password" }),
-                        ]),
-                      ]),
-                    ]),
-  
-                    Button({ type: "submit" ,color: 'primary'}, "Submit"),
-                  ]),
+  View({ border: "sm", style: "width: max-content" }, [
+    "hover, persistant",
+    Popover({ trigger: "hover", persistant: "true" }, [
+      Container({ size: "xl", mx: "auto" }, [
+        View({ tag: "h3" }, "Login form"),
+        Form([
+          Col([
+            Row([
+              View({ tag: "div", style: "display: block" }, "Username"),
+              Input({ name: "username" }),
+            ]),
+            Row([View("password"), Input({ name: "password"})]),
+            Row({ border: true, p: "sm", mb: "sm" }, [
+              View([
+                View([
+                  "Username: ",
+                  View({ tag: "span", "u-text": "username" }),
+                ]),
+                View([
+                  "password: ",
+                  View({ tag: "span", "u-text": "password" }),
                 ]),
               ]),
             ]),
+            Button({ type: "submit" ,color: 'primary'}, "Submit"),
           ]),
+        ]),
+      ]),
+    ]),
+  ]),
           `,
         }),
       ]
