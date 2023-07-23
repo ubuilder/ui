@@ -11793,6 +11793,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         if (trigger == "click") {
           Alpine.bind(target, () => ({
             "u-on:focus"() {
+              console.log('show');
               this.show();
             },
             "u-on:blur"() {
@@ -11802,6 +11803,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         } else {
           Alpine.bind(target, () => ({
             "u-on:mouseenter"() {
+              console.log('show');
               this.show();
             },
             "u-on:mouseleave"() {
@@ -11809,6 +11811,14 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
             },
           }));
         }
+        Alpine.bind(floatingEl, () => ({
+          "u-on:mouseenter"() {
+            floatingEl.focus();
+          },
+          "u-on:focus"() {
+            floatingEl.focus();
+          },
+        }));
 
         //if the persistant is false
         if(!edge){
@@ -11821,6 +11831,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
             },
           }));
         }
+        
       });
     }
 
