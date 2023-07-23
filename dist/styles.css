@@ -1,7 +1,8 @@
 /* #region Root */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
 @import "https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css";
-:root {
+:root, [u-view-theme=light] {
+  --color-primary-100: #c0d6f1;
   --color-primary-200: #97bced;
   --color-primary-300: #7fb0e8;
   --color-primary-400: #5593e6;
@@ -9,6 +10,7 @@
   --color-primary-600: #1d5aaa;
   --color-primary-700: #16519f;
   --color-primary-content: var(--color-light-100);
+  --color-secondary-100: #c6d0dc;
   --color-secondary-200: #a5b4c8;
   --color-secondary-300: #8396af;
   --color-secondary-400: #7686a0;
@@ -16,6 +18,7 @@
   --color-secondary-600: #576679;
   --color-secondary-700: #4a5869;
   --color-secondary-content: var(--color-light-100);
+  --color-success-100: #cbe6c4;
   --color-success-200: #a8e299;
   --color-success-300: #8ed27d;
   --color-success-400: #74c061;
@@ -23,6 +26,7 @@
   --color-success-600: #428d2f;
   --color-success-700: #347624;
   --color-success-content: var(--color-light-100);
+  --color-error-100: #e7c0c0;
   --color-error-200: #e69b9b;
   --color-error-300: #d67b7b;
   --color-error-400: #ca6161;
@@ -30,6 +34,7 @@
   --color-error-600: #872b2b;
   --color-error-700: #752626;
   --color-error-content: var(--color-light-100);
+  --color-warning-100: #f4daa7;
   --color-warning-200: #f7c560;
   --color-warning-300: #eeb84b;
   --color-warning-400: #f6af2a;
@@ -37,6 +42,7 @@
   --color-warning-600: #da960e;
   --color-warning-700: #cd8f13;
   --color-warning-content: var(--color-light-100);
+  --color-info-100: #b6ebf2;
   --color-info-200: #8be7f3;
   --color-info-300: #76d2de;
   --color-info-400: #60bdc9;
@@ -65,6 +71,9 @@
   --color-base-700: var(--color-light-700);
   --color-base-800: var(--color-light-800);
   --color-base-900: var(--color-light-900);
+}
+
+:root {
   --size-base: 1.5rem;
   --size-xxs: calc(0.25 * var(--size-base));
   --size-xs: calc(0.5 * var(--size-base));
@@ -86,7 +95,7 @@
 
 /* #endregion */
 /* #region Dark */
-.dark {
+[u-view-theme=dark] {
   --color-base-100: var(--color-dark-100);
   --color-base-200: var(--color-dark-200);
   --color-base-300: var(--color-dark-300);
@@ -94,6 +103,7 @@
   --color-base-700: var(--color-dark-700);
   --color-base-800: var(--color-dark-800);
   --color-base-900: var(--color-dark-900);
+  --color-primary-100: #0e2038;
   --color-primary-200: #193354;
   --color-primary-300: #234772;
   --color-primary-400: #3c6cab;
@@ -104,7 +114,7 @@
   color: var(--color-base-900);
 }
 
-.light {
+[u-view-theme=light] {
   --color-base-100: var(--color-light-100);
   --color-base-200: var(--color-light-200);
   --color-base-300: var(--color-light-300);
@@ -146,7 +156,7 @@ h3 {
   font-size: calc(var(--size-lg) * 0.8);
 }
 
-h4 {
+h4, [u-alert-title] {
   line-height: var(--size-md);
   font-size: calc(var(--size-md) * 0.8);
 }
@@ -270,6 +280,118 @@ h6 {
 
 [u-avatar-color=light] {
   --avatar-bg: var(--color-light-300);
+}
+
+[u-alert] {
+  --alert-shadow: var(--size-md);
+  transition: all 0.3s ease;
+  display: none;
+  flex-direction: column;
+  padding: var(--size-sm);
+  margin-bottom: var(--size-xs);
+  width: 100%;
+  min-width: calc(var(--size-container-sm) / 2);
+  border: 1px solid var(--color-base-400);
+  border-left: var(--size-xxs) solid var(--alert-border);
+  background-color: var(--color-base-200);
+  border-radius: var(--size-xxs);
+  box-shadow: 0 calc(var(--alert-shadow) / 4) calc(var(--alert-shadow) / 2) calc(var(--alert-shadow) / -4) rgba(0, 0, 0, 0.15);
+  gap: var(--size-sm);
+}
+
+[u-alert-open] {
+  display: flex;
+}
+
+[u-alert-content] {
+  color: var(--color-base-800);
+}
+
+[u-alert-icon] {
+  --icon-size: var(--size-md);
+}
+
+[u-alert-header] {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: var(--size-xs);
+}
+
+[u-alert-title] {
+  flex: 1;
+  color: var(--alert-title);
+}
+
+[u-alert-close] {
+  color: var(--color-base-400);
+  background-color: transparent;
+  border: none;
+  padding: var(--size-xxs);
+  cursor: pointer;
+}
+
+[u-alert-close]:hover {
+  color: var(--color-base-700);
+}
+
+[u-alert-color=primary] {
+  --alert-border: var(--color-primary-300);
+  --alert-title: var(--color-primary-500);
+}
+
+[u-alert-color=secondary] {
+  --alert-border: var(--color-secondary-300);
+  --alert-title: var(--color-secondary-500);
+}
+
+[u-alert-color=success] {
+  --alert-border: var(--color-success-300);
+  --alert-title: var(--color-success-500);
+}
+
+[u-alert-color=info] {
+  --alert-border: var(--color-info-300);
+  --alert-title: var(--color-info-500);
+}
+
+[u-alert-color=error] {
+  --alert-border: var(--color-error-300);
+  --alert-title: var(--color-error-500);
+}
+
+[u-alert-color=warning] {
+  --alert-border: var(--color-warning-300);
+  --alert-title: var(--color-warning-500);
+}
+
+[u-alert-container] {
+  display: flex;
+  flex-direction: column;
+}
+
+[u-alert-container-placement=top-end] {
+  position: absolute;
+  right: var(--size-md);
+  top: var(--size-md);
+}
+
+[u-alert-container-placement=top-start] {
+  position: absolute;
+  left: var(--size-md);
+  top: var(--size-md);
+}
+
+[u-alert-container-placement=bottom-end] {
+  position: absolute;
+  right: var(--size-md);
+  bottom: var(--size-md);
+}
+
+[u-alert-container-placement=bottom-start] {
+  position: absolute;
+  left: var(--size-md);
+  bottom: var(--size-md);
 }
 
 [u-badge] {
@@ -830,7 +952,7 @@ h6 {
 [u-textarea], [u-code-editor] {
   transition: all 0.3s ease;
   width: 100%;
-  background-color: var(--color-base-100);
+  background-color: var(--color-base-200);
   padding: var(--size-xxs) var(--size-sm);
   border: 1px solid var(--color-base-300);
   border-radius: calc(var(--size-xxs) / 2);
@@ -3197,4 +3319,30 @@ h6 {
   transition-property: all;
   transition-duration: 400ms;
   transition-timing-function: ease-in;
+}
+
+[u-tooltip] {
+  box-sizing: border-box;
+  display: none;
+  width: max-content;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: calc(var(--size-xxs) / 2) var(--size-xs);
+  font-size: var(--size-sm);
+  color: var(--color-base-400);
+  background-color: var(--color-base-900);
+  z-index: 99;
+  border: 1px solid var(--color-base-400);
+  background-clip: padding-box;
+  border-radius: calc(var(--size-xxs) / 2);
+}
+
+[u-tooltip-arrow] {
+  z-index: -1;
+  position: absolute;
+  width: var(--size-xs);
+  height: var(--size-xs);
+  transform: rotate(45deg);
+  background-color: var(--color-base-900);
 }

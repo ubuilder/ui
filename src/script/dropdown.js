@@ -62,15 +62,16 @@ export function Dropdown(Alpine){
   Alpine.directive('dropdown-panel', (el, {}, {evaluate})=>{
     Alpine.bind(el, () => ({
       "u-show": "open",
-      "@click.outside"(){
-        this.close()
-      } ,
-      "@hover"() {
-        clearTimeout(this.timeout)
-      },
-      "@hover.outside"(){
-        this.timeout = setTimeout(()=>{close()}, 200)
-      },
+      // "u-on:click.outside"(){
+      //   this.close()
+      // } ,
+      // "u-on:mouseenter"() {
+      //   clearTimeout(this.timeout)
+      // },
+      // "u-on:mouseleave"(){
+      //   this.timeout = setTimeout(()=>{close()}, 200)
+      // },
     }));
   })
 }
+

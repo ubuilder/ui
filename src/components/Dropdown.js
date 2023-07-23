@@ -59,7 +59,7 @@ export const DropdownItem = Base({
     };
 
     $slots = [
-      icon && Icon({ name: icon }),
+      icon && Icon(icon),
       label && View({ tag: "span" }, label),
       $slots,
     ];

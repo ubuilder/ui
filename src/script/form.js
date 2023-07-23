@@ -1,12 +1,17 @@
 export function Form(Alpine) {
   const handlers = {
-    input: (el) => ({ name: el.name, value: () => el.value }),
+    input: (el) => ({
+      name: el.name,
+      get: () => el.value,
+      set: (value) => (el.value = value),
+    }),
     checkbox: (el) => {
       const checkbox = el.querySelector("[u-checkbox-input]");
 
       return {
         name: checkbox.name,
-        value: () => checkbox.checked,
+        get: () => checkbox.checked,
+        set: (value) => (checkbox.checked = value),
       };
     },
     "checkbox-group": (el) => {
@@ -15,16 +20,31 @@ export function Form(Alpine) {
 
       return {
         name,
-        value: () => {
+        get: () => {
           let value = [];
 
-          el.querySelectorAll("[u-checkbox-group-item-input]").forEach((item) => {
-            if (item.checked) {
-              value = [...value, item.value];
+          el.querySelectorAll("[u-checkbox-group-item-input]").forEach(
+            (item) => {
+              if (item.checked) {
+                value = [...value, item.value];
+              }
             }
-          });
-          
+          );
+
           return value;
+        },
+        set(value) {
+          console.log("set value of checkbox group to", value);
+
+          el.querySelectorAll("[u-checkbox-group-item-input]").forEach(
+            (item) => {
+              if (value.includes(item.value)) {
+                item.checked = true;
+              } else {
+                item.checked = false;
+              }
+            }
+          );
         },
       };
     },
@@ -33,19 +53,23 @@ export function Form(Alpine) {
 
       return {
         name,
-        value: () => {
+        get: () => {
           let value = "";
 
-          el.querySelectorAll("[u-radio-group-input]").forEach((item) => {
-            console.log({ item });
-            console.log("item ", item.checked, item.value);
-
+          el.querySelectorAll("[u-radio-group-item-input]").forEach((item) => {
             if (item.checked) {
               value = item.value;
             }
           });
-          console.log({ value });
           return value;
+        },
+        set: (value) => {
+          el.querySelectorAll("[u-radio-group-item-input]").forEach((item) => {
+            console.log("radio group", item.value, value);
+            if (item.value === value) {
+              item.checked = true;
+            }
+          });
         },
       };
     },
@@ -55,7 +79,7 @@ export function Form(Alpine) {
 
       return {
         name,
-        value() {
+        get() {
           if (multiple) {
             const selected = Array.from(el.selectedOptions)
               .map((option) => option.value)
@@ -63,9 +87,22 @@ export function Form(Alpine) {
 
             return selected;
           } else {
-            const selected = el.selectedOptions[0].value;
+            const selected = el.selectedOptions[0];
 
-            return selected;
+            console.log(selected);
+            if (selected) return selected.value;
+            return undefined;
+          }
+        },
+        set(value) {
+          console.log("set value of select to", value);
+          if (Array.isArray(value)) {
+            Array.from(el.options).map((option) => {
+              if (value.includes(option.value)) option.selected = true;
+              else option.selected = false;
+            });
+          } else {
+            el.value = value;
           }
         },
       };
@@ -75,29 +112,36 @@ export function Form(Alpine) {
 
       return {
         name,
-        value: () => el.value,
+        get: () => el.value,
+        set: (value) => (el.value = value),
       };
     },
   };
 
-  Alpine.directive("form", (el) => {
+  Alpine.directive("form", (el, {}, {evaluateLater}) => {
+    let actionFn;
+
+    let method = el.getAttribute('method')
+ 
+    if(method === 'FUNCTION') {
+      actionFn = evaluateLater(el.getAttribute('action'))
+      // console.log(actionFn(el, el, value))
+      
+    }
+
     const fields = {};
 
-    let inputs = [
-      "input",
-      "checkbox",
-      "checkbox-group",
-      "radio-group",
-      "select",
-      "textarea",
-    ];
+    const formValue = JSON.parse(el.getAttribute("value") ?? "{}");
 
-    for (let input of inputs) {
+    for (let input in handlers) {
       el.querySelectorAll(`[u-${input}]`).forEach((el) => {
-        console.log('initialize', input)
-        const { name, value } = handlers[input](el);
+        const { name, get, set } = handlers[input](el);
 
-        fields[name] = value;
+        if (typeof formValue[name] !== "undefined") {
+          set(formValue[name]);
+        }
+
+        fields[name] = { get, set };
       });
     }
 
@@ -106,7 +150,7 @@ export function Form(Alpine) {
         let result = {};
 
         for (let field in fields) {
-          result[field] = fields[field]();
+          result[field] = fields[field].get();
         }
         return result;
       },
@@ -118,67 +162,58 @@ export function Form(Alpine) {
         event.preventDefault();
 
         Object.keys(fields).map((key) => {
-          console.log(key, "fields: ", fields);
-          value[key] = fields[key]();
+          value[key] = fields[key].get();
         });
 
-        const pathname = window.location.pathname;
+        if (el.getAttribute("method") === "FUNCTION") {          
 
-        const url = pathname.endsWith("/")
-          ? pathname.substring(0, pathname.length - 1)
-          : pathname + "?" + el.getAttribute("action");
+          const result = await actionFn((v) => v, { scope: { '$value': value }, params: [value] })
 
-        try {
-          // support function call
-          console.log("function call");
-          const result = await fetch(url, {
-            method: "POST", // el.method,
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(value),
-          }).then((res) => res.json());
+        } else {
+          const pathname = window.location.pathname;
 
-          console.log({ result });
-        } catch (err) {
-          console.log(err);
+          const url = pathname.endsWith("/")
+            ? pathname.substring(0, pathname.length - 1)
+            : pathname + "?" + el.getAttribute("action");
+
+          try {
+            const result = await fetch(url, {
+              method: "POST", // el.method,
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(value),
+            }).then((res) => res.json());
+
+            console.log({ result });
+          } catch (err) {
+            console.log(err);
+          }
         }
       },
     });
   });
+
+
+  Alpine.magic('post', (el) => {
+    return async (pathname, data = {}, headers = {}) => {
+      const result = await fetch(pathname, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify(data)
+      }).then(res => res.json())
+
+      return result;
+    }
+  })
+
+  Alpine.magic('get', (el) => {
+    return async (pathname) => {
+      const result = await fetch(pathname, {
+        method: 'GET',
+      }).then(res => res.json())
+
+      return result;
+    }
+  })
 }
-
-/** export function Form($el) {
-  $el.addEventListener("submit", async (event) => {
-    event.preventDefault();
-
-    const entries = new FormData($el);
-    const data = Object.fromEntries(entries);
-
-    const pathname = window.location.pathname;
-
-    // Checkbox Group
-    $el.querySelectorAll("[multiple]").forEach((el) => {
-      console.log(el);
-      data[el.getAttribute("name")] = entries.getAll(el.getAttribute("name"));
-    });
-
-    const url = pathname.endsWith("/")
-      ? pathname.substring(0, pathname.length - 1)
-      : pathname + "?" + $el.getAttribute("u-action");
-
-    const result = await fetch(url, {
-      method: $el.method,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    }).then((res) => res.json());
-
-    alert(result);
-  });
-  //
-}
-
-register("u-form", Form);
-*/

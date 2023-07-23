@@ -14,9 +14,32 @@ export function ClientSideRouting(Alpine) {
   
         morphdom(document.getElementsByTagName("html")[0], html, {
           onBeforeElUpdated(fromEl, toEl) {
+              if (fromEl.isEqualNode(toEl)) {
+                return false
+            }
             // Do not update icon if name is same
             if(fromEl.hasAttribute('u-icon') && fromEl.getAttribute('name') === toEl.getAttribute('name')) {
               return false
+            }
+            if (fromEl.nodeName === "SCRIPT" && toEl.nodeName === "SCRIPT" && fromEl.getAttribute('type') === 'module') {
+              var script = document.createElement('script');
+              //copy over the attributes
+              [...toEl.attributes].forEach( attr => { script.setAttribute(attr.nodeName ,attr.nodeValue) })
+
+              script.innerHTML = toEl.innerHTML;
+              fromEl.replaceWith(script)
+              return false;
+          } 
+          return true;
+          },
+          onNodeAdded: function (node) {
+            if (node.nodeName === 'SCRIPT') {
+                var script = document.createElement('script');
+                //copy over the attributes
+                [...node.attributes].forEach( attr => { script.setAttribute(attr.nodeName ,attr.nodeValue) })
+
+                script.innerHTML = node.innerHTML;
+                node.replaceWith(script)
             }
           }
         });
@@ -47,7 +70,6 @@ export function ClientSideRouting(Alpine) {
       });
   
       window.addEventListener("popstate", async function () {
-        console.log("popstate", window.location.pathname);
         await updateRoute(window.location.pathname);
       });
   

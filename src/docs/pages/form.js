@@ -125,5 +125,42 @@ export default function () {
     ])
 
     ]),
+    Section({title: 'Initial Value'}, [
+      Form({ value: {name: 'user', remember: true, password: 'secret', gender: 'female', description: 'hello', languages: 'css'}}, [
+        Input({name: 'name', label: 'Name'}),
+        Input({name: 'password', type: 'password', label: 'Password'}),
+        Textarea({name: 'description', label: 'description' }),
+        Checkbox({name: 'remember', text: 'Remember Me'}),
+        // CheckboxGroup({ name: 'languages', items: ['html', 'css', 'js', 'svelte']}),
+        RadioGroup({ name: 'languages', items: ['html', 'css', 'js', 'svelte']}),
+        Select({ name: 'gender', placeholder: "Select gender...", items: ['male', 'female']}),
+        // Select({ name: 'languages', multiple: true, placeholder: "Select language...", items: ['html', 'css', 'js', 'svelte']}),
+        Button({type: 'submit', color: 'primary'}, 'Submit')
+      ])
+    ]),
+    Section({title: 'Funtion call', description: 'You can call javascript function by setting method to FUNCTION, in action you can write your function ($value is the value of form elements) '}, [
+      Form({ method: 'FUNCTION', action: 'console.log($value)'}, [
+        Input({name: 'name', label: 'Name'}),
+        Input({name: 'password', type: 'password', label: 'Password'}),
+        Textarea({name: 'description', label: 'description' }),
+        Checkbox({name: 'remember', text: 'Remember Me'}),
+        // CheckboxGroup({ name: 'languages', items: ['html', 'css', 'js', 'svelte']}),
+        RadioGroup({ name: 'languages', items: ['html', 'css', 'js', 'svelte']}),
+        Select({ name: 'gender', placeholder: "Select gender...", items: ['male', 'female']}),
+        // Select({ name: 'languages', multiple: true, placeholder: "Select language...", items: ['html', 'css', 'js', 'svelte']}),
+        Button({type: 'submit', color: 'primary'}, 'Submit')
+      ])
+      
+    ]),
+
+    Section({title: 'GET/POST Helpers'}, [
+      Form({method: 'FUNCTION', action: `$get('/form', $value).then(res => alert('Successfully logged in'))`}, [
+        Input({name: 'username', label: 'Username'}),
+        Input({name: 'password', label: 'Password', type: 'password'}),
+        Button({color: 'primary'}, 'Login')
+      ])
+    ])
+
+
   ]);
 }

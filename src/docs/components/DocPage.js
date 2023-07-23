@@ -3,10 +3,10 @@ import { Button, View } from "../../components/index.js";
 import { tag } from "../../core/tags.js";
 
 export function DocPage(
-  { component = "page", name = "", prefix = "/ui/", ...restProps },
+  { component = "page", theme="dark", name = "", host, prefix = "/ui/", ...restProps },
   slots
 ) {
-  const scriptGlobal = View({ tag: "script", src: prefix + "ulibs.js" });
+
   const style = View({
     tag: "link",
     rel: "stylesheet",
@@ -35,11 +35,6 @@ export function DocPage(
           "http-equiv": "X-UA-Compatible",
           content: "IE=edge",
         }),
-        View({
-          tag: "meta",
-          name: "viewport",
-          content: "width=device-width, initial-scale=1.0",
-        }),
         title,
         style,
         // View({ tag: "script", src: "//unpkg.com/alpinejs", defer: true }),
@@ -54,7 +49,7 @@ export function DocPage(
           Button(
             {
               color: "dark",
-              "u-on:click": `el => document.body.classList.toggle('dark')`,
+              "u-on:click": `el => document.body.setAttribute('u-view-theme', document.body.getAttribute('u-view-theme') === 'dark' ? 'light' : 'dark')`,
             },
             "Dark"
           ),
