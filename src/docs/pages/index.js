@@ -42,6 +42,7 @@ export default ({ prefix }) => {
       Item({ slug: "spinner", text: "Spinner" }),
       Item({ slug: "tabs", text: "Tabs" }),
       Item({ slug: "tooltip", text: "Tooltip" }),
+      Item({ slug: "popover", text: "Popover" }),
 
       Item({ slug: "view", text: "View" }),
 
