@@ -29,6 +29,7 @@ export default ({ prefix }) => {
       Col({w: 100}, View({tag: 'h3', pt: 'sm', style: 'font-weight: normal'}, 'Components')),
       Item({ slug: "auto-complete", text: "Autocomplete" }),
       Item({ slug: "avatar", text: "Avatar" }),      
+      Item({ slug: "alert", text: "Alert" }),      
       Item({ slug: "breadcrumb", text: "Breadcrumb" }),
       Item({ slug: "button", text: "Button" }),
       Item({ slug: "card", text: "Card" }),

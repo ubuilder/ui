@@ -3,10 +3,11 @@ import { DocPage } from "../components/DocPage.js";
 import { Preview } from "../components/Preview.js";
 import { Section } from "../components/Section.js";
 
-export default function () {
+export default function ({...props}) {
   return DocPage({ name: "Avatar" }, [
     Section({ title: "Default" }, [
       Preview({
+        ...props,
         code: `
   Avatar('AV')
 `,
@@ -14,6 +15,7 @@ export default function () {
     ]),
     Section({ title: "Image" }, [
       Preview({
+        ...props,
         code: `
   Avatar({ src: 'https://avatars.githubusercontent.com/u/67925134?s=96&v=4' })
 `,
@@ -22,6 +24,7 @@ export default function () {
 
     Section({ title: "Colors" }, [
       Preview({
+        ...props,
         code: `
   Avatar({color: "primary"}, "PR"),
   Avatar({color: "secondary" }, "SE"),
@@ -37,6 +40,7 @@ export default function () {
 
     Section({ title: "Sizes" }, [
       Preview({
+        ...props,
         code: `
   Avatar({ color: "primary", size: "xs"}, "XS"),
   Avatar({ color: "primary", size: "sm"}, "SM"),

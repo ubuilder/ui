@@ -1,21 +1,414 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./dist/styles.css">
+<<<<<<< HEAD
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            color: #f0f0f0;
+            background-color: #262832;
+        }
+        .item {
+            border: 1px solid #404040;
+            padding: 4px 8px;
+            display: inline-flex;
+            margin: 4px;
+            /* background-color: #0b7726; */
+        }
+
+        .item.active {
+            opacity: 0.5;
+        }
+
+        .slot {
+            padding: 8px;
+            border: 1px dashed #d0d0d0;
+        }
+
+        .selected {
+            border: 1px solid blue;
+        }
+
+        .slot-lg {
+            padding: 1rem;
+        }
+
+        .slot.active {
+            border: 1px solid #40f080;
+        }
+
+        .toolbar {
+            position: absolute;
+            height: 32px;
+            width: 400px;
+            border: 1px solid green;
+            background-color: #404040;
+        }
+    </style>
+=======
+    <script src="./dist/ulibs.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+>>>>>>> 887e6d1700337de06b3558c6a8e9ee8e1908bace
     <title>Document</title>
 </head>
+
 <body>
+    ap
+    <script type="module">
+        const code = 'Icon("key")'
 
-    <button u-button u-button-color="primary">Popup</button>
-    <div u-popup trigger="hover">
-        Content
-    </div>
+<<<<<<< HEAD
+    <div id="parent"></div>
 
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi at numquam est ad unde. Quibusdam blanditiis tempora unde! Eum quam ex totam autem obcaecati fuga quidem dignissimos laudantium et? Nihil, consequatur voluptates reiciendis pariatur tenetur architecto cumque doloremque quas incidunt facilis exercitationem esse deleniti totam dolores dicta commodi suscipit eius.
-    
-    <script>process = {env: {}}</script>
-    <script src="./dist/ulibs.js"></script>
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <div class="components"></div>
+    <br />
+    OPTIONS:
+    <div class="options"></div>
+
+
+    <div class="toolbar">TOOLBAR</div>
+    <script type="module">
+        import {Button, Container} from './src/components/index.js'
+        import {tag} from './src/core/index.js'
+
+
+        let shortcuts = [
+            {
+                key: 'Ctrl+Alt+d',
+                run() {
+                    console.log('Control Alt d')
+                }
+            },
+
+            {
+                key: 'Ctrl+d',
+                run() {
+                    console.log('Ctrl d')
+                }
+            },
+        ]
+
+        window.onkeypress = (e) =>{
+            for(let shortcut of shortcuts) {
+                const key = shortcut.key.split('+').map(x => x.trim())
+
+                const last = key.pop();
+
+                console.log('1', {ctrl: [key.includes('Ctrl'), e.ctrlKey]})
+                if(key.includes('Ctrl') && !e.ctrlKey) return
+                if(key.includes('Alt') && !e.altKey) return
+
+                console.log('2', {alt: [key.includes('Alt'), e.altKey]})
+                if(!key.includes('Ctrl') && e.ctrlKey) return
+                if(!key.includes('Alt') && e.altKey) return
+
+                console.log([e.key, last])
+                if(e.key === last) {
+                    e.preventDefault()
+                    shortcut.run()
+                }
+
+                // if(key.includes('Alt') 
+            }
+        }
+        
+        let page = {
+            tag: 'div',
+            props: {},
+            slots: [
+                Container({size: 'xl', mx: 'auto'})
+            ]
+        }
+
+        let components = {
+            Button: ({slot = 'Hello', color}) => Button({color}, slot),
+            Container: ({size = 'xl', slot}) => Container({size}, slot),
+        }
+                
+        let moving = false;
+
+        let selected = null;
+
+        function renderPage({element, page}) {
+            function renderComponent(component, props, slots) {
+                return tag(component).toString()
+                // return component({...props, slot: slots.map(renderComponent)}).toString()
+            }
+            
+            const result = `<div>${renderComponent(page)}</div>`
+            element.innerHTML=result
+        }
+
+        function setPage(newPage) {
+
+            page = newPage
+
+            renderPage({element: document.getElementById('parent'),page})
+
+        }
+
+        setPage({tag: 'div', props: {}, slots: [Container([Button('test')])]})
+        
+
+        // const components = {
+        //     section: {
+        //         attributes: { 'u-section': true },
+        //         slots: ['container', 'row']
+        //     },
+        //     container: {
+        //         attributes: { 'u-container': true, 'u-container-size': 'md', 'u-view-mx': 'auto' },
+        //         slots: ['row', 'button', 'text']
+        //     },
+        //     row: {
+        //         attributes: { 'u-row': true },
+        //         slots: ['col']
+        //     },
+        //     button: {
+        //         tag: 'button',
+        //         attributes: { 'u-button': true, 'u-button-color': 'primary' },
+        //         slots: ['text']
+        //     },
+        //     col: {
+        //         attributes: { 'u-col': true, 'u-col-col': 3 },
+        //         slots: ['button', 'row', 'text']
+        //     },
+        //     text: {
+        //         tag: 'p',
+        //         attributes: {},
+        //         slots: []
+        //     }
+        // }
+
+
+        const componentList = document.querySelector('.components')
+
+        Object.keys(components).map(key => {
+            const el = document.createElement('div')
+            el.textContent = key
+            el.setAttribute('u-component-name', key)
+            el.classList.add('item')
+
+            componentList.appendChild(el)
+        })
+
+        document.querySelectorAll('.item').forEach(item => {
+            let shiftX, shiftY
+
+            const el = document.createElement('div')
+            el.textContent = item.textContent
+            el.setAttribute('u-component-name', item.getAttribute('u-component-name'))
+            el.classList.add('item')
+            el.style.position = 'absolute'
+            el.style.top = '-100px'
+            el.hidden = true
+
+            document.body.appendChild(el)
+
+
+            // item
+            function moveAt(pageX, pageY) {
+                el.style.left = pageX - shiftX / 2 + 'px';
+                el.style.top = pageY - shiftY / 2 + 'px';
+            }
+
+            item.addEventListener('dblclick', (e) => {
+                if(selected.getAttribute('u-component-name') === item.getAttribute('u-component-name')) {
+                    insertComponent(selected, item)
+                }
+
+            })
+            
+            item.addEventListener('mousedown', (e) => {
+                console.log('mousedown item', item)
+                event.stopPropagation()
+                moving = el;
+                // item.classList.add('active'
+                el.hidden = false
+
+                shiftX = event.clientX - item.getBoundingClientRect().left;
+                shiftY = event.clientY - item.getBoundingClientRect().top;
+
+
+                console.log('item dragstart')
+            })
+
+            function onMouseMove(e) {
+                if (moving === el) {
+                    moveAt(e.pageX, e.pageY);
+                }
+            }
+            document.addEventListener('mousemove', onMouseMove)
+
+        
+
+            function onSelect(el, e) {
+                if(e) {
+                    e.preventDefault()
+
+                }
+                if (selected === el) {
+                    selected = null
+                } else {
+                    selected = el
+
+
+                    const t = document.querySelector('.toolbar')
+
+                    let top = el.getBoundingClientRect().top - 32
+                    console.log(top)
+                    if (top < 0) {
+                        top = top + el.clientHeight + 32;
+                    }
+
+                    t.style.top = top + 'px'
+                    t.style.left = el.getBoundingClientRect().left + 'px'
+
+                    document.querySelector('.options').textContent = el.getAttribute('u-component-name')
+                    document.querySelectorAll('.selected').forEach(el => {
+                        el.classList.remove('selected')
+                    })
+                    el.classList.add('selected')
+                }
+            }
+
+            function insertComponent(slot, el) {
+                if (slot.classList.contains('slot')) {
+                        const slotCompName = slot.getAttribute('u-component-name')
+
+                        if (components[slotCompName].slots.includes(el.getAttribute('u-component-name'))) {
+
+
+                            const comp = components[el.getAttribute('u-component-name')];
+                            const newEl = document.createElement(comp.tag ?? 'div')
+
+                            newEl.addEventListener('click', (e) => {
+                                e.stopPropagation()
+                                console.log('clicked on : ', newEl)
+
+
+                            })
+
+
+                            console.log({ comp })
+                            Object.keys(comp.attributes).map(key => {
+                                newEl.setAttribute(key, comp.attributes[key])
+                            })
+
+                            if (comp.slots.length > 0) {
+
+                                newEl.classList.add('slot')
+                                newEl.setAttribute('u-component-name', el.getAttribute('u-component-name'))
+
+
+
+                                newEl.textContent = '+ Click to add content'
+                                newEl.addEventListener('click', (e) => onSelect(newEl, e))
+                                setTimeout(() => {
+                                    onSelect(newEl)
+
+                                })
+                                // } else {
+
+                                //     newEl.appendChild(createSlot(el.getAttribute('u-component-name')))
+                                // }
+
+                            }
+                            slot.appendChild(newEl)
+                        }
+
+                    }
+
+            }
+
+            // TODO: Copy mode
+            document.addEventListener('mouseup', (e) => {
+                console.log('mouseup')
+                if (moving === el) {
+
+                    // item.classList.remove('active')
+
+                    moving = false;
+
+                    el.hidden = true
+                    el.style.top = '-100px'
+                    el.style.left = '-100px'
+
+                    let dropzone = document.elementFromPoint(e.clientX, e.clientY)
+
+                    console.log(dropzone)
+                    // el.style.position = ''
+
+                    insertComponent(dropzone, el)
+                    console.log('item dragend')
+                }
+
+            })
+
+
+        })
+
+        document.querySelectorAll('.slot').forEach(slot => {
+            // slot
+
+
+            slot.addEventListener('mouseenter', (e) => {
+                if (moving) {
+                    slot.classList.add('active')
+                }
+                console.log('slot dragenter')
+            })
+            slot.addEventListener('mouseleave', (e) => {
+                if (moving) {
+                    slot.classList.remove('active')
+                }
+
+                console.log('slot dragleave')
+            })
+            // slot.addEventListener('dragover', (e) => {
+            //     e.preventDefault()
+            //     console.log('slot dragover')
+            // })
+            // slot.addEventListener('drop', (e) => {
+            //     console.log('slot drop')
+
+            //     const activeItem = document.querySelector('.item.active')
+
+            //     slot.appendChild(activeItem)
+            // })
+            // slot.addEventListener('dragenter', (e) => {
+            //     console.log('slot dragend')
+            // })
+            // slot.addEventListener('dragenter', (e) => {
+            //     console.log('slot dragend')
+            // })
+
+
+
+        })
+
+    </script>
+</body>
+
+</html>
+=======
+        const script = document.createElement('script')
+        script.type = 'module'
+
+        script.textContent = `import {Icon} from '/src/components/index.js';\n const page = ` + code + `;\n console.log({page})`
+        
+        console.log(script)
+        document.body.appendChild(script)
+
+    </script>
+
 </body>
 </html>
+>>>>>>> 887e6d1700337de06b3558c6a8e9ee8e1908bace

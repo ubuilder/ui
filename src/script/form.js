@@ -167,10 +167,8 @@ export function Form(Alpine) {
 
         if (el.getAttribute("method") === "FUNCTION") {          
 
-          console.log(actionFn)
           const result = await actionFn((v) => v, { scope: { '$value': value }, params: [value] })
 
-          console.log({ result });
         } else {
           const pathname = window.location.pathname;
 
@@ -195,4 +193,27 @@ export function Form(Alpine) {
       },
     });
   });
+
+
+  Alpine.magic('post', (el) => {
+    return async (pathname, data = {}, headers = {}) => {
+      const result = await fetch(pathname, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify(data)
+      }).then(res => res.json())
+
+      return result;
+    }
+  })
+
+  Alpine.magic('get', (el) => {
+    return async (pathname) => {
+      const result = await fetch(pathname, {
+        method: 'GET',
+      }).then(res => res.json())
+
+      return result;
+    }
+  })
 }

@@ -3,10 +3,10 @@ import { Button, View } from "../../components/index.js";
 import { tag } from "../../core/tags.js";
 
 export function DocPage(
-  { component = "page", name = "", prefix = "/ui/", ...restProps },
+  { component = "page", theme="dark", name = "", host, prefix = "/ui/", ...restProps },
   slots
 ) {
-  const scriptGlobal = View({ tag: "script", src: prefix + "ulibs.js" });
+
   const style = View({
     tag: "link",
     rel: "stylesheet",
@@ -34,11 +34,6 @@ export function DocPage(
           tag: "meta",
           "http-equiv": "X-UA-Compatible",
           content: "IE=edge",
-        }),
-        View({
-          tag: "meta",
-          name: "viewport",
-          content: "width=device-width, initial-scale=1.0",
         }),
         title,
         style,
