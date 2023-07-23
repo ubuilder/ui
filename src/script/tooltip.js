@@ -14,6 +14,7 @@ export function Tooltip(Alpine) {
       document.querySelector(el.getAttribute("u-tooltip-target")) ?? el.parentNode;
     const floatingEl = el;
 
+    console.log(target)
     target.setAttribute('u-tooltip-reference', '')
     
     const offsetValue = el.getAttribute("u-tooltip-offset") ?? 0;

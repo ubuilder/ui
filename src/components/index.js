@@ -11,6 +11,7 @@ export * from "./Modal.js";
 export * from "./Table.js";
 export * from "./View.js";
 export * from "./Divider.js";
+export * from "./FormField.js";
 export * from "./Spinner.js";
 export * from "./Radio.js";
 export * from "./Breadcrumb.js";

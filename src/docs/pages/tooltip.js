@@ -79,10 +79,10 @@ export default function () {
       },
       [
         Preview({
-          code: `
+          code: `[
   Button({ id: "my-button" }, "action"),
   Tooltip({ target: "#my-button" }, "This tooltip is not child of the button"),
-`,
+          ]`,
         }),
       ]
     ),

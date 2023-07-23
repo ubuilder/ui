@@ -80,7 +80,7 @@ export const Preview = Base({
     }
     </style>
     <script type="module">
-        import {${Object.keys(components).join(', ')}} from 'https://unpkg.com/@ulibs/ui@next/src/components/index.js'
+        import {${Object.keys(components).filter(key => `View ${code}`.indexOf(key) > -1).join(', ')}} from 'https://unpkg.com/@ulibs/ui@next/src/components/index.js'
 
         const page = View({d: 'inline-flex', p: 'sm', gap: 'xs'},${code.trim()})
 
