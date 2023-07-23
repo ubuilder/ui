@@ -43,7 +43,8 @@ export function ClientSideRouting(Alpine) {
             }
           }
         });
-  
+
+        return true
       } catch (err) {
         console.log(err)
         console.log('path not found')
@@ -81,7 +82,7 @@ export function ClientSideRouting(Alpine) {
         },
         goto(pathname) {
           history.pushState({}, undefined, pathname);
-          updateRoute(pathname)
+          return updateRoute(pathname)
         },
       };
     });
