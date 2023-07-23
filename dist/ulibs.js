@@ -521,7 +521,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
   // packages/alpinejs/src/directives.js
   var prefixAsString = "x-";
-  function prefix(subject = "") {
+  function prefix$1(subject = "") {
     return prefixAsString + subject;
   }
   function setPrefix(newPrefix) {
@@ -1553,7 +1553,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     evaluate: evaluate$1,
     initTree,
     nextTick,
-    prefixed: prefix,
+    prefixed: prefix$1,
     prefix: setPrefix,
     plugin,
     magic,
@@ -2693,10 +2693,10 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   }
 
   // packages/alpinejs/src/directives/x-cloak.js
-  directive("cloak", (el) => queueMicrotask(() => mutateDom(() => el.removeAttribute(prefix("cloak")))));
+  directive("cloak", (el) => queueMicrotask(() => mutateDom(() => el.removeAttribute(prefix$1("cloak")))));
 
   // packages/alpinejs/src/directives/x-init.js
-  addInitSelector(() => `[${prefix("init")}]`);
+  addInitSelector(() => `[${prefix$1("init")}]`);
   directive("init", skipDuringClone((el, {expression}, {evaluate: evaluate2}) => {
     if (typeof expression === "string") {
       return !!expression.trim() && evaluate2(expression, {}, false);
@@ -2732,7 +2732,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   });
 
   // packages/alpinejs/src/directives/x-bind.js
-  mapAttributes(startingWith(":", into(prefix("bind:"))));
+  mapAttributes(startingWith(":", into(prefix$1("bind:"))));
   var handler2 = (el, {value, modifiers, expression, original}, {effect: effect3}) => {
     if (!value) {
       let bindingProviders = {};
@@ -2769,7 +2769,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   }
 
   // packages/alpinejs/src/directives/x-data.js
-  addRootSelector(() => `[${prefix("data")}]`);
+  addRootSelector(() => `[${prefix$1("data")}]`);
   directive("data", skipDuringClone((el, {expression}, {cleanup: cleanup2}) => {
     expression = expression === "" ? "{}" : expression;
     let magicContext = {};
@@ -3064,7 +3064,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   });
 
   // packages/alpinejs/src/directives/x-on.js
-  mapAttributes(startingWith("@", into(prefix("on:"))));
+  mapAttributes(startingWith("@", into(prefix$1("on:"))));
   directive("on", skipDuringClone((el, {value, modifiers, expression}, {cleanup: cleanup2}) => {
     let evaluate2 = expression ? evaluateLater(el, expression) : () => {
     };
@@ -3158,7 +3158,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     });
   }
 
-  function Icon(Alpine) {
+  function Icon$1(Alpine) {
     Alpine.directive("icon", (el) => {
       const iconName = el.textContent;
 
@@ -3369,10 +3369,8 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
           if (el.getAttribute("method") === "FUNCTION") {          
 
-            console.log(actionFn);
-            const result = await actionFn((v) => v, { scope: { '$value': value }, params: [value] });
+            await actionFn((v) => v, { scope: { '$value': value }, params: [value] });
 
-            console.log({ result });
           } else {
             const pathname = window.location.pathname;
 
@@ -3396,6 +3394,29 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           }
         },
       });
+    });
+
+
+    Alpine.magic('post', (el) => {
+      return async (pathname, data = {}, headers = {}) => {
+        const result = await fetch(pathname, {
+          method: 'POST',
+          headers,
+          body: JSON.stringify(data)
+        }).then(res => res.json());
+
+        return result;
+      }
+    });
+
+    Alpine.magic('get', (el) => {
+      return async (pathname) => {
+        const result = await fetch(pathname, {
+          method: 'GET',
+        }).then(res => res.json());
+
+        return result;
+      }
     });
   }
 
@@ -9770,6 +9791,9 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     
           morphdom(document.getElementsByTagName("html")[0], html, {
             onBeforeElUpdated(fromEl, toEl) {
+                if (fromEl.isEqualNode(toEl)) {
+                  return false
+              }
               // Do not update icon if name is same
               if(fromEl.hasAttribute('u-icon') && fromEl.getAttribute('name') === toEl.getAttribute('name')) {
                 return false
@@ -11703,7 +11727,513 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     });
   }
 
+  const prefix = "u";
+
+  function extract(...params) {
+    let $props = {};
+    let $slots = [];
+
+    if (typeof params[0] === "object" && !Array.isArray(params[0])) {
+      $props = params[0];
+
+      if (typeof params[1] !== "undefined") {
+        if (Array.isArray(params[1])) {
+          $slots = params[1];
+        } else if (typeof params[1] === "function") {
+          $slots = params[1];
+        } else {
+          $slots = [params[1]];
+        }
+      }
+
+      return { $props, $slots };
+    }
+
+    if (Array.isArray(params[0])) {
+      $slots = params[0];
+    } else if (typeof params[1] === "function") {
+      $slots = params[1];
+    } else {
+      $slots = [params[0]];
+    }
+
+    return { $props, $slots };
+  }
+
+  function classname(component, cssProps = {}, globalClasses = "") {
+    let classes = [];
+
+    if (component) {
+      classes.push([prefix, paramCase(component)].join("-"));
+    } else {
+      classes.push(prefix);
+    }
+
+    function paramCase(str) {
+      return str
+        .split("")
+        .map((char) => {
+          if ((char >= "A") & (char <= "Z")) {
+            return "-" + char.toLowerCase();
+          }
+          return char;
+        })
+        .join("");
+    }
+
+    Object.keys(cssProps).map((key) => {
+      let value = cssProps[key];
+      if (typeof value === "number" || typeof value === "string") {
+        classes.push([prefix, component, paramCase(key), value].join("-"));
+      }
+      if (value === true) {
+        classes.push([prefix, component, paramCase(key)].join("-"));
+      }
+    });
+
+    classes.push(globalClasses);
+    return classes.filter(Boolean).join(" ");
+  }
+
+  function Base({render}) {
+    return (...$) => {
+      const { $props = {}, $slots = [] } = extract(...$);
+
+      let props = {};
+      for (let key in $props) {
+        if (typeof $props[key] !== "undefined") {
+          props[key] = $props[key];
+        }
+      }
+
+      return render(props, $slots);
+    };
+  }
+
+  function renderScriptInternal(component) {
+    if (Array.isArray(component)) {
+      return component.map((x) => renderScriptInternal(x));
+    }
+
+    if (component && typeof component === "object") {
+      return [
+        {
+          onMount: component.props.onMount,
+          scriptName: component.props.scriptName,
+          script: component.props.script,
+        },
+        renderScriptInternal(component.slots),
+      ].flat(5);
+    }
+    return [];
+  }
+
+  function renderScripts(component) {
+    if (typeof component !== "object") return;
+
+    const scripts = renderScriptInternal(component);
+
+    let result = "";
+    let scriptsObject = scripts.reduce((prev, curr) => {
+      return { ...prev, [curr.scriptName]: curr.onMount };
+    }, {});
+
+    result += Object.keys(scriptsObject)
+      .map((key) => scriptsObject[key])
+      .join("\n");
+
+    result += scripts.map((script) => script.script).join("\n");
+
+    return result;
+  }
+
+  function stringify(object) {
+    if (object && typeof object === "object" || typeof object === "number") {
+      return "'" + JSON.stringify(object) + "'";
+    } else {
+      return JSON.stringify(object);
+    }
+  }
+
+  function renderAttributes({
+    scriptName,
+    scriptProps,
+    onMount,
+    script,
+    ...object
+  }) {
+    let result = "";
+    if (scriptName) {
+      result += " " + scriptName + "=" + stringify(scriptProps ?? {});
+    }
+
+    for (let [key, value] of Object.entries(object)) {
+      if (value === false || typeof value === "undefined" || value === null)
+        continue;
+
+      if (key === "htmlHead") {
+        continue;
+      }
+      if (value === "") {
+        result += " " + key;
+      } else {
+        result += " " + key + "=" + stringify(value);
+      }
+    }
+    return result;
+  }
+
+  function renderSlots(slots) {
+    return slots.map((slot) => renderTemplate(slot)).join("");
+  }
+
+  function renderTemplate(object) {
+    if (typeof object === "undefined") return;
+    if (Array.isArray(object))
+      return object.map((item) => renderTemplate(item)).join("\n");
+    if (object && typeof object === "object") {
+      const { tag, slots, props } = object;
+
+      if (!tag) return "";
+
+      return (
+        `<${tag}${renderAttributes(props)}>` + renderSlots(slots) + `</${tag}>`
+      );
+    }
+    return object;
+  }
+
+
+  function renderHead(object) {
+    if (typeof object === "undefined") return;
+    if (Array.isArray(object))
+      return object.map((item) => renderHead(item)).join("\n");
+    if (object && typeof object === "object") {
+      const { tag, slots, props } = object;
+
+      return [props?.htmlHead ? renderTemplate(props.htmlHead) :"", ...slots?.map((slot) => renderHead(slot))]
+        .join("\n")
+        .trim();
+    }
+    return "";
+  }
+
+  function tag(tagName, props = {}, ...slots) {
+
+    if(typeof tagName === 'object') {
+      return tag(tagName.tag, tagName.props, tagName.slots)
+    }
+    
+    return {
+      tag: tagName,
+      props,
+      slots,
+      toString() {
+        return renderTemplate(this);
+      },
+      toHead() {
+        return renderHead(this);
+      },
+      toScript() {
+        return renderScripts(this);
+      },
+      toHtml() {
+        return `<!DOCTYPE html>
+<html>
+  <head>
+    ${this.toHead()}
+  </head>
+  <body>
+    ${this.toString()}
+    <script>
+      ${this.toScript()}
+    </script>
+  </body>
+</html>`
+      }
+    };
+  }
+
+  // Not implemented
+  // border directions (only border bottom, ....)
+
+  //* bgColor (primary, secondary, success, info, warning, danger, light, dark)
+  //* textColor (primary, secondary, success, info, warning, danger, light, dark)
+  //* borderRadius (xs, sm, md, lg, xl)
+  //* borderColor (primary, secondary, success, info, warning, danger, light, dark)
+  //* borderSize (xs, sm, md, lg, xl)
+  //* d(flex, inline, block, grid, contents, inline-flex, inline-block, none)
+  //* dXs (flex, inline, block, grid, contents, inline-flex, inline-block, none)
+  //* dSm (flex, inline, block, grid, contents, inline-flex, inline-block, none)
+  //* dMd (flex, inline, block, grid, contents, inline-flex, inline-block, none)
+  //* dLg (flex, inline, block, grid, contents, inline-flex, inline-block, none)
+  //* dXl (flex, inline, block, grid, contents, inline-flex, inline-block, none)
+  //* align (start, center, end, baseline, stretch)
+  //* alignSelf (start, center, end, baseline, stretch)
+  //* justify (start, center, end, between, evenly, around)
+  //* justifySelf (start, center, end, between, evenly, around)
+  //* flexDirection (row, column, row-reverse, column-reverse)
+  //* flexDirectionXs (row, column, row-reverse, column-reverse)
+  //* flexDirectionSm (row, column, row-reverse, column-reverse)
+  //* flexDirectionMd (row, column, row-reverse, column-reverse)
+  //* flexDirectionLg (row, column, row-reverse, column-reverse)
+  //* flexDirectionXl (row, column, row-reverse, column-reverse)
+  //* gap (0, sm, md, lg, xl)
+  //* wrap (true, false)
+  //* w (width) (0, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl, 6xl, auto, 50, 100)
+  //* h (height) (0, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl, 6xl, auto, 50, 100)
+
+  const View = Base({
+    render($props, $slots) {
+      const {
+        tag: tagName = "div",
+        component = "view",
+        cssProps = {},
+        m,
+        p,
+        mx,
+        px,
+        ms,
+        ps,
+        my,
+        py,
+        me,
+        pe,
+        mt,
+        pt,
+        mb,
+        pb,
+        w,
+        h,
+        d,
+        dXs,
+        dSm,
+        dMd,
+        dLg,
+        dXl,
+        gap,
+        align,
+        alignSelf,
+        justify,
+        justifySelf,
+        flexDirection,
+        flexDirectionXs,
+        flexDirectionSm,
+        flexDirectionMd,
+        flexDirectionLg,
+        flexDirectionXl,
+        bgColor,
+        textColor,
+        borderSize,
+        border,
+        borderColor,
+        borderRadius,
+        wrap,
+        ...restProps
+      } = $props;
+
+      const viewCssProps = {
+        m,
+        p,
+        mx,
+        px,
+        ms,
+        ps,
+        my,
+        py,
+        me,
+        pe,
+        mt,
+        pt,
+        mb,
+        pb,
+        w,
+        h,
+        d,
+        dXs,
+        dSm,
+        dMd,
+        dLg,
+        dXl,
+        gap,
+        align,
+        wrap,
+        flexDirection,
+        flexDirectionXs,
+        flexDirectionSm,
+        flexDirectionMd,
+        flexDirectionLg,
+        flexDirectionXl,
+        alignSelf,
+        justify,
+        justifySelf,
+        bgColor,
+        textColor,
+        borderSize,
+        border,
+        borderColor,
+        borderRadius,
+      };
+
+      const cssAttributes = {};
+
+      for (let prop in cssProps) {
+        if (cssProps[prop])
+          if (cssProps[prop] === true) {
+            cssAttributes[classname(component + "-" + prop)] = "";
+          } else {
+            cssAttributes[classname(component + "-" + prop)] = cssProps[prop];
+          }
+      }
+      for (let prop in viewCssProps) {
+        if (viewCssProps[prop])
+          if (viewCssProps[prop] === true) {
+            cssAttributes[classname("view-" + prop)] = "";
+          } else {
+            cssAttributes[classname("view-" + prop)] = viewCssProps[prop];
+          }
+      }
+
+      const props = {
+        [classname(component)]: component === "view" ? false : "",
+        ...restProps,
+        ...cssAttributes,
+      };
+
+      for (let key in props) {
+        if (key.startsWith("on") && key[2] >= "A" && key[2] <= "Z") {
+          let event = key.substring(2).toLocaleLowerCase();
+
+          if (event === "init") {
+            props["u-init"] = props[key];
+          } else {
+            props["u-on:" + event] = props[key];
+          }
+
+          delete props[key];
+        } else {
+          if (props[key] === true) {
+            props[key] = "";
+          }
+        }
+      }
+
+      return tag(tagName, props, $slots);
+    },
+  });
+
+  const Icon = Base({
+    render({ model, size, color, ...restProps }, slots) {
+      const result = View({
+        ...restProps,
+        tag: "span",
+        component: "icon",
+        cssProps: { size },
+        textColor: color,
+        model
+      }, slots);
+      return result;
+    },
+  });
+
+  const Alert$1 = Base({
+    render($props, $slots) {
+      const {
+        component = "alert",
+        autoClose = false,
+        duration = 5000,
+        open = true,
+        icon,
+        color = "primary",
+        dismissible = false,
+        title,
+        ...restProps
+      } = $props;
+
+      const props = {
+        ...restProps,
+        component,
+        duration: autoClose ? duration : undefined,
+        cssProps: {
+          color,
+          autoClose,
+          open,
+        },
+      };
+
+      return View(props, [
+        View({ component: component + "-header" }, [
+          (icon &&
+            Icon({ [classname(component + "-icon")]: true, color }, icon)) ||
+            [],
+          View({ component: component + "-title" }, title ?? ''),
+          (dismissible &&
+            View(
+              { tag: "button", component: component + "-close" },
+              Icon("x")
+            )) ||
+            [],
+        ]),
+        ($slots.toString() !== "" &&
+          View({ component: component + "-content" }, $slots)) ||
+          [],
+      ]);
+    },
+  });
+
+  function Alert(Alpine) {
+      Alpine.directive('alert', (el) => {
+          const isOpen = el.getAttribute('u-alert-open');       
+
+          Alpine.bind(el, {
+              'u-data'() {
+                  return {
+                      isOpen,
+                  }
+              },
+              'u-bind:u-alert-open'() {
+                  return this.$data.isOpen
+              }
+          });
+          
+      });
+      Alpine.directive('alert-close', (el) => {
+          console.log('close button', el);
+          Alpine.bind(el, {
+              'u-on:click'() {
+                  this.$data.isOpen = false;
+              }
+          });
+      });
+
+      Alpine.directive('alert-auto-close', (el) => {
+          Alpine.bind(el, {
+              'u-init'() {
+                  setTimeout(() => {
+                      this.$data.isOpen = false;
+                  }, +el.getAttribute('duration') ?? 5000);
+              }
+          });
+      });
+
+      Alpine.magic('alert', (el) => {
+          
+
+          return (name, {title, icon = 'check', content = '', ...restProps}) => {
+              const container = document.querySelector(`[u-alert-container][name="${name}"]`);
+
+              const al = document.createElement('div');
+              al.innerHTML = Alert$1({title, icon, ...restProps}, content);
+              console.log('add alert in ', {container, al});
+              container.appendChild(al);
+
+              
+          }
+      });
+  }
+
   function components(Alpine) {
+    Alert(Alpine);
     Popup(Alpine);
     ClientSideRouting(Alpine);
     Checkbox(Alpine);
@@ -11713,7 +12243,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     Textarea(Alpine);
     Form(Alpine);
     Accordion(Alpine);
-    Icon(Alpine);
+    Icon$1(Alpine);
     AutoComplete(Alpine);
     Modal(Alpine);
     Tabs(Alpine);

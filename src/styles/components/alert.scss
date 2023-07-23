@@ -1,0 +1,85 @@
+[u-alert] {
+  --alert-shadow: var(--size-md);
+  display: none;
+  flex-direction: column;
+  padding: var(--size-sm);
+  margin-bottom: var(--size-xs);
+  min-width: var(--size-container-xs);
+  border: 1px solid var(--color-base-400);
+  border-left: var(--size-xxs) solid var(--alert-border);
+  background-color: var(--alert-bg);
+  border-radius: var(--size-xxs);
+  box-shadow: 0 calc(var(--alert-shadow) / 4) calc(var(--alert-shadow) / 2) calc(var(--alert-shadow) / -4) var(--color-base-400);
+  gap: var(--size-sm);
+}
+
+[u-alert-open] {
+    display: flex;
+}
+
+[u-alert-icon] {
+//   stroke-width: 2;
+  --icon-size: var(--size-md);
+}
+
+[u-alert-header] {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: var(--size-xs);
+}
+
+[u-alert-title] {
+    flex: 1;
+  color: var(--alert-title);
+  @extend h4;
+}
+
+[u-alert-close] {
+    color: var(--color-base-400);
+    background-color: transparent;
+    border: none;
+    padding: var(--size-xxs);
+    cursor: pointer;
+}
+
+[u-alert-close]:hover {
+    color: var(--color-base-700);
+}
+
+@include color-variants(alert) using ($color) {
+  --alert-border: #{var(--color-#{$color}-300)};
+  --alert-title: #{var(--color-#{$color}-500)};
+  // --alert-bg: #{var(--color-#{$color}-100)};
+  --alert-content: #{var(--color-#{$color}-500)};
+}
+
+
+[u-alert-container] {
+    display: flex;
+    flex-direction: column;
+}
+
+[u-alert-container-placement="top-end"] {
+    position: absolute;
+    right: var(--size-md);
+    top: var(--size-md);
+}
+
+[u-alert-container-placement="top-start"] {
+    position: absolute;
+    left: var(--size-md);
+    top: var(--size-md);
+}
+
+[u-alert-container-placement="bottom-end"] {
+    position: absolute;
+    right: var(--size-md);
+    bottom: var(--size-md);
+}
+
+[u-alert-container-placement="bottom-start"] {
+    position: absolute;
+    left: var(--size-md);
+    bottom: var(--size-md);
+}

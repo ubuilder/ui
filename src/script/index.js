@@ -15,8 +15,10 @@ import { Textarea } from "./textarea";
 import { Tabs } from "./tabs";
 import { Dropdown } from "./dropdown";
 import { Tooltip } from "./tooltip";
+import { Alert } from "./alert";
 
 function components(Alpine) {
+  Alert(Alpine)
   Popup(Alpine);
   ClientSideRouting(Alpine);
   Checkbox(Alpine);

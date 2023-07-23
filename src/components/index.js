@@ -1,4 +1,5 @@
 export * from "./Accordion.js";
+export * from "./Alert.js";
 export * from "./Badge.js";
 export * from "./Button.js";
 export * from "./Card.js";
