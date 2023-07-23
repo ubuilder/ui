@@ -9944,6 +9944,10 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     
       Alpine.directive("input", (el) => {
         Alpine.bind(el, {
+          // initial value
+          'u-init'() {
+            this.$data[el.getAttribute('name')] = el.value;
+          },
           "u-on:input"(e) {
             this.$data[el.getAttribute("name")] = e.target.value;
           },
@@ -11603,7 +11607,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         });
       }
 
-      Alpine.bind(el.parentNode, () => ({
+      Alpine.bind(target, () => ({
         "u-data"() {
           return {
             show() {
@@ -11640,7 +11644,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       }));
 
       if (trigger == "click") {
-        Alpine.bind(el.parentNode, () => ({
+        Alpine.bind(target, () => ({
           "u-on:focus"() {
             this.show();
           },
@@ -11652,7 +11656,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           },
         }));
       } else {
-        Alpine.bind(el.parentNode, () => ({
+        Alpine.bind(target, () => ({
           "u-on:mouseenter"() {
             this.show();
           },
