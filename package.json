@@ -17,7 +17,7 @@
     "dev:css": "nodemon -e .scss -w ./src/styles --exec npm run build:css",
     "dev:js": "nodemon -e .js -w ./src/script --exec npm run build:js",
     "dev:docs": "nodemon -e .js,.css -w ./dist -w ./src/docs --exec 'node scripts/docs.js dev'",
-    "dev": "conc npm:dev:css npm:dev:js npm:dev:docs",
+    "dev": "conc npm:dev:cnss npm:dev:js npm:dev:docs",
     "start": "http-server ./build -p 3002"
   },
   "keywords": [],
@@ -32,13 +32,6 @@
     "./ulibs.js": "./dist/ulibs.js"
   },
   "devDependencies": {
-    "connect-livereload": "^0.6.1",
-    "express": "^4.18.2",
-    "livereload": "^0.9.3",
-    "nodemon": "^2.0.22",
-    "rollup": "^3.23.0"
-  },
-  "dependencies": {
     "@floating-ui/dom": "^1.4.5",
     "@rollup/plugin-node-resolve": "^15.1.0",
     "@rollup/plugin-replace": "^5.0.2",
@@ -47,8 +40,9 @@
     "concurrently": "^8.2.0",
     "http-server": "^14.1.1",
     "morphdom": "^2.7.0",
-    "sass": "^1.63.4",
-    "tippy.js": "^6.3.7",
+    "nodemon": "^2.0.22",
+    "rollup": "^3.23.0",
+    "sass": "^1.64.1",
     "tom-select": "^2.2.2"
   }
 }
