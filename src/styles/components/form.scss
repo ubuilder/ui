@@ -311,3 +311,15 @@
   outline: none;
   box-shadow: 0 0 0px 4px var(--color-primary-200);
 }
+
+// Code editor
+[u-code-editor] {
+  padding: 0 !important;
+  @extend [u-textarea];
+}
+
+[u-code-editor]:focus-within {
+  background-color: var(--color-base-200);
+  outline: none;
+  box-shadow: 0 0 0px 4px var(--color-primary-200);
+}

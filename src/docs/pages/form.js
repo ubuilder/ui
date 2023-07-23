@@ -151,6 +151,16 @@ export default function () {
         Button({type: 'submit', color: 'primary'}, 'Submit')
       ])
       
+    ]),
+
+    Section({title: 'GET/POST Helpers'}, [
+      Form({method: 'FUNCTION', action: `$get('/form', $value).then(res => alert('Successfully logged in'))`}, [
+        Input({name: 'username', label: 'Username'}),
+        Input({name: 'password', label: 'Password', type: 'password'}),
+        Button({color: 'primary'}, 'Login')
+      ])
     ])
+
+
   ]);
 }

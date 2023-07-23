@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./dist/styles.css">
+    <style>
+        .fullscreen {
+            position: fixed;
+            width: 100vh;
+            height: 100vh;
+        }
+
+        .fullscreen iframe {
+            width: 100%;
+            height: 100%;
+        }
+
+        
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+
+    <form u-form u-on:submit="save(js)"
+        u-on:keydown="($event) => fullscreen = $event.key === 'Escape' ? false : fullscreen">
+
+        <div u-container u-view-my="md" u-data="{fullscreen: false}" u-view-h="100">
+
+            <div u-row u-view-h="100">
+                <div u-col u-col-col="6">
+                    <div u-row u-view-mt="xxl">
+                        <div u-col u-col-col="12">
+
+                            <div u-form-field>
+
+                            <div u-form-field-label>
+                                Label
+                            </div>
+                            <div u-code-editor u-view-w="100" u-view-h="100" lang="js" name="js" value="Initial"></div>
+            </div>
+
+                        </div>
+
+                        <div u-col>
+                            <button u-on:click="save(js)" u-button u-button-color="primary">Run</button>
+                            <button type="button" u-on:click="fullscreen = !fullscreen" u-button
+                                u-button-color="primary">Run</button>
+                        </div>
+                    </div>
+
+                </div>
+                <div u-col u-col-col="6" u-bind:class="fullscreen ? 'fullscreen' : ''">
+                    <iframe u-view-w="100" u-view-h="100" src='javascript:void(0)' id="iframe"></iframe>
+                </div>
+
+            </div>
+    </form>
+
+    </div>
+
+    <script src="./dist/ulibs.js"></script>
+    
+    <script>
+        function runCode(js) {
+            const code = `
+                import {Button, Container, View} from 'https://unpkg.com/@ulibs/ui@next/src/components/index.js'
+
+                const data = {name: 'My Name', username: 'My Username', id: 'My ID'}
+
+                const page = ${js}
+                document.getElementById("app").innerHTML = page.toString().replace(/\\{\\{(\\w+)\\}\\}/g, (a, b) => data[b]);
+            `
+
+            const iframe = document.querySelector(`[id="iframe"]`)
+
+            var html_string = `
+            <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/@ulibs/ui@next/dist/styles.css">                                            
+    <title>Document</title>
+</head>
+<bo`+ `dy class="${document.body.classList.toString()}">
+    <div id="app"></div>
+    
+    <scr`+ `ipt type="module">${code}<\/sc` + `ript></bo` + `dy>
+        </ht`+ `ml>
+            `;
+
+            iframe.src = "data:text/html;charset=utf-8," + escape(html_string);
+
+            console.log(iframe.src)
+
+        }
+        function save(js) {
+            runCode(js)
+        }
+
+        function fullscreen() {
+
+        }
+
+    </script>
+
+</body>
+
+</html>
