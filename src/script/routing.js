@@ -14,6 +14,9 @@ export function ClientSideRouting(Alpine) {
   
         morphdom(document.getElementsByTagName("html")[0], html, {
           onBeforeElUpdated(fromEl, toEl) {
+              if (fromEl.isEqualNode(toEl)) {
+                return false
+            }
             // Do not update icon if name is same
             if(fromEl.hasAttribute('u-icon') && fromEl.getAttribute('name') === toEl.getAttribute('name')) {
               return false
