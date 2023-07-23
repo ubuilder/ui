@@ -43,8 +43,8 @@ export function ClientSideRouting(Alpine) {
             }
           }
         });
-  
-        return;
+
+        return true
       } catch (err) {
         console.log(err)
         console.log('path not found')

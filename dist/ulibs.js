@@ -9820,7 +9820,8 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
               }
             }
           });
-    
+
+          return true
         } catch (err) {
           console.log(err);
           console.log('path not found');
@@ -9858,7 +9859,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           },
           goto(pathname) {
             history.pushState({}, undefined, pathname);
-            updateRoute(pathname);
+            return updateRoute(pathname)
           },
         };
       });
@@ -61861,7 +61862,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           const lang = el.getAttribute('lang');
           const name = el.getAttribute('name');
           let doc = el.getAttribute('value');
-          const readonly = el.getAttribute('readonly');
+          el.getAttribute('readonly');
           
           const languages = {
               jsx: javascript({jsx: true}),
@@ -61884,7 +61885,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
               dispatch: onUpdate,
               extensions: [
                   // basicSetup,
-                  EditorState$1.readOnly.of(readonly),
+                  // EditorState.readOnly.of(readonly),
                   keymap$1.of(defaultKeymap), 
                   lineNumbers$1(), 
                   languages[lang] ?? languages['js'], // default language is js
@@ -63827,6 +63828,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         component: "icon",
         cssProps: { size },
         textColor: color,
+        name: slots,
         model
       }, slots);
       return result;
@@ -63916,16 +63918,26 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       Alpine.magic('alert', (el) => {
           
 
-          return (name, {title, icon = 'check', content = '', ...restProps}) => {
-              const container = document.querySelector(`[u-alert-container][name="${name}"]`);
+          const alert = (name, {title, icon = 'check', content = '', ...restProps}) => {
+              let container = document.querySelector(`[u-alert-container][name="${name}"]`);
+
+              // first container
+              if(!name) container = document.querySelector('[u-alert-container]');
 
               const al = document.createElement('div');
               al.innerHTML = Alert$1({title, icon, ...restProps}, content);
-              console.log('add alert in ', {container, al});
-              container.appendChild(al);
 
-              
-          }
+              setTimeout(() => {
+                  container.appendChild(al);
+              }, 100);
+          };
+
+          alert.success = (message, title = 'Success') => alert(undefined, {content: message, type: 'success', title, icon: 'check'});
+          alert.info = (message, title = 'Info') => alert(undefined, {content: message, type: 'info', title, icon: 'info-circle'});
+          alert.warning = (message, title = 'Warning') => alert(undefined, {content: message, type: 'warning', title, icon: 'info-triangle'});
+          alert.error = (message, title = 'Error') => alert(undefined, {content: message, type: 'error', title, icon: 'alert-triangle'});
+          
+          return alert
       });
   }
 
