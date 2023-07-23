@@ -23,3 +23,4 @@ export * from "./Tabs.js";
 export * from "./Dropdown.js";
 export * from "./AutoComplete.js";
 export * from "./Tooltip.js";
+export * from "./Popover.js";
