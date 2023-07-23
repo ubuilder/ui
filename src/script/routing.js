@@ -18,6 +18,26 @@ export function ClientSideRouting(Alpine) {
             if(fromEl.hasAttribute('u-icon') && fromEl.getAttribute('name') === toEl.getAttribute('name')) {
               return false
             }
+            if (fromEl.nodeName === "SCRIPT" && toEl.nodeName === "SCRIPT" && fromEl.getAttribute('type') === 'module') {
+              var script = document.createElement('script');
+              //copy over the attributes
+              [...toEl.attributes].forEach( attr => { script.setAttribute(attr.nodeName ,attr.nodeValue) })
+
+              script.innerHTML = toEl.innerHTML;
+              fromEl.replaceWith(script)
+              return false;
+          } 
+          return true;
+          },
+          onNodeAdded: function (node) {
+            if (node.nodeName === 'SCRIPT') {
+                var script = document.createElement('script');
+                //copy over the attributes
+                [...node.attributes].forEach( attr => { script.setAttribute(attr.nodeName ,attr.nodeValue) })
+
+                script.innerHTML = node.innerHTML;
+                node.replaceWith(script)
+            }
           }
         });
   

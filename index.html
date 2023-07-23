@@ -2,20 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./dist/styles.css">
+    <script src="./dist/ulibs.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <body>
+    ap
+    <script type="module">
+        const code = 'Icon("key")'
 
-    <button u-button u-button-color="primary">Popup</button>
-    <div u-popup trigger="hover">
-        Content
-    </div>
+        const script = document.createElement('script')
+        script.type = 'module'
 
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi at numquam est ad unde. Quibusdam blanditiis tempora unde! Eum quam ex totam autem obcaecati fuga quidem dignissimos laudantium et? Nihil, consequatur voluptates reiciendis pariatur tenetur architecto cumque doloremque quas incidunt facilis exercitationem esse deleniti totam dolores dicta commodi suscipit eius.
-    
-    <script>process = {env: {}}</script>
-    <script src="./dist/ulibs.js"></script>
+        script.textContent = `import {Icon} from '/src/components/index.js';\n const page = ` + code + `;\n console.log({page})`
+        
+        console.log(script)
+        document.body.appendChild(script)
+
+    </script>
+
 </body>
 </html>
