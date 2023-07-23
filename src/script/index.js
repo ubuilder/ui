@@ -14,10 +14,23 @@ import { Select } from "./select";
 import { Textarea } from "./textarea";
 import { Tabs } from "./tabs";
 import { Dropdown } from "./dropdown";
+import { CodeEditor } from './code-editor';
 import { Tooltip } from "./tooltip";
 import { Alert } from "./alert";
 
+// import hljs from 'highlight.js/lib/core';
+// import javascript from 'highlight.js/lib/languages/javascript';
+// hljs.registerLanguage('javascript', javascript);
+
 function components(Alpine) {
+
+  // Alpine.directive('code-viewer', (el) => {
+  //   const prism = hljs.highlightElement(el, true, (result) => {
+  //     console.log(result)
+  //   })
+  //   console.log(prism)
+  // })
+  
   Alert(Alpine)
   Popup(Alpine);
   ClientSideRouting(Alpine);
@@ -29,7 +42,8 @@ function components(Alpine) {
   Form(Alpine);
   Accordion(Alpine);
   Icon(Alpine);
-  AutoComplete(Alpine);
+  CodeEditor(Alpine);
+  AutoComplete(Alpine)
   Modal(Alpine);
   Tabs(Alpine);
   Dropdown(Alpine);

@@ -32,6 +32,9 @@
     "./ulibs.js": "./dist/ulibs.js"
   },
   "devDependencies": {
+    "@codemirror/lang-css": "^6.2.0",
+    "@codemirror/lang-html": "^6.4.5",
+    "@codemirror/lang-javascript": "^6.1.9",
     "@floating-ui/dom": "^1.4.5",
     "@rollup/plugin-node-resolve": "^15.1.0",
     "@rollup/plugin-replace": "^5.0.2",
@@ -39,10 +42,17 @@
     "alpinejs": "^3.12.3",
     "concurrently": "^8.2.0",
     "http-server": "^14.1.1",
+    "mobiledoc-kit": "^0.15.0",
     "morphdom": "^2.7.0",
     "nodemon": "^2.0.22",
     "rollup": "^3.23.0",
     "sass": "^1.64.1",
     "tom-select": "^2.2.2"
+  },
+  "dependencies": {
+    "@ulibs/ui": "^0.0.2-next.54",
+    "ace-builds": "^1.23.4",
+    "highlight.js": "^11.8.0",
+    "prismjs": "^1.29.0"
   }
 }

@@ -9,6 +9,7 @@ export const Icon = Base({
       component: "icon",
       cssProps: { size },
       textColor: color,
+      name: slots,
       model
     }, slots);
     return result;

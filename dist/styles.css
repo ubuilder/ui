@@ -949,7 +949,7 @@ h6 {
   box-shadow: 0 0 0px 4px var(--color-primary-200);
 }
 
-[u-textarea] {
+[u-textarea], [u-code-editor] {
   transition: all 0.3s ease;
   width: 100%;
   background-color: var(--color-base-200);
@@ -962,7 +962,17 @@ h6 {
   width: 100%;
 }
 
-[u-textarea]:focus {
+[u-textarea]:focus, [u-code-editor]:focus {
+  background-color: var(--color-base-200);
+  outline: none;
+  box-shadow: 0 0 0px 4px var(--color-primary-200);
+}
+
+[u-code-editor] {
+  padding: 0 !important;
+}
+
+[u-code-editor]:focus-within {
   background-color: var(--color-base-200);
   outline: none;
   box-shadow: 0 0 0px 4px var(--color-primary-200);

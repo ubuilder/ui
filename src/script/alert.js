@@ -38,15 +38,25 @@ export function Alert(Alpine) {
     Alpine.magic('alert', (el) => {
         
 
-        return (name, {title, icon = 'check', content = '', ...restProps}) => {
-            const container = document.querySelector(`[u-alert-container][name="${name}"]`)
+        const alert = (name, {title, icon = 'check', content = '', ...restProps}) => {
+            let container = document.querySelector(`[u-alert-container][name="${name}"]`)
+
+            // first container
+            if(!name) container = document.querySelector('[u-alert-container]');
 
             const al = document.createElement('div')
             al.innerHTML = AlertComponent({title, icon, ...restProps}, content)
-            console.log('add alert in ', {container, al})
-            container.appendChild(al)
 
-            
+            setTimeout(() => {
+                container.appendChild(al)
+            }, 100)
         }
+
+        alert.success = (message, title = 'Success') => alert(undefined, {content: message, type: 'success', title, icon: 'check'});
+        alert.info = (message, title = 'Info') => alert(undefined, {content: message, type: 'info', title, icon: 'info-circle'});
+        alert.warning = (message, title = 'Warning') => alert(undefined, {content: message, type: 'warning', title, icon: 'info-triangle'});
+        alert.error = (message, title = 'Error') => alert(undefined, {content: message, type: 'error', title, icon: 'alert-triangle'});
+        
+        return alert
     })
 }

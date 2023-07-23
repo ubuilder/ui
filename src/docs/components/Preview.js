@@ -9,6 +9,7 @@ import {
 import { Base } from "../../utils.js";
 
 import * as components from '../../components/index.js'
+import { CodeEditor } from "../../components/CodeEditor.js";
 
 let id = 0;
 
@@ -76,7 +77,7 @@ export const Preview = Base({
 `
     
 
-    return Tabs(
+    return [Tabs(
       {
         htmlHead: [
           View({type: 'module', tag: 'script'}, script)
@@ -106,17 +107,21 @@ export const Preview = Base({
           ]),
           $props.code &&
             TabsPanel([
-              View(
-                {
-                  tag: "pre",
-                  style:
-                    "font-size: var(--size-xs); line-height: var(--size-sm); overflow: auto",
-                },
-                [View({ tag: "code" }, [$props.code])]
-              ),
+              // View(
+                // {
+                  // tag: "pre",
+                  // style:
+                    // "font-size: var(--size-xs); line-height: var(--size-sm); overflow: auto",
+                // },
+                // [View({ tag: "code" }, [
+                  CodeEditor({name: 'preview-code-' + id, value: $props.code, lang: 'js', style: 'min-height: 200px'})
+                
+                // ])]
+              // ),
             ]),
         ]),
       ]
-    );
+    ), 
+  ];
   },
 });
