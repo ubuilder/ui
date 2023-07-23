@@ -26,6 +26,7 @@
 }
 
 [u-popover-edge] {
+  z-index: 100;
   box-sizing: content-box;
   position: absolute;
   top: 50%;
@@ -36,4 +37,8 @@
   border-color: transparent;
   border-style: solid;
   opacity: 0;
+}
+
+[u-tooltip-focus-able] {
+  z-index: -3;
 }
