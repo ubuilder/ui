@@ -18,7 +18,7 @@ export const Preview = Base({
   render($props, $slots) {
     id++;
     const code = $props.code;
-    const prefix = $props.prefix;
+    const prefix = $props.prefix ?? '/ui/';
     
     function indent(level) {
       return Array.from({ length: level + 1 }).join("  ");
