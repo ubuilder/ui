@@ -3159,10 +3159,9 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   }
 
   function Icon$1(Alpine) {
-    Alpine.directive("icon", (el) => {
-      const iconName = el.textContent;
-
-      const name = el.getAttribute("name");
+    Alpine.directive("icon", (el, {}, {evaluateLater, effect}) => {
+      const iconName = el.getAttribute('u-bind:name');
+      const staticName = el.getAttribute('name');
 
       async function setIcon(value) {
         try {
@@ -3173,7 +3172,6 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
           if (svg.indexOf("Cannot") > -1) {
             el.innerHTML = "";
-            // console.log('icon not loaded', value)
           } else {
             el.innerHTML = svg;
           }
@@ -3183,19 +3181,16 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         }
       }
 
-      if (name) {
-        Alpine.bind(el, {
-          "u-model": name,
-          "u-init"() {
-            this.$watch(name, (value) => setIcon(value));
-          },
+      const evaluate = evaluateLater(iconName);
+
+      effect(() => {
+        evaluate((value) => {
+          setIcon(value);
         });
-      } else {
-        Alpine.bind(el, {
-          "u-init"() {
-            setIcon(iconName);
-          },
-        });
+      });
+
+      if(staticName) {
+        setIcon(staticName);
       }
     });
   }
@@ -12348,7 +12343,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           (dismissible &&
             View(
               { tag: "button", component: component + "-close" },
-              Icon("x")
+              Icon({name: "x"})
             )) ||
             [],
         ]),

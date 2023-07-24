@@ -1,8 +1,7 @@
 export function Icon(Alpine) {
-  Alpine.directive("icon", (el) => {
-    const iconName = el.textContent;
-
-    const name = el.getAttribute("name");
+  Alpine.directive("icon", (el, {}, {evaluateLater, effect}) => {
+    const iconName = el.getAttribute('u-bind:name');
+    const staticName = el.getAttribute('name')
 
     async function setIcon(value) {
       try {
@@ -13,7 +12,6 @@ export function Icon(Alpine) {
 
         if (svg.indexOf("Cannot") > -1) {
           el.innerHTML = "";
-          // console.log('icon not loaded', value)
         } else {
           el.innerHTML = svg;
         }
@@ -23,19 +21,16 @@ export function Icon(Alpine) {
       }
     }
 
-    if (name) {
-      Alpine.bind(el, {
-        "u-model": name,
-        "u-init"() {
-          this.$watch(name, (value) => setIcon(value));
-        },
-      });
-    } else {
-      Alpine.bind(el, {
-        "u-init"() {
-          setIcon(iconName);
-        },
-      });
+    const evaluate = evaluateLater(iconName)
+
+    effect(() => {
+      evaluate((value) => {
+        setIcon(value)
+      })
+    })
+
+    if(staticName) {
+      setIcon(staticName)
     }
   });
 }

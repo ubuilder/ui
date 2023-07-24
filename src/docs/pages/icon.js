@@ -5,13 +5,13 @@ import { Section } from "../components/Section.js";
 
 export default () =>
   DocPage({ name: "Icon" }, [
-    Section({ title: "Default" }, [Preview({ code: 'Icon("user")' })]),
+    Section({ title: "Default" }, [Preview({ code: 'Icon({name: "user"})' })]),
     Section({ title: "Dynamic" }, [
       Preview({
         style: 'height: 300px',
         code: `Form([
         Input({ label: "Enter icon name...", name: "icon" }),
-        Icon({ m: "md", size: "xl", name: "icon" }),
+        Icon({ m: "md", size: "xl", $name: "icon" }),
       ])`,
       }),
     ]),

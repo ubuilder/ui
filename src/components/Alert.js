@@ -36,7 +36,7 @@ export const Alert = Base({
         (dismissible &&
           View(
             { tag: "button", component: component + "-close" },
-            Icon("x")
+            Icon({name: "x"})
           )) ||
           [],
       ]),

@@ -16,18 +16,18 @@ export default function () {
       },
       [
         ButtonGroup({}, [
-          Button({ color: "primary" }, [Icon("home"), "Left"]),
-          Button({ color: "primary" }, ["Right", Icon("home") ]),
+          Button({ color: "primary" }, [Icon({ name: "home" }), "Left"]),
+          Button({ color: "primary" }, ["Right", Icon({ name: "home" })]),
           Button({ color: "primary" }, [
-            Icon("home" ),
+            Icon({ name: "home" }),
             "Both",
-            Icon("check" ),
+            Icon({ name: "check" }),
           ]),
           Button({ color: "primary" }, [
-            Icon("home" ),
-            Icon("check" ),
+            Icon({ name: "home" }),
+            Icon({ name: "check" }),
           ]),
-          Button({ color: "primary" }, Icon("check")),
+          Button({ color: "primary" }, Icon({ name: "check" })),
         ]),
       ]
     ),
@@ -35,19 +35,19 @@ export default function () {
       { title: "Sizes", description: "Button component supports these sizes" },
       [
         Button({ color: "primary", size: "sm" }, [
-          Icon("check" ),
+          Icon({ name: "check" }),
           "Small (sm)",
         ]),
         Button({ color: "primary", size: "md" }, [
-          Icon("check" ),
+          Icon({ name: "check" }),
           "Medium (md)",
         ]),
         Button({ color: "primary", size: "lg" }, [
-          Icon("check" ),
+          Icon({ name: "check" }),
           "Large (lg)",
         ]),
         Button({ color: "primary", size: "xl" }, [
-          Icon("check" ),
+          Icon({ name: "check" }),
           "Extra Large (xl)",
         ]),
       ]
@@ -59,17 +59,17 @@ export default function () {
       },
       [
         ButtonGroup({}, [
-          Button({ color: "primary" }, [Icon("check"), "Primary"]),
+          Button({ color: "primary" }, [Icon({ name: "check" }), "Primary"]),
           Button({ color: "secondary" }, [
-            Icon("check" ),
+            Icon({ name: "check" }),
             "Secondary",
           ]),
-          Button({ color: "success" }, [Icon("check"), "Success"]),
-          Button({ color: "error" }, [Icon("check"), "Error"]),
-          Button({ color: "warning" }, [Icon("check"), "Warning"]),
-          Button({ color: "info" }, [Icon("check"), "Info"]),
-          Button({ color: "dark" }, [Icon("check"), "Dark"]),
-          Button({ color: "light" }, [Icon("check"), "Light"]),
+          Button({ color: "success" }, [Icon({ name: "check" }), "Success"]),
+          Button({ color: "error" }, [Icon({ name: "check" }), "Error"]),
+          Button({ color: "warning" }, [Icon({ name: "check" }), "Warning"]),
+          Button({ color: "info" }, [Icon({ name: "check" }), "Info"]),
+          Button({ color: "dark" }, [Icon({ name: "check" }), "Dark"]),
+          Button({ color: "light" }, [Icon({ name: "check" }), "Light"]),
         ]),
       ]
     ),
