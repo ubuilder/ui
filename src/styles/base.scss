@@ -170,6 +170,14 @@ body {
   font-size: #{calc(var(--size-#{$size}) * 0.8)};
 }
 
+
+// dark light toggle smoothly
+* {
+  transition-property: background-color, border-color, color;
+  transition-duration: 0.1s;
+  transition-timing-function: ease-out;
+}
+
 h1 {
   @include font-size(2xl);
 }

@@ -141,6 +141,12 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
+* {
+  transition-property: background-color, border-color, color;
+  transition-duration: 0.1s;
+  transition-timing-function: ease-out;
+}
+
 h1 {
   line-height: var(--size-2xl);
   font-size: calc(var(--size-2xl) * 0.8);
@@ -284,7 +290,7 @@ h6 {
 
 [u-alert] {
   --alert-shadow: var(--size-md);
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease;
   display: none;
   flex-direction: column;
   padding: var(--size-sm);
@@ -499,7 +505,6 @@ h6 {
   --button-active: var(--color-base-100);
   --button-content: var(--color-base-900);
   --button-size: var(--size-md);
-  transition: all 0.2s ease;
   text-decoration: none;
   display: inline-flex;
   border: 1px solid var(--button-hover);
@@ -760,7 +765,6 @@ h6 {
 [u-checkbox-text]::before, [u-checkbox-group-item-text]::before {
   content: "";
   background-color: var(--color-base-100);
-  transition: all 0.3s ease;
   margin-right: var(--size-xs);
   border-radius: var(--size-xxs);
   width: var(--size-sm);
@@ -843,7 +847,6 @@ h6 {
 [u-radio-text]::before, [u-radio-group-item-text]::before {
   content: "";
   background-color: var(--color-base-100);
-  transition: all 0.3s ease;
   margin-right: var(--size-xs);
   border-radius: var(--size-xs);
   width: var(--size-sm);
@@ -901,7 +904,6 @@ h6 {
 }
 
 [u-input] {
-  transition: all 0.3s ease;
   background-color: var(--color-base-200);
   padding: var(--size-xxs) var(--size-sm);
   border: 1px solid var(--color-base-300);
@@ -923,7 +925,6 @@ h6 {
 }
 
 [u-select] {
-  transition: all 0.3s ease;
   background-color: var(--color-base-200);
   padding: var(--size-xxs) var(--size-sm);
   border: 1px solid var(--color-base-300);
@@ -950,7 +951,6 @@ h6 {
 }
 
 [u-textarea], [u-code-editor] {
-  transition: all 0.3s ease;
   width: 100%;
   background-color: var(--color-base-200);
   padding: var(--size-xxs) var(--size-sm);
@@ -1624,7 +1624,7 @@ h6 {
 
 [u-modal] {
   opacity: 0;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   --modal-size: var(--size-container-md);
   --modal-margin: var(--size-md);
   position: fixed;
@@ -1678,8 +1678,8 @@ h6 {
 }
 
 [u-modal-backdrop] {
-  transition: all 0.2s ease;
-  background-color: rgba(0, 0, 0, 0.5019607843);
+  transition: all 0.3s ease;
+  background-color: rgba(0, 0, 0, 0.15);
   backdrop-filter: blur(8px);
   width: 100%;
   height: 100%;
@@ -3275,7 +3275,6 @@ h6 {
 
 [u-arrow-down], [u-arrow-up] {
   transform: rotate(90deg) scale(0.9, 1.5);
-  transition: all 0.2s ease;
   padding: var(--size-xxs);
   line-height: 0px;
   font-weight: bold;

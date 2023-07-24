@@ -1,7 +1,7 @@
 [u-alert] {
   --alert-shadow: var(--size-md);
 
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease;
   display: none;
   flex-direction: column;
   padding: var(--size-sm);
