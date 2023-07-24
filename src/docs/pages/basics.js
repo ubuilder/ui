@@ -2,7 +2,7 @@ import { DocPage } from "../components/DocPage.js";
 import { Section } from "../components/Section.js";
 import { Preview } from "../components/Preview.js";
 
-export default () => DocPage({name: 'AlpineJS Features'}, [
+export default () => DocPage({name: 'Basic Features'}, [
     Section({title: 'If statement'}, [
         Preview({code: `View({
             $data: {show: true}
