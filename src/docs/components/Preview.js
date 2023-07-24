@@ -79,6 +79,7 @@ export const Preview = Base({
 
     return [Tabs(
       {
+        mb: 'xs',
         htmlHead: [
           View({type: 'module', tag: 'script'}, script)
         ],

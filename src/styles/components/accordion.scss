@@ -1,6 +1,6 @@
 /* #region Accordion */
 [u-accordions] {
-  --accordion-border-color: var(--color-base-300);
+  --accordion-border-color: var(--color-base-400);
   display: flex;
   flex-direction: column;
   border: 1px solid var(--accordion-border-color);
@@ -11,16 +11,17 @@
 }
 
 [u-accordion-header] {
-  padding: var(--size-sm) var(--size-md);
-  font-size: calc(var(--size-lg) * 0.8);
-  line-height: var(--size-lg);
+  padding: var(--size-xs) var(--size-md);
+  font-size: calc(var(--size-md) * 0.8);
+  line-height: var(--size-md);
   cursor: pointer;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-[u-accordion-header="open"] {
+
+[u-accordion-header-open] {
   font-weight: bold;
 }
 

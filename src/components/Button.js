@@ -1,62 +1,47 @@
-import { Base } from "../utils.js";
+import { Base, extract } from "../utils.js";
 import { View } from "./View.js";
 
 export const Button = Base({
   render($props, $slots) {
-    const {
-      href,
-      tag = href ? "a" : "button",
-      component = "button",
-      disabled = false,
-      $disabled,
-      $color,
-      $link,
-      $size,
-      $href,
-      size = "md",
-      link = false,
-      color = link ? "light" : undefined,
-      ...restProps
-    } = $props;
-
-    const props = {
-      ...restProps,
-      disabled,
-      $disabled,
-      "$u-button-color": $color,
-      "$u-button-size": $size,
-      "$u-button-link": $link,
-      tag,
-      component,
-      href,
-      $href,
+    const [props, restProps] = extract($props, {
+      href: undefined,
+      tag: undefined,
+      component: 'button',
+      disabled: false,
       cssProps: {
-        color,
-        size,
-        link,
-      },
-    };
+        size: 'md',
+        link: false,
+        color: undefined
+      }
+    });
 
-    return View(props, $slots);
+    if(!props.tag) {
+      if(props.href) {
+        props.tag = 'a' 
+      } else {
+        props.tag = 'button'
+      }
+    }
+    
+    if(!props.color) {
+      if(props.link) {
+        props.color = 'light'
+      }
+    }
+
+    return View({...restProps, ...props}, $slots);
   },
 });
 
 export const ButtonGroup = Base({
   render($props, $slots) {
-    const {
-      component = "button-group",
-      compact = false,
-      ...restProps
-    } = $props;
-
-    const props = {
-      ...restProps,
-      component,
+    const [props, restProps] = extract($props, {
+      component: 'button-group',
       cssProps: {
-        compact,
-      },
-    };
-
-    return View(props, $slots);
+        compact: false
+      }
+    });
+    
+    return View({...props, ...restProps}, $slots);
   },
 });

@@ -34,6 +34,12 @@ export default () => DocPage({name: 'Basic Features'}, [
         Button({onClick: 'disabled = !disabled', $text: "disabled ? 'Enable' : 'Disable'"}),
         Button({$color: "disabled ? 'secondary' : 'primary'"}, 'Color of this button is dynamic')
     ])
+]`}),
+Preview({code: `[
+    View({$data: {size: 'sm'}}, [
+        Select({items: ["sm", "md", "lg", "xl"], label: 'Size', name: 'size'}),
+        View({ $p: 'size', border: true }, ['padding: ', View({tag: 'span', $text: 'size'})])
+    ])
 ]`})
     ]),
     Section({title: 'Data'}, [

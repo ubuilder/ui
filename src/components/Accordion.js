@@ -1,38 +1,30 @@
-import { Base } from "../utils.js";
+import { Base, extract } from "../utils.js";
 import { View } from "./View.js";
 
 export const Accordions = Base({
   render($props, slots) {
-    const {
-      component = "accordions",
-      persistent = false,
-      ...restProps
-    } = $props;
+    const [props, restProps] = extract($props, {
+      component: 'accordions',
+      persistent: false
+    })
 
-    const props = {
-      ...restProps,
-      component,
-      persistent,
-    };
-
-    return View(props, slots);
+    return View({...props, ...restProps}, slots);
   },
 });
 
 export const Accordion = Base({
   render($props, slots) {
-    const { component = "accordion", header, body, ...restProps } = $props;
+    const [props, restProps] = extract($props, {
+      component: 'accordion',
+      header: undefined,
+      body: undefined
+    })
 
-    const props = {
-      ...restProps,
-      component,
-    };
-
-    return View(props, [
-      header && View({ component: component + "-header" }, header),
+    return View({component: props.component, ...restProps}, [
+      props.header && View({ component: props.component + "-header" }, props.header),
       View(
-        { component: component + "-content" },
-        body ? AccordionBody([body]) : slots
+        { component: props.component + "-content" },
+        props.body ? AccordionBody([props.body]) : slots
       ),
     ]);
   },
@@ -40,14 +32,12 @@ export const Accordion = Base({
 
 export const AccordionHeader = Base({
   render($props, slots) {
-    const { component = "accordion-header", title, ...restProps } = $props;
+    const [props, restProps] = extract($props, { 
+      component: "accordion-header", 
+      title: undefined
+    });
 
-    const props = {
-      ...restProps,
-      component,
-    };
-
-    return View(props, [
+    return View({component: props.component, ...restProps}, [
       title && View({ tag: "h3", component: component + "-title" }, title),
       slots || View({ component: "accordion-header-icon" }, ["^"]),
     ]);
@@ -56,13 +46,10 @@ export const AccordionHeader = Base({
 
 export const AccordionBody = Base({
   render($props, slots) {
-    const { component = "accordion-body", ...restProps } = $props;
+    const [props, restProps] = extract($props, { 
+      component: "accordion-body"
+    });
 
-    const props = {
-      ...restProps,
-      component,
-    };
-
-    return View(props, slots);
+    return View({...props, ...restProps}, slots);
   },
 });

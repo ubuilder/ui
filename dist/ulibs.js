@@ -11890,7 +11890,39 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
   const prefix = "u";
 
-  function extract(...params) {
+  function extract(allProps, names) {
+    const restProps = { ...allProps };
+    const result = names;
+
+    Object.keys(names).map((key) => {
+      if (typeof names[key] === "object") {
+        result[key] = names[key];
+        Object.keys(names[key]).map((key2) => {
+          if (allProps[key2]) {
+            result[key][key2] = allProps[key2];
+            delete restProps[key2];
+          }
+          if (allProps["$" + key2]) {
+            result[key]["$" + key2] = allProps["$" + key2];
+            delete restProps["$" + key2];
+          }
+        });
+      } else {
+        if (allProps[key]) {
+          result[key] = allProps[key];
+          delete restProps[key];
+        }
+        if (allProps["$" + key]) {
+          result["$" + key] = allProps["$" + key] ?? names["$" + key];
+          delete restProps["$" + key];
+        }
+      }
+    });
+
+    return [result, restProps];
+  }
+
+  function getPropsAndSlots(...params) {
     let $props = {};
     let $slots = [];
 
@@ -11958,7 +11990,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
   function Base({ render }) {
     return (...$) => {
-      const { $props = {}, $slots = [] } = extract(...$);
+      const { $props = {}, $slots = [] } = getPropsAndSlots(...$);
 
       let props = {};
       for (let key in $props) {
@@ -12236,23 +12268,43 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         borderRadius,
       };
 
+      console.log({cssProps});
       const cssAttributes = {};
 
       for (let prop in cssProps) {
-        if (typeof cssProps[prop] !== "undefined")
+        if (typeof cssProps[prop] !== "undefined") {
+          if(prop.startsWith('$')) continue;
           if (cssProps[prop] === true) {
             cssAttributes[classname(component + "-" + prop)] = "";
           } else {
             cssAttributes[classname(component + "-" + prop)] = cssProps[prop];
           }
+        }
+        if (typeof cssProps['$' + prop] !== "undefined") {
+          if (cssProps['$' + prop] === true) {
+            cssAttributes[classname('bind') + ':' + classname(component + "-" + prop)] = "";
+          } else {
+            cssAttributes[classname('bind') + ':' + classname(component + "-" + prop)] = cssProps['$' + prop];
+          }
+        }
       }
       for (let prop in viewCssProps) {
-        if (typeof viewCssProps[prop] !== "undefined")
+        if (typeof viewCssProps[prop] !== "undefined") {
+          console.log('add this prop: ', prop);
+
+          if(prop.startsWith('$')) continue;
           if (viewCssProps[prop] === true) {
             cssAttributes[classname("view-" + prop)] = "";
           } else {
             cssAttributes[classname("view-" + prop)] = viewCssProps[prop];
           }
+        }
+        if (typeof $props['$' + prop] !== "undefined") {
+          console.log('add this prop: $' + prop);
+
+          cssAttributes[classname('bind') + ':' + classname("view-" + prop)] = $props['$' + prop];
+        }
+        
       }
 
       const props = {
@@ -12317,41 +12369,44 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
   const Alert$1 = Base({
     render($props, $slots) {
-      const {
-        component = "alert",
-        autoClose = false,
-        duration = 5000,
-        open = true,
-        icon,
-        color = "primary",
-        dismissible = false,
-        title,
-        ...restProps
-      } = $props;
-
-      const props = {
-        ...restProps,
-        component,
-        duration: autoClose ? duration : undefined,
+      const [props, restProps] = extract($props, {
+        component: "alert",
+        duration: 5000,
+        icon: undefined,
+        dismissible: false,
+        title: undefined,
         cssProps: {
-          color,
-          autoClose,
-          open,
+          autoClose: false,
+          open: true,
+          color: "primary",
         },
+      });
+      const component = props.component;
+
+      const alertProps = {
+        ...restProps,
+        component: props.component,
+        duration: props.autoClose ? props.duration : undefined,
+        cssProps: props.cssProps,
       };
 
-      return View(props, [
+      const iconProps = {
+        [classname(component + "-icon")]: "",
+        color: props.cssProps.color,
+        $color: props.cssProps.$color,
+        name: props.icon,
+        $name: props.$icon,
+      };
+
+      return View(alertProps, [
         View({ component: component + "-header" }, [
-          (icon &&
-            Icon({ [classname(component + "-icon")]: true, color }, icon)) ||
-            [],
-          View({ component: component + "-title" }, title ?? ''),
-          (dismissible &&
+          props.icon ? Icon(iconProps) : [],
+          View({ component: component + "-title" }, props.title ?? ""),
+          
             View(
-              { tag: "button", component: component + "-close" },
-              Icon({name: "x"})
-            )) ||
-            [],
+              { tag: "button", $show: props.dismissible, component: component + "-close" },
+              Icon({ name: "x" })
+            ),
         ]),
         ($slots.toString() !== "" &&
           View({ component: component + "-content" }, $slots)) ||

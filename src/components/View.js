@@ -122,23 +122,43 @@ export const View = Base({
       borderRadius,
     };
 
+    console.log({cssProps})
     const cssAttributes = {};
 
     for (let prop in cssProps) {
-      if (typeof cssProps[prop] !== "undefined")
+      if (typeof cssProps[prop] !== "undefined") {
+        if(prop.startsWith('$')) continue;
         if (cssProps[prop] === true) {
           cssAttributes[classname(component + "-" + prop)] = "";
         } else {
           cssAttributes[classname(component + "-" + prop)] = cssProps[prop];
         }
+      }
+      if (typeof cssProps['$' + prop] !== "undefined") {
+        if (cssProps['$' + prop] === true) {
+          cssAttributes[classname('bind') + ':' + classname(component + "-" + prop)] = "";
+        } else {
+          cssAttributes[classname('bind') + ':' + classname(component + "-" + prop)] = cssProps['$' + prop];
+        }
+      }
     }
     for (let prop in viewCssProps) {
-      if (typeof viewCssProps[prop] !== "undefined")
+      if (typeof viewCssProps[prop] !== "undefined") {
+        console.log('add this prop: ', prop)
+
+        if(prop.startsWith('$')) continue;
         if (viewCssProps[prop] === true) {
           cssAttributes[classname("view-" + prop)] = "";
         } else {
           cssAttributes[classname("view-" + prop)] = viewCssProps[prop];
         }
+      }
+      if (typeof $props['$' + prop] !== "undefined") {
+        console.log('add this prop: $' + prop)
+
+        cssAttributes[classname('bind') + ':' + classname("view-" + prop)] = $props['$' + prop];
+      }
+      
     }
 
     const props = {

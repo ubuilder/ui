@@ -18,7 +18,7 @@ let value = "";
 
 export default function () {
   return DocPage({ name: "Accordion Example" }, [
-    Card({ title: "Card", onInit: "value = 0;" }, [
+    Card({ title: "Card",$data: {value: ''} }, [
       CardBody({}, [
         Accordions({ persistent: false }, [
           Accordion({
@@ -27,7 +27,7 @@ export default function () {
               Button(
                 {
                   color: "primary",
-                  onClick: `alert("click on button")`,
+                  onClick: `alert('click on button')`,
                 },
                 "Hi"
               ),
@@ -89,11 +89,7 @@ export default function () {
                         id: "button-new-project",
                         color: "primary",
                         // onClick: `console.log('HELLO', $event, $el)`,
-                        onInit: `
-                        // $("#button-new-project").on('click', () => {
-                        //   console.log('should create new project')
-                        // })
-                        `,
+                        onInit: `console.log('HELLO', $el)`,
                       },
                       "Hi"
                     ),
@@ -177,7 +173,7 @@ export default function () {
             Button(
               {
                 color: "primary",
-                onClick: `alert("input value is: " + value)`,
+                onClick: `alert('input value is: ' + value)`,
               },
               "Next"
             ),

@@ -1,24 +1,38 @@
 const prefix = "u";
 
-export function props(names, allProps) {
+export function extract(allProps, names) {
   const restProps = { ...allProps };
-  const result = {};
-  result.restProps = restProps;
+  const result = names;
 
-  Object.keys(names).map((name) => {
-    result[name + "Props"] = { [prefix + "-" + name]: "" };
-
-    for (let propName in allProps) {
-      if (names[name].includes(propName.replace("$", ""))) {
-        result[name + "Props"][propName] = allProps[propName];
-        delete restProps[propName];
+  Object.keys(names).map((key) => {
+    if (typeof names[key] === "object") {
+      result[key] = names[key];
+      Object.keys(names[key]).map((key2) => {
+        if (allProps[key2]) {
+          result[key][key2] = allProps[key2];
+          delete restProps[key2];
+        }
+        if (allProps["$" + key2]) {
+          result[key]["$" + key2] = allProps["$" + key2];
+          delete restProps["$" + key2];
+        }
+      });
+    } else {
+      if (allProps[key]) {
+        result[key] = allProps[key];
+        delete restProps[key];
+      }
+      if (allProps["$" + key]) {
+        result["$" + key] = allProps["$" + key] ?? names["$" + key];
+        delete restProps["$" + key];
       }
     }
   });
-  return result;
+
+  return [result, restProps];
 }
 
-export function extract(...params) {
+export function getPropsAndSlots(...params) {
   let $props = {};
   let $slots = [];
 
@@ -86,7 +100,7 @@ export function classname(component, cssProps = {}, globalClasses = "") {
 
 export function Base({ render }) {
   return (...$) => {
-    const { $props = {}, $slots = [] } = extract(...$);
+    const { $props = {}, $slots = [] } = getPropsAndSlots(...$);
 
     let props = {};
     for (let key in $props) {
