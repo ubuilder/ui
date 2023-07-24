@@ -70,7 +70,7 @@ export const Preview = Base({
     const script = `
     import {${Object.keys(components).filter(key => `View ${code}`.indexOf(key) > -1).join(', ')}} from '${prefix}src/components/index.js'
 
-    const page = View({d: 'inline-flex', p: 'sm', gap: 'xs'},[${code.trim()}])
+    const page = View({d: 'inline-flex', p: 'xl', gap: 'xs'},[${code.trim()}])
 
     document.getElementById("preview-html-${id}").innerHTML = page.toString()
     document.getElementById("preview-code-${id}").innerHTML = page.toString().replace(/</g, "\\n&#60;").replace(/>/g, "&#62;\\n\\t").replace(/\\n/g, '<br/>')
@@ -107,17 +107,18 @@ export const Preview = Base({
           ]),
           $props.code &&
             TabsPanel([
-              // View(
-                // {
-                  // tag: "pre",
-                  // style:
-                    // "font-size: var(--size-xs); line-height: var(--size-sm); overflow: auto",
-                // },
-                // [View({ tag: "code" }, [
-                  CodeEditor({name: 'preview-code-' + id, value: $props.code, lang: 'js', style: 'min-height: 200px'})
+              View(
+                {
+                  tag: "pre",
+                  style:
+                    "font-size: var(--size-sm); line-height: var(--size-md); overflow: auto",
+                },
+                [View({ tag: "code" }, [
+                  $props.code.trim()
+                  // CodeEditor({name: 'preview-code-' + id, value: $props.code, lang: 'js', style: 'min-height: 200px'})
                 
-                // ])]
-              // ),
+                ])]
+              ),
             ]),
         ]),
       ]

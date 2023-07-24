@@ -16,6 +16,7 @@ import { Tabs } from "./tabs";
 import { Dropdown } from "./dropdown";
 import { CodeEditor } from './code-editor';
 import { Tooltip } from "./tooltip";
+import { Popover } from "./popover";
 import { Alert } from "./alert";
 
 // import hljs from 'highlight.js/lib/core';
@@ -48,6 +49,7 @@ function components(Alpine) {
   Tabs(Alpine);
   Dropdown(Alpine);
   Tooltip(Alpine);
+  Popover(Alpine);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
