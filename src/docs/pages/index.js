@@ -51,7 +51,7 @@ export default ({ prefix }) => {
       Col({w: 100}, View({tag: 'h3', pt: 'sm', style: 'font-weight: normal'}, 'Examples')),
       Item({ slug: "accordion-example", text: "Accordion Example" }),
       Item({ slug: "card-example", text: "Card Example" }),
-      Item({ slug: "form", text: "Form" }),
+      Item({ slug: "dynamic-form", text: "Form" }),
       Item({ slug: "login", text: "Login" }),
       Item({ slug: "signup", text: "Signup" }),
       Item({ slug: "table", text: "Table & Modal" }),
