@@ -12,6 +12,7 @@ export const Button = Base({
       $color,
       $link,
       $size,
+      $href,
       size = "md",
       link = false,
       color = link ? "light" : undefined,
@@ -28,6 +29,7 @@ export const Button = Base({
       tag,
       component,
       href,
+      $href,
       cssProps: {
         color,
         size,
