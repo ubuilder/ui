@@ -9789,6 +9789,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         try {
           const html = await fetch(pathname).then((res) => res.text());
     
+          // resolve promise after morphdom completed
           morphdom(document.getElementsByTagName("html")[0], html, {
             onBeforeElUpdated(fromEl, toEl) {
                 if (fromEl.isEqualNode(toEl)) {
@@ -63828,7 +63829,6 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         component: "icon",
         cssProps: { size },
         textColor: color,
-        name: slots,
         model
       }, slots);
       return result;
