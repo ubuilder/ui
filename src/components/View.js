@@ -163,6 +163,10 @@ export const View = Base({
           props["u-if"] = props[key];
         } else if (key === "$text") {
           props["u-text"] = props[key];
+        } else if (key === "$show") {
+          props["u-show"] = props[key];
+        } else if (key === "$data") {
+          props["u-data"] = props[key];
         } else if (key === "$html") {
           props["u-html"] = props[key];
         } else if (key === "$for") {

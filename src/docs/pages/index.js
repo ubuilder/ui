@@ -25,6 +25,7 @@ export default ({ prefix }) => {
 
     Row([
       Item({ slug: 'installation', text: 'Installation'}),
+      Item({ slug: 'alpine', text: 'Basics'}),
 
       Col({w: 100}, View({tag: 'h3', pt: 'sm', style: 'font-weight: normal'}, 'Components')),
       Item({ slug: "auto-complete", text: "Autocomplete" }),

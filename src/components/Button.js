@@ -7,6 +7,11 @@ export const Button = Base({
       href,
       tag = href ? "a" : "button",
       component = "button",
+      disabled = false,
+      $disabled,
+      $color,
+      $link,
+      $size,
       size = "md",
       link = false,
       color = link ? "light" : undefined,
@@ -15,6 +20,11 @@ export const Button = Base({
 
     const props = {
       ...restProps,
+      disabled,
+      $disabled,
+      "$u-button-color": $color,
+      "$u-button-size": $size,
+      "$u-button-link": $link,
       tag,
       component,
       href,
