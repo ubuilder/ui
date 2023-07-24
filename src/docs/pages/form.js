@@ -53,9 +53,11 @@ export default function () {
           key: "key",
           text: "text",
         }),
+        Input({col: 6, label: 'Input'}),
         Select({
             placeholder: 'Hello World!',
           name: "color",
+          col: 6,
         //   multiple: true,
         //   value: [2,3],
         label: 'Color',
