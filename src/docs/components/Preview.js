@@ -98,7 +98,7 @@ export const Preview = Base({
               {
                 tag: "pre",
                 style:
-                  "font-size: var(--size-xs); line-height: var(--size-sm); overflow: auto",
+                  "font-size: var(--size-md); line-height: var(--size-lg); overflow: auto",
               },
               [
                 View({ tag: "code", id: "preview-code-" + id })
@@ -111,7 +111,7 @@ export const Preview = Base({
                 {
                   tag: "pre",
                   style:
-                    "font-size: var(--size-sm); line-height: var(--size-md); overflow: auto",
+                    "font-size: var(--size-md); line-height: var(--size-lg); overflow: auto",
                 },
                 [View({ tag: "code" }, [
                   $props.code.trim()

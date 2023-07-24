@@ -155,7 +155,7 @@
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata&display=swap');
 
 body {
   font-size: calc(var(--size-md) * 0.8);
@@ -202,6 +202,6 @@ h6 {
 }
 
 code {
-  font-family: 'Fira Code', 'Courier New', Courier, monospace;
+  font-family: 'Inconsolata', 'Courier New', Courier, monospace;
 }
 /* #endregion */
