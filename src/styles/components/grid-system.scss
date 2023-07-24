@@ -35,7 +35,7 @@
 
 // Col
 [u-col] {
-  --col-width: initial;
+  --col: auto;
   padding-left: calc(var(--row-gutter) / 4);
   padding-right: calc(var(--row-gutter) / 4);
 
@@ -50,6 +50,9 @@
 
 [u-col-col=""] {
   flex: 1;
+}
+[u-col-col="0"] {
+  --col: auto;
 }
 
 $col-sizes: (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);

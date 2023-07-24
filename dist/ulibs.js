@@ -3366,6 +3366,8 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         async "u-on:submit"(event) {
           const value = {};
           event.preventDefault();
+          
+          event.stopPropagation();
 
           Object.keys(fields).map((key) => {
             value[key] = fields[key].get();
