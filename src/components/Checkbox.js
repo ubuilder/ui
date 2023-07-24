@@ -28,7 +28,7 @@ export const CheckboxInput = Base({
       name,
       tag: "input",
       type: "checkbox",
-      name,
+      $model: name,
       value,
       checked,
       multiple,
@@ -126,6 +126,8 @@ export const CheckboxGroup = Base({
       }
       return item;
     }
+   
+    console.log({items, key: getKey(items[0]), text: getText(items[0])})
 
     return FormField(props, [
       View(

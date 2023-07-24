@@ -40,7 +40,7 @@ export default function () {
     Section({ title: "form + checkbox" }, [
       Container({size: 'xl', mx: 'auto'}, [
 
-      Form([
+      Form({$data: {username: '', password: '', gender: 'Male', color: '', colors: [], description: '', required: false, group: [], remember_me: false, }}, [
         Input({ name: "username" }),
         Input({ name: "password" }),
         RadioGroup({
@@ -133,7 +133,7 @@ export default function () {
 
     ]),
     Section({title: 'Initial Value'}, [
-      Form({ value: {name: 'user', remember: true, password: 'secret', gender: 'female', description: 'hello', languages: 'css'}}, [
+      Form({ $data: {name: 'user', remember: true, password: 'secret', gender: 'female', description: 'hello', languages: 'css'}}, [
         Input({name: 'name', label: 'Name'}),
         Input({name: 'password', type: 'password', label: 'Password'}),
         Textarea({name: 'description', label: 'description' }),
@@ -146,7 +146,7 @@ export default function () {
       ])
     ]),
     Section({title: 'Funtion call', description: 'You can call javascript function by setting method to FUNCTION, in action you can write your function ($value is the value of form elements) '}, [
-      Form({ method: 'FUNCTION', action: 'console.log($value)'}, [
+      Form({ $data: {name: '', password: '', description: '', remember: false, languages: [], gender: undefined}, onSubmit: 'console.log(Alpine.raw($data))'}, [
         Input({name: 'name', label: 'Name'}),
         Input({name: 'password', type: 'password', label: 'Password'}),
         Textarea({name: 'description', label: 'description' }),
@@ -161,7 +161,7 @@ export default function () {
     ]),
 
     Section({title: 'GET/POST Helpers'}, [
-      Form({method: 'FUNCTION', action: `$get('/form', $value).then(res => alert('Successfully logged in'))`}, [
+      Form({$data: {username: '', password: ''}, onSubmit: `$get('/form', $data).then(res => alert('Successfully logged in'))`}, [
         Input({name: 'username', label: 'Username'}),
         Input({name: 'password', label: 'Password', type: 'password'}),
         Button({color: 'primary'}, 'Login')

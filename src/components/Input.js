@@ -44,6 +44,7 @@ export const Input = Base({
       type,
       value,
       $value,
+      $model: name,
       placeholder,
       required,
       disabled,

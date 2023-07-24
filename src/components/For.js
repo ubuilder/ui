@@ -3,9 +3,9 @@ import { View } from "./View.js";
 
 export const For = Base({
     render($props, $slots) {
-        const {items, as} = $props
+        const {items, as, index = 'index', key = index } = $props
 
-        return View({tag: 'template', $for: `${as} in ${items}`}, [
+        return View({tag: 'template', $for: `(${as},${index}) in ${items}`, ':key': key}, [
             $slots
         ])
     }

@@ -19,7 +19,7 @@ export const Textarea = Base({
     const textareaProps = {
       tag: "textarea",
       placeholder,
-      name,
+      $model: name,
       component,
       rows,
       value

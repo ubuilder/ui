@@ -507,11 +507,6 @@ declare const Autocomplete: View<{todo: true}>
 declare const Datepicker: View<{todo: true}>
 
 /**
- * Switch Component
- */
-declare const Switch: View<{todo: true}>
-
-/**
  * Slider Component
  */
 declare const Slider: View<{todo: true}>

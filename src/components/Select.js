@@ -27,7 +27,7 @@ export const Select = Base({
       tag: "select",
       component: "select",
       value,
-      name,
+      $model: name,
       multiple,
     };
 

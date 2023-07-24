@@ -2,6 +2,7 @@ import { Base } from "../utils.js";
 import { View } from "./View.js";
 import { FormField } from "./FormField.js";
 
+
 export const RadioInput = Base({
   render($props, $slots) {
     const {
@@ -25,10 +26,11 @@ export const RadioInput = Base({
     };
 
     const radioProps = {
-      name,
+      // name,
       tag: "input",
       type: "radio",
-      name,
+      // name,
+      $model: name,
       value,
       checked,
       multiple,
@@ -60,7 +62,7 @@ export const RadioGroup = Base({
 
     const radioGroupProps = {
       component,
-      tag: "div",
+      tag: "form",
       name,
       cssProps: {
         inline,

@@ -191,6 +191,8 @@ export const View = Base({
           props["u-html"] = props[key];
         } else if (key === "$for") {
           props["u-for"] = props[key];
+        } else if (key === "$model") {
+          props["u-model"] = props[key];
         } else {
           props[`u-bind:` + key.substring(1)] = props[key];
         }
@@ -202,6 +204,9 @@ export const View = Base({
       }
     }
 
+    if(tagName === 'input') {
+      console.log({props})
+    }
     return tag(tagName, props, $slots);
   },
 });

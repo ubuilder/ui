@@ -745,10 +745,6 @@ code {
   color: var(--color-base-900);
 }
 
-[u-form-field] {
-  margin-bottom: var(--size-xs);
-}
-
 [u-checkbox-input], [u-checkbox-group-item-input] {
   position: absolute;
   width: 0;

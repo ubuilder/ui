@@ -30,7 +30,6 @@ export const Switch = Base({
         tag: "input",
         type: "checkbox",
         text,
-        name,
         checked,
         component,
       };
