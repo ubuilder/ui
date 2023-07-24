@@ -3216,6 +3216,15 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           set: (value) => (checkbox.checked = value),
         };
       },
+      switch: (el) => {
+        const switchEl = el.querySelector("[u-switch-input]");
+
+        return {
+          name: switchEl.name,
+          get: () => switchEl.checked,
+          set: (value) => (switchEl.checked = value),
+        };
+      },
       "checkbox-group": (el) => {
         // el._model.get
         const name = el.getAttribute("name");
@@ -12397,6 +12406,19 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       });
   }
 
+  function Switch(Alpine) {
+    Alpine.directive("switch-input", (el) => {
+      Alpine.bind(el, {
+        "u-init"() {
+          this.$data.name = el.getAttribute("name");
+        },
+        "u-on:change"(e) {
+          this.$data[el.getAttribute("name")] = e.target.checked;
+        },
+      });
+    });
+  }
+
   // import hljs from 'highlight.js/lib/core';
   // import javascript from 'highlight.js/lib/languages/javascript';
   // hljs.registerLanguage('javascript', javascript);
@@ -12420,6 +12442,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     Textarea(Alpine);
     Form(Alpine);
     Accordion(Alpine);
+    Switch(Alpine);
     Icon$1(Alpine);
     AutoComplete(Alpine);
     Modal(Alpine);

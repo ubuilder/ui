@@ -37,12 +37,6 @@ export const Datepicker = Base({
   },
 });
 
-export const Switch = Base({
-  render($props, $slots) {
-    // Switch component
-  },
-});
-
 export const Slider = Base({
   render($props, $slots) {
     // Slider

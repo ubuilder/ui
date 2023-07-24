@@ -308,6 +308,15 @@ declare const CheckboxGroup: FormField<{
 }>;
 
 /**
+ * Switch Component
+ */
+declare const Switch: FormField<{
+  text: string;
+  inline: boolean;
+  checked: boolean;
+}>;
+
+/**
  * RadioGroup Component
  */
 declare const RadioGroup: FormField<{

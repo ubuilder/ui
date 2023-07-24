@@ -50,7 +50,6 @@
     "tom-select": "^2.2.2"
   },
   "dependencies": {
-    "@ulibs/ui": "^0.0.2-next.54",
     "ace-builds": "^1.23.4",
     "highlight.js": "^11.8.0",
     "prismjs": "^1.29.0"

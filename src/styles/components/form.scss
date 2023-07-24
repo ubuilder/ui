@@ -39,7 +39,7 @@
   border-radius: var(--size-xxs);
   width: var(--size-sm);
   height: var(--size-sm);
-  border: 1px solid var(--color-base-700);
+  border: 1px solid var(--color-primary-200);
 }
 
 
@@ -74,7 +74,84 @@
 
 }
 
+// Switch
 
+[u-switch-input] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  margin-right: var(--size-xs);
+}
+
+
+/* The switch - the box around the slider */
+[u-switch] {
+  --switch-size: var(--size-md);
+  --switch-knob-size: calc(var(--switch-size) - 10px);
+
+  position: relative;
+  display: inline-block;
+  width: calc(var(--switch-size) * 2);
+  height: var(--switch-size);
+}
+
+/* The slider */
+[u-switch-text] {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--color-base-400);
+  border: 1px solid var(--color-primary-200);
+  transition: .3s;
+}
+
+// The switch button
+[u-switch-text]:before {
+  position: absolute;
+  content: "";
+  height: var(--switch-knob-size);
+  width: var(--switch-knob-size);
+  left: 4px;
+  bottom: 4px;
+
+  border: 1px solid bar(--color-base-400);
+  background-color: var(--color-light-200);
+  transition: .3s;
+}
+[u-view-theme="dark"] [u-switch-text]::before {
+  background-color: var(--color-light-400);
+}
+
+
+[u-switch-input]:checked + [u-switch-text] {
+  background-color: var(--color-primary-500);
+}
+[u-switch-input]:checked + [u-switch-text]::before {
+  background-color: var(--color-primary-content);
+}
+
+[u-switch-input]:focus + [u-switch-text] {
+  box-shadow: 0 0 0 3px var(--color-primary-200);
+}
+
+[u-switch-input]:checked + [u-switch-text]:before {
+  transform: translateX(var(--switch-size));
+}
+
+/* Rounded sliders */
+[u-switch-text] {
+  border-radius: var(--switch-size);
+}
+
+[u-switch-text]:before {
+  border-radius: 50%;
+}
+
+
+// Checkbox Group
 [u-checkbox-group-item-input] {
   @extend [u-checkbox-input];
 }
@@ -145,7 +222,7 @@
   border-radius: var(--size-xs);
   width: var(--size-sm);
   height: var(--size-sm);
-  border: 1px solid var(--color-base-700);
+  border: 1px solid var(--color-primary-200);
 }
 
 

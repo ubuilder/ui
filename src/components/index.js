@@ -20,6 +20,7 @@ export * from "./Breadcrumb.js";
 export * from "./Avatar.js";
 export * from "./Progress.js";
 export * from "./Select.js";
+export * from "./Switch.js";
 export * from "./Textarea.js";
 export * from "./Tabs.js";
 export * from "./Dropdown.js";

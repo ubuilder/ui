@@ -18,6 +18,7 @@ import { CodeEditor } from './code-editor';
 import { Tooltip } from "./tooltip";
 import { Popover } from "./popover";
 import { Alert } from "./alert";
+import { Switch } from "./switch";
 
 // import hljs from 'highlight.js/lib/core';
 // import javascript from 'highlight.js/lib/languages/javascript';
@@ -42,6 +43,7 @@ function components(Alpine) {
   Textarea(Alpine);
   Form(Alpine);
   Accordion(Alpine);
+  Switch(Alpine);
   Icon(Alpine);
   CodeEditor(Alpine);
   AutoComplete(Alpine)

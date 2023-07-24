@@ -11,6 +11,7 @@ import {
   RadioGroup,
   Select,
   Textarea,
+  Switch,
 } from "../../components/index.js";
 import { DocPage } from "../components/DocPage.js";
 import { Section } from "../components/Section.js";
@@ -88,6 +89,7 @@ export default function () {
             value: 'This is description',
             placeholder: 'Enter Description...'
         }),
+        Switch({name: 'required', label: 'is this field required?'}),
         CheckboxGroup({
           name: "group",
           items: ["one", "two", "three", "four"],
@@ -109,6 +111,7 @@ export default function () {
             View(["Colors: ", View({ tag: "span", "u-text": "JSON.stringify(colors)" })]),
 
             View(['Description: ', View({tag: 'span', 'u-text': 'description'})]),
+            View(['Required: ', View({tag: 'span', 'u-text': 'required'})]),
             View([
               "Group: ",
               View({ tag: "span", "u-text": "JSON.stringify(group)" }),
@@ -143,7 +146,7 @@ export default function () {
         Input({name: 'name', label: 'Name'}),
         Input({name: 'password', type: 'password', label: 'Password'}),
         Textarea({name: 'description', label: 'description' }),
-        Checkbox({name: 'remember', text: 'Remember Me'}),
+        Switch({name: 'remember', label: 'Remember Me'}),
         // CheckboxGroup({ name: 'languages', items: ['html', 'css', 'js', 'svelte']}),
         RadioGroup({ name: 'languages', items: ['html', 'css', 'js', 'svelte']}),
         Select({ name: 'gender', placeholder: "Select gender...", items: ['male', 'female']}),

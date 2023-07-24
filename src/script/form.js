@@ -14,6 +14,15 @@ export function Form(Alpine) {
         set: (value) => (checkbox.checked = value),
       };
     },
+    switch: (el) => {
+      const switchEl = el.querySelector("[u-switch-input]");
+
+      return {
+        name: switchEl.name,
+        get: () => switchEl.checked,
+        set: (value) => (switchEl.checked = value),
+      };
+    },
     "checkbox-group": (el) => {
       // el._model.get
       const name = el.getAttribute("name");

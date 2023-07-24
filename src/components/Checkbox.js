@@ -37,7 +37,7 @@ export const CheckboxInput = Base({
 
     return View(props, [
       View(checkboxProps),
-      text && View({ tag: "span", component: component + "-text" }, text),
+      View({ tag: "span", component: component + "-text" }, text?? []),
     ]);
   },
 });
