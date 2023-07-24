@@ -3356,8 +3356,8 @@ h6 {
   left: 0;
   padding: calc(var(--size-xxs) / 2) var(--size-xs);
   font-size: var(--size-sm);
-  color: var(--color-base-400);
-  background-color: var(--color-base-900);
+  color: var(--color-base-800);
+  background-color: var(--color-base-200);
   z-index: 99;
   border: 1px solid var(--color-base-400);
   background-clip: padding-box;
@@ -3370,7 +3370,8 @@ h6 {
   width: var(--size-xs);
   height: var(--size-xs);
   transform: rotate(45deg);
-  background-color: var(--color-base-900);
+  background-color: var(--color-base-200);
+  border-color: var(--color-base-400);
 }
 
 [u-popover-edge] {

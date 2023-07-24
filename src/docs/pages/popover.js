@@ -47,7 +47,7 @@ export default function () {
       [
         Preview({
           code: `
-  Button(["hover, none-persistant", Popover({trigger: 'hover',persistant: 'false' },"Hi, it is popover")])`,
+  Button(["hover, none-persistant", Popover({trigger: 'hover',persistant: false },"Hi, it is popover")])`,
         }),
       ]
     ),
@@ -59,7 +59,7 @@ export default function () {
       [
         Preview({
           code: `
-  Button(["hover, none-persistant, arrow", Popover({trigger: 'hover',persistant: 'false', arrow: 'true' },"Hi, it is popover")])`,
+  Button(["hover, none-persistant, arrow", Popover({trigger: 'hover',persistant: false, arrow: true },"Hi, it is popover")])`,
         }),
       ]
     ),
@@ -72,10 +72,10 @@ export default function () {
       [
         Preview({
           code: `
-  Button(["hover, persistant, arrow, top", Popover({trigger: 'hover',persistant: 'true', arrow: 'true', placement: 'top' },"Hi, it is popover")]),
-  Button(["hover, persistant, arrow, left", Popover({trigger: 'hover',persistant: 'true', arrow: 'true', placement: 'left' },"Hi, it is popover")]),
-  Button(["hover, persistant, arrow, bottom", Popover({trigger: 'hover',persistant: 'true', arrow: 'true', placement: 'bottom' },"Hi, it is popover")]),
-  Button(["hover, persistant, arrow, right", Popover({trigger: 'hover',persistant: 'true', arrow: 'true', placement: 'right' },"Hi, it is popover")]),
+  Button(["hover, persistant, arrow, top", Popover({trigger: 'hover',persistant: true, arrow: true, placement: 'top' },"Hi, it is popover")]),
+  Button(["hover, persistant, arrow, left", Popover({trigger: 'hover',persistant: true, arrow: true, placement: 'left' },"Hi, it is popover")]),
+  Button(["hover, persistant, arrow, bottom", Popover({trigger: 'hover',persistant: true, arrow: true, placement: 'bottom' },"Hi, it is popover")]),
+  Button(["hover, persistant, arrow, right", Popover({trigger: 'hover',persistant: true, arrow: true, placement: 'right' },"Hi, it is popover")]),
           `,
         }),
       ]
@@ -90,14 +90,14 @@ export default function () {
           code: `
   Button([
     "hover, persistant",
-    Popover({ trigger: "hover", persistant: "true" }, [
+    Popover({ trigger: "hover", persistant: true }, [
       View([
         View("this is view1"),
-        Popover({ trigger: "hover", persistant: "true" }, "popover"),
+        Popover({ trigger: "hover", persistant: true }, "popover"),
       ]),
       View([
         View("this is view2"),
-        Popover({ trigger: "hover", persistant: "true" }, "popover"),
+        Popover({ trigger: "hover", persistant: true }, "popover"),
       ]),
     ]),
   ]),
@@ -109,7 +109,7 @@ export default function () {
       {
         title: "focusable",
         description:
-          "defaultvalue is true, in case of need you can make it false ",
+          "default value is true, in case of need you can make it false ",
       },
       [
         Preview({
@@ -132,21 +132,20 @@ export default function () {
       },
       [
         Preview({
-          code: `
+          height: 500,
+          code: `[
   View({ border: "sm", style: "width: max-content" }, [
     "hover, persistant",
     Popover({ trigger: "hover", persistant: "true" }, [
-      Container({ size: "xl", mx: "auto" }, [
-        View({ tag: "h3" }, "Login form"),
+      Container({ size: "xl", style: 'max-width: 450px', mx: "auto", my: "sm" }, [
+        View({ tag: "h3", my: "sm" }, "Login form"),
+
         Form([
-          Col([
-            Row([
-              View({ tag: "div", style: "display: block" }, "Username"),
-              Input({ name: "username" }),
-            ]),
-            Row([View("password"), Input({ name: "password"})]),
-            Row({ border: true, p: "sm", mb: "sm" }, [
-              View([
+          Input({ label: "Username", name: "username" }),
+          Input({ label: "Password", name: "password" }),
+
+          Col({col: 12}, [
+            View({ border: true, p: "sm", mb: "sm" },[
                 View([
                   "Username: ",
                   View({ tag: "span", "u-text": "username" }),
@@ -155,15 +154,15 @@ export default function () {
                   "password: ",
                   View({ tag: "span", "u-text": "password" }),
                 ]),
-              ]),
             ]),
-            Button({ type: "submit" ,color: 'primary'}, "Submit"),
           ]),
+
+          Button({ type: "submit", color: "primary" }, "Submit"),
         ]),
       ]),
     ]),
   ]),
-          `,
+]`,
         }),
       ]
     ),
@@ -322,19 +321,15 @@ export default function () {
         View({ border: "sm", style: "width: max-content" }, [
           "hover, persistant",
           Popover({ trigger: "hover", persistant: "true" }, [
-            Container({ size: "xl", mx: "auto" }, [
-              View({ tag: "h3" }, "Login form"),
+            Container({ size: "xl", style: 'max-width: 450px', mx: "auto", my: "sm" }, [
+              View({ tag: "h3", my: "sm" }, "Login form"),
 
               Form([
-                Col([
-                  Row([
-                    View({ tag: "div", style: "display: block" }, "Username"),
-                    Input({ name: "username" }),
-                  ]),
-                  Row([View("password"), Input({ name: "password" })]),
+                Input({ label: "Username", name: "username" }),
+                Input({ label: "Password", name: "password" }),
 
-                  Row({ border: true, p: "sm", mb: "sm" }, [
-                    View([
+                Col({col: 12}, [
+                  View({ border: true, p: "sm", mb: "sm" },[
                       View([
                         "Username: ",
                         View({ tag: "span", "u-text": "username" }),
@@ -343,11 +338,10 @@ export default function () {
                         "password: ",
                         View({ tag: "span", "u-text": "password" }),
                       ]),
-                    ]),
                   ]),
-
-                  Button({ type: "submit", color: "primary" }, "Submit"),
                 ]),
+
+                Button({ type: "submit", color: "primary" }, "Submit"),
               ]),
             ]),
           ]),
