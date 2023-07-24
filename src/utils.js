@@ -1,5 +1,23 @@
 const prefix = "u";
 
+export function props(names, allProps) {
+  const restProps = { ...allProps };
+  const result = {};
+  result.restProps = restProps;
+
+  Object.keys(names).map((name) => {
+    result[name + "Props"] = { [prefix + "-" + name]: "" };
+
+    for (let propName in allProps) {
+      if (names[name].includes(propName.replace("$", ""))) {
+        result[name + "Props"][propName] = allProps[propName];
+        delete restProps[propName];
+      }
+    }
+  });
+  return result;
+}
+
 export function extract(...params) {
   let $props = {};
   let $slots = [];
@@ -66,7 +84,7 @@ export function classname(component, cssProps = {}, globalClasses = "") {
   return classes.filter(Boolean).join(" ");
 }
 
-export function Base({render}) {
+export function Base({ render }) {
   return (...$) => {
     const { $props = {}, $slots = [] } = extract(...$);
 

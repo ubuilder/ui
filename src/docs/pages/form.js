@@ -27,8 +27,8 @@ export default function () {
 
           Col({ border: true, p: "sm", mb: "sm" }, [
             View([
-              View(["Username: ", View({ tag: "span", "u-text": "username" })]),
-              View(["password: ", View({ tag: "span", "u-text": "password" })]),
+              View(["Username: ", View({ tag: "span", $text: "username" })]),
+              View(["password: ", View({ tag: "span", $text: "password" })]),
             ]),
           ]),
 
@@ -102,28 +102,30 @@ export default function () {
 
         Col({ col: 12, border: true, p: "sm", mb: "sm" }, [
           View([
-            View(["Username: ", View({ tag: "span", "u-text": "username" })]),
-            View(["password: ", View({ tag: "span", "u-text": "password" })]),
+            View(["Username: ", View({ tag: "span", $text: "username" })]),
+            View(["password: ", View({ tag: "span", $text: "password" })]),
             View([
               "Remember Me: ",
-              View({ tag: "span", "u-text": "remember_me" }),
+              View({ tag: "span", $text: "remember_me" }),
             ]),
-            View(["Gender: ", View({ tag: "span", "u-text": "gender" })]),
-            View(["Color: ", View({ tag: "span", "u-text": "color" })]),
-            View(["Colors: ", View({ tag: "span", "u-text": "JSON.stringify(colors)" })]),
+            View(["Gender: ", View({ tag: "span", $text: "gender" })]),
+            View(["Color: ", View({ tag: "span", $text: "color" })]),
+            View(["Colors: ", View({ tag: "span", $text: "JSON.stringify(colors)" })]),
 
-            View(['Description: ', View({tag: 'span', 'u-text': 'description'})]),
-            View(['Required: ', View({tag: 'span', 'u-text': 'required'})]),
+            View(['Description: ', View({tag: 'span', $text: 'description'})]),
+            View(['Required: ', View({tag: 'span', $text: 'required'})]),
             View([
               "Group: ",
-              View({ tag: "span", "u-text": "JSON.stringify(group)" }),
+              View({ tag: "span", $text: "JSON.stringify(group)" }),
             ]),
             View([
               "Selected: ",
-              View({ tag: "span", "u-text": "group.length" }),
+              View({ tag: "span", $text: "group.length" }),
             ]),
           ]),
         ]),
+
+        Switch({mb: 0}),
 
         Button({ type: "submit", color: "primary" }, "Submit"),
       ]),

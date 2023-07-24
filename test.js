@@ -1,13 +1,13 @@
+import { props } from "./src/utils.js"
 
-const myCode = `Icon('user')`
+const value = props({input: ['name', 'value', 'disabled'], wrapper: ['label'], col: ['col', 'colSm', 'colXs']}, {
+    name: 'hadi',
+    label: 'this is label',
+    $label: 'bound_to_something',
+    $disabled: '!active',
+    col: 12,
+    colMd: 44,
+    mb: 'sm'
+})
 
-const components = 'Icon, View';
-
-import { Icon } from './src/components/index.js'
-
-const run = new Function(` const page = ${myCode}; console.log(page)`)
-
-
-const res = run()
-
-console.log(res)
+console.log(value)

@@ -125,7 +125,7 @@ export const View = Base({
     const cssAttributes = {};
 
     for (let prop in cssProps) {
-      if (cssProps[prop])
+      if (typeof cssProps[prop] !== "undefined")
         if (cssProps[prop] === true) {
           cssAttributes[classname(component + "-" + prop)] = "";
         } else {
@@ -133,7 +133,7 @@ export const View = Base({
         }
     }
     for (let prop in viewCssProps) {
-      if (viewCssProps[prop])
+      if (typeof viewCssProps[prop] !== "undefined")
         if (viewCssProps[prop] === true) {
           cssAttributes[classname("view-" + prop)] = "";
         } else {
@@ -157,6 +157,19 @@ export const View = Base({
           props["u-on:" + event] = props[key];
         }
 
+        delete props[key];
+      } else if (key.startsWith("$")) {
+        if (key === "$if") {
+          props["u-if"] = props[key];
+        } else if (key === "$text") {
+          props["u-text"] = props[key];
+        } else if (key === "$html") {
+          props["u-html"] = props[key];
+        } else if (key === "$for") {
+          props["u-for"] = props[key];
+        } else {
+          props[`u-bind:` + key.substring(1)] = props[key];
+        }
         delete props[key];
       } else {
         if (props[key] === true) {

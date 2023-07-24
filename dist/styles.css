@@ -1127,7 +1127,7 @@ code {
 }
 
 [u-col] {
-  align-self: stretch;
+  --col-width: initial;
   padding-left: calc(var(--row-gutter) / 4);
   padding-right: calc(var(--row-gutter) / 4);
   padding-top: calc(var(--row-gutter) / 4);

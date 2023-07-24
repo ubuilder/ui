@@ -4,9 +4,8 @@ import { Row } from "./GridSystem.js";
 export const Form = Base({
   render($props, $slots) {
     $props.tag = "form";
-    // $props.component = $props.component ?? "form";
+
     $props.method = $props.method ?? "POST";
-    $props[classname("action")] = $props.action ?? "POST";
     $props[classname("form")] = true;
 
     return Row($props, $slots);
