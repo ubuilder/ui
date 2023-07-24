@@ -11,12 +11,13 @@ import {
 export function Tooltip(Alpine) {
   Alpine.directive("tooltip", (el) => {
     const target =
-      document.querySelector(el.getAttribute("u-tooltip-target")) ?? el.parentNode;
+      document.querySelector(el.getAttribute("u-tooltip-target")) ??
+      el.parentNode;
     const floatingEl = el;
 
-    console.log(target)
-    target.setAttribute('u-tooltip-reference', '')
-    
+    console.log(target);
+    target.setAttribute("u-tooltip-reference", "");
+
     const offsetValue = el.getAttribute("u-tooltip-offset") ?? 0;
     const placement = el.getAttribute("u-tooltip-placement") ?? "bottom";
     const margin = el.getAttribute("u-tooltip-margin") ?? 4;
