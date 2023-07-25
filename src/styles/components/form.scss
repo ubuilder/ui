@@ -44,8 +44,7 @@
 
 
 [u-checkbox-input]:focus ~ [u-checkbox-text]::before {
-
-  box-shadow: 0 0 0 3px var(--color-primary-200);
+  @extend [u-form-field-focus];
 }
 
 [u-checkbox-text]::after {
@@ -130,11 +129,11 @@
   background-color: var(--color-primary-500);
 }
 [u-switch-input]:checked + [u-switch-text]::before {
-  background-color: var(--color-primary-content);
+  background-color: var(--color-primary-800);
 }
 
 [u-switch-input]:focus + [u-switch-text] {
-  box-shadow: 0 0 0 3px var(--color-primary-200);
+  @extend [u-form-field-focus];
 }
 
 [u-switch-input]:checked + [u-switch-text]:before {
@@ -165,13 +164,6 @@
   margin-bottom: var(--size-xxs);
   margin-right: var(--size-sm);
 }
-
-[u-checkbox-inline] {
-  display: inline-block;
-  margin-right: var(--size-sm);
-}
-
-
 
 [u-checkbox-group] {
   display: flex;
@@ -227,8 +219,8 @@
 
 
 [u-radio-input]:focus ~ [u-radio-text]::before {
+  @extend [u-form-field-focus];
 
-  box-shadow: 0 0 0 3px var(--color-primary-200);
 }
 
 [u-radio-text]::after {
@@ -278,13 +270,6 @@
   margin-right: var(--size-sm);
 }
 
-[u-radio-inline] {
-  display: inline-block;
-  margin-right: var(--size-sm);
-}
-
-
-
 [u-radio-group] {
   display: flex;
   flex-direction: column;
@@ -294,57 +279,53 @@
   flex-direction: row;
 }
 
-
-
-[u-radio-group-input] {
-  //   margin-bottom: var(--size-md);
-
-}
-
 // input
 
 
 
-[u-input] {
-  --input-size: var(--size-md);
+[u-form-field-input] {
+  --form-field-size: var(--size-md);
+
   background-color: var(--color-base-200);
   padding: var(--size-xxs) var(--size-sm);
-  border: 1px solid var(--color-base-400);
+  border: 1px solid var(--color-base-300);
   border-radius: calc(var(--size-xxs) / 2);
   color: var(--color-base-900);
 
-  font-size: calc(var(--input-size) * 0.6);
-  line-height: var(--input-size);
+  font-size: calc(var(--form-field-size) * 0.6);
+  line-height: var(--form-field-size);
+  height: calc(var(--form-field-size) + calc(2 * var(--size-xxs)));
+
 
   width: 100%;
+
+}
+
+[u-form-field-focus] {
+  border: 1px solid var(--color-primary-300);
+  outline: none;
+  box-shadow: 0 0 0px 4px var(--color-primary-100);
+}
+
+
+[u-input] {
+  @extend [u-form-field-input]
 }
 [u-input-size-lg] {
-  --input-size: var(--size-lg);
+  --form-field-size: var(--size-lg);
 }
 
 [u-input]:focus {
-  background-color: var(--color-base-200);
-  outline: none;
-  box-shadow: 0 0 0px 4px var(--color-primary-200);
+  @extend [u-form-field-focus];
 }
+
 
 // Select
 
 
 [u-select] {
-  --input-size: var(--size-md);
-  
-  background-color: var(--color-base-200);
-  padding: var(--size-xxs) var(--size-sm);
-  border: 1px solid var(--color-base-400);
-  border-radius: calc(var(--size-xxs) / 2);
-  color: var(--color-base-900);
+  @extend [u-form-field-input];
 
-  font-size: calc(var(--input-size) * 0.6);
-  line-height: var(--input-size);
-  height: calc(var(--input-size) + calc(2 * var(--size-xxs)));
-
-  width: 100%;
 }
 [u-select-size="lg"] {
   --input-size: var(--size-lg);
@@ -365,12 +346,6 @@
   @extend [u-form-field-focus];  
 }
 
-[u-form-field-focus] {
-  background-color: var(--color-base-200);
-  outline: none;
-  box-shadow: 0 0 0px 4px var(--color-primary-200);
-}
-
 @import "../../../node_modules/tom-select/src/scss/tom-select.scss";
 
 select[u-autocomplete] {
@@ -380,7 +355,7 @@ select[u-autocomplete] {
 }
 
 [u-autocomplete] {
-  @extend [u-input];
+  @extend [u-form-field-input];
 }
 
 [u-autocomplete-item] {
@@ -432,34 +407,22 @@ select[u-autocomplete] {
 
 [u-textarea] {
   
-  width: 100%;
-  background-color: var(--color-base-200);
-  padding: var(--size-xxs) var(--size-sm);
-  border: 1px solid var(--color-base-400);
-  border-radius: calc(var(--size-xxs) / 2);
-  color: var(--color-base-900);
-
-  font-size: calc(var(--size-md) * 0.6);
-  line-height: var(--size-md);
-
-  width: 100%;
+  @extend [u-form-field-input];
+  height: auto;
 }
 
 
 [u-textarea]:focus {
-  background-color: var(--color-base-200);
-  outline: none;
-  box-shadow: 0 0 0px 4px var(--color-primary-200);
+  @extend [u-form-field-focus];
 }
 
 // Code editor
 [u-code-editor] {
+  @extend [u-form-field-input];
+
   padding: 0 !important;
-  @extend [u-textarea];
 }
 
 [u-code-editor]:focus-within {
-  background-color: var(--color-base-200);
-  outline: none;
-  box-shadow: 0 0 0px 4px var(--color-primary-200);
+  @extend [u-form-field-focus];
 }

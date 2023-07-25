@@ -44,6 +44,7 @@
   opacity: 0.7;
   color: var(--color-base-900);
 }
+
 [u-button-link]:active {
   opacity: 0.5;
   border-color: transparent;
@@ -58,21 +59,21 @@
   --button-bg: #{var(--color-#{$color}-500)};
   --button-hover: #{var(--color-#{$color}-600)};
   --button-active: #{var(--color-#{$color}-700)};
-  --button-content: #{var(--color-#{$color}-content)};
+  --button-content: #{var(--color-#{$color}-900)};
 }
 
-[u-button-color="dark"] {
-  --button-bg: var(--color-dark-200);
-  --button-hover: var(--color-dark-300);
-  --button-active: var(--color-dark-100);
-  --button-content: var(--color-light-100);
-}
-[u-button-color="light"] {
-  --button-bg: var(--color-light-100);
-  --button-hover: var(--color-light-300);
-  --button-active: var(--color-light-400);
-  --button-content: var(--color-light-900);
-}
+// [u-button-color="dark"] {
+//   --button-bg: var(--color-dark-200);
+//   --button-hover: var(--color-dark-300);
+//   --button-active: var(--color-dark-100);
+//   --button-content: var(--color-light-100);
+// }
+// [u-button-color="light"] {
+//   --button-bg: var(--color-light-100);
+//   --button-hover: var(--color-light-300);
+//   --button-active: var(--color-light-400);
+//   --button-content: var(--color-light-900);
+// }
 
 [u-button-group] {
   display: flex;
