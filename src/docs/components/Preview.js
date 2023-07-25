@@ -86,7 +86,7 @@ export const Preview = Base({
      
       },
       [
-        TabsList([TabsItem("Preview"), TabsItem("HTML"), TabsItem("JS")]),
+        TabsList([TabsItem("Preview"), false ? TabsItem("HTML") : '', TabsItem("JS")]),
         TabsContent([
           TabsPanel(
             { style: `padding: 0; min-height: 100px; overflow-x: auto;` },
@@ -94,7 +94,7 @@ export const Preview = Base({
               View({id: 'preview-html-' + id, w: 100, style: `position: relative; height: ${height}px; min-width: ${width}px`}),
             ]
           ),
-          TabsPanel([
+          false ? TabsPanel([
             View(
               {
                 tag: "pre",
@@ -105,7 +105,7 @@ export const Preview = Base({
                 View({ tag: "code", id: "preview-code-" + id })
               ]
             ),
-          ]),
+          ]) : '',
           $props.code &&
             TabsPanel([
               View(
