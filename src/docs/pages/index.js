@@ -28,7 +28,7 @@ export default ({ prefix }) => {
       Item({ slug: 'basics', text: 'Basics'}),
 
       Col({w: 100}, View({tag: 'h3', pt: 'sm', style: 'font-weight: normal'}, 'Components')),
-      Item({ slug: "auto-complete", text: "Autocomplete" }),
+      Item({ slug: "autocomplete", text: "Autocomplete" }),
       Item({ slug: "avatar", text: "Avatar" }),      
       Item({ slug: "alert", text: "Alert" }),      
       Item({ slug: "breadcrumb", text: "Breadcrumb" }),
