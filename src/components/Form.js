@@ -24,12 +24,6 @@ export const Editor = Base({
   },
 });
 
-export const Autocomplete = Base({
-  render($props, $slots) {
-    // Autocomplete
-  },
-});
-
 export const Datepicker = Base({
   render($props, $slots) {
     // Datepicker

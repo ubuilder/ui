@@ -486,6 +486,17 @@ declare const Tooltip: View<{trigger: 'click' | 'hover', placement: Placement}>
  */
 declare const View: View<{}>;
 
+declare const Autocomplete: FormField<{
+  value: string[],
+  items: any[],
+  key: string | ((item: any) => string)
+  text: string | ((item: any) => string)
+  placeholder: string
+  create: boolean
+  readonly: boolean
+  multiple: boolean
+}>
+
 /**
  * FileUpload Component
  */
@@ -495,11 +506,6 @@ declare const FileUpload: View<{todo: true}>
  * Editor Component
  */
 declare const Editor: View<{todo: true}>
-
-/**
- * Autocomplete Component
- */
-declare const Autocomplete: View<{todo: true}>
 
 /**
  * Datepicker Component

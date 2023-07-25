@@ -122,7 +122,6 @@ export const View = Base({
       borderRadius,
     };
 
-    console.log({cssProps})
     const cssAttributes = {};
 
     for (let prop in cssProps) {
@@ -144,8 +143,6 @@ export const View = Base({
     }
     for (let prop in viewCssProps) {
       if (typeof viewCssProps[prop] !== "undefined") {
-        console.log('add this prop: ', prop)
-
         if(prop.startsWith('$')) continue;
         if (viewCssProps[prop] === true) {
           cssAttributes[classname("view-" + prop)] = "";
@@ -154,7 +151,6 @@ export const View = Base({
         }
       }
       if (typeof $props['$' + prop] !== "undefined") {
-        console.log('add this prop: $' + prop)
 
         cssAttributes[classname('bind') + ':' + classname("view-" + prop)] = $props['$' + prop];
       }
@@ -204,9 +200,6 @@ export const View = Base({
       }
     }
 
-    if(tagName === 'input') {
-      console.log({props})
-    }
     return tag(tagName, props, $slots);
   },
 });

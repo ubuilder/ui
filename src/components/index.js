@@ -25,6 +25,6 @@ export * from "./Switch.js";
 export * from "./Textarea.js";
 export * from "./Tabs.js";
 export * from "./Dropdown.js";
-export * from "./AutoComplete.js";
+export * from "./Autocomplete.js";
 export * from "./Tooltip.js";
 export * from "./Popover.js";
