@@ -122,7 +122,8 @@
   --color-primary-500: #2677e1;
   --color-primary-600: #3c85e4;
   --color-primary-700: #5192e7;
-  --color-primary-content: var(--color-light-100);
+  --color-primary-800: var(--color-light-100);
+  --color-primary-900: var(--color-light-200);
   --color-secondary-100: #1e232a;
   --color-secondary-200: #282f38;
   --color-secondary-300: #3d4653;
@@ -130,7 +131,8 @@
   --color-secondary-500: #65758b;
   --color-secondary-600: #748397;
   --color-secondary-700: #8491a2;
-  --color-secondary-content: var(--color-light-100);
+  --color-secondary-800: var(--color-light-100);
+  --color-secondary-900: var(--color-light-200);
   --color-success-100: #1c3416;
   --color-success-200: #25461d;
   --color-success-300: #38682b;
@@ -138,7 +140,8 @@
   --color-success-500: #5dae48;
   --color-success-600: #6db65a;
   --color-success-700: #7dbe6d;
-  --color-success-content: var(--color-light-100);
+  --color-success-800: var(--color-light-100);
+  --color-success-900: var(--color-light-200);
   --color-error-100: #381212;
   --color-error-200: #4a1818;
   --color-error-300: #6f2323;
@@ -146,7 +149,8 @@
   --color-error-500: #b93b3b;
   --color-error-600: #c04f4f;
   --color-error-700: #c76262;
-  --color-error-content: var(--color-light-100);
+  --color-error-800: var(--color-light-100);
+  --color-error-900: var(--color-light-200);
   --color-warning-100: #4a3204;
   --color-warning-200: #624206;
   --color-warning-300: #946308;
@@ -154,7 +158,8 @@
   --color-warning-500: #f6a50e;
   --color-warning-600: #f7ae26;
   --color-warning-700: #f8b73e;
-  --color-warning-content: var(--color-light-100);
+  --color-warning-800: var(--color-light-100);
+  --color-warning-900: var(--color-light-200);
   --color-info-100: #163134;
   --color-info-200: #1d4146;
   --color-info-300: #2b6168;
@@ -162,7 +167,8 @@
   --color-info-500: #48a2ae;
   --color-info-600: #5aabb6;
   --color-info-700: #6db5be;
-  --color-info-content: var(--color-light-100);
+  --color-info-800: var(--color-light-100);
+  --color-info-900: var(--color-light-200);
   background-color: var(--color-base-100);
   color: var(--color-base-900);
 }
@@ -1558,6 +1564,12 @@ select[u-autocomplete], .ts-wrapper select.ts-control {
   width: 0;
   height: 0;
   position: absolute;
+}
+
+[u-autocomplete], .ts-wrapper .ts-control {
+  min-height: calc(2 * var(--form-field-size));
+  height: auto;
+  align-items: center;
 }
 
 [u-autocomplete-item], .ts-wrapper.multi .ts-control > div {
@@ -2986,18 +2998,6 @@ select[u-autocomplete], .ts-wrapper select.ts-control {
   --view-border-color: var(--color-primary-900);
 }
 
-[u-view-bg-color=primary-content] {
-  background-color: var(--color-primary-content);
-}
-
-[u-view-text-color=primary-content] {
-  color: var(--color-primary-content);
-}
-
-[u-view-border-color=primary-content] {
-  --view-border-color: var(--color-primary-content);
-}
-
 [u-view-bg-color=secondary] {
   background-color: var(--color-secondary-500);
 }
@@ -3116,18 +3116,6 @@ select[u-autocomplete], .ts-wrapper select.ts-control {
 
 [u-view-border-color=secondary-900] {
   --view-border-color: var(--color-secondary-900);
-}
-
-[u-view-bg-color=secondary-content] {
-  background-color: var(--color-secondary-content);
-}
-
-[u-view-text-color=secondary-content] {
-  color: var(--color-secondary-content);
-}
-
-[u-view-border-color=secondary-content] {
-  --view-border-color: var(--color-secondary-content);
 }
 
 [u-view-bg-color=success] {
@@ -3250,18 +3238,6 @@ select[u-autocomplete], .ts-wrapper select.ts-control {
   --view-border-color: var(--color-success-900);
 }
 
-[u-view-bg-color=success-content] {
-  background-color: var(--color-success-content);
-}
-
-[u-view-text-color=success-content] {
-  color: var(--color-success-content);
-}
-
-[u-view-border-color=success-content] {
-  --view-border-color: var(--color-success-content);
-}
-
 [u-view-bg-color=info] {
   background-color: var(--color-info-500);
 }
@@ -3380,18 +3356,6 @@ select[u-autocomplete], .ts-wrapper select.ts-control {
 
 [u-view-border-color=info-900] {
   --view-border-color: var(--color-info-900);
-}
-
-[u-view-bg-color=info-content] {
-  background-color: var(--color-info-content);
-}
-
-[u-view-text-color=info-content] {
-  color: var(--color-info-content);
-}
-
-[u-view-border-color=info-content] {
-  --view-border-color: var(--color-info-content);
 }
 
 [u-view-bg-color=error] {
@@ -3514,18 +3478,6 @@ select[u-autocomplete], .ts-wrapper select.ts-control {
   --view-border-color: var(--color-error-900);
 }
 
-[u-view-bg-color=error-content] {
-  background-color: var(--color-error-content);
-}
-
-[u-view-text-color=error-content] {
-  color: var(--color-error-content);
-}
-
-[u-view-border-color=error-content] {
-  --view-border-color: var(--color-error-content);
-}
-
 [u-view-bg-color=warning] {
   background-color: var(--color-warning-500);
 }
@@ -3644,18 +3596,6 @@ select[u-autocomplete], .ts-wrapper select.ts-control {
 
 [u-view-border-color=warning-900] {
   --view-border-color: var(--color-warning-900);
-}
-
-[u-view-bg-color=warning-content] {
-  background-color: var(--color-warning-content);
-}
-
-[u-view-text-color=warning-content] {
-  color: var(--color-warning-content);
-}
-
-[u-view-border-color=warning-content] {
-  --view-border-color: var(--color-warning-content);
 }
 
 [u-view-bg-color=light] {
@@ -3778,18 +3718,6 @@ select[u-autocomplete], .ts-wrapper select.ts-control {
   --view-border-color: var(--color-light-900);
 }
 
-[u-view-bg-color=light-content] {
-  background-color: var(--color-light-content);
-}
-
-[u-view-text-color=light-content] {
-  color: var(--color-light-content);
-}
-
-[u-view-border-color=light-content] {
-  --view-border-color: var(--color-light-content);
-}
-
 [u-view-bg-color=dark] {
   background-color: var(--color-dark-500);
 }
@@ -3910,18 +3838,6 @@ select[u-autocomplete], .ts-wrapper select.ts-control {
   --view-border-color: var(--color-dark-900);
 }
 
-[u-view-bg-color=dark-content] {
-  background-color: var(--color-dark-content);
-}
-
-[u-view-text-color=dark-content] {
-  color: var(--color-dark-content);
-}
-
-[u-view-border-color=dark-content] {
-  --view-border-color: var(--color-dark-content);
-}
-
 [u-view-bg-color=base] {
   background-color: var(--color-base-500);
 }
@@ -4040,18 +3956,6 @@ select[u-autocomplete], .ts-wrapper select.ts-control {
 
 [u-view-border-color=base-900] {
   --view-border-color: var(--color-base-900);
-}
-
-[u-view-bg-color=base-content] {
-  background-color: var(--color-base-content);
-}
-
-[u-view-text-color=base-content] {
-  color: var(--color-base-content);
-}
-
-[u-view-border-color=base-content] {
-  --view-border-color: var(--color-base-content);
 }
 
 [u-view-align=start] {

@@ -102,7 +102,7 @@ $displays: ('flex', 'inline-flex', 'block', 'none', 'inline-block', 'contents', 
     --view-border-color: var(--color-#{$color}-500);
   }
 
-  @each $variant in (100, 200, 300, 400, 500, 600, 700, 800, 900, content) {
+  @each $variant in (100, 200, 300, 400, 500, 600, 700, 800, 900) {
     [u-view-bg-color="#{$color}-#{$variant}"] {
       background-color: var(--color-#{$color}-#{$variant});
     }

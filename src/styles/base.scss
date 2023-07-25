@@ -108,7 +108,9 @@ info: #48a2ae,
     --color-#{$color}-500: #{$value};
     --color-#{$color}-600: #{tint($value, 10)};
     --color-#{$color}-700: #{tint($value, 20)};
-    --color-#{$color}-content: var(--color-light-100);
+    --color-#{$color}-800: var(--color-light-100);
+    --color-#{$color}-900: var(--color-light-200);
+
   }
   
 

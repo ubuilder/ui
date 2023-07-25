@@ -353,6 +353,9 @@ select[u-autocomplete] {
 
 [u-autocomplete] {
   @extend [u-form-field-input];
+  min-height: calc(2 * var(--form-field-size));
+  height: auto;
+  align-items: center;
 }
 
 [u-autocomplete-item] {
