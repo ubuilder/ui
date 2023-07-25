@@ -7,8 +7,9 @@ export const Button = Base({
       href: undefined,
       tag: undefined,
       component: 'button',
-      disabled: false,
       cssProps: {
+        active: false,
+        disabled: false,
         size: 'md',
         link: false,
         color: undefined

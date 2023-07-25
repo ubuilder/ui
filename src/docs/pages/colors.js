@@ -20,7 +20,7 @@ export default () => {
       colorNames.map((name) =>
         Row({mb: 'xxs'}, [
           Col({ col: 3, py: "xs", px: "md", bgColor: name, textColor: 'light' }, name),
-          colorValues.map((value) => Col({ col: 1, py: "xs", px: "md", style: `background-color: var(--color-${name}-${value}); color: black` }, value)),
+          colorValues.map((value) => Col({ col: 1, py: "xs", px: "md", bgColor: `${name}-${value}`, textColor: 'dark-100' }, value)),
         ])
       ),
     ]),

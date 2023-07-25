@@ -51,7 +51,7 @@
 }
 
 [u-alert-close]:hover {
-    color: var(--color-base-700);
+    color: var(--color-base-800);
 }
 
 @include color-variants(alert) using ($color) {
@@ -63,28 +63,30 @@
 [u-alert-container] {
     display: flex;
     flex-direction: column;
+    padding: var(--size-md);
 }
 
 [u-alert-container-placement="top-end"] {
-    position: absolute;
-    right: var(--size-md);
-    top: var(--size-md);
+    position: fixed;
+    right: 0;
+    top: 0;
+
 }
 
 [u-alert-container-placement="top-start"] {
-    position: absolute;
-    left: var(--size-md);
-    top: var(--size-md);
+    position: fixed;
+    left: 0;
+    top: 0;
 }
 
 [u-alert-container-placement="bottom-end"] {
-    position: absolute;
-    right: var(--size-md);
-    bottom: var(--size-md);
+    position: fixed;
+    right: 0;
+    bottom: 0;
 }
 
 [u-alert-container-placement="bottom-start"] {
-    position: absolute;
-    left: var(--size-md);
-    bottom: var(--size-md);
+    position: fixed;
+    left: 0;
+    bottom: 0;
 }

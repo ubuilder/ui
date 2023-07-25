@@ -7,6 +7,30 @@
   color: var(--color-base-900);
 }
 
+[u-form-field-input] {
+  --form-field-size: var(--size-md);
+
+  background-color: var(--color-base-200);
+  padding: var(--size-xxs) var(--size-sm);
+  border: 1px solid var(--color-base-300);
+  border-radius: calc(var(--size-xxs) / 2);
+  color: var(--color-base-900);
+
+  font-size: calc(var(--form-field-size) * 0.8);
+  line-height: var(--form-field-size);
+  height: calc(var(--form-field-size) * 2);
+
+  width: 100%;
+}
+
+[u-form-field-focus] {
+  border: 1px solid var(--color-primary-300);
+  outline: none;
+  box-shadow: 0 0 0px 4px var(--color-primary-100);
+}
+
+
+
 // [u-form-field] {
 //   margin-bottom: var(--size-xs);
 // }
@@ -280,33 +304,6 @@
 }
 
 // input
-
-
-
-[u-form-field-input] {
-  --form-field-size: var(--size-md);
-
-  background-color: var(--color-base-200);
-  padding: var(--size-xxs) var(--size-sm);
-  border: 1px solid var(--color-base-300);
-  border-radius: calc(var(--size-xxs) / 2);
-  color: var(--color-base-900);
-
-  font-size: calc(var(--form-field-size) * 0.6);
-  line-height: var(--form-field-size);
-  height: calc(var(--form-field-size) + calc(2 * var(--size-xxs)));
-
-
-  width: 100%;
-
-}
-
-[u-form-field-focus] {
-  border: 1px solid var(--color-primary-300);
-  outline: none;
-  box-shadow: 0 0 0px 4px var(--color-primary-100);
-}
-
 
 [u-input] {
   @extend [u-form-field-input]

@@ -1,36 +1,38 @@
+import { AlertContainer } from "../../components/Alert.js";
+import { Button } from "../../components/Button.js";
 import { Col, Container, Row } from "../../components/GridSystem.js";
 import { View } from "../../components/View.js";
 import { Badge, Card, CardBody } from "../../components/index.js";
 
 const components = {
-  accordion: { title: "Accordion", new: true },
+  accordion: { title: "Accordion", soon: true },
   alert: { title: "Alert" },
-  autocomplete: { title: "Autocomplete" },
+  autocomplete: { title: "Autocomplete", new: true },
   avatar: { title: "Avatar" },
-  badge: { title: 'Badge',new: true },
+  badge: { title: "Badge", soon: true },
   breadcrumb: { title: "Breadcrumb" },
-  button: { title: "Button" },
+  button: { title: "Button", updated: true },
   card: { title: "Card" },
   checkbox: { title: "Checkbox & Radio" },
-  codeeditor: {title: 'Code Editor', new: true},
+  codeeditor: { title: "Code Editor", soon: true },
   divider: { title: "Divider" },
   dropdown: { title: "Dropdown" },
-  form: {title: "Form", new: true },
-  formfield: { title: "FormField" , new: true },
+  form: { title: "Form", soon: true },
+  formfield: { title: "FormField", soon: true },
   grid: { title: "Grid" },
   icon: { title: "Icon" },
-  image: {title: 'Image', new: true },
-  input: {title: 'Input', new: true },
-  modal: {title: 'Modal'},
+  image: { title: "Image", soon: true },
+  input: { title: "Input", soon: true },
+  modal: { title: "Modal" },
   popover: { title: "Popover" },
   progress: { title: "Progress" },
-  radio: {title: "Radio", new: true },
-  select: {title: 'Select', new: true },
+  radio: { title: "Radio", soon: true },
+  select: { title: "Select", soon: true },
   spinner: { title: "Spinner" },
-  switch: {title: 'Switch'},
-  table: {title: 'Table'},
+  switch: { title: "Switch" },
+  table: { title: "Table" },
   tabs: { title: "Tabs" },
-  textarea: {title: 'Textarea', new: true },
+  textarea: { title: "Textarea", soon: true },
   tooltip: { title: "Tooltip" },
   view: { title: "View" },
 };
@@ -38,7 +40,16 @@ const components = {
 export default ({ prefix }) => {
   function ComponentItems() {
     return Object.keys(components).map((key) =>
-      Item({ slug: key, text: components[key].title, tags: components[key].new ? ['New'] : [] })
+      Item({
+        disabled: components[key].soon,
+        slug: key,
+        text: components[key].title,
+        tags: [
+          components[key].new && { text: "New", color: "primary" },
+          components[key].soon && { text: "Comming Soon", color: "warning" },
+          components[key].updated && { text: "Updated", color: "info" },
+        ].filter(Boolean),
+      })
     );
   }
 
@@ -60,33 +71,63 @@ export default ({ prefix }) => {
     );
   }
 
-  function Item({ slug, text, tags = [] }) {
+  function Item({ disabled, slug, text, tags = [] }) {
     return Col({ col: 12, colSm: 6, colLg: 4 }, [
       Card(
         {
-          tag: "a",
+          tag: disabled ? 'span' : "a",
           d: "block",
           href: `${prefix}${slug}`,
+          onClick: disabled ? `$alert.info('there is no documentation for ${text} component yet!<br/><br/>Please come back later!', 'Page is not available')` : undefined,
           style: "text-decoration: none; color: var(--color-base-900)",
         },
-        [CardBody([View({d: 'flex', align: 'center', gap: 'xs'}, [text, tags.map(tag => Badge({color: 'success'}, tag))])])]
+        [
+          CardBody([
+            View({ d: "flex", align: "center", gap: "xs" }, [
+              text,
+              tags.map((tag) => Badge({ color: tag.color }, tag.text)),
+            ]),
+          ]),
+        ]
       ),
     ]);
   }
 
-  return Container({ size: "xl", mx: "auto", my: "xl" }, [
-    // tag("a", { href: "/" }, "UBuilder"),
-    View({ tag: "h1" }, "Components"),
+  return [
     View(
-      {
-        tag: "h3",
-        mb: "lg",
-        mt: "xxs",
-        style: "color: var(--color-base-800); font-weight: 400",
-      },
-      "UI Components for NodeJS"
-    ),
+      { p: "xs", class: "border-bottom header" },
+      Container({ size: "xl", mx: "auto" }, [
+        Row([
+          Col([
+          View({ tag: "h1" }, "Components"),
+          View(
+            {
+              tag: "h3",
+              mb: "lg",
+              mt: "xxs",
+              style: "color: var(--color-base-800); font-weight: 400",
+            },
+            "UI Components for NodeJS"
+          ),
+          ]) ,     
+        Button(
+          {
+            d: 'none',
+            dXs: 'inline-flex',
+            mt: 'sm',
+            ms: 'auto',
+            color: "dark",
+            "u-on:click": `el => document.body.setAttribute('u-view-theme', document.body.getAttribute('u-view-theme') === 'dark' ? 'light' : 'dark')`,
+          },
+          "Dark"
+        ),
+      ])
 
+      ])
+    ),
+    Container({ size: "xl", mx: "auto", my: "xl" }, [
+    // tag("a", { href: "/" }, "UBuilder"),
+  
     View(
       { mb: "md", mt: "sm", style: "line-height: var(--size-lg)" },
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi at numquam est ad unde. Quibusdam blanditiis tempora unde! Eum quam ex totam autem obcaecati fuga quidem dignissimos laudantium et? Nihil, consequatur voluptates reiciendis pariatur tenetur architecto cumque doloremque quas incidunt facilis exercitationem esse deleniti totam dolores dicta commodi suscipit eius."
@@ -104,5 +145,6 @@ export default ({ prefix }) => {
       Heading({ title: "Examples" }),
       ExampleItems(),
     ]),
-  ]);
+    AlertContainer({placement: 'top-end'})
+  ])];
 };

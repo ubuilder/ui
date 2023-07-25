@@ -18,5 +18,5 @@
 
 @include color-variants(badge) using ($color) {
   --badge-bg: #{var(--color-#{$color}-100)};
-  --badge-content: #{var(--color-#{$color}-500)};
+  --badge-content: #{var(--color-#{$color}-600)};
 }

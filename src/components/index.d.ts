@@ -1,3 +1,7 @@
+
+// TODO support props that starts with $ (typescript will have something useful..) 
+
+
 import type {Placement} from '@floating-ui/core'
 
 type Slot = string | number | Tag;
@@ -13,16 +17,19 @@ type Tag = {
   toHead: () => string;
 };
 
-export type Colors =
-  | "primary"
-  | "secondary"
-  | "success"
-  | "error"
-  | "info"
-  | "warning"
-  | "dark"
-  | "light"
-  | undefined;
+export type ColorNames =   | "primary"
+| "secondary"
+| "success"
+| "error"
+| "info"
+| "warning"
+| "light"
+| "dark"
+| "base"
+
+export type ColorValues = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 'content';
+
+export type Colors = ColorNames | `${ColorNames}-${ColorValues}` | undefined;
 
 export type Sizes = "xs" | "sm" | "md" | "lg" | undefined;
 
