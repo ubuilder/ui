@@ -5,7 +5,7 @@ import { View } from "../../components/View.js";
 import { Badge, Card, CardBody } from "../../components/index.js";
 
 const components = {
-  accordion: { title: "Accordion", soon: true },
+  accordion: { title: "Accordion", new: true },
   alert: { title: "Alert" },
   autocomplete: { title: "Autocomplete", new: true },
   avatar: { title: "Avatar" },

@@ -70,7 +70,7 @@ export const Preview = Base({
     const script = `
     import {${Object.keys(components).filter(key => `View ${code}`.indexOf(key) > -1).join(', ')}} from '${prefix}src/components/index.js'
 
-    const page = View({d: 'inline-flex', p: 'xl', gap: 'xs'},[${code.trim()}])
+    const page = View({p: 'lg'}, [${code.trim()}])
 
     document.getElementById("preview-html-${id}").innerHTML = page.toString()
     // document.getElementById("preview-code-${id}").innerHTML = page.toString().replace(/</g, "\\n&#60;").replace(/>/g, "&#62;\\n\\t").replace(/\\n/g, '<br/>')
