@@ -1,10 +1,3 @@
-import { Button } from "../../components/Button.js";
-import { DocPage } from "../components/DocPage.js";
-import { Section } from "../components/Section.js";
-import { Preview } from "../components/Preview.js";
-import { Tooltip } from "../../components/Tooltip.js";
-import { View } from "../../components/View.js";
-
 # Tooltip
 
 ## Default
