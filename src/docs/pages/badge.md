@@ -26,11 +26,11 @@ Badge("Default");
 ## Sizes
 
 ```js
-[
+View({d: 'flex', align: 'end', wrap: true, gap: 'xs'}, [
   Badge({ color: 'primary', size: 'xs' }, "Extra Small"),
   Badge({ color: 'primary', size: 'sm' }, "Small"),
   Badge({ color: 'primary', size: 'md' }, "Medium"),
   Badge({ color: 'primary', size: 'lg' }, "Large"),
   Badge({ color: 'primary', size: 'xl' }, "Extra Large"),
-];
+]);
 ```
