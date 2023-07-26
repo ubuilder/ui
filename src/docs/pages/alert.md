@@ -97,7 +97,7 @@ AlertContainer({ name: "my-alert-container" }, [
 
 You can use `$alert` magic to add new alerts
 
-```js
+```js static
 [
   View([
     Button(

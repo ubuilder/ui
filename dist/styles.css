@@ -2206,6 +2206,7 @@ select[u-autocomplete], .ts-wrapper select.ts-control {
 }
 [u-icon] {
   --icon-size: var(--size-md);
+  display: inline-block;
   stroke-width: 1px;
   width: var(--icon-size);
   height: var(--icon-size);
@@ -2261,6 +2262,42 @@ select[u-autocomplete], .ts-wrapper select.ts-control {
 
 [u-icon-size="6xl"] {
   --icon-size: var(--size-6xl);
+}
+
+[u-icon-color=primary] {
+  color: var(--color-primary-500);
+}
+
+[u-icon-color=secondary] {
+  color: var(--color-secondary-500);
+}
+
+[u-icon-color=success] {
+  color: var(--color-success-500);
+}
+
+[u-icon-color=info] {
+  color: var(--color-info-500);
+}
+
+[u-icon-color=error] {
+  color: var(--color-error-500);
+}
+
+[u-icon-color=warning] {
+  color: var(--color-warning-500);
+}
+
+[u-icon-color=light] {
+  color: var(--color-light-500);
+}
+
+[u-icon-color=dark] {
+  color: var(--color-dark-500);
+}
+
+[u-icon-color=base] {
+  color: var(--color-base-500);
 }
 
 [u-modal] {
@@ -4896,8 +4933,12 @@ select[u-autocomplete], .ts-wrapper select.ts-control {
 }
 
 [u-tabs-item] {
+  display: flex;
+  align-items: center;
+  gap: var(--size-xs);
   padding: var(--size-xs) var(--size-sm);
   border-radius: var(--size-xxs) var(--size-xxs) 0 0;
+  white-space: nowrap;
   border: 1px solid transparent;
   border-bottom: 1px solid var(--tabs-border-color);
   background-color: inherit;
@@ -4915,6 +4956,11 @@ select[u-autocomplete], .ts-wrapper select.ts-control {
   background-color: var(--tabs-panel-bg-color);
   border: 1px solid var(--tabs-border-color);
   border-bottom-color: transparent;
+}
+
+[u-tabs-item-disabled] {
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 [u-tabs-panel] {

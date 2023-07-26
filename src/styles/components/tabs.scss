@@ -7,9 +7,13 @@
 }
 
 [u-tabs-item] {
+    display: flex;
+    align-items: center;
+    gap: var(--size-xs);
     padding: var(--size-xs) var(--size-sm);
     border-radius: var(--size-xxs) var(--size-xxs) 0 0;
 
+    white-space: nowrap;
     border: 1px solid transparent;
     border-bottom: 1px solid var(--tabs-border-color);
     background-color: inherit;
@@ -27,6 +31,10 @@
     background-color: var(--tabs-panel-bg-color);
     border: 1px solid var(--tabs-border-color);
     border-bottom-color: transparent;
+}
+[u-tabs-item-disabled] {
+    opacity: 0.5;
+    pointer-events: none;
 }
 
 [u-tabs-panel] {
