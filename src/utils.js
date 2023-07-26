@@ -13,7 +13,7 @@ export function extract(allProps, names) {
           delete restProps[key2];
         }
         if (allProps["$" + key2]) {
-          props[key]["$" + key2] = allProps["$" + key2];
+          result[key]["$" + key2] = allProps["$" + key2];
           delete restProps["$" + key2];
         }
       });

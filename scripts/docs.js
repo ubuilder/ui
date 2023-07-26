@@ -19,12 +19,19 @@ function Doc({ title, description, sections }) {
   console.log("Doc", { title, description, sections });
   return DocPage(
     { name: title, description },
-    sections.map((section) =>
-      Section(
-        { title: section.title, description: section.description },
-        section.code ? Preview({ code: section.code }) : ''
-      )
-    )
+    sections.map((section) => {
+      return Section(
+        {
+          title: section.find((x) => x.type === "title")?.value ?? "No Title",
+          descriptions: section
+            .filter((sec) => sec.type === "description")
+            .map((x) => x.value),
+        },
+        section
+          .filter((sec) => sec.type === "code")
+          .map((x) => Preview({ code: x.value, static: x.meta === "static" }))
+      );
+    })
   );
 }
 
@@ -55,12 +62,11 @@ await Promise.all(
   files.map(async (file) => {
     let slug = file;
 
-    if(file.endsWith('.md')) {
+    if (file.endsWith(".md")) {
       slug = slug.replace(".md", "");
-
     }
 
-    if(file.endsWith('.js')) {
+    if (file.endsWith(".js")) {
       slug = slug.replace(".js", "");
     }
 
@@ -68,38 +74,36 @@ await Promise.all(
       slug = "";
     }
 
-    if(file.endsWith('.js')) {
+    if (file.endsWith(".js")) {
+      // console.log({file, slug})
+      const result = await import("../src/docs/pages/" + file);
 
-    // console.log({file, slug})
-    const result = await import("../src/docs/pages/" + file);
+      console.log({ result });
+      if (Array.isArray(result.default)) {
+        const { default: sections, title, description } = result;
 
-    console.log({ result });
-    if (Array.isArray(result.default)) {
-      const { default: sections, title, description } = result;
-
-      router.addPage(prefix + slug, {
-        page: ({ ...props }) => {
-          return Doc({ title, description, sections });
-        },
-      });
+        router.addPage(prefix + slug, {
+          page: ({ ...props }) => {
+            return Doc({ title, description, sections });
+          },
+        });
+      } else {
+        router.addPage(prefix + slug, {
+          page: ({ ...props }) => {
+            return result.default({ ...props });
+          },
+        });
+      }
     } else {
+      // markdown
+      const result = await readMarkdownDoc("./src/docs/pages/" + file);
       router.addPage(prefix + slug, {
-        page: ({ ...props }) => {
-          return result.default({ ...props });
+        page({ ...props }) {
+          console.log(path.resolve("./src/docs/pages/" + file));
+          return Doc(result);
         },
       });
     }
-  } else {
-    // markdown
-    const result = await readMarkdownDoc('./src/docs/pages/' + file)
-    router.addPage(prefix + slug, {
-      page({...props}) {
-        console.log(path.resolve('./src/docs/pages/' + file))
-        return Doc(result)
-      }
-    })
-  }
-
   })
 );
 

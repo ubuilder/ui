@@ -20,7 +20,7 @@ const components = {
   form: { title: "Form", soon: true },
   formfield: { title: "FormField", soon: true },
   grid: { title: "Grid" },
-  icon: { title: "Icon" },
+  icon: { title: "Icon", new: true },
   image: { title: "Image", soon: true },
   input: { title: "Input", soon: true },
   modal: { title: "Modal", new: true },
@@ -34,7 +34,7 @@ const components = {
   tabs: { title: "Tabs" },
   textarea: { title: "Textarea", soon: true },
   tooltip: { title: "Tooltip" },
-  view: { title: "View" },
+  view: { title: "View", new: true },
 };
 
 export default ({ prefix }) => {

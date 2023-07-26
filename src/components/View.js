@@ -4,17 +4,12 @@ import { classname, Base } from "../utils.js";
 // Not implemented
 // border directions (only border bottom, ....)
 
-      //* bgColor (primary, secondary, success, info, warning, danger, light, dark)
-      //* textColor (primary, secondary, success, info, warning, danger, light, dark)
+      //* bgColor (primary, secondary, success, info, warning, danger, light, dark, base)
+      //* textColor (primary, secondary, success, info, warning, danger, light, dark, base)
       //* borderRadius (xs, sm, md, lg, xl)
       //* borderColor (primary, secondary, success, info, warning, danger, light, dark)
       //* borderSize (xs, sm, md, lg, xl)
-//* d(flex, inline, block, grid, contents, inline-flex, inline-block, none)
-//* dXs (flex, inline, block, grid, contents, inline-flex, inline-block, none)
-//* dSm (flex, inline, block, grid, contents, inline-flex, inline-block, none)
-//* dMd (flex, inline, block, grid, contents, inline-flex, inline-block, none)
-//* dLg (flex, inline, block, grid, contents, inline-flex, inline-block, none)
-//* dXl (flex, inline, block, grid, contents, inline-flex, inline-block, none)
+
       //* align (start, center, end, baseline, stretch)
       //* alignSelf (start, center, end, baseline, stretch)
       //* justify (start, center, end, between, evenly, around)
@@ -191,6 +186,6 @@ export const View = Base({
       }
     }
 
-    return tag(tagName, props, $slots);
+    return tag(tagName, props, $slots.filter(Boolean));
   },
 });

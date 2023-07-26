@@ -1,6 +1,7 @@
 [u-icon] {
   --icon-size: var(--size-md);
 
+  display: inline-block;
   stroke-width: 1px;
   width: var(--icon-size);
   height: var(--icon-size);
@@ -14,4 +15,8 @@
 
 @include variant(icon-size, $all-sizes) using ($size) {
   --icon-size: #{var(--size-#{$size})};
+}
+
+@include color-variants(icon) using ($color) {
+  color: #{var(--color-#{$color}-500)};
 }
