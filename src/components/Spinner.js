@@ -3,14 +3,16 @@ import { View } from "./View.js";
 
 export const Spinner = Base({
   render($props, $slots) {
-    const [props, restProps] = extract($props, {
-      component: 'spinner',
+    const {props, restProps} = extract($props, {
+      props: {
+        component: 'spinner',
+      },
       cssProps: {
         color: undefined,
         size: 'md'
       }
     })
  
-    return View({...props, ...restProps});
+    return View({...props, cssProps, ...restProps});
   },
 });
