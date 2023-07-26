@@ -11835,7 +11835,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
             delete restProps[key2];
           }
           if (allProps["$" + key2]) {
-            result[key]["$" + key2] = allProps["$" + key2];
+            props[key]["$" + key2] = allProps["$" + key2];
             delete restProps["$" + key2];
           }
         });
@@ -11845,13 +11845,15 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           delete restProps[key];
         }
         if (allProps["$" + key]) {
-          result["$" + key] = allProps["$" + key] ?? names["$" + key];
+          result["$" + key] = allProps["$" + key];
           delete restProps["$" + key];
         }
       }
     });
 
-    return [result, restProps];
+    result.restProps = restProps;
+
+    return result;
   }
 
   function getPropsAndSlots(...params) {
@@ -12299,42 +12301,38 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
   const Alert$1 = Base({
     render($props, $slots) {
-      const [props, restProps] = extract($props, {
+      const {component, icon, title, dismissible, alertProps, iconProps, restProps, cssProps} = extract($props, {
         component: "alert",
-        duration: 5000,
+        alertProps: {
+          component: "alert",
+          duration: 5000,
+        },
+        iconProps: {
+          color: 'primary',
+          icon: undefined
+          // 
+        },
         icon: undefined,
-        dismissible: false,
         title: undefined,
+        dismissible: undefined,
         cssProps: {
           autoClose: false,
           open: true,
           color: "primary",
         },
       });
-      const component = props.component;
 
-      const alertProps = {
-        ...restProps,
-        component: props.component,
-        duration: props.autoClose ? props.duration : undefined,
-        cssProps: props.cssProps,
-      };
+      iconProps.component = component + '-icon';
+      iconProps.name = iconProps.icon;
+      delete iconProps['icon'];
 
-      const iconProps = {
-        [classname(component + "-icon")]: "",
-        color: props.cssProps.color,
-        $color: props.cssProps.$color,
-        name: props.icon,
-        $name: props.$icon,
-      };
 
-      console.log({props}, {dismissible: props.dismissible});
-      return View(alertProps, [
+      return View({...alertProps, cssProps, ...restProps}, [
         View({ component: component + "-header" }, [
-          props.icon ? Icon(iconProps) : [],
-          View({ component: component + "-title" }, props.title ?? ""),
+          icon ? Icon(iconProps) : [],
+          View({ component: component + "-title" }, title ?? ""),
           
-            props.dismissible ? View(
+            dismissible ? View(
               { tag: "button", component: component + "-close" },
               Icon({ name: "x" })
             ) : [],

@@ -3,17 +3,19 @@ import { View } from "./View.js";
 
 export const Modal = Base({
   render($props, $slots) {
-    const [props, restProps] = extract($props, {
-      component: 'modal',
-      persistent: false,
-      name: undefined,
+    const {props, cssProps, restProps} = extract($props, {
+      props: {
+        component: 'modal',
+        persistent: false,
+        name: undefined,
+        tabindex: 0,
+      },
       cssProps: {
         open: false,
       }
     })
-    props.tabindex = 0
 
-    return View({...props, ...restProps}, [
+    return View({...props, cssProps, ...restProps}, [
       View({ component: props.component + "-backdrop" }),
       View({ component: props.component + "-content" }, $slots),
     ]);
@@ -22,8 +24,10 @@ export const Modal = Base({
 
 export const ModalBody = Base({
   render($props, $slots) {
-    const [props, restProps] = extract($props, {
-      component: 'modal-body'
+    const {props, restProps} = extract($props, {
+      props: {
+        component: 'modal-body'
+      }
     })
 
     return View({...props, ...restProps}, $slots);

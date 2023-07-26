@@ -1,47 +1,34 @@
-import { Base } from "../utils.js";
+import { Base, extract } from "../utils.js";
 import { View } from "./View.js";
 
 export const Popover = Base({
   render($props, $slots) {
-    const {
-      component = "popover",
-      size = "md",
-      arrow = false,
-      target,
-      offset,
-      margin,
-      placement = "bottom",
-      arrowMargin,
-      flip = true,
-      shift = true,
-      persistant = true,
-      focusAble = true,
-      trigger = "click", //click, hover
-      ...restProps
-    } = $props;
-
-    const props = {
-      ...restProps,
-      component,
+    const {props, cssProps, otherProps, restProps } = extract($props, {
+      component: 'popover',
       cssProps: {
-        target,
-        size,
-        offset,
-        placement,
-        margin,
-        arrowMargin,
-        trigger,
-        flip,
-        shift,
+        size: undefined,
+        target: undefined,
+        offset: undefined,
+        margin: undefined,
+        placement: 'bottom',
+        arrowMargin: undefined,
+        trigger: 'click',
+        flip: true,
+        shift: true,
       },
-    };
+      otherProps: {
+        arrow: false,
+        focusAble: true,
+        persistant: true
+      }
+    })
 
-    return View(props, [
-      arrow ? View({ component: component + "-arrow" }) : [],
-      persistant
+    return View({...props, ...cssProps, ...restProps}, [
+      otherProps.arrow ? View({ component: props.component + "-arrow" }) : [],
+      otherProps.persistant
         ? View({
-            component: component + "-edge",
-            ...(focusAble ? { "u-tooltip-focus-able": "" } : ""),
+            component: props.component + "-edge",
+            ...(otherProps.focusAble ? { "u-tooltip-focus-able": "" } : ""),
           })
         : [],
       $slots,

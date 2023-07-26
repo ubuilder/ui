@@ -11,7 +11,7 @@ export default function () {
       Preview({
         code: `View({d: 'flex', gap: 'xs', wrap: true}, [
   Button({color: 'primary'}, "Primary"),
-  Button({color: 'secondary'}, "Secondary"),
+  Button({a: '123', onClick: 'console.log(1)', color: 'secondary'}, "Secondary"),
   Button({color: 'success'}, "Success"),
   Button({color: 'info'}, "Info"),
   Button({color: 'warning'}, "Warning"),
