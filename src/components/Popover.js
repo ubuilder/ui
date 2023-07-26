@@ -4,7 +4,9 @@ import { View } from "./View.js";
 export const Popover = Base({
   render($props, $slots) {
     const {props, cssProps, otherProps, restProps } = extract($props, {
-      component: 'popover',
+      props: {
+        component: 'popover',
+      },
       cssProps: {
         size: undefined,
         target: undefined,
@@ -23,7 +25,7 @@ export const Popover = Base({
       }
     })
 
-    return View({...props, ...cssProps, ...restProps}, [
+    return View({...props, cssProps, ...restProps}, [
       otherProps.arrow ? View({ component: props.component + "-arrow" }) : [],
       otherProps.persistant
         ? View({

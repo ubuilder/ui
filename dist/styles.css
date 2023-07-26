@@ -86,7 +86,7 @@
 }
 
 :root {
-  --size-base: 1.5rem;
+  --size-base: 1rem;
   --size-xxs: calc(0.25 * var(--size-base));
   --size-xs: calc(0.5 * var(--size-base));
   --size-sm: calc(0.75 * var(--size-base));

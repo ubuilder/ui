@@ -12266,7 +12266,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         }
       }
 
-      return tag(tagName, props, $slots);
+      return tag(tagName, props, $slots.filter(Boolean));
     },
   });
 
