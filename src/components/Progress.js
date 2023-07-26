@@ -6,7 +6,7 @@ export const Progress = Base({
     const {
       component = "progress",
       value = 0,
-      color = "primary",
+      color,
       ...restProps
     } = $props;
 

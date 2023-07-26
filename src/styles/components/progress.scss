@@ -1,10 +1,9 @@
 [u-progress] {
   height: var(--size-xs);
-  background-color: var(--color-base-200);
+  background-color: var(--color-base-300);
   border-radius: var(--size-xxs);
   overflow: hidden;
 }
-
 
 [u-progress-bar] {
   height: 100%;
@@ -15,9 +14,3 @@
   --progress-bar-color: #{var(--color-#{$color}-500)};
 }
 
-[u-progress-bar-color="dark"] {
-  --progress-bar-color: var(--color-dark-400);
-}
-[u-progress-bar-color="light"] {
-  --progress-bar-color: var(--color-light-100);
-}
