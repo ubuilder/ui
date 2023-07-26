@@ -18,7 +18,7 @@ router.addStatic({ path: "./src", prefix: prefix + "src" });
 function Doc({ title, description, sections }) {
   console.log("Doc", { title, description, sections });
   return DocPage(
-    { title, description },
+    { name: title, description },
     sections.map((section) =>
       Section(
         { title: section.title, description: section.description },
