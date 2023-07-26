@@ -16,7 +16,6 @@ Tabs([
 ```
 
 ## Active
-
 You can change active tab by adding `active: true` prop for tab item.
 
 ```js
