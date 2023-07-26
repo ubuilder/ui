@@ -12386,14 +12386,14 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       Alpine.magic('alert', (el) => {
           
 
-          const alert = (name, {title, icon = 'check', content = '', ...restProps}) => {
+          const alert = (name, {title, icon = 'check', dismissible = true, content = '', ...restProps}) => {
               let container = document.querySelector(`[u-alert-container][name="${name}"]`);
 
               // first container
               if(!name) container = document.querySelector('[u-alert-container]');
 
               const al = document.createElement('div');
-              al.innerHTML = Alert$1({title, icon, ...restProps}, content);
+              al.innerHTML = Alert$1({title, icon, dismissible, ...restProps}, content);
 
               setTimeout(() => {
                   container.appendChild(al);
