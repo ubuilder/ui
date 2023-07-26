@@ -1,6 +1,10 @@
 import { Router } from "@ulibs/router";
 import { View } from "../src/components/index.js";
+import { DocPage, Preview, Section } from "../src/docs/components/index.js";
+
 import fs from "fs";
+import { readMarkdownDoc } from "./mark.js";
+import path from "path";
 
 const router = Router({ dev: true, reloadTimeout: 1500 });
 
@@ -10,6 +14,19 @@ const host = "localhost";
 
 router.addStatic({ path: "./dist", prefix: prefix + "dist" });
 router.addStatic({ path: "./src", prefix: prefix + "src" });
+
+function Doc({ title, description, sections }) {
+  console.log("Doc", { title, description, sections });
+  return DocPage(
+    { title, description },
+    sections.map((section) =>
+      Section(
+        { title: section.title, description: section.description },
+        Preview({ code: section.code })
+      )
+    )
+  );
+}
 
 function layout(props, slots) {
   return View(
@@ -36,24 +53,53 @@ const files = fs.readdirSync("./src/docs/pages");
 
 await Promise.all(
   files.map(async (file) => {
-    let slug = file.replace(".js", "");
+    let slug = file;
+
+    if(file.endsWith('.md')) {
+      slug = slug.replace(".md", "");
+
+    }
+
+    if(file.endsWith('.js')) {
+      slug = slug.replace(".js", "");
+    }
 
     if (file === "index.js") {
       slug = "";
     }
 
+    if(file.endsWith('.js')) {
+
     // console.log({file, slug})
     const result = await import("../src/docs/pages/" + file);
 
-    // console.log('addPage', prefix + slug)
+    console.log({ result });
+    if (Array.isArray(result.default)) {
+      const { default: sections, title, description } = result;
+
+      router.addPage(prefix + slug, {
+        page: ({ ...props }) => {
+          return Doc({ title, description, sections });
+        },
+      });
+    } else {
+      router.addPage(prefix + slug, {
+        page: ({ ...props }) => {
+          return result.default({ ...props });
+        },
+      });
+    }
+  } else {
+    // markdown
+    const result = await readMarkdownDoc('./src/docs/pages/' + file)
     router.addPage(prefix + slug, {
-      load(req) {
-        // console.log(req)
-      },
-      page: ({ ...props }) => {
-        return result.default({ ...props });
-      },
-    });
+      page({...props}) {
+        console.log(path.resolve('./src/docs/pages/' + file))
+        return Doc(result)
+      }
+    })
+  }
+
   })
 );
 

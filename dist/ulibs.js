@@ -9976,28 +9976,6 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       });
     }
 
-  function Select(Alpine) {
-    Alpine.directive("select", (el) => {
-      const multiple = el.getAttribute("multiple");
-      const name = el.getAttribute("name");
-
-      // on change
-      Alpine.bind(el, {
-        "u-on:change"(e) {
-          if (multiple) {
-            const selectedValues = Array.from(e.target.selectedOptions).map(
-              (x) => x.value
-            );
-            this.$data[name] = selectedValues;
-          } else {
-            const value = el.selectedOptions[0].value;
-            this.$data[name] = value;
-          }
-        },
-      });
-    });
-  }
-
   function Textarea(Alpine) {
       Alpine.directive('textarea', (el) => {
 
@@ -12460,7 +12438,6 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     Alert(Alpine);
     Popup(Alpine);
     ClientSideRouting(Alpine);
-    Select(Alpine);
     Input(Alpine);
     Textarea(Alpine);
     Form(Alpine);

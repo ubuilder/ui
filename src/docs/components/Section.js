@@ -14,7 +14,7 @@ export function Section({ title, description }, ...slots) {
     description &&
       View(
         { tag: "p", style: "line-height: var(--size-lg);", my: "sm" },
-        description
+        [description]
       ),
     ...slots,
   ]);

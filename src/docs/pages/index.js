@@ -9,7 +9,7 @@ const components = {
   alert: { title: "Alert" },
   autocomplete: { title: "Autocomplete", new: true },
   avatar: { title: "Avatar" },
-  badge: { title: "Badge", soon: true },
+  badge: { title: "Badge", new: true },
   breadcrumb: { title: "Breadcrumb" },
   button: { title: "Button", updated: true },
   card: { title: "Card" },
