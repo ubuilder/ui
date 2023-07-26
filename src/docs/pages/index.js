@@ -23,7 +23,7 @@ const components = {
   icon: { title: "Icon" },
   image: { title: "Image", soon: true },
   input: { title: "Input", soon: true },
-  modal: { title: "Modal" },
+  modal: { title: "Modal", new: true },
   popover: { title: "Popover" },
   progress: { title: "Progress" },
   radio: { title: "Radio", soon: true },

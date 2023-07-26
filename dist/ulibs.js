@@ -3164,6 +3164,10 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       const staticName = el.getAttribute('name');
 
       async function setIcon(value) {
+        if(!value) {
+          el.innerHTML = '';
+          return
+        }
         try {
           const res = await fetch(
             `https://unpkg.com/@tabler/icons@2.19.0/icons/${value}.svg`
@@ -9005,8 +9009,10 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       Alpine.bind(el, {
         'u-on:click'() {
           const isOpen = el.parentNode.hasAttribute('u-modal-open');
+          const isPersistent = el.parentNode.hasAttribute('persistent');
 
-          if(isOpen) {
+          console.log(isPersistent);
+          if(isOpen && !isPersistent) {
             this.$modal.close();
           }
         }
@@ -9026,27 +9032,41 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       Alpine.bind(el, {
         'u-data'() {
           return {
+            isOpen: false,
             close() {
-              el.removeAttribute('u-modal-open');
+
+              this.$data.isOpen = false;
+              // el.removeAttribute('u-modal-open')
             },
           }
+        },
+        'u-bind:u-modal-open'() {
+          return this.$data.isOpen;
         }
       });
     });
 
-    Alpine.magic('modal', (...args) => {
+    Alpine.magic('modal', (el) => {
       return {
         open(name) {
-          const el = document.querySelector(`[name="${name}"]`);
+          let query = "[u-modal]";
+          if(name) query = query + `[name="${name}"]`;
+          
+          const el = document.querySelector(query);
+          if(el) {
+            el.focus();
+            Alpine.$data(el).isOpen = true;
+          }
 
-          el.setAttribute('u-modal-open', '');
         },
-        close() {
-
-          const el = document.querySelector(`[u-modal-open]`);
+        close(name) {
+          let query = "[u-modal-open]";
+          if(name) query = query + `[name="${name}"]`;
+          
+          const el = document.querySelector(query);
 
           if(el) {
-            el.removeAttribute('u-modal-open');
+            Alpine.$data(el).isOpen = false;
           }
         }
       }
@@ -12330,15 +12350,16 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         $name: props.$icon,
       };
 
+      console.log({props}, {dismissible: props.dismissible});
       return View(alertProps, [
         View({ component: component + "-header" }, [
           props.icon ? Icon(iconProps) : [],
           View({ component: component + "-title" }, props.title ?? ""),
           
-            View(
-              { tag: "button", $show: props.dismissible, component: component + "-close" },
+            props.dismissible ? View(
+              { tag: "button", component: component + "-close" },
               Icon({ name: "x" })
-            ),
+            ) : [],
         ]),
         ($slots.toString() !== "" &&
           View({ component: component + "-content" }, $slots)) ||
@@ -12375,9 +12396,11 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       Alpine.directive('alert-auto-close', (el) => {
           Alpine.bind(el, {
               'u-init'() {
+                  console.log('set timeout');
                   setTimeout(() => {
+                      console.log('close', el);
                       this.$data.isOpen = false;
-                  }, +el.getAttribute('duration') ?? 5000);
+                  }, el.hasAttribute('duration') ? +el.getAttribute('duration') : 5000);
               }
           });
       });

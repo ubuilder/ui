@@ -1,31 +1,34 @@
-import {
-    Avatar,
-    Button,
-    Modal,
-    ModalBody,
-    View
-  } from "../../components/index.js";
-  
-  import { DocPage } from "../components/DocPage.js";
-  
-  const avatar = ({ title, description }) => {
-      return View({d: 'flex', wrap: true, gap: 'xs'},[
-        Button({'u-on:click': '$modal.open(1)'}, 'Open Modal 1'),
-        Button({'u-on:click': "$modal.open('abc')"}, 'Open Modal 2'),
-        Modal({name: '1'}, [
-            ModalBody([
-                View({p: 'md', bgColor: 'success'}, 'Modal 1')
-            ])
-        ]),
-        Modal({name: 'abc', open: true}, [
-            ModalBody([
-                View({p: 'md', bgColor: 'info'}, 'Modal 2')
+import { DocPage } from "../components/DocPage.js";
+import { Preview } from "../components/Preview.js";
+import { Section } from "../components/Section.js";
+
+export default function () {
+  return DocPage({ name: "Modal" }, [
+    Section({ title: "Default", description: "This is default Modal" }, [
+      Preview({ code: `[
+    Button({onClick: "$modal.open('modal-1')", color: 'primary'}, "Open Modal"),
+    Modal({name: 'modal-1'}, [
+        ModalBody([
+            View("Body of Modal"),
+            View({mt: 'md'}, [
+                Button({onClick: '$modal.close()'}, 'Close')
             ])
         ])
-      ])
-  };
-  
-  export default function () {
-    return DocPage({ name: "avatar" }, [avatar("simple-avatar", "desc....")]);
-  }
-  
+    ])
+]` }),
+    ]),
+    Section({ title: "Persistent", description: "This is persistent Modal" }, [
+        Preview({ code: `[
+    Button({onClick: "$modal.open('modal-2')", color: 'primary'}, "Open Persistent Modal"),
+    Modal({name: 'modal-2', persistent: true}, [
+        ModalBody([
+            View("You can only close me using below button"),
+            View({mt: 'md'}, [
+                Button({onClick: '$modal.close()'}, 'Close')
+            ])
+        ])
+    ])
+]` }),
+      ]),
+  ]);
+}

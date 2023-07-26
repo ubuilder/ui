@@ -1,39 +1,31 @@
-import { Base } from "../utils.js";
+import { Base, extract } from "../utils.js";
 import { View } from "./View.js";
 
 export const Modal = Base({
   render($props, $slots) {
-    const {
-      component = "modal",
-      open = false,
-      persistent,
-      name,
-      ...restProps
-    } = $props;
+    const [props, restProps] = extract($props, {
+      component: 'modal',
+      persistent: false,
+      name: undefined,
+      cssProps: {
+        open: false,
+      }
+    })
+    props.tabindex = 0
 
-    const props = {
-      ...restProps,
-      component,
-      cssProps: { open },
-      persistent,
-      name,
-    };
-
-    return View(props, [
-      View({ component: component + "-backdrop" }),
-      View({ component: component + "-content" }, $slots),
+    return View({...props, ...restProps}, [
+      View({ component: props.component + "-backdrop" }),
+      View({ component: props.component + "-content" }, $slots),
     ]);
   },
 });
 
 export const ModalBody = Base({
   render($props, $slots) {
-    const { component = "modal-body", ...restProps } = $props;
+    const [props, restProps] = extract($props, {
+      component: 'modal-body'
+    })
 
-    const props = {
-      ...restProps,
-      component,
-    };
-    return View(props, $slots);
+    return View({...props, ...restProps}, $slots);
   },
 });

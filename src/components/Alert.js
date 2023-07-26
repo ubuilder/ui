@@ -34,15 +34,16 @@ export const Alert = Base({
       $name: props.$icon,
     };
 
+    console.log({props}, {dismissible: props.dismissible})
     return View(alertProps, [
       View({ component: component + "-header" }, [
         props.icon ? Icon(iconProps) : [],
         View({ component: component + "-title" }, props.title ?? ""),
         
-          View(
-            { tag: "button", $show: props.dismissible, component: component + "-close" },
+          props.dismissible ? View(
+            { tag: "button", component: component + "-close" },
             Icon({ name: "x" })
-          ),
+          ) : [],
       ]),
       ($slots.toString() !== "" &&
         View({ component: component + "-content" }, $slots)) ||

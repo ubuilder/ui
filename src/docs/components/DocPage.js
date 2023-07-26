@@ -12,7 +12,7 @@ export function DocPage(
     rel: "stylesheet",
     href: prefix + "styles.css",
   });
-  const title = View({ tag: "title" }, `UBuilder / Components / ` + name);
+  const title = View({ tag: "title" }, name + ' | UBuilder Component');
 
   const customCss = `
   .header {

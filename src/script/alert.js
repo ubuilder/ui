@@ -28,9 +28,11 @@ export function Alert(Alpine) {
     Alpine.directive('alert-auto-close', (el) => {
         Alpine.bind(el, {
             'u-init'() {
+                console.log('set timeout')
                 setTimeout(() => {
+                    console.log('close', el)
                     this.$data.isOpen = false
-                }, +el.getAttribute('duration') ?? 5000)
+                }, el.hasAttribute('duration') ? +el.getAttribute('duration') : 5000)
             }
         })
     })

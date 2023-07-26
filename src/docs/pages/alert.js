@@ -54,13 +54,13 @@ export default ({ theme, prefix }) =>
           "supported values are top-start, top-end, bottom-start and bottom-end",
       },
       [
-        Preview({
-          height: 800, width: 600,
-          code: `AlertContainer({name: 'my-alert-container-2', placement: 'top-end'}, [
-            Alert({title: 'First', icon: 'check'}, 'First Alert'),
-            Alert({title: 'Second', color: 'error'}, 'Second Alert'),
-        ])
-        `,
+        Preview({ code: `[
+        
+  View("Alert container is open in top-right side of page"),
+  Button({ onClick: "$alert('my-alert-container-2', {title: 'Title',content: 'This is alert', color: 'primary'})" }, "Add Alert in this container"),
+  AlertContainer({name: 'my-alert-container-2', placement: 'top-end'}, [
+  Alert({title: 'Container Placement', icon: 'check'}, 'This is AlertContainer with top-end placement'),
+])]`,
         }),
       ]
     ),
@@ -70,14 +70,14 @@ export default ({ theme, prefix }) =>
         description: "You can use $alert magic to add new alerts",
       },
       [
-        Preview({height: 800, width: 600, code: `[
+        Preview({ code: `[
           View([
             Button(
               {
                 onClick:
                   "$alert('my-alert-container-3', {content: 'Hello', color: 'info', dismissible: true})",
               },
-              "Add alert Here"
+              "Bottom right"
 
             ),
             Button(
@@ -85,7 +85,7 @@ export default ({ theme, prefix }) =>
                   onClick:
                     "$alert('my-alert-container-2', {content: 'Hello', color: 'warning', dismissible: true})",
                 },
-                "Add alert in previous section"
+                "top right"
   
               ),
           ]),
