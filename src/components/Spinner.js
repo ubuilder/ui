@@ -3,7 +3,7 @@ import { View } from "./View.js";
 
 export const Spinner = Base({
   render($props, $slots) {
-    const {props, restProps} = extract($props, {
+    const {props, cssProps, restProps} = extract($props, {
       props: {
         component: 'spinner',
       },

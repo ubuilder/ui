@@ -22,7 +22,7 @@ function Doc({ title, description, sections }) {
     sections.map((section) =>
       Section(
         { title: section.title, description: section.description },
-        Preview({ code: section.code })
+        section.code ? Preview({ code: section.code }) : ''
       )
     )
   );
