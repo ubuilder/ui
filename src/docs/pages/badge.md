@@ -11,7 +11,7 @@ Badge("Default");
 ## Colors
 
 ```js
-[
+View({d: 'flex', align: 'end', wrap: true, gap: 'xs'},[
   Badge({ color: "primary" }, "primary"),
   Badge({ color: "secondary" }, "secondary"),
   Badge({ color: "success" }, "success"),
@@ -20,7 +20,7 @@ Badge("Default");
   Badge({ color: "error" }, "error"),
   Badge({ color: "light" }, "light"),
   Badge({ color: "dark" }, "dark"),
-];
+]);
 ```
 
 ## Sizes
