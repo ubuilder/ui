@@ -65,15 +65,18 @@ This is persistent Modal
 ```js
 [
   Button({ onClick: "$modal.open('login-form')", color: "primary" }, "Login"),
-  Modal({name: 'login-form'}, [
+  Modal({name: 'login-form', size: 'xs'}, [
     ModalBody([
       Form({$data: {username: '', password: ''}}, [
         Input({ name: "username", label: "Username" }),
         Input({ name: "password", label: "Password", type: "password" }),
-        ButtonGroup({ justifySelf: "end" }, [
-          Button({ onClick: '$modal.close()', type: "button" }, "Cancel"),
-          Button({ color: "primary" }, "Login"),
-        ]),
+        Col({col: 12}, [
+          ButtonGroup({ justify: "end" }, [
+            Button({ onClick: '$modal.close()', type: "button" }, "Cancel"),
+            Button({ color: "primary" }, "Login"),
+          ]),
+                  ])
+
       ]),
     ]),
   ]),
@@ -81,3 +84,24 @@ This is persistent Modal
 ```
 
 ## Card inside Modal
+```js
+[
+  Button({onClick: "$modal.open('modal-card')"}, "Open"),
+  Modal({name: 'modal-card', size: 'xs'}, [
+    Card([
+      CardHeader([
+        CardTitle("Card Title")
+      ]),
+      CardBody([
+        'Content of card body Sdfa sdflkasjdfio sadif aosdif aifoa sidf weio fasoidfasdif oasidf oasdif asoidf aosidf oasidf weifwioe fioe fiwf oisd gdoig aoif cxbaoisfn aovim asofsmd lfks afoi kdfa sofi awefao isd fjsaoidfmewaosi foas idf oaiej aksdf aojf we.'
+      ]),
+      CardFooter([
+        ButtonGroup({ms: 'auto'},[
+          Button({color: 'primary'}, "Submit")
+        ])
+      ])
+    ])
+  ])
+]
+
+```

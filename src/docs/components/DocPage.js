@@ -45,7 +45,8 @@ export function DocPage(
       View(
         { p: "xs", class: "border-bottom header" },
         Container({ size: "xl", mx: "auto" }, [
-          Button({ link: true, href: '/ui' }, "Back"),
+          Button({ link: true, href: '/ui' }, "Home"),
+          Button({ link: true, onClick: '$routing.back()' }, "back"),
           Button(
             {
               color: "dark",

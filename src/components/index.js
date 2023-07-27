@@ -24,6 +24,8 @@ export * from "./Select.js";
 export * from "./Switch.js";
 export * from "./Textarea.js";
 export * from "./Tabs.js";
+export * from "./Image.js";
+
 export * from "./Dropdown.js";
 export * from "./Autocomplete.js";
 export * from "./Tooltip.js";

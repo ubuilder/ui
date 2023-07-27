@@ -37,6 +37,16 @@ View({ $data: { content: "" } }, [
 ]);
 ```
 
+## Column Width
+All properties of `Col` component is supported
+```js
+Row([
+    Textarea({col: 12, colXs: 6, colMd: 4}),
+    Textarea({col: 12, colXs: 6, colMd: 2, offsetMd: 2}),
+    Textarea({col: 12, colXs: 6, colMd: 4}),
+])
+```
+
 ## With Form
 TODO: 
 ```js
