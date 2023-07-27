@@ -12,6 +12,7 @@ export const Modal = Base({
       },
       cssProps: {
         open: false,
+        size: undefined
       }
     })
 

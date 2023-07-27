@@ -110,7 +110,7 @@
 /* The switch - the box around the slider */
 [u-switch] {
   --switch-size: var(--size-md);
-  --switch-knob-size: calc(var(--switch-size) - 10px);
+  --switch-knob-size: calc(var(--switch-size) - var(--size-xxs));
 
   position: relative;
   display: inline-block;
@@ -127,7 +127,6 @@
   right: 0;
   bottom: 0;
   background-color: var(--color-base-400);
-  border: 1px solid var(--color-primary-200);
   transition: .3s;
 }
 
@@ -137,10 +136,9 @@
   content: "";
   height: var(--switch-knob-size);
   width: var(--switch-knob-size);
-  left: 4px;
-  bottom: 4px;
+  left: calc(var(--size-xxs) / 2);
+  bottom: calc(var(--size-xxs) / 2);
 
-  border: 1px solid bar(--color-base-400);
   background-color: var(--color-light-200);
   transition: .3s;
 }
@@ -158,6 +156,7 @@
 
 [u-switch-input]:focus + [u-switch-text] {
   @extend [u-form-field-focus];
+  border: none;
 }
 
 [u-switch-input]:checked + [u-switch-text]:before {

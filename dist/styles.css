@@ -1007,7 +1007,7 @@ code {
 /* The switch - the box around the slider */
 [u-switch] {
   --switch-size: var(--size-md);
-  --switch-knob-size: calc(var(--switch-size) - 10px);
+  --switch-knob-size: calc(var(--switch-size) - var(--size-xxs));
   position: relative;
   display: inline-block;
   width: calc(var(--switch-size) * 2);
@@ -1023,7 +1023,6 @@ code {
   right: 0;
   bottom: 0;
   background-color: var(--color-base-400);
-  border: 1px solid var(--color-primary-200);
   transition: 0.3s;
 }
 
@@ -1032,9 +1031,8 @@ code {
   content: "";
   height: var(--switch-knob-size);
   width: var(--switch-knob-size);
-  left: 4px;
-  bottom: 4px;
-  border: 1px solid bar(--color-base-400);
+  left: calc(var(--size-xxs) / 2);
+  bottom: calc(var(--size-xxs) / 2);
   background-color: var(--color-light-200);
   transition: 0.3s;
 }
@@ -1049,6 +1047,10 @@ code {
 
 [u-switch-input]:checked + [u-switch-text]::before {
   background-color: var(--color-primary-800);
+}
+
+[u-switch-input]:focus + [u-switch-text] {
+  border: none;
 }
 
 [u-switch-input]:checked + [u-switch-text]:before {
@@ -2303,7 +2305,7 @@ select[u-autocomplete], .ts-wrapper select.ts-control {
 [u-modal] {
   opacity: 0;
   transition: all 0.3s ease;
-  --modal-size: var(--size-container-md);
+  --modal-size: max-content;
   --modal-margin: var(--size-md);
   position: fixed;
   width: 100%;
@@ -2327,23 +2329,23 @@ select[u-autocomplete], .ts-wrapper select.ts-control {
 }
 
 [u-modal-size=xs] {
-  --modal-size: var(--size-container-xs);
+  --modal-size: calc(var(--size-container-xs));
 }
 
 [u-modal-size=sm] {
-  --modal-size: var(--size-container-sm);
+  --modal-size: calc(var(--size-container-sm));
 }
 
 [u-modal-size=md] {
-  --modal-size: var(--size-container-md);
+  --modal-size: calc(var(--size-container-md));
 }
 
 [u-modal-size=lg] {
-  --modal-size: var(--size-container-lg);
+  --modal-size: calc(var(--size-container-lg));
 }
 
 [u-modal-size=xl] {
-  --modal-size: var(--size-container-xl);
+  --modal-size: calc(var(--size-container-xl));
 }
 
 [u-modal-open] {
