@@ -7,6 +7,11 @@ There is no single Radio component, It is not possible to use single radio butto
 
 ## Placeholder
 
+
+## Disabled
+TODO: Disabled All radios or some of them
+
+
 ## Items
 
 ## Items (object)

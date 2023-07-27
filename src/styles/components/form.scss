@@ -329,6 +329,7 @@
 
 [u-select][multiple] {
   padding: 0;
+  min-height: calc(var(--form-field-size) * 2);
   height: auto;
 
   option {

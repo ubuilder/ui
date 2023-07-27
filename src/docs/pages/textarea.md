@@ -12,6 +12,10 @@ Textarea();
 Textarea({ label: "Textarea" });
 ```
 
+## Disabled
+
+
+
 ## Placeholder
 
 ```js

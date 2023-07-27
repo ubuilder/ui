@@ -16,6 +16,9 @@ With Label
 Switch({ label: "Switch Button" });
 ```
 
+## Disabled
+
+
 ## Initial Value
 
 ```js
