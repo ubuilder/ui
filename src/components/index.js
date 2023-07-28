@@ -5,7 +5,6 @@ export * from "./Button.js";
 export * from "./Card.js";
 export * from "./Checkbox.js";
 export * from "./GridSystem.js";
-export * from "./For.js";
 export * from "./Icon.js";
 export * from "./Input.js";
 export * from "./Form.js";

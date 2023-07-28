@@ -8,15 +8,17 @@ export default () => DocPage({name: 'Basic Features'}, [
             $data: {show: true}
         }, [
             View({$text: 'show'}), 
-            If({condition: 'show'}, 'Show is true')
+            View({$if: 'show'}, 'Show is true')
         ])`})
     ]),
     Section({title: 'For loops'}, [
         Preview({code: `View({
-    $data: {numbers: [1,2,3,4]}
+    $data: {len: 8}
 }, [
-    View(['Length: ', View({tag: 'span', $text: "numbers.length"})]), 
-    For({items: 'numbers', as: 'item'}, View({p: 'xs', $text: "item"}))
+    View(['Length: ', View({tag: 'spna', $text: "len"})]), 
+    View({border: true, d: 'flex', gap: 'xs'}, [
+        View({$for: 'item in len', $text: 'item', p: 'xs'})
+    ])
 ])`})
     ]),
     Section({title: 'Events'}, [

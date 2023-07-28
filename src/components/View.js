@@ -162,7 +162,9 @@ export const View = Base({
         delete props[key];
       } else if (key.startsWith("$")) {
         if (key === "$if") {
-          props["u-if"] = props[key];
+          const uif = $props[key];
+          delete $props[key]
+          return View({tag: 'template', 'u-if': uif}, View($props, $slots))
         } else if (key === "$text") {
           props["u-text"] = props[key];
         } else if (key === "$show") {
@@ -172,7 +174,9 @@ export const View = Base({
         } else if (key === "$html") {
           props["u-html"] = props[key];
         } else if (key === "$for") {
-          props["u-for"] = props[key];
+          const ufor = $props[key];
+          delete $props[key]
+          return View({tag: 'template', 'u-for': ufor}, View($props, $slots))
         } else if (key === "$model") {
           props["u-model"] = props[key];
         } else {
