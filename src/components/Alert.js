@@ -1,7 +1,6 @@
 import { Icon } from "./Icon.js";
 import { Base, classname, extract } from "../utils.js";
 import { View } from "./View.js";
-import { If } from "./For.js";
 
 export const Alert = Base({
   render($props, $slots) {
