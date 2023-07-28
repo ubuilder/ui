@@ -25,7 +25,7 @@ export const Accordion = Base({
     })
 
     return View({...props, ...restProps}, [
-      header && View({ component: props.component + "-header" }, header),
+      header && AccordionHeader({ title: header }),
       View(
         { component: props.component + "-content" },
         body ? AccordionBody([body]) : slots
