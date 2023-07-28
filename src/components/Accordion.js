@@ -39,6 +39,8 @@ export const AccordionHeader = Base({
     const {props, title, restProps} = extract($props, { 
       props: {
         component: "accordion-header", 
+        tag: 'button',
+        type: 'button'
       },
       title: undefined
     });
