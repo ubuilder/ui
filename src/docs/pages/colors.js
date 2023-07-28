@@ -1,4 +1,4 @@
-import { Row, Col, For, View, } from "../../components/index.js";
+import { Row, Col } from "../../components/index.js";
 import { DocPage } from "../components/DocPage.js";
 import { Section } from "../components/Section.js";
 

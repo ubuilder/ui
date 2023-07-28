@@ -1,6 +1,6 @@
 import { Col, Row } from "../../components/GridSystem.js";
 import { View } from "../../components/View.js";
-import { Input, Button, For, Switch, Container, Card, Checkbox, CheckboxGroup, RadioGroup, Select, Textarea, CardBody } from "../../components/index.js";
+import { Input, Button, Switch, Container, Card, Checkbox, CheckboxGroup, RadioGroup, Select, Textarea, CardBody } from "../../components/index.js";
 import { DocPage } from "../components/DocPage.js";
 import { Section } from "../components/Section.js";
 
@@ -28,8 +28,8 @@ export default () =>
           },
           [
             Card([
-              For(
-                { items: "todos", as: "todo" },
+              View(
+                { $for: "todo in todos" },
                 Row({ p: "xs" }, [
                   Input({ col: true, name: "todo.title", label: "title" }),
                   Switch({ col: 0, name: "todo.done", label: "Done" }),
