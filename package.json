@@ -16,7 +16,7 @@
     "dev:nodemon": "nodemon -e .sass,.scss -w ./src -w ./src/docs --exec npm run build",
     "dev:css": "nodemon -e .scss -w ./src/styles --exec npm run build:css",
     "dev:js": "nodemon -e .js -w ./src/script --exec npm run build:js",
-    "dev:docs": "nodemon -e .js,.css -w ./dist -w ./src/docs --exec 'node scripts/docs.js dev'",
+    "dev:docs": "nodemon -e .js,.css -w ./dist -w ./src/docs --exec node scripts/docs.js dev",
     "dev": "conc npm:dev:css npm:dev:js npm:dev:docs",
     "start": "http-server ./build -p 3002"
   },
@@ -36,6 +36,7 @@
     "@codemirror/lang-html": "^6.4.5",
     "@codemirror/lang-javascript": "^6.1.9",
     "@floating-ui/dom": "^1.4.5",
+    "@rollup/plugin-commonjs": "^25.0.3",
     "@rollup/plugin-node-resolve": "^15.1.0",
     "@rollup/plugin-replace": "^5.0.2",
     "@ulibs/router": "^0.0.20",
@@ -52,6 +53,7 @@
   "dependencies": {
     "ace-builds": "^1.23.4",
     "highlight.js": "^11.8.0",
-    "prismjs": "^1.29.0"
+    "prismjs": "^1.29.0",
+    "quill": "^1.3.7"
   }
 }
