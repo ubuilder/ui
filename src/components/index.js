@@ -28,3 +28,4 @@ export * from "./Dropdown.js";
 export * from "./AutoComplete.js";
 export * from "./Tooltip.js";
 export * from "./Popover.js";
+export * from "./TextEditor.js";
