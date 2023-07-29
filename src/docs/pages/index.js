@@ -41,7 +41,7 @@ const components = {
   switch: { title: "Switch", updated: true, done: true },
   table: { title: "Table", updated: true, done: true },
   tabs: { title: "Tabs", updated: true, done: true },
-  'text-editor': {title: 'TextEditor', soon: true},
+  texteditor: {title: 'TextEditor', new: true, done: false},
   textarea: { title: "Textarea", new: true, done: true },
   tooltip: { title: "Tooltip", done: true },
   view: { title: "View", new: true, done: '50' },
