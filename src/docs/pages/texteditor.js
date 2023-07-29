@@ -13,10 +13,9 @@ import {
 
 export default function () {
   return DocPage({ name: "Popover" }, [
-    
     Section(
       {
-        title: "default",
+        title: "default Texteditor",
         description: "this simple text editor with default values",
       },
       Preview({ code: `TextEditor()` })
@@ -24,55 +23,48 @@ export default function () {
 
     Section(
       {
-        title: "type",
-        description: "basic is the simplest type",
+        title: "type attribute",
+        description: "basic is the simplest type with least options",
       },
       Preview({ code: `TextEditor({type: 'basic'})` })
     ),
     Section(
       {
         title: "type",
-        description: "default is simple",
+        description: "default type is 'simple'",
       },
       Preview({ code: `TextEditor({type: 'simple'})` })
     ),
     Section(
       {
         title: "type",
-        description: "standard",
+        description: "standard, it has more options",
       },
       Preview({ code: `TextEditor({type: 'standard'})` })
     ),
     Section(
       {
         title: "type",
-        description: "advanced",
+        description: "advanced, it is fully fitured",
       },
       Preview({ code: `TextEditor({type: 'advanced'})` })
     ),
 
     Section(
       {
-        title: "value",
+        title: "value attribute",
         description: "we can set a primary value",
       },
       Preview({ code: `TextEditor({value: 'hellow world!'})` })
     ),
-
     Section(
       {
-        title: "label",
-        description: "like rest of form element it can have label",
-      },
-      Preview({ code: `TextEditor({label: 'comment'})` })
-    ),
-    Section(
-      {
-        title: "placeholder",
-        description: "like rest of form element it can have placeholder",
+        title: "placeholder and Label",
+        description:
+          "like rest of form element it can have placeholder and label",
       },
       Preview({
-        code: `TextEditor({placeholder: 'please write your comments...'})`,
+        code: `TextEditor({placeholder: 'please write your comments...', label: 'comment'})`,
       })
     ),
     Section(
@@ -92,14 +84,14 @@ export default function () {
     ),
     Section(
       {
-        title: "tow way value binding",
+        title: "value binding",
         description:
-          "with $model we can bind the value of editor with some variable",
+          "with $model we can bind the value of editor with some variablea",
       },
       Preview({
         code: `[
         View({$data: {comment: ''}},[
-          Button({onClick: "comment= ''; console.log('reseted')" }, 'reset'),
+          Button({onClick: "comment= ''" }, 'reset comment'),
           View({$text: 'comment'}),
           TextEditor({$model: 'comment'}),
         ]),
@@ -108,38 +100,46 @@ export default function () {
     ),
     Section(
       {
-        title: "in form",
+        title: "texteditor in form",
         description:
           "just like other form element it can send the form data, under the hood it acts as textarea tag",
       },
       Preview({
-        code: `Form(
-        [
-          Input({  col: 6, label: "User Name",  }),
-          Input({  col: 6, label: "email", }),
-          TextEditor({  label: "comment" }),
+        code: `
+        Form({p: 'sm'},[
+          View({tag: 'fieldset'},[
+            View({tag: 'legend'}, 'Send your comment'),
+            Input({  col: 12, label: "User Name",  }),
+          Input({  col: 12, label: "email", }),
+          TextEditor({ col: 12,  label: "comment" }),
   
           Button({ type: "submit" }, "Submit"),
-        ]
-      )`,
+          ])
+        ])
+        `,
       })
     ),
     Section(
       {
-        title: "in a form with $data binding",
-        description: "the data of the form inputs can be send to backend",
+        title: "texteditor in a form with name and  $data binding",
+        description:
+          "just like rest of form inputs texteditor value can be bound with $data",
       },
       Preview({
-        code: `Form(
+        code: `
+        Form(
         {
           $data: {
             username: "",
             password: "",
             comment: "",
           },
+          p: 'sm'
         },
         [
-          Input({ name: "username", col: 6, label: "User Name",  }),
+          View({tag: 'fieldset'},[
+            View({tag: 'legend'}, 'Send your Comment'),
+            Input({ name: "username", col: 6, label: "User Name",  }),
           Input({ name: "password", col: 6, label: "Password", }),
           TextEditor({ name: "comment", label: "comment" }),
           Col({ border: true, p: "sm", style: "width:100%" }, [
@@ -150,6 +150,7 @@ export default function () {
             ]),
           ]),
           Button({ type: "submit" }, "Submit"),
+          ])
         ]
       )`,
       })
@@ -161,7 +162,7 @@ export default function () {
         title: "textEditor",
         description: "this simple text editor with default values",
       },
-      TextEditor()
+      TextEditor({style: 'height: 100px'})
     ),
     Section(
       {
@@ -175,7 +176,7 @@ export default function () {
         title: "type",
         description: "basic",
       },
-      TextEditor({ type: "basic" })
+      TextEditor({ type: "basic", style: 'height: 100px' })
     ),
     Section(
       {
