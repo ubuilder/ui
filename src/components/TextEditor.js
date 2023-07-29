@@ -26,18 +26,13 @@ export const TextEditor = Base({
       ['u-texteditor-model']: $model,
       ['u-texteditor-readonly']: readOnly,
       cssProps: {
-        placeholder,
-        value,
         type,
         size,
       },
     };    
 
-    console.log('props', props)
-
-    
     return FormField(props ,[
-      View({tag: 'textarea', component: 'texteditor-textarea', name, value, disabled }),
+      View({tag: 'textarea', component: 'texteditor-textarea', name, value, disabled, placeholder }),
       View({"u-texteditor-target": ''}),
       $slots
     ])
