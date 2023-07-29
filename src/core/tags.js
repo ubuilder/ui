@@ -1,4 +1,6 @@
-import { renderHead, renderScripts, renderTemplate } from "./index.js";
+// import { renderHead, renderScripts, renderTemplate } from "./index.js";
+import { renderHead, renderTemplate } from "./template.js";
+import { renderScripts } from "./scripts.js";
 export function tag(tagName, props = {}, ...slots) {
 
   if(typeof tagName === 'object') {
