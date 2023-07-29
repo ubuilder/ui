@@ -12184,7 +12184,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         borderRadius,
       };
 
-      // console.log({cssProps})
+      console.log({cssProps});
       const cssAttributes = {};
 
       for (let prop in cssProps) {
@@ -12206,7 +12206,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       }
       for (let prop in viewCssProps) {
         if (typeof viewCssProps[prop] !== "undefined") {
-          // console.log('add this prop: ', prop)
+          console.log('add this prop: ', prop);
 
           if(prop.startsWith('$')) continue;
           if (viewCssProps[prop] === true) {
@@ -12216,7 +12216,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           }
         }
         if (typeof $props['$' + prop] !== "undefined") {
-          // console.log('add this prop: $' + prop)
+          console.log('add this prop: $' + prop);
 
           cssAttributes[classname('bind') + ':' + classname("view-" + prop)] = $props['$' + prop];
         }
@@ -12264,6 +12264,10 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
             props[key] = "";
           }
         }
+      }
+
+      if(tagName === 'input') {
+        console.log({props});
       }
       return tag(tagName, props, $slots);
     },

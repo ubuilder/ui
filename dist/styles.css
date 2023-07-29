@@ -2,6 +2,7 @@
 /* #region Root */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inconsolata&display=swap");
+@import "https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css";
 :root, [u-view-theme=light] {
   --color-primary-100: #c0d6f1;
   --color-primary-200: #97bced;
