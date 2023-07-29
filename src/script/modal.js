@@ -3,8 +3,10 @@ export function Modal(Alpine) {
     Alpine.bind(el, {
       'u-on:click'() {
         const isOpen = el.parentNode.hasAttribute('u-modal-open')
+        const isPersistent = el.parentNode.hasAttribute('persistent');
 
-        if(isOpen) {
+        console.log(isPersistent)
+        if(isOpen && !isPersistent) {
           this.$modal.close()
         }
       }
@@ -24,27 +26,41 @@ export function Modal(Alpine) {
     Alpine.bind(el, {
       'u-data'() {
         return {
+          isOpen: false,
           close() {
-            el.removeAttribute('u-modal-open')
+
+            this.$data.isOpen = false
+            // el.removeAttribute('u-modal-open')
           },
         }
+      },
+      'u-bind:u-modal-open'() {
+        return this.$data.isOpen;
       }
     })
   })
 
-  Alpine.magic('modal', (...args) => {
+  Alpine.magic('modal', (el) => {
     return {
       open(name) {
-        const el = document.querySelector(`[name="${name}"]`)
+        let query = "[u-modal]"
+        if(name) query = query + `[name="${name}"]`
+        
+        const el = document.querySelector(query)
+        if(el) {
+          el.focus()
+          Alpine.$data(el).isOpen = true
+        }
 
-        el.setAttribute('u-modal-open', '')
       },
-      close() {
-
-        const el = document.querySelector(`[u-modal-open]`)
+      close(name) {
+        let query = "[u-modal-open]"
+        if(name) query = query + `[name="${name}"]`
+        
+        const el = document.querySelector(query)
 
         if(el) {
-          el.removeAttribute('u-modal-open')
+          Alpine.$data(el).isOpen = false
         }
       }
     }

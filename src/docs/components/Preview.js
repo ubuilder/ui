@@ -20,6 +20,7 @@ export const Preview = Base({
     const prefix = $props.prefix ?? '/ui/';
     const height = $props.height;
     const width = $props.width;
+    const staticc = $props.static;
     
     function indent(level) {
       return Array.from({ length: level + 1 }).join("  ");
@@ -70,12 +71,28 @@ export const Preview = Base({
     const script = `
     import {${Object.keys(components).filter(key => `View ${code}`.indexOf(key) > -1).join(', ')}} from '${prefix}src/components/index.js'
 
-    const page = View({d: 'inline-flex', p: 'xl', gap: 'xs'},[${code.trim()}])
+    const page = View({p: 'lg'}, [${code?.trim()}])
 
     document.getElementById("preview-html-${id}").innerHTML = page.toString()
-    document.getElementById("preview-code-${id}").innerHTML = page.toString().replace(/</g, "\\n&#60;").replace(/>/g, "&#62;\\n\\t").replace(/\\n/g, '<br/>')
+    // document.getElementById("preview-code-${id}").innerHTML = page.toString().replace(/</g, "\\n&#60;").replace(/>/g, "&#62;\\n\\t").replace(/\\n/g, '<br/>')
 `
     
+    if(staticc) {
+      return components.Card({bgColor: 'base-100', p: 'sm', borderColor: 'base-400'},[
+        View(
+          {
+            tag: "pre",
+            style:
+              "font-size: var(--size-md); line-height: var(--size-lg); overflow: auto",
+          },
+          [View({ tag: "code" }, [
+            $props.code.trim()
+            // CodeEditor({name: 'preview-code-' + id, value: $props.code, lang: 'js', style: 'min-height: 200px'})
+          
+          ])]
+        ),
+      ])
+    }
 
     return [Tabs(
       {
@@ -86,15 +103,15 @@ export const Preview = Base({
      
       },
       [
-        TabsList([TabsItem("Preview"), TabsItem("HTML"), TabsItem("JS")]),
+        TabsList([TabsItem("Preview"), false ? TabsItem("HTML") : '', $props.code ? TabsItem("JS"):'']),
         TabsContent([
           TabsPanel(
             { style: `padding: 0; min-height: 100px; overflow-x: auto;` },
             [
-              View({id: 'preview-html-' + id, w: 100, style: `position: relative; height: ${height}px; min-width: ${width}px`}),
+              View({id: 'preview-html-' + id, w: 100, style: `height: ${height}px; min-width: ${width}px`}),
             ]
           ),
-          TabsPanel([
+          false ? TabsPanel([
             View(
               {
                 tag: "pre",
@@ -105,7 +122,7 @@ export const Preview = Base({
                 View({ tag: "code", id: "preview-code-" + id })
               ]
             ),
-          ]),
+          ]) : '',
           $props.code &&
             TabsPanel([
               View(

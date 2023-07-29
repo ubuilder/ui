@@ -1,11 +1,11 @@
 [u-badge] {
-  --badge-bg: var(--color-default-bg);
-  --badge-content: var(--color-default-content);
+  --badge-bg: var(--color-base-300);
+  --badge-content: var(--color-base-800);
 
   --badge-size: var(--size-md);
   border-radius: var(--badge-size);
   padding: 0 calc(var(--badge-size) / 2);
-  font-size: calc(var(--badge-size) * 0.8);
+  font-size: calc(var(--badge-size) * 0.6);
   line-height: var(--badge-size);
 
   background-color: var(--badge-bg);
@@ -17,6 +17,16 @@
 }
 
 @include color-variants(badge) using ($color) {
-  --badge-bg: #{var(--color-#{$color}-500)};
-  --badge-content: #{var(--color-#{$color}-content)};
+  --badge-bg: #{var(--color-#{$color}-100)};
+  --badge-content: #{var(--color-#{$color}-600)};
+}
+
+[u-badge-color="light"] {
+  --badge-bg: var(--color-light-300);
+  --badge-content: var(--color-light-800);
+}
+
+[u-badge-color="dark"] {
+  --badge-bg: var(--color-dark-300);
+  --badge-content: var(--color-dark-800);
 }

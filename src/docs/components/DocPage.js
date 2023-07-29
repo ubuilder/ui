@@ -12,7 +12,7 @@ export function DocPage(
     rel: "stylesheet",
     href: prefix + "styles.css",
   });
-  const title = View({ tag: "title" }, `UBuilder / Components / ` + name);
+  const title = View({ tag: "title" }, name + ' | UBuilder Component');
 
   const customCss = `
   .header {
@@ -45,7 +45,8 @@ export function DocPage(
       View(
         { p: "xs", class: "border-bottom header" },
         Container({ size: "xl", mx: "auto" }, [
-          Button({ link: true, "u-on:click": "$routing.back()" }, "Back"),
+          Button({ link: true, href: '/ui' }, "Home"),
+          Button({ link: true, onClick: '$routing.back()' }, "back"),
           Button(
             {
               color: "dark",

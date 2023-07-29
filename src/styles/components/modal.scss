@@ -1,7 +1,7 @@
 [u-modal] {
   opacity: 0;
   transition: all 0.3s ease;
-  --modal-size: var(--size-container-md);
+  --modal-size: max-content;
   --modal-margin: var(--size-md);
 
   position: fixed;
@@ -23,11 +23,11 @@
   background-color: var(--color-base-200);
   border: 1px solid var(--color-base-400);
   border-radius: var(--size-xxs);
-  z-index: 1;
+  z-index: 11;
 }
 
 @include size-variants(modal) using($size) {
-  --modal-size: #{var(--size-container-#{$size})};
+  --modal-size: calc(var(--size-container-#{$size}));
 }
 
 [u-modal-open] {
@@ -39,9 +39,10 @@
   padding: var(--size-sm) var(--size-md);
 }
 [u-modal-backdrop] {
+  z-index: 10;
   transition: all 0.3s ease;
-  background-color: rgba(0,0,0,0.15);
-  backdrop-filter: blur(8px);
+  background-color: rgba(0,0,0,0.35);
+  // backdrop-filter: blur(8px);
   width: 100%;
   height: 100%;
   left: 0;

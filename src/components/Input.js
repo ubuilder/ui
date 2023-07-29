@@ -1,67 +1,38 @@
-import { Base } from "../utils.js";
+import { Base, extract } from "../utils.js";
 import { FormField } from "./FormField.js";
 import { View } from "./View.js";
 
-// function props(objects, props) {
-//   const result = {}
-//   Object.keys(objects).map(key => {
-//     result[key] = 
-//   })
-//   return {}
-// }
-
 export const Input = Base({
   render($props, $slots) {
-
-    // const {inputProps, wrapperProps, ...restProps} = props({input: ['name', ], wrapper: ['label', ]}, $props)
-    
-    // const myProps = ['label', 'name', 'disabled'];
-    
-    const {
-      component = "input",
-      label,
-      name,
-      type,
-      value,
-      disabled,
-      $disabled,
-      $value,
-      placeholder,
-      required,
-      ...restProps
-    } = $props;
-
-    const props = {
-      ...restProps,
-      component,
-      name,
-      label,
-    };
-
-    const inputProps = {
-      name,
-      component,
-      type,
-      value,
-      $value,
-      $model: name,
-      placeholder,
-      required,
-      disabled,
-      $disabled,
-      tag: "input",
-    };
-
-    if (!value) {
-      if (type === "number") {
-        inputProps.value = 0;
-      } else {
-        inputProps.value = "";
+    const {props, wrapperProps, restProps} = extract($props, {
+      props: {
+        component: 'input',
+        tag: 'input',
+        name: undefined,
+        type: undefined,
+        disabled: undefined,
+        readonly: undefined,
+        required: undefined,
+        placeholder: undefined,
+        value: undefined,
+      },
+      wrapperProps: {
+        component: 'input',
+        label: undefined,
+        name: undefined
       }
-    } else {
-      inputProps.value = value;
+    })
+
+    props.$model = props.name
+
+    if (!props.value) {
+      if (props.type === "number") {
+        props.value = 0;
+      } else {
+        props.value = "";
+      }
     }
 
-    return FormField(props, View(inputProps));
+    return FormField({...wrapperProps, ...restProps}, View(props));
   },
 });

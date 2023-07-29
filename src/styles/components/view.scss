@@ -90,28 +90,31 @@ $displays: ('flex', 'inline-flex', 'block', 'none', 'inline-block', 'contents', 
 
 // #region colors
 
-@include variant(view-bg-color, $colors) using ($color) {
-  background-color: var(--color-#{$color}-500);
-}
+@each $color in $colors {
+  [u-view-bg-color="#{$color}"] {
+    background-color: var(--color-#{$color}-500);
+  }
+  [u-view-text-color="#{$color}"] {
+    color: var(--color-#{$color}-500);
+  }
 
-[u-view-bg-color="dark"] {
-  background-color: var(--color-dark-200);
-}
+  [u-view-border-color="#{$color}"] {
+    --view-border-color: var(--color-#{$color}-500);
+  }
 
-[u-view-bg-color="light"] {
-  background-color: var(--color-light-100);
-}
+  @each $variant in (100, 200, 300, 400, 500, 600, 700, 800, 900) {
+    [u-view-bg-color="#{$color}-#{$variant}"] {
+      background-color: var(--color-#{$color}-#{$variant});
+    }
 
-@include variant(view-text-color, $colors) using ($color) {
-  color: var(--color-#{$color}-500);
-}
+    [u-view-text-color="#{$color}-#{$variant}"] {
+      color: var(--color-#{$color}-#{$variant});
+    }
 
-[u-view-text-color="dark"] {
-  color: var(--color-dark-200);
-}
-
-[u-view-text-color="light"] {
-  color: var(--color-light-100);
+    [u-view-border-color="#{$color}-#{$variant}"] {
+      --view-border-color: var(--color-#{$color}-#{$variant});
+    }
+  } 
 }
 
 // #endregion

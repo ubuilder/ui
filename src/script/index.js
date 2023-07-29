@@ -3,7 +3,7 @@ import Alpine from "alpinejs";
 import { Accordion } from "./accordion";
 import { Icon } from "./icon";
 import { Form } from "./form";
-import { AutoComplete } from "./autoComplete";
+import { Autocomplete } from "./autocomplete";
 import { Modal } from "./modal";
 import { ClientSideRouting } from "./routing";
 import { Popup } from "./popup";
@@ -47,7 +47,7 @@ function components(Alpine) {
   Switch(Alpine);
   Icon(Alpine);
   CodeEditor(Alpine);
-  AutoComplete(Alpine)
+  Autocomplete(Alpine)
   Modal(Alpine);
   Tabs(Alpine);
   Dropdown(Alpine);

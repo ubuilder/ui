@@ -3,17 +3,22 @@ import { View } from "./View.js";
 
 export const Button = Base({
   render($props, $slots) {
-    const [props, restProps] = extract($props, {
-      href: undefined,
-      tag: undefined,
-      component: 'button',
-      disabled: false,
+    const {props, cssProps, restProps} = extract($props, {
+      props: {
+        href: undefined,
+        tag: undefined,
+        component: 'button',
+      },
       cssProps: {
+        active: false,
+        disabled: false,
         size: 'md',
         link: false,
         color: undefined
       }
     });
+
+    console.log({props, cssProps, restProps})
 
     if(!props.tag) {
       if(props.href) {
@@ -25,23 +30,23 @@ export const Button = Base({
     
     if(!props.color) {
       if(props.link) {
-        props.color = 'light'
+        props.color = 'base'
       }
     }
 
-    return View({...restProps, ...props}, $slots);
+    return View({...restProps, cssProps, ...props}, $slots);
   },
 });
 
 export const ButtonGroup = Base({
   render($props, $slots) {
-    const [props, restProps] = extract($props, {
+    const {component, cssProps, restProps} = extract($props, {
       component: 'button-group',
       cssProps: {
         compact: false
       }
     });
     
-    return View({...props, ...restProps}, $slots);
+    return View({component, cssProps, ...restProps}, $slots);
   },
 });

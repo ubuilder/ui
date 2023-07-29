@@ -1,6 +1,6 @@
 import { View } from "../../components/index.js";
 
-export function Section({ title, description }, ...slots) {
+export function Section({ title, descriptions = [] }, ...slots) {
   return View({ mb: "lg" }, [
     title &&
       View(
@@ -11,10 +11,10 @@ export function Section({ title, description }, ...slots) {
         },
         title
       ),
-    description &&
+    descriptions &&
       View(
         { tag: "p", style: "line-height: var(--size-lg);", my: "sm" },
-        description
+        descriptions
       ),
     ...slots,
   ]);

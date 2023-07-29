@@ -1,26 +1,18 @@
-import { Base } from "../utils.js";
+import { Base, extract } from "../utils.js";
 import { View } from "./View.js";
 
 export const Spinner = Base({
   render($props, $slots) {
-    const {
-      tag = "div",
-      component = "spinner",
-      size = "md",
-      color = "light",
-      ...restProps
-    } = $props;
-
-    const props = {
-      ...restProps,
-      tag,
-      component,
-      cssProps: {
-        color,
-        size,
+    const {props, cssProps, restProps} = extract($props, {
+      props: {
+        component: 'spinner',
       },
-    };
-
-    return View(props, $slots);
+      cssProps: {
+        color: undefined,
+        size: 'md'
+      }
+    })
+ 
+    return View({...props, cssProps, ...restProps});
   },
 });

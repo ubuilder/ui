@@ -4,6 +4,10 @@ export function Icon(Alpine) {
     const staticName = el.getAttribute('name')
 
     async function setIcon(value) {
+      if(!value) {
+        el.innerHTML = ''
+        return
+      }
       try {
         const res = await fetch(
           `https://unpkg.com/@tabler/icons@2.19.0/icons/${value}.svg`

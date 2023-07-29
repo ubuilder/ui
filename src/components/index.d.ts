@@ -1,4 +1,6 @@
-import type {Placement} from '@floating-ui/core'
+// TODO support props that starts with $ (typescript will have something useful..)
+
+import type { Placement } from "@floating-ui/core";
 
 type Slot = string | number | Tag;
 
@@ -13,16 +15,29 @@ type Tag = {
   toHead: () => string;
 };
 
-export type Colors =
+export type ColorNames =
   | "primary"
   | "secondary"
   | "success"
   | "error"
   | "info"
   | "warning"
-  | "dark"
   | "light"
-  | undefined;
+  | "dark"
+  | "base";
+
+export type ColorValues =
+  | 100
+  | 200
+  | 300
+  | 400
+  | 500
+  | 600
+  | 700
+  | 800
+  | 900
+
+export type Colors = ColorNames | `${ColorNames}-${ColorValues}` | undefined;
 
 export type Sizes = "xs" | "sm" | "md" | "lg" | undefined;
 
@@ -42,8 +57,18 @@ export type AllSizes =
   | "6xl"
   | undefined;
 
-export type Component<Props, Components = {}, OwnProps = {}> = Components &
-  ((props: Props & OwnProps, slots: Slot[]) => Tag);
+export type Component<
+  Props extends Record<string, any>,
+  Components extends Record<string, any> = {},
+  OwnProps extends Record<string, any> = {}
+> = Components &
+  ((
+    props: Props &
+      OwnProps & { [X in keyof Props as `$${X}`]: string } & {
+        [X in keyof OwnProps as `$${X}`]: string;
+      },
+    slots: Slot[]
+  ) => Tag);
 
 export type WidthHeights =
   | "0"
@@ -123,7 +148,7 @@ export type FormField<Props = {}> = Col<
   }
 >;
 
-export type View<Props, Components = {}> = Component<
+export type View<Props extends Record<string, any>, Components extends Record<string, any> = {}> = Component<
   Props,
   Components,
   {
@@ -177,8 +202,14 @@ export type View<Props, Components = {}> = Component<
   }
 > & { extend: (a: any, b: any) => string };
 
-
-declare const tag: (tagName: string | { tag: string, props: Record<string, any>, slots: Slot[] } | Tag, props: Record<string,any>, ...slots: Slot[]) => Tag
+declare const tag: (
+  tagName:
+    | string
+    | { tag: string; props: Record<string, any>; slots: Slot[] }
+    | Tag,
+  props: Record<string, any>,
+  ...slots: Slot[]
+) => Tag;
 
 /**
  * Accordions Component
@@ -444,69 +475,117 @@ declare const TableCell: View<{ head: boolean }>;
 /**
  * Tabs component
  */
-declare const Tabs: View<{}>
+declare const Tabs: View<{}>;
 // declare const Tabs: View<{size: Sizes}>
 
 /**
  * TabsPanel component
  */
-declare const TabsPanel: View<{}>
+declare const TabsPanel: View<{}>;
 // declare const TabsPanel: View<{size: Sizes}>
 
 /**
  * TabsContent component
  */
-declare const TabsContent: View<{}>
+declare const TabsContent: View<{}>;
 // declare const TabsContent: View<{size: Sizes}>
 
 /**
  * TabsItem component
  */
-declare const TabsItem: View<{active: boolean}>
+declare const TabsItem: View<{ active: boolean }>;
 // declare const TabsItem: View<{active: boolean,size: Sizes, label: string}>
 
 /**
  * TabsList component
  */
-declare const TabsList: View<{}>
+declare const TabsList: View<{}>;
 // declare const TabsList: View<{horizontal: boolean, size: Sizes}>
 
 /**
  * Textarea Component
  */
-declare const Textarea: FormField<{placeholder: string, value: string, rows: number}>
+declare const Textarea: FormField<{
+  placeholder: string;
+  value: string;
+  rows: number;
+}>;
+
+/**
+ * Popover Component
+ */
+declare const Popover: View<{
+  trigger: 'click' | 'hover';
+  placement: Placement;
+  arrow: boolean;
+  arrowMargin: number;
+  flip: boolean;
+  shift: boolean;
+  focusAble: boolean;
+  persistent: boolean;
+  size: string,
+  target: string,
+  offset: number,
+  margin: number,
+}>
 
 /**
  * Tooltip Component
  */
-declare const Tooltip: View<{trigger: 'click' | 'hover', placement: Placement}>
+declare const Tooltip: View<{
+  trigger: "click" | "hover";
+  placement: Placement;
+  arrow: boolean;
+  arrowMargin: number;
+  margin: number;
+  offset: number;
+  target: string;
+}>;
 
 /**
  * View Component
  */
 declare const View: View<{}>;
 
+declare const Autocomplete: FormField<{
+  value: string[];
+  items: any[];
+  key: string | ((item: any) => string);
+  text: string | ((item: any) => string);
+  placeholder: string;
+  create: boolean;
+  readonly: boolean;
+  multiple: boolean;
+}>;
+
 /**
  * FileUpload Component
  */
-declare const FileUpload: View<{todo: true}>
+declare const FileUpload: View<{ todo: true }>;
 
 /**
  * Editor Component
  */
-declare const Editor: View<{todo: true}>
-
-/**
- * Autocomplete Component
- */
-declare const Autocomplete: View<{todo: true}>
+declare const Editor: View<{ todo: true }>;
 
 /**
  * Datepicker Component
  */
-declare const Datepicker: View<{todo: true}>
+declare const Datepicker: View<{ todo: true }>;
 
 /**
  * Slider Component
  */
-declare const Slider: View<{todo: true}>
+declare const Slider: View<{ todo: true }>;
+
+type a = { abc: true };
+
+type b = {
+  [y in keyof a as `$${y}`]: a[y];
+} & {
+  [x in keyof a]: a[x];
+
+  // [x in keyof a]: a[x];
+
+  // `${x}`]: string;
+};

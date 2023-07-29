@@ -3164,6 +3164,10 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       const staticName = el.getAttribute('name');
 
       async function setIcon(value) {
+        if(!value) {
+          el.innerHTML = '';
+          return
+        }
         try {
           const res = await fetch(
             `https://unpkg.com/@tabler/icons@2.19.0/icons/${value}.svg`
@@ -8928,66 +8932,87 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   TomSelect.define('restore_on_backspace', restore_on_backspace);
   TomSelect.define('virtual_scroll', virtual_scroll);
 
-  function AutoComplete(Alpine){
+  function Autocomplete(Alpine) {
+    Alpine.directive('autocomplete', (el, {}, {cleanup, evaluateLater}) => {
 
-    Alpine.directive('auto-complete', (el, {value, modifiers, expression, }, {Alpine, effect, evaluate, evaluateLater})=>{
+      const create = el.hasAttribute('create');
+      const onCreate = evaluateLater(el.getAttribute('u-on:create'));
 
-      
-     });
-    Alpine.directive('auto-complete-settings', (el, {value, modifiers, expression, }, {Alpine, effect, evaluate, evaluateLater})=>{
-
-      let settings  = evaluate(expression);
-      console.log(settings);
-      let input = el.querySelector('input');
-      new TomSelect(input, {
-          maxItems: null,
-          valueField: 'value',
-          labelField: 'text',
-          searchField: 'text',
-          options: evaluate("items"),
-          items: evaluate('values'),
-          persist: false,
-          createOnBlur: true,
-          create: true,
-          ...settings,
-      });
-      
-
-      
-      
       Alpine.bind(el, {
-        "u-init"(){
-          let tomSelect = document.getElementById(this.id).querySelector('input');
-          tomSelect = tomSelect.tomselect;
-          
-          tomSelect.on('change', (val)=>{
-            this.values = val.split(',');
-            tomSelect.addOptions(this.items, true);
-            tomSelect.refreshOptions();
-          });
-          tomSelect.on('option_add', (value, data)=>{
-            let set = new Set(this.items);
-            set.add(data);
-            this.items = Array.from(set);
-            tomSelect.addOptions(this.items, true);
-            tomSelect.refreshOptions();
+        'u-init'() {
+
+          const instance = new TomSelect(el, {
+            maxItems: el.hasAttribute('multiple') ? null : 1,
+            create,
+            onOptionAdd(value) {
+              onCreate(() => {}, {scope: {$event: value}});
+            }                    
+          });    
+
+          cleanup(() => {
+            instance.destroy();
           });
         }
       });
-     });
-
-
-    
+    });
 
   }
+
+    // Alpine.directive('auto-complete', (el, {value, modifiers, expression, }, {Alpine, effect, evaluate, evaluateLater})=>{
+
+      
+    //  })
+    // Alpine.directive('auto-complete-settings', (el, {value, modifiers, expression, }, {Alpine, effect, evaluate, evaluateLater})=>{
+
+    //   let settings  = evaluate(expression)
+    //   console.log(settings)
+    //   let input = el.querySelector('input')
+    //   var tomSelect = new TomSelect(input, {
+    //       maxItems: null,
+    //       valueField: 'value',
+    //       labelField: 'text',
+    //       searchField: 'text',
+    //       options: evaluate("items"),
+    //       items: evaluate('values'),
+    //       persist: false,
+    //       createOnBlur: true,
+    //       create: true,
+    //       ...settings,
+    //   })
+      
+
+      
+      
+    //   Alpine.bind(el, {
+    //     "u-init"(){
+    //       let tomSelect = document.getElementById(this.id).querySelector('input')
+    //       tomSelect = tomSelect.tomselect
+          
+    //       tomSelect.on('change', (val)=>{
+    //         this.values = val.split(',')
+    //         tomSelect.addOptions(this.items, true)
+    //         tomSelect.refreshOptions()
+    //       })
+    //       tomSelect.on('option_add', (value, data)=>{
+    //         let set = new Set(this.items)
+    //         set.add(data)
+    //         this.items = Array.from(set)
+    //         tomSelect.addOptions(this.items, true)
+    //         tomSelect.refreshOptions()
+    //       })
+    //     }
+    //   })
+    //  })
 
   function Modal(Alpine) {
     Alpine.directive('modal-backdrop', (el) => {
       Alpine.bind(el, {
         'u-on:click'() {
           const isOpen = el.parentNode.hasAttribute('u-modal-open');
+          const isPersistent = el.parentNode.hasAttribute('persistent');
 
-          if(isOpen) {
+          console.log(isPersistent);
+          if(isOpen && !isPersistent) {
             this.$modal.close();
           }
         }
@@ -9007,27 +9032,41 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       Alpine.bind(el, {
         'u-data'() {
           return {
+            isOpen: false,
             close() {
-              el.removeAttribute('u-modal-open');
+
+              this.$data.isOpen = false;
+              // el.removeAttribute('u-modal-open')
             },
           }
+        },
+        'u-bind:u-modal-open'() {
+          return this.$data.isOpen;
         }
       });
     });
 
-    Alpine.magic('modal', (...args) => {
+    Alpine.magic('modal', (el) => {
       return {
         open(name) {
-          const el = document.querySelector(`[name="${name}"]`);
+          let query = "[u-modal]";
+          if(name) query = query + `[name="${name}"]`;
+          
+          const el = document.querySelector(query);
+          if(el) {
+            el.focus();
+            Alpine.$data(el).isOpen = true;
+          }
 
-          el.setAttribute('u-modal-open', '');
         },
-        close() {
-
-          const el = document.querySelector(`[u-modal-open]`);
+        close(name) {
+          let query = "[u-modal-open]";
+          if(name) query = query + `[name="${name}"]`;
+          
+          const el = document.querySelector(query);
 
           if(el) {
-            el.removeAttribute('u-modal-open');
+            Alpine.$data(el).isOpen = false;
           }
         }
       }
@@ -9936,28 +9975,6 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         // input
       });
     }
-
-  function Select(Alpine) {
-    Alpine.directive("select", (el) => {
-      const multiple = el.getAttribute("multiple");
-      const name = el.getAttribute("name");
-
-      // on change
-      Alpine.bind(el, {
-        "u-on:change"(e) {
-          if (multiple) {
-            const selectedValues = Array.from(e.target.selectedOptions).map(
-              (x) => x.value
-            );
-            this.$data[name] = selectedValues;
-          } else {
-            const value = el.selectedOptions[0].value;
-            this.$data[name] = value;
-          }
-        },
-      });
-    });
-  }
 
   function Textarea(Alpine) {
       Alpine.directive('textarea', (el) => {
@@ -11828,13 +11845,15 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           delete restProps[key];
         }
         if (allProps["$" + key]) {
-          result["$" + key] = allProps["$" + key] ?? names["$" + key];
+          result["$" + key] = allProps["$" + key];
           delete restProps["$" + key];
         }
       }
     });
 
-    return [result, restProps];
+    result.restProps = restProps;
+
+    return result;
   }
 
   function getPropsAndSlots(...params) {
@@ -12066,31 +12085,17 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   // Not implemented
   // border directions (only border bottom, ....)
 
-  //* bgColor (primary, secondary, success, info, warning, danger, light, dark)
-  //* textColor (primary, secondary, success, info, warning, danger, light, dark)
-  //* borderRadius (xs, sm, md, lg, xl)
-  //* borderColor (primary, secondary, success, info, warning, danger, light, dark)
-  //* borderSize (xs, sm, md, lg, xl)
-  //* d(flex, inline, block, grid, contents, inline-flex, inline-block, none)
-  //* dXs (flex, inline, block, grid, contents, inline-flex, inline-block, none)
-  //* dSm (flex, inline, block, grid, contents, inline-flex, inline-block, none)
-  //* dMd (flex, inline, block, grid, contents, inline-flex, inline-block, none)
-  //* dLg (flex, inline, block, grid, contents, inline-flex, inline-block, none)
-  //* dXl (flex, inline, block, grid, contents, inline-flex, inline-block, none)
-  //* align (start, center, end, baseline, stretch)
-  //* alignSelf (start, center, end, baseline, stretch)
-  //* justify (start, center, end, between, evenly, around)
-  //* justifySelf (start, center, end, between, evenly, around)
-  //* flexDirection (row, column, row-reverse, column-reverse)
-  //* flexDirectionXs (row, column, row-reverse, column-reverse)
-  //* flexDirectionSm (row, column, row-reverse, column-reverse)
-  //* flexDirectionMd (row, column, row-reverse, column-reverse)
-  //* flexDirectionLg (row, column, row-reverse, column-reverse)
-  //* flexDirectionXl (row, column, row-reverse, column-reverse)
-  //* gap (0, sm, md, lg, xl)
-  //* wrap (true, false)
-  //* w (width) (0, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl, 6xl, auto, 50, 100)
-  //* h (height) (0, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl, 6xl, auto, 50, 100)
+        //* bgColor (primary, secondary, success, info, warning, danger, light, dark, base)
+        //* textColor (primary, secondary, success, info, warning, danger, light, dark, base)
+        //* borderRadius (xs, sm, md, lg, xl)
+        //* borderColor (primary, secondary, success, info, warning, danger, light, dark)
+        //* borderSize (xs, sm, md, lg, xl)
+
+        //* align (start, center, end, baseline, stretch)
+        //* alignSelf (start, center, end, baseline, stretch)
+        //* justify (start, center, end, between, evenly, around)
+        //* justifySelf (start, center, end, between, evenly, around)
+
 
   const View = Base({
     render($props, $slots) {
@@ -12184,7 +12189,6 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         borderRadius,
       };
 
-      console.log({cssProps});
       const cssAttributes = {};
 
       for (let prop in cssProps) {
@@ -12206,8 +12210,6 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       }
       for (let prop in viewCssProps) {
         if (typeof viewCssProps[prop] !== "undefined") {
-          console.log('add this prop: ', prop);
-
           if(prop.startsWith('$')) continue;
           if (viewCssProps[prop] === true) {
             cssAttributes[classname("view-" + prop)] = "";
@@ -12216,7 +12218,6 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           }
         }
         if (typeof $props['$' + prop] !== "undefined") {
-          console.log('add this prop: $' + prop);
 
           cssAttributes[classname('bind') + ':' + classname("view-" + prop)] = $props['$' + prop];
         }
@@ -12242,7 +12243,9 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           delete props[key];
         } else if (key.startsWith("$")) {
           if (key === "$if") {
-            props["u-if"] = props[key];
+            const uif = $props[key];
+            delete $props[key];
+            return View({tag: 'template', 'u-if': uif}, View($props, $slots))
           } else if (key === "$text") {
             props["u-text"] = props[key];
           } else if (key === "$show") {
@@ -12252,7 +12255,9 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           } else if (key === "$html") {
             props["u-html"] = props[key];
           } else if (key === "$for") {
-            props["u-for"] = props[key];
+            const ufor = $props[key];
+            delete $props[key];
+            return View({tag: 'template', 'u-for': ufor}, View($props, $slots))
           } else if (key === "$model") {
             props["u-model"] = props[key];
           } else {
@@ -12266,68 +12271,66 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         }
       }
 
-      if(tagName === 'input') {
-        console.log({props});
-      }
-      return tag(tagName, props, $slots);
+      return tag(tagName, props, $slots.filter(Boolean));
     },
   });
 
   const Icon = Base({
-    render({ $name, name, size, color, ...restProps }, slots) {
-      const result = View({
-        ...restProps,
-        tag: "span",
-        component: "icon",
-        cssProps: { size },
-        textColor: color,
-        name,
-        $name
+    render($props, slots) {
+      const { props, restProps, cssProps } = extract($props, {
+        props: {
+          component: "icon",
+          tag: "span",
+          name: undefined,
+        },
+        cssProps: { size: "md", color: undefined },
       });
-      return result;
+
+      return View({
+        ...props,
+        cssProps,
+        ...restProps,
+      });
     },
   });
 
   const Alert$1 = Base({
     render($props, $slots) {
-      const [props, restProps] = extract($props, {
+      const {component, icon, title, dismissible, alertProps, iconProps, restProps, cssProps} = extract($props, {
         component: "alert",
-        duration: 5000,
+        alertProps: {
+          component: "alert",
+          duration: 5000,
+        },
+        iconProps: {
+          color: 'primary',
+          icon: undefined
+          // 
+        },
         icon: undefined,
-        dismissible: false,
         title: undefined,
+        dismissible: undefined,
         cssProps: {
           autoClose: false,
           open: true,
           color: "primary",
         },
       });
-      const component = props.component;
 
-      const alertProps = {
-        ...restProps,
-        component: props.component,
-        duration: props.autoClose ? props.duration : undefined,
-        cssProps: props.cssProps,
-      };
+      iconProps.component = component + '-icon';
+      iconProps.name = iconProps.icon;
+      delete iconProps['icon'];
 
-      const iconProps = {
-        [classname(component + "-icon")]: "",
-        color: props.cssProps.color,
-        $color: props.cssProps.$color,
-        name: props.icon,
-        $name: props.$icon,
-      };
 
-      return View(alertProps, [
+      return View({...alertProps, cssProps, ...restProps}, [
         View({ component: component + "-header" }, [
-          props.icon ? Icon(iconProps) : [],
-          View({ component: component + "-title" }, props.title ?? ""),
+          icon ? Icon(iconProps) : [],
+          View({ component: component + "-title" }, title ?? ""),
           
-            View(
-              { tag: "button", $show: props.dismissible, component: component + "-close" },
+            dismissible ? View(
+              { tag: "button", component: component + "-close" },
               Icon({ name: "x" })
-            ),
+            ) : [],
         ]),
         ($slots.toString() !== "" &&
           View({ component: component + "-content" }, $slots)) ||
@@ -12364,9 +12367,11 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       Alpine.directive('alert-auto-close', (el) => {
           Alpine.bind(el, {
               'u-init'() {
+                  console.log('set timeout');
                   setTimeout(() => {
+                      console.log('close', el);
                       this.$data.isOpen = false;
-                  }, +el.getAttribute('duration') ?? 5000);
+                  }, el.hasAttribute('duration') ? +el.getAttribute('duration') : 5000);
               }
           });
       });
@@ -12374,14 +12379,14 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       Alpine.magic('alert', (el) => {
           
 
-          const alert = (name, {title, icon = 'check', content = '', ...restProps}) => {
+          const alert = (name, {title, icon = 'check', dismissible = true, content = '', ...restProps}) => {
               let container = document.querySelector(`[u-alert-container][name="${name}"]`);
 
               // first container
               if(!name) container = document.querySelector('[u-alert-container]');
 
               const al = document.createElement('div');
-              al.innerHTML = Alert$1({title, icon, ...restProps}, content);
+              al.innerHTML = Alert$1({title, icon, dismissible, ...restProps}, content);
 
               setTimeout(() => {
                   container.appendChild(al);
@@ -24057,14 +24062,13 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     Alert(Alpine);
     Popup(Alpine);
     ClientSideRouting(Alpine);
-    Select(Alpine);
     Input(Alpine);
     Textarea(Alpine);
     Form(Alpine);
     Accordion(Alpine);
     Switch(Alpine);
     Icon$1(Alpine);
-    AutoComplete(Alpine);
+    Autocomplete(Alpine);
     Modal(Alpine);
     Tabs(Alpine);
     Dropdown(Alpine);

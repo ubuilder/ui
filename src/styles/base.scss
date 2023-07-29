@@ -1,91 +1,72 @@
+@function tint($color, $percentage) {
+  @return mix(white, $color, $percentage * 1%);
+}
+@function shade($color, $percentage) {
+  @return mix(black, $color, $percentage * 1%);
+}
+
+$theme-colors: (
+primary: #2677e1,
+secondary: #65758b,
+success: #5dae48,
+error: #b93b3b,
+warning: #f6a50e,
+info: #48a2ae,
+);
+
 /* #region Root */
 :root, [u-view-theme="light"] {
-  --color-primary-100: #c0d6f1;
-  --color-primary-200: #97bced;
-  --color-primary-300: #7fb0e8;
-  --color-primary-400: #5593e6;
-  --color-primary-500: #2677e1;
-  --color-primary-600: #1d5aaa;
-  --color-primary-700: #16519f;
-  --color-primary-content: var(--color-light-100);
 
-  --color-secondary-100: #c6d0dc;
-  --color-secondary-200: #a5b4c8;
-  --color-secondary-300: #8396af;
-  --color-secondary-400: #7686a0;
-  --color-secondary-500: #65758b;
-  --color-secondary-600: #576679;
-  --color-secondary-700: #4a5869;
-  --color-secondary-content: var(--color-light-100);
+  @each $color, $value in $theme-colors {
+    @debug $color, $value;
+    --color-#{$color}-100: #{tint($value, 80)};
+    --color-#{$color}-200: #{tint($value, 60)};
+    --color-#{$color}-300: #{tint($value, 40)};
+    --color-#{$color}-400: #{tint($value, 20)};
+    --color-#{$color}-500: #{$value};
+    --color-#{$color}-600: #{shade($value, 20)};
+    --color-#{$color}-700: #{shade($value, 40)};
 
-  --color-success-100: #cbe6c4;
-  --color-success-200: #a8e299;
-  --color-success-300: #8ed27d;
-  --color-success-400: #74c061;
-  --color-success-500: #5dae48;
-  --color-success-600: #428d2f;
-  --color-success-700: #347624;
-  --color-success-content: var(--color-light-100);
+    --color-#{$color}-800: var(--color-light-100);
+    --color-#{$color}-900: var(--color-light-200);
+  }
 
-  --color-error-100: #e7c0c0;
-  --color-error-200: #e69b9b;
-  --color-error-300: #d67b7b;
-  --color-error-400: #ca6161;
-  --color-error-500: #b93b3b;
-  --color-error-600: #872b2b;
-  --color-error-700: #752626;
-  --color-error-content: var(--color-light-100);
+  --color-light-100: #f4f4f4;
+  --color-light-200: #ffffff;
+  --color-light-300: #e5e7e8;
+  --color-light-400: #ced4da;
+  --color-light-500: #bec4cb;
+  --color-light-600: #b0b5bb;
+  --color-light-700: #adb1be;
 
-  --color-warning-100: #f4daa7;
-  --color-warning-200: #f7c560;
-  --color-warning-300: #eeb84b;
-  --color-warning-400: #f6af2a;
-  --color-warning-500: #f6a50e;
-  --color-warning-600: #da960e;
-  --color-warning-700: #cd8f13;
-  --color-warning-content: var(--color-light-100);
-
-  --color-info-100: #b6ebf2;
-  --color-info-200: #8be7f3;
-  --color-info-300: #76d2de;
-  --color-info-400: #60bdc9;
-  --color-info-500: #48a2ae;
-  --color-info-600: #237782;
-  --color-info-700: #29838f;
-  --color-info-content: var(--color-light-100);
-
+  --color-light-800: #494b4f;
+  --color-light-900: #2d3030;
+  
   --color-dark-100: #0e1824;
   --color-dark-200: #121e2d;
   --color-dark-300: #162436;
   --color-dark-400: #1d2d42;
+  --color-dark-500: #182433;
+  --color-dark-600: #1e202c;
+  --color-dark-700: #1a203b;
+  
+  --color-dark-800: #c2c7d5;
+  --color-dark-900: #dadbe1;
 
-  // disabled (opacity: 0.5)
-
-  --color-dark-700: #9599ad;
-  --color-dark-800: #a6b0cf;
-  --color-dark-900: #c3cbe4;
-
-  --color-light-100: #f8f8f8;
-  --color-light-200: #ffffff;
-  --color-light-300: #e9ebec;
-  --color-light-400: #ced4da;
-
-  --color-light-700: #82848d;
-  --color-light-800: #6c7286;
-  --color-light-900: #495057;
 
   --color-base-100: var(--color-light-100);
   --color-base-200: var(--color-light-200);
   --color-base-300: var(--color-light-300);
   --color-base-400: var(--color-light-400);
-
+  --color-base-500: var(--color-light-500);
+  --color-base-600: var(--color-light-600);
   --color-base-700: var(--color-light-700);
   --color-base-800: var(--color-light-800);
   --color-base-900: var(--color-light-900);
 }
 
 :root {
-  --size-base: 1.5rem;
+  --size-base: 1rem;
   --size-xxs: calc(0.25 * var(--size-base));
   --size-xs: calc(0.5 * var(--size-base));
   --size-sm: calc(0.75 * var(--size-base));
@@ -114,19 +95,25 @@
   --color-base-200: var(--color-dark-200);
   --color-base-300: var(--color-dark-300);
   --color-base-400: var(--color-dark-400);
-
+  --color-base-500: var(--color-dark-500);
+  --color-base-600: var(--color-dark-600);
   --color-base-700: var(--color-dark-700);
   --color-base-800: var(--color-dark-800);
   --color-base-900: var(--color-dark-900);
 
-  --color-primary-100: #0e2038;
-  --color-primary-200: #193354;
-  --color-primary-300: #234772;
-  --color-primary-400: #3c6cab;
-  --color-primary-500: #2677e1;
-  --color-primary-600: #1d5aaa;
-  --color-primary-700: #16519f;
+  @each $color, $value in $theme-colors {
+    --color-#{$color}-100: #{shade($value, 70)};
+    --color-#{$color}-200: #{shade($value, 60)};
+    --color-#{$color}-300: #{shade($value, 40)};
+    --color-#{$color}-400: #{shade($value, 20)};
+    --color-#{$color}-500: #{$value};
+    --color-#{$color}-600: #{tint($value, 10)};
+    --color-#{$color}-700: #{tint($value, 20)};
+    --color-#{$color}-800: var(--color-light-100);
+    --color-#{$color}-900: var(--color-light-200);
 
+  }
+  
 
   background-color: var(--color-base-100);
   color: var(--color-base-900);
@@ -137,7 +124,8 @@
   --color-base-200: var(--color-light-200);
   --color-base-300: var(--color-light-300);
   --color-base-400: var(--color-light-400);
-
+  --color-base-500: var(--color-light-500);
+  --color-base-600: var(--color-light-600);
   --color-base-700: var(--color-light-700);
   --color-base-800: var(--color-light-800);
   --color-base-900: var(--color-light-900);

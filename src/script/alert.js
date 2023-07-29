@@ -28,9 +28,11 @@ export function Alert(Alpine) {
     Alpine.directive('alert-auto-close', (el) => {
         Alpine.bind(el, {
             'u-init'() {
+                console.log('set timeout')
                 setTimeout(() => {
+                    console.log('close', el)
                     this.$data.isOpen = false
-                }, +el.getAttribute('duration') ?? 5000)
+                }, el.hasAttribute('duration') ? +el.getAttribute('duration') : 5000)
             }
         })
     })
@@ -38,14 +40,14 @@ export function Alert(Alpine) {
     Alpine.magic('alert', (el) => {
         
 
-        const alert = (name, {title, icon = 'check', content = '', ...restProps}) => {
+        const alert = (name, {title, icon = 'check', dismissible = true, content = '', ...restProps}) => {
             let container = document.querySelector(`[u-alert-container][name="${name}"]`)
 
             // first container
             if(!name) container = document.querySelector('[u-alert-container]');
 
             const al = document.createElement('div')
-            al.innerHTML = AlertComponent({title, icon, ...restProps}, content)
+            al.innerHTML = AlertComponent({title, icon, dismissible, ...restProps}, content)
 
             setTimeout(() => {
                 container.appendChild(al)

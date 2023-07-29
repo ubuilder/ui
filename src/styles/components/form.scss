@@ -7,6 +7,30 @@
   color: var(--color-base-900);
 }
 
+[u-form-field-input] {
+  --form-field-size: var(--size-md);
+
+  background-color: var(--color-base-200);
+  padding: var(--size-xxs) var(--size-sm);
+  border: 1px solid var(--color-base-300);
+  border-radius: calc(var(--size-xxs) / 2);
+  color: var(--color-base-900);
+
+  font-size: calc(var(--form-field-size) * 0.8);
+  line-height: var(--form-field-size);
+  height: calc(var(--form-field-size) * 2);
+
+  width: 100%;
+}
+
+[u-form-field-focus] {
+  border: 1px solid var(--color-primary-300);
+  outline: none;
+  box-shadow: 0 0 0px 4px var(--color-primary-100);
+}
+
+
+
 // [u-form-field] {
 //   margin-bottom: var(--size-xs);
 // }
@@ -44,8 +68,7 @@
 
 
 [u-checkbox-input]:focus ~ [u-checkbox-text]::before {
-
-  box-shadow: 0 0 0 3px var(--color-primary-200);
+  @extend [u-form-field-focus];
 }
 
 [u-checkbox-text]::after {
@@ -87,7 +110,7 @@
 /* The switch - the box around the slider */
 [u-switch] {
   --switch-size: var(--size-md);
-  --switch-knob-size: calc(var(--switch-size) - 10px);
+  --switch-knob-size: calc(var(--switch-size) - var(--size-xxs));
 
   position: relative;
   display: inline-block;
@@ -104,7 +127,6 @@
   right: 0;
   bottom: 0;
   background-color: var(--color-base-400);
-  border: 1px solid var(--color-primary-200);
   transition: .3s;
 }
 
@@ -114,10 +136,9 @@
   content: "";
   height: var(--switch-knob-size);
   width: var(--switch-knob-size);
-  left: 4px;
-  bottom: 4px;
+  left: calc(var(--size-xxs) / 2);
+  bottom: calc(var(--size-xxs) / 2);
 
-  border: 1px solid bar(--color-base-400);
   background-color: var(--color-light-200);
   transition: .3s;
 }
@@ -130,11 +151,12 @@
   background-color: var(--color-primary-500);
 }
 [u-switch-input]:checked + [u-switch-text]::before {
-  background-color: var(--color-primary-content);
+  background-color: var(--color-primary-800);
 }
 
 [u-switch-input]:focus + [u-switch-text] {
-  box-shadow: 0 0 0 3px var(--color-primary-200);
+  @extend [u-form-field-focus];
+  border: none;
 }
 
 [u-switch-input]:checked + [u-switch-text]:before {
@@ -165,13 +187,6 @@
   margin-bottom: var(--size-xxs);
   margin-right: var(--size-sm);
 }
-
-[u-checkbox-inline] {
-  display: inline-block;
-  margin-right: var(--size-sm);
-}
-
-
 
 [u-checkbox-group] {
   display: flex;
@@ -227,8 +242,8 @@
 
 
 [u-radio-input]:focus ~ [u-radio-text]::before {
+  @extend [u-form-field-focus];
 
-  box-shadow: 0 0 0 3px var(--color-primary-200);
 }
 
 [u-radio-text]::after {
@@ -278,13 +293,6 @@
   margin-right: var(--size-sm);
 }
 
-[u-radio-inline] {
-  display: inline-block;
-  margin-right: var(--size-sm);
-}
-
-
-
 [u-radio-group] {
   display: flex;
   flex-direction: column;
@@ -294,57 +302,26 @@
   flex-direction: row;
 }
 
-
-
-[u-radio-group-input] {
-  //   margin-bottom: var(--size-md);
-
-}
-
 // input
 
-
-
 [u-input] {
-  --input-size: var(--size-md);
-  background-color: var(--color-base-200);
-  padding: var(--size-xxs) var(--size-sm);
-  border: 1px solid var(--color-base-400);
-  border-radius: calc(var(--size-xxs) / 2);
-  color: var(--color-base-900);
-
-  font-size: calc(var(--input-size) * 0.6);
-  line-height: var(--input-size);
-
-  width: 100%;
+  @extend [u-form-field-input]
 }
 [u-input-size-lg] {
-  --input-size: var(--size-lg);
+  --form-field-size: var(--size-lg);
 }
 
 [u-input]:focus {
-  background-color: var(--color-base-200);
-  outline: none;
-  box-shadow: 0 0 0px 4px var(--color-primary-200);
+  @extend [u-form-field-focus];
 }
+
 
 // Select
 
 
 [u-select] {
-  --input-size: var(--size-md);
-  
-  background-color: var(--color-base-200);
-  padding: var(--size-xxs) var(--size-sm);
-  border: 1px solid var(--color-base-400);
-  border-radius: calc(var(--size-xxs) / 2);
-  color: var(--color-base-900);
+  @extend [u-form-field-input];
 
-  font-size: calc(var(--input-size) * 0.6);
-  line-height: var(--input-size);
-  height: calc(var(--input-size) + calc(2 * var(--size-xxs)));
-
-  width: 100%;
 }
 [u-select-size="lg"] {
   --input-size: var(--size-lg);
@@ -352,6 +329,7 @@
 
 [u-select][multiple] {
   padding: 0;
+  min-height: calc(var(--form-field-size) * 2);
   height: auto;
 
   option {
@@ -362,10 +340,66 @@
 }
 
 [u-select]:focus {
-  background-color: var(--color-base-200);
-  outline: none;
-  box-shadow: 0 0 0px 4px var(--color-primary-200);
+  @extend [u-form-field-focus];  
+}
 
+@import "../../../node_modules/tom-select/src/scss/tom-select.scss";
+
+select[u-autocomplete] {
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+[u-autocomplete] {
+  @extend [u-form-field-input];
+  min-height: calc(2 * var(--form-field-size));
+  height: auto;
+  align-items: center;
+}
+
+[u-autocomplete-item] {
+  border-radius: calc(var(--size-xxs) / 2);
+  background: var(--color-base-400);
+  color: var(--color-base-900);
+  padding: 0 var(--size-xxs);
+  border: 1px solid var(--color-base-400);
+}
+
+[u-autocomplete-dropdown] {
+  color: var(--color-base-800);
+  border: 1px solid var(--color-base-400);
+  background: var(--color-base-200);
+}
+[u-autocomplete-dropdown-item-active] {
+  background-color: var(--color-base-300);
+  color: var(--color-base-900);
+}
+
+.ts-wrapper.full .ts-control, .ts-wrapper.single.input-active .ts-control {
+  background-color: var(--color-base-200);
+}
+
+// Autocomplete
+.ts-wrapper .ts-control {
+  @extend [u-autocomplete];
+}
+
+.ts-wrapper.focus .ts-control {
+  @extend [u-form-field-focus];
+}
+
+.ts-wrapper.multi .ts-control > div {
+  @extend [u-autocomplete-item];
+}
+
+.ts-dropdown {
+  @extend [u-autocomplete-dropdown];
+  // box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.ts-dropdown .active {
+  @extend [u-autocomplete-dropdown-item-active];
 }
 
 // Textarea
@@ -373,34 +407,22 @@
 
 [u-textarea] {
   
-  width: 100%;
-  background-color: var(--color-base-200);
-  padding: var(--size-xxs) var(--size-sm);
-  border: 1px solid var(--color-base-400);
-  border-radius: calc(var(--size-xxs) / 2);
-  color: var(--color-base-900);
-
-  font-size: calc(var(--size-md) * 0.6);
-  line-height: var(--size-md);
-
-  width: 100%;
+  @extend [u-form-field-input];
+  height: auto;
 }
 
 
 [u-textarea]:focus {
-  background-color: var(--color-base-200);
-  outline: none;
-  box-shadow: 0 0 0px 4px var(--color-primary-200);
+  @extend [u-form-field-focus];
 }
 
 // Code editor
 [u-code-editor] {
+  @extend [u-form-field-input];
+
   padding: 0 !important;
-  @extend [u-textarea];
 }
 
 [u-code-editor]:focus-within {
-  background-color: var(--color-base-200);
-  outline: none;
-  box-shadow: 0 0 0px 4px var(--color-primary-200);
+  @extend [u-form-field-focus];
 }
