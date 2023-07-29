@@ -2594,9 +2594,8 @@ select[u-autocomplete], .ts-wrapper select.ts-control {
 
 [u-dropdown-label] {
   display: flex;
-  box-shadow: 0 var(--size-xxs) var(--size-xxs) rgba(0, 0, 0, 0.15);
   cursor: pointer;
-  padding: var(--size-xs) var(--size-xxs);
+  padding: var(--size-xs) var(--size-xs);
   border: 1px solid var(--color-base-400);
   border-radius: var(--dropdown-border-radious);
 }
