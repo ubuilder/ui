@@ -4,43 +4,54 @@ import { Col, Container, Row } from "../../components/GridSystem.js";
 import { View } from "../../components/View.js";
 import { Badge, Card, CardBody } from "../../components/index.js";
 
+// done: true | false | '50'
+
 const components = {
-  accordion: { title: "Accordion", new: true },
-  alert: { title: "Alert" },
-  autocomplete: { title: "Autocomplete", new: true },
-  avatar: { title: "Avatar" },
-  badge: { title: "Badge", new: true },
-  breadcrumb: { title: "Breadcrumb" },
-  button: { title: "Button", updated: true },
-  card: { title: "Card" },
-  checkbox: { title: "Checkbox & Radio" },
-  codeeditor: { title: "Code Editor", soon: true },
-  divider: { title: "Divider" },
-  dropdown: { title: "Dropdown" },
-  form: { title: "Form", soon: true },
-  formfield: { title: "FormField", soon: true },
-  grid: { title: "Grid" },
-  icon: { title: "Icon" },
-  image: { title: "Image", soon: true },
-  input: { title: "Input", soon: true },
-  modal: { title: "Modal", new: true },
-  popover: { title: "Popover" },
-  progress: { title: "Progress" },
-  radio: { title: "Radio", soon: true },
-  select: { title: "Select", soon: true },
-  spinner: { title: "Spinner" },
-  switch: { title: "Switch" },
-  table: { title: "Table" },
-  tabs: { title: "Tabs" },
-  textarea: { title: "Textarea", soon: true },
-  tooltip: { title: "Tooltip" },
-  view: { title: "View" },
+  accordion: { title: "Accordion", new: true, done: true },
+  alert: { title: "Alert", done: true },
+  autocomplete: { title: "Autocomplete", new: true, done: true },
+  avatar: { title: "Avatar", done: true },
+  badge: { title: "Badge", new: true, done: true },
+  breadcrumb: { title: "Breadcrumb", done: false },
+  button: { title: "Button", updated: true, done: true },
+  card: { title: "Card", done: false },
+  checkbox: { title: "Checkbox & Radio", done: false },
+  colorpicker: {title: 'Colorpicker', soon: true, done: false},
+  codeeditor: { title: "Code Editor", soon: true, done: false },
+  divider: { title: "Divider", done: false },
+  dropdown: { title: "Dropdown", done: false },
+  datepicker: {title: 'Datepicker', soon: true, done: false},
+  fieldset: {title: 'Fieldset', soon: true},
+  'file-upload': {title: 'FileUpload & Dropzone', soon: true, done: false},
+  form: { title: "Form", soon: true, done: false },
+  formfield: { title: "FormField", soon: true, done: false },
+  grid: { title: "Grid", done: false },
+  header: {title: 'Header', done: false, soon: true},
+  icon: { title: "Icon", new: true, done: true },
+  image: { title: "Image", new: true, done: true },
+  input: { title: "Input", done: '50' },
+  modal: { title: "Modal", new: true, done: true },
+  offcanvas: {title: 'Offcanvas', soon: true},
+  popover: { title: "Popover", updated: true, done: true },
+  progress: { title: "Progress", done: true },
+  radio: { title: "Radio", done: '50' },
+  select: { title: "Select", done: '50' },
+  sidebar: {title: 'Sidebar', done: false, soon: true},
+  spinner: { title: "Spinner", done: true },
+  switch: { title: "Switch", updated: true, done: true },
+  table: { title: "Table", updated: true, done: true },
+  tabs: { title: "Tabs", updated: true, done: true },
+  'text-editor': {title: 'TextEditor', soon: true},
+  textarea: { title: "Textarea", new: true, done: true },
+  tooltip: { title: "Tooltip", done: true },
+  view: { title: "View", new: true, done: '50' },
 };
 
 export default ({ prefix }) => {
   function ComponentItems() {
     return Object.keys(components).map((key) =>
       Item({
+        done: components[key].done,
         disabled: components[key].soon,
         slug: key,
         text: components[key].title,
@@ -71,15 +82,23 @@ export default ({ prefix }) => {
     );
   }
 
-  function Item({ disabled, slug, text, tags = [] }) {
+  function Item({ done, disabled, slug, text, tags = [] }) {
+    const doneProps = done === true
+      ? { border: true, borderColor: "success-300" }
+      : done == "50"
+      ? { border: true, borderColor: "warning-300" }
+      : { style: 'box-shadow: 0 2px 6px -1px var(--color-error-300); border: 1px solid var(--color-error-400)' };
     return Col({ col: 12, colSm: 6, colLg: 4 }, [
       Card(
         {
-          tag: disabled ? 'span' : "a",
+          ...doneProps,
+          tag: disabled ? "span" : "a",
           d: "block",
           href: `${prefix}${slug}`,
-          onClick: disabled ? `$alert.info('there is no documentation for ${text} component yet!<br/><br/>Please come back later!', 'Page is not available')` : undefined,
-          style: "text-decoration: none; color: var(--color-base-900)",
+          onClick: disabled
+            ? `$alert.info('there is no documentation for ${text} component yet!<br/><br/>Please come back later!', 'Page is not available')`
+            : undefined,
+          style: (doneProps.style ?? '') + ";text-decoration: none; color: var(--color-base-900)",
         },
         [
           CardBody([
@@ -99,52 +118,52 @@ export default ({ prefix }) => {
       Container({ size: "xl", mx: "auto" }, [
         Row([
           Col([
-          View({ tag: "h1" }, "Components"),
-          View(
+            View({ tag: "h1" }, "Components"),
+            View(
+              {
+                tag: "h3",
+                mb: "lg",
+                mt: "xxs",
+                style: "color: var(--color-base-800); font-weight: 400",
+              },
+              "UI Components for NodeJS"
+            ),
+          ]),
+          Button(
             {
-              tag: "h3",
-              mb: "lg",
-              mt: "xxs",
-              style: "color: var(--color-base-800); font-weight: 400",
+              d: "none",
+              dXs: "inline-flex",
+              mt: "sm",
+              ms: "auto",
+              color: "dark",
+              "u-on:click": `el => document.body.setAttribute('u-view-theme', document.body.getAttribute('u-view-theme') === 'dark' ? 'light' : 'dark')`,
             },
-            "UI Components for NodeJS"
+            "Dark"
           ),
-          ]) ,     
-        Button(
-          {
-            d: 'none',
-            dXs: 'inline-flex',
-            mt: 'sm',
-            ms: 'auto',
-            color: "dark",
-            "u-on:click": `el => document.body.setAttribute('u-view-theme', document.body.getAttribute('u-view-theme') === 'dark' ? 'light' : 'dark')`,
-          },
-          "Dark"
-        ),
-      ])
-
+        ]),
       ])
     ),
     Container({ size: "xl", mx: "auto", my: "xl" }, [
-    // tag("a", { href: "/" }, "UBuilder"),
-  
-    View(
-      { mb: "md", mt: "sm", style: "line-height: var(--size-lg)" },
-      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi at numquam est ad unde. Quibusdam blanditiis tempora unde! Eum quam ex totam autem obcaecati fuga quidem dignissimos laudantium et? Nihil, consequatur voluptates reiciendis pariatur tenetur architecto cumque doloremque quas incidunt facilis exercitationem esse deleniti totam dolores dicta commodi suscipit eius."
-    ),
+      // tag("a", { href: "/" }, "UBuilder"),
 
-    Row([
-      Item({ slug: "installation", text: "Installation" }),
-      Item({ slug: "basics", text: "Basics" }),
-      Item({ slug: "colors", text: "Colors" }),
+      View(
+        { mb: "md", mt: "sm", style: "line-height: var(--size-lg)" },
+        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi at numquam est ad unde. Quibusdam blanditiis tempora unde! Eum quam ex totam autem obcaecati fuga quidem dignissimos laudantium et? Nihil, consequatur voluptates reiciendis pariatur tenetur architecto cumque doloremque quas incidunt facilis exercitationem esse deleniti totam dolores dicta commodi suscipit eius."
+      ),
 
-      Heading({ title: "Components" }),
+      Row([
+        Item({ slug: "installation", text: "Installation" }),
+        Item({ slug: "basics", text: "Basics" }),
+        Item({ slug: "colors", text: "Colors" }),
 
-      ComponentItems(),
+        Heading({ title: "Components" }),
 
-      Heading({ title: "Examples" }),
-      ExampleItems(),
+        ComponentItems(),
+
+        Heading({ title: "Examples" }),
+        ExampleItems(),
+      ]),
+      AlertContainer({ placement: "top-end" }),
     ]),
-    AlertContainer({placement: 'top-end'})
-  ])];
+  ];
 };

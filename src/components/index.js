@@ -5,7 +5,6 @@ export * from "./Button.js";
 export * from "./Card.js";
 export * from "./Checkbox.js";
 export * from "./GridSystem.js";
-export * from "./For.js";
 export * from "./Icon.js";
 export * from "./Input.js";
 export * from "./Form.js";
@@ -24,6 +23,8 @@ export * from "./Select.js";
 export * from "./Switch.js";
 export * from "./Textarea.js";
 export * from "./Tabs.js";
+export * from "./Image.js";
+
 export * from "./Dropdown.js";
 export * from "./Autocomplete.js";
 export * from "./Tooltip.js";

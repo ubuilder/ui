@@ -1,126 +1,69 @@
-import { Base } from "../utils.js";
+import { Base, extract } from "../utils.js";
 import { View } from "./View.js";
 
-/**
-* @type {import('.').Tabs}
-*/
 export const Tabs = Base({
-  render($props, $slots){
-    const {
-      component = "tabs",
-      size = "md",
-      ...restProps
-    } = $props;
+  render($props, $slots) {
+    const { component, restProps } = extract($props, {
+      component: "tabs",
+    });
 
-    const props = {
-      ...restProps,
-      component,
-      cssProps: {
-        size,
+    return View(
+      {
+        ...restProps,
+        component,
       },
-    };
-
-    return View(props, $slots);
-  }
+      $slots
+    );
+  },
 });
 
-/**
-* @type {import('.').TabsList}
-*/
 export const TabsList = Base({
   render($props, $slots) {
-    const {
-      component = "tabs-list",
-      horizontal = true,
-      size = "md",
-      ...restProps
-    } = $props;
+    const { component, restProps } = extract($props, {
+      component: "tabs-list",
+    });
 
-    const props = {
-      ...restProps,
-      component,
-      cssProps: {
-        horizontal,
-        size,
-      },
-    };
-
-    return View(props, $slots)
-  }
+    return View({ component, ...restProps }, $slots);
+  },
 });
 
-/**
-* @type {import('.').TabsPanel}
-*/
 export const TabsPanel = Base({
-  render($props, $slots){
-    const {
-      component = "tabs-panel",
-      size = "md",
-      ...restProps
-    } = $props;
+  render($props, $slots) {
+    const { component, restProps } = extract($props, {
+      component: "tabs-panel",
+    });
 
-    const props = {
-      ...restProps,
-      component,
-      cssProps: {
-        size,
-      },    
-    }
-
-    return View(props, $slots)
-  }
+    return View({ component, ...restProps }, $slots);
+  },
 });
 
-/**
-* @type {import('.').TabsItem}
-*/
 export const TabsItem = Base({
   render($props, $slots) {
-    const {
-      component = "tabs-item",
-      label ,
-      active = false,
-      size = "md",
-      ...restProps
-    } = $props;
-
-    const props = {
-      ...restProps,
-      component,
-      tag: 'button',
+    const { props, cssProps, restProps } = extract($props, {
+      props: {
+        component: "tabs-item",
+        tag: "button",
+        type: 'button',
+        disabled: false,
+      },
       cssProps: {
-        size,
-        active
-      },    
-    }
-    if(active)props['u-tabs-item-active'] = "true"
+        active: false,
+        disabled: false
+      },
+    });
 
-    return View(props, $slots);
-  }
+    return View({ ...props, cssProps, ...restProps }, $slots);
+  },
 });
 
-/**
-* @type {import('.').TabsContent}
-*/
 export const TabsContent = Base({
   render($props, $slots) {
-    const {
-      component = "tabs-content",
-      size = "md",
-      ...restProps
-    } = $props;
-
-    const props = {
-      ...restProps,
-      component,
-      cssProps: {
-        size,
+    const { props, cssProps, restProps } = extract($props, {
+      props: {
+        component: "tabs-content",
       },
-    };
+    });
 
-    return View(props, $slots);
-  }
+    return View({ ...props, cssProps, ...restProps }, $slots);
+  },
 });
-
-

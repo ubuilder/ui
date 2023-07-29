@@ -66,7 +66,7 @@ info: #48a2ae,
 }
 
 :root {
-  --size-base: 1.5rem;
+  --size-base: 1rem;
   --size-xxs: calc(0.25 * var(--size-base));
   --size-xs: calc(0.5 * var(--size-base));
   --size-sm: calc(0.75 * var(--size-base));
@@ -95,7 +95,8 @@ info: #48a2ae,
   --color-base-200: var(--color-dark-200);
   --color-base-300: var(--color-dark-300);
   --color-base-400: var(--color-dark-400);
-
+  --color-base-500: var(--color-dark-500);
+  --color-base-600: var(--color-dark-600);
   --color-base-700: var(--color-dark-700);
   --color-base-800: var(--color-dark-800);
   --color-base-900: var(--color-dark-900);

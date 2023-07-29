@@ -11845,13 +11845,15 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           delete restProps[key];
         }
         if (allProps["$" + key]) {
-          result["$" + key] = allProps["$" + key] ?? names["$" + key];
+          result["$" + key] = allProps["$" + key];
           delete restProps["$" + key];
         }
       }
     });
 
-    return [result, restProps];
+    result.restProps = restProps;
+
+    return result;
   }
 
   function getPropsAndSlots(...params) {
@@ -12082,31 +12084,17 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   // Not implemented
   // border directions (only border bottom, ....)
 
-  //* bgColor (primary, secondary, success, info, warning, danger, light, dark)
-  //* textColor (primary, secondary, success, info, warning, danger, light, dark)
-  //* borderRadius (xs, sm, md, lg, xl)
-  //* borderColor (primary, secondary, success, info, warning, danger, light, dark)
-  //* borderSize (xs, sm, md, lg, xl)
-  //* d(flex, inline, block, grid, contents, inline-flex, inline-block, none)
-  //* dXs (flex, inline, block, grid, contents, inline-flex, inline-block, none)
-  //* dSm (flex, inline, block, grid, contents, inline-flex, inline-block, none)
-  //* dMd (flex, inline, block, grid, contents, inline-flex, inline-block, none)
-  //* dLg (flex, inline, block, grid, contents, inline-flex, inline-block, none)
-  //* dXl (flex, inline, block, grid, contents, inline-flex, inline-block, none)
-  //* align (start, center, end, baseline, stretch)
-  //* alignSelf (start, center, end, baseline, stretch)
-  //* justify (start, center, end, between, evenly, around)
-  //* justifySelf (start, center, end, between, evenly, around)
-  //* flexDirection (row, column, row-reverse, column-reverse)
-  //* flexDirectionXs (row, column, row-reverse, column-reverse)
-  //* flexDirectionSm (row, column, row-reverse, column-reverse)
-  //* flexDirectionMd (row, column, row-reverse, column-reverse)
-  //* flexDirectionLg (row, column, row-reverse, column-reverse)
-  //* flexDirectionXl (row, column, row-reverse, column-reverse)
-  //* gap (0, sm, md, lg, xl)
-  //* wrap (true, false)
-  //* w (width) (0, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl, 6xl, auto, 50, 100)
-  //* h (height) (0, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl, 6xl, auto, 50, 100)
+        //* bgColor (primary, secondary, success, info, warning, danger, light, dark, base)
+        //* textColor (primary, secondary, success, info, warning, danger, light, dark, base)
+        //* borderRadius (xs, sm, md, lg, xl)
+        //* borderColor (primary, secondary, success, info, warning, danger, light, dark)
+        //* borderSize (xs, sm, md, lg, xl)
+
+        //* align (start, center, end, baseline, stretch)
+        //* alignSelf (start, center, end, baseline, stretch)
+        //* justify (start, center, end, between, evenly, around)
+        //* justifySelf (start, center, end, between, evenly, around)
+
 
   const View = Base({
     render($props, $slots) {
@@ -12254,7 +12242,9 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           delete props[key];
         } else if (key.startsWith("$")) {
           if (key === "$if") {
-            props["u-if"] = props[key];
+            const uif = $props[key];
+            delete $props[key];
+            return View({tag: 'template', 'u-if': uif}, View($props, $slots))
           } else if (key === "$text") {
             props["u-text"] = props[key];
           } else if (key === "$show") {
@@ -12264,7 +12254,9 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           } else if (key === "$html") {
             props["u-html"] = props[key];
           } else if (key === "$for") {
-            props["u-for"] = props[key];
+            const ufor = $props[key];
+            delete $props[key];
+            return View({tag: 'template', 'u-for': ufor}, View($props, $slots))
           } else if (key === "$model") {
             props["u-model"] = props[key];
           } else {
@@ -12278,63 +12270,63 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         }
       }
 
-      return tag(tagName, props, $slots);
+      return tag(tagName, props, $slots.filter(Boolean));
     },
   });
 
   const Icon = Base({
-    render({ $name, name, size, color, ...restProps }, slots) {
-      const result = View({
-        ...restProps,
-        tag: "span",
-        component: "icon",
-        cssProps: { size },
-        textColor: color,
-        name,
-        $name
+    render($props, slots) {
+      const { props, restProps, cssProps } = extract($props, {
+        props: {
+          component: "icon",
+          tag: "span",
+          name: undefined,
+        },
+        cssProps: { size: "md", color: undefined },
       });
-      return result;
+
+      return View({
+        ...props,
+        cssProps,
+        ...restProps,
+      });
     },
   });
 
   const Alert$1 = Base({
     render($props, $slots) {
-      const [props, restProps] = extract($props, {
+      const {component, icon, title, dismissible, alertProps, iconProps, restProps, cssProps} = extract($props, {
         component: "alert",
-        duration: 5000,
+        alertProps: {
+          component: "alert",
+          duration: 5000,
+        },
+        iconProps: {
+          color: 'primary',
+          icon: undefined
+          // 
+        },
         icon: undefined,
-        dismissible: false,
         title: undefined,
+        dismissible: undefined,
         cssProps: {
           autoClose: false,
           open: true,
           color: "primary",
         },
       });
-      const component = props.component;
 
-      const alertProps = {
-        ...restProps,
-        component: props.component,
-        duration: props.autoClose ? props.duration : undefined,
-        cssProps: props.cssProps,
-      };
+      iconProps.component = component + '-icon';
+      iconProps.name = iconProps.icon;
+      delete iconProps['icon'];
 
-      const iconProps = {
-        [classname(component + "-icon")]: "",
-        color: props.cssProps.color,
-        $color: props.cssProps.$color,
-        name: props.icon,
-        $name: props.$icon,
-      };
 
-      console.log({props}, {dismissible: props.dismissible});
-      return View(alertProps, [
+      return View({...alertProps, cssProps, ...restProps}, [
         View({ component: component + "-header" }, [
-          props.icon ? Icon(iconProps) : [],
-          View({ component: component + "-title" }, props.title ?? ""),
+          icon ? Icon(iconProps) : [],
+          View({ component: component + "-title" }, title ?? ""),
           
-            props.dismissible ? View(
+            dismissible ? View(
               { tag: "button", component: component + "-close" },
               Icon({ name: "x" })
             ) : [],

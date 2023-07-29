@@ -55,10 +55,13 @@ Alert(
 ## AutoClose
 
 ```js
-Alert(
-  { autoClose: true, title: "this will close in 5 seconds", icon: "check" },
+[
+  "Reload page if there is no alert here<br/>",
+  Alert(
+  { id: 'auto-close-alert', autoClose: true, title: "this will close in 5 seconds", icon: "check" },
   "Description of alert"
-);
+)
+]
 ```
 
 ## Alert Container (static)

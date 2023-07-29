@@ -512,11 +512,34 @@ declare const Textarea: FormField<{
 }>;
 
 /**
+ * Popover Component
+ */
+declare const Popover: View<{
+  trigger: 'click' | 'hover';
+  placement: Placement;
+  arrow: boolean;
+  arrowMargin: number;
+  flip: boolean;
+  shift: boolean;
+  focusAble: boolean;
+  persistent: boolean;
+  size: string,
+  target: string,
+  offset: number,
+  margin: number,
+}>
+
+/**
  * Tooltip Component
  */
 declare const Tooltip: View<{
   trigger: "click" | "hover";
   placement: Placement;
+  arrow: boolean;
+  arrowMargin: number;
+  margin: number;
+  offset: number;
+  target: string;
 }>;
 
 /**

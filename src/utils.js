@@ -23,13 +23,15 @@ export function extract(allProps, names) {
         delete restProps[key];
       }
       if (allProps["$" + key]) {
-        result["$" + key] = allProps["$" + key] ?? names["$" + key];
+        result["$" + key] = allProps["$" + key];
         delete restProps["$" + key];
       }
     }
   });
 
-  return [result, restProps];
+  result.restProps = restProps
+
+  return result;
 }
 
 export function getPropsAndSlots(...params) {
