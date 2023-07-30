@@ -10708,7 +10708,6 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         el.parentNode;
       const floatingEl = el;
 
-      console.log(target);
       target.setAttribute("u-tooltip-reference", "");
 
       const offsetValue = el.getAttribute("u-tooltip-offset") ?? 0;
@@ -23147,7 +23146,6 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       
 
       quill.on("text-change", (delta, old, source) => {
-        console.log("text-change fired");
         const innerHtml = quill.root.innerHTML;
         innerHtml === "<p><br></p>"
           ? (textarea.value = "")
