@@ -18,7 +18,7 @@ export function DocPage(
     rel: "stylesheet",
     href: prefix + "styles.css",
   });
-  const title = View({ tag: "title" }, name + " | UBuilder Component");
+  const title = View({ tag: "title" }, name + " | uLibs Component");
 
   const customCss = `
   .header {
