@@ -70,6 +70,9 @@ export function DocPage(
             ]),
             // Col([Button({ link: true, p: 0, onClick: "$routing.back()" }, Icon({name: 'chevron-left'}))]),
             Col({ ms: "auto" }, [
+              Button({ me: 'xxs', color: 'dark', href: 'https://github.com/ubuilder/ui'}, [
+                Icon({name: 'brand-github'})
+              ]),
               Button(
                 {
                   class: "hide-dark",
