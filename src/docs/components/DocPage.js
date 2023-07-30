@@ -42,7 +42,7 @@ export function DocPage(
         
         setTheme((localStorage.getItem('theme') ?? 'light'))
         </script>`,
-        
+
         ...(restProps.htmlHead ?? []),
         View({ tag: "meta", charset: "UTF-8" }),
         View({
@@ -52,7 +52,7 @@ export function DocPage(
         }),
         title,
         style,
-      `<style>[u-view-theme="dark"] .hide-dark {display: none} .hide-light {display: none} [u-view-theme="dark"] .hide-light {display: block}</style>`,
+        `<style>[u-view-theme="dark"] .hide-dark {display: none} .hide-light {display: none} [u-view-theme="dark"] .hide-light {display: block}</style>`,
         // View({ tag: "script", src: "//unpkg.com/alpinejs", defer: true }),
         View({ tag: "style" }, customCss),
       ],
@@ -69,26 +69,33 @@ export function DocPage(
               ),
             ]),
             // Col([Button({ link: true, p: 0, onClick: "$routing.back()" }, Icon({name: 'chevron-left'}))]),
-            Col({ ms: "auto" }, [
-              Button({ me: 'xxs', color: 'dark', href: 'https://github.com/ubuilder/ui'}, [
-                Icon({name: 'brand-github'})
+            Col({ ms: "auto", d: 'flex' }, [
+              Button(
+                {
+                  me: "xxs",
+                  color: "dark",
+                  href: "https://github.com/ubuilder/ui",
+                },
+                [Icon({ name: "brand-github" })]
+              ),
+              View({d: 'flex'}, [
+                Button(
+                  {
+                    class: "hide-dark",
+                    ms: "auto",
+                    "u-on:click": `setTheme('dark')`,
+                  },
+                  Icon({ name: "moon" })
+                ),
+                Button(
+                  {
+                    class: "hide-light",
+                    ms: "auto",
+                    "u-on:click": `setTheme('light')`,
+                  },
+                  Icon({ name: "sun" })
+                ),
               ]),
-              Button(
-                {
-                  class: "hide-dark",
-                  ms: "auto",
-                  "u-on:click": `setTheme('dark')`,
-                },
-                Icon({ name: "moon" })
-              ),
-              Button(
-                {
-                  class: "hide-light",
-                  ms: "auto",
-                  "u-on:click": `setTheme('light')`,
-                },
-                Icon({ name: "sun" })
-              ),
             ]),
           ]),
         ])
