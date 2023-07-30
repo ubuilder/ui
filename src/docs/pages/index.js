@@ -20,7 +20,7 @@ const components = {
   codeeditor: { title: "Code Editor", soon: true, done: false },
   divider: { title: "Divider", done: false },
   dropdown: { title: "Dropdown", done: false },
-  datepicker: {title: 'Datepicker', soon: true, done: false},
+  datepicker: {title: 'Datepicker', new: true, done: false},
   fieldset: {title: 'Fieldset', soon: true},
   'file-upload': {title: 'FileUpload & Dropzone', soon: true, done: false},
   form: { title: "Form", soon: true, done: false },
