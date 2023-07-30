@@ -5,8 +5,6 @@ import { View } from "../../components/View.js";
 import { Badge, Card, CardBody } from "../../components/index.js";
 import { DocPage } from "../components/DocPage.js";
 
-// done: true | false | '50'
-
 const components = {
   accordion: { title: "Accordion" },
   alert: { title: "Alert" },
@@ -84,29 +82,18 @@ export default ({ prefix }) => {
     );
   }
 
-  function Item({ done, disabled, slug, text, tags = [] }) {
-    // const doneProps =
-    //   done === true
-    //     ? { border: true, borderColor: "success-300" }
-    //     : done == "50"
-    //     ? { border: true, borderColor: "warning-300" }
-    //     : {
-    //         style:
-    //           "box-shadow: 0 2px 6px -1px var(--color-error-300); border: 1px solid var(--color-error-400)",
-    //       };
+  function Item({ disabled, slug, text, tags = [] }) {
+
     return Col({ col: 12, colSm: 6, colLg: 4 }, [
       Card(
         {
-          // ...doneProps,
           tag: disabled ? "span" : "a",
           d: "block",
           href: `${prefix}${slug}`,
           onClick: disabled
             ? `$alert.info('there is no documentation for ${text} component yet!<br/><br/>Please come back later!', 'Page is not available')`
             : undefined,
-          style:
-            // (doneProps.style ?? "") +
-            ";text-decoration: none; color: var(--color-base-900)",
+          style: "text-decoration: none; color: var(--color-base-900)",
         },
         [
           CardBody([
