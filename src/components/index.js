@@ -30,3 +30,4 @@ export * from "./Autocomplete.js";
 export * from "./Tooltip.js";
 export * from "./Popover.js";
 export * from "./TextEditor.js";
+export * from "./DatePicker.js";
