@@ -195,6 +195,15 @@
 }
 
 
+[u-texteditor] {
+  display: flex;
+  flex-direction: column;
+}
+
+.ql-editor {
+  min-height: var(--size-6xl);
+}
+
 //ubuilder specific style
 .ql-container.ql-snow {
   border: 1px solid var(--color-base-300);

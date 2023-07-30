@@ -4,7 +4,7 @@
 
 ```js
 View({ style: "height: 400px", $data: { auto: "" } }, [
-  View({ mb: "sm" }, ["Value: ", View({ tag: "span", $text: "auto" })]),
+  View({ mb: "sm" }, ["Value: ", View({ $text: "auto" })]),
   Autocomplete({
     label: "Autocomplete",
     items: ["Item 1", "Item 2", "Item 3", "Item 4"],
@@ -18,7 +18,7 @@ View({ style: "height: 400px", $data: { auto: "" } }, [
 
 ```js
 View({ style: "height: 400px", style: "height: 400px", $data: { auto: [] } }, [
-  View({ mb: "sm" }, ["Value: ", View({ tag: "span", $text: "auto" })]),
+  View({ mb: "sm" }, ["Value: ", View({ $text: "auto" })]),
   Autocomplete({
     label: "Autocomplete",
     items: ["Item 1", "Item 2", "Item 3", "Item 4"],
@@ -35,7 +35,7 @@ when create prop is true, you can create new items using autocomplete input, onC
 
 ```js
 View({ style: "height: 400px", $data: { auto: [] } }, [
-  View({ mb: "sm" }, ["Value: ", View({ tag: "span", $text: "auto" })]),
+  View({ mb: "sm" }, ["Value: ", View({ $text: "auto" })]),
   Autocomplete({
     label: "Autocomplete",
     items: ["Item 1", "Item 2", "Item 3", "Item 4"],
@@ -53,7 +53,7 @@ You can pass key and text props to use a field of the object as value and it's t
 
 ```js
 View({ style: "height: 400px", $data: { auto: [] } }, [
-  View({ mb: "sm" }, ["Value: ", View({ tag: "span", $text: "auto" })]),
+  View({ mb: "sm" }, ["Value: ", View({ $text: "auto" })]),
   Autocomplete({
     label: "Autocomplete",
     items: [

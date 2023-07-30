@@ -1622,6 +1622,12 @@ select[u-autocomplete], .ts-wrapper select.ts-control {
   padding: 0 !important;
 }
 
+[u-fieldset] {
+  border: 2px solid var(--color-base-300);
+  padding: var(--size-sm);
+  margin-bottom: var(--size-xs);
+}
+
 [u-container] {
   --container-size: 100%;
   width: 100%;
@@ -2904,6 +2910,15 @@ select[u-autocomplete], .ts-wrapper select.ts-control {
 
 .ql-snow a {
   color: var(--color-primary-500);
+}
+
+[u-texteditor] {
+  display: flex;
+  flex-direction: column;
+}
+
+.ql-editor {
+  min-height: var(--size-6xl);
 }
 
 .ql-container.ql-snow {

@@ -11244,7 +11244,6 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   const View = Base({
     render($props, $slots) {
       const {
-        tag: tagName = "div",
         component = "view",
         cssProps = {},
         m,
@@ -11289,6 +11288,9 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         wrap,
         ...restProps
       } = $props;
+
+      let tagName = $props.tag ?? 'div';
+      delete restProps['tag'];
 
       const viewCssProps = {
         m,
@@ -11392,6 +11394,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
             return View({tag: 'template', 'u-if': uif}, View($props, $slots))
           } else if (key === "$text") {
             props["u-text"] = props[key];
+            if(!$props.tag) tagName = 'span';
           } else if (key === "$show") {
             props["u-show"] = props[key];
           } else if (key === "$data") {
