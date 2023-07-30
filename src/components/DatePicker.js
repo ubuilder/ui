@@ -7,6 +7,7 @@ export const DatePicker = Base({
     const {
       component = "datepicker",
       value,
+      type, //gregorian, jalaliFA, jalaliIR
       $model,
       placeholder,
       size = "md",
@@ -26,6 +27,9 @@ export const DatePicker = Base({
       component,
       placeholder,
       tag: "input",
+      cssProps: {
+        type
+      }
     };
 
     return FormField(props, [View(inputPorps), $slots]);
