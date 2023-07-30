@@ -16,7 +16,6 @@ router.addStatic({ path: "./dist", prefix: prefix + "dist" });
 router.addStatic({ path: "./src", prefix: prefix + "src" });
 
 function Doc({ title, description, sections }) {
-  console.log("Doc", { title, description, sections });
   return DocPage(
     { name: title, description },
     sections.map((section) => {
@@ -78,7 +77,6 @@ await Promise.all(
       // console.log({file, slug})
       const result = await import("../src/docs/pages/" + file);
 
-      console.log({ result });
       if (Array.isArray(result.default)) {
         const { default: sections, title, description } = result;
 
@@ -99,7 +97,6 @@ await Promise.all(
       const result = await readMarkdownDoc("./src/docs/pages/" + file);
       router.addPage(prefix + slug, {
         page({ ...props }) {
-          console.log(path.resolve("./src/docs/pages/" + file));
           return Doc(result);
         },
       });
@@ -109,7 +106,6 @@ await Promise.all(
 
 router.addLayout(prefix, {
   load() {
-    console.log("layout load", prefix);
     return { host, prefix, theme: "dark" };
   },
   component: layout,

@@ -5,7 +5,6 @@ export function Modal(Alpine) {
         const isOpen = el.parentNode.hasAttribute('u-modal-open')
         const isPersistent = el.parentNode.hasAttribute('persistent');
 
-        console.log(isPersistent)
         if(isOpen && !isPersistent) {
           this.$modal.close()
         }
