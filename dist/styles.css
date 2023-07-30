@@ -472,7 +472,7 @@ code {
 [u-alert-container] {
   display: flex;
   flex-direction: column;
-  padding: var(--size-md);
+  margin: var(--size-md);
 }
 
 [u-alert-container-placement=top-end] {

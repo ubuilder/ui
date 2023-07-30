@@ -89,7 +89,7 @@ AlertContainer({ name: "my-alert-container" }, [
   ),
   AlertContainer({ name: "my-alert-container-2", placement: "top-end" }, [
     Alert(
-      { title: "Container Placement", icon: "check" },
+      { title: "Container Placement", dismissible: true, icon: "check" },
       "This is AlertContainer with top-end placement"
     ),
   ]),
