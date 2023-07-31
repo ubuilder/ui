@@ -15,10 +15,6 @@ import {
       const target =
         document.querySelector(el.getAttribute("u-popover-target")) ?? el.parentNode;
       const floatingEl = el;
-  
-      console.log('target',target)
-      console.log('floatingel',target)
-      console.log('innerWrapper',edge)
       
       target.setAttribute('u-popover-reference', '')
       
@@ -117,7 +113,6 @@ import {
       if (trigger == "click") {
         Alpine.bind(target, () => ({
           "u-on:focus"() {
-            console.log('show')
             this.show();
           },
           "u-on:blur"() {
@@ -127,7 +122,6 @@ import {
       } else {
         Alpine.bind(target, () => ({
           "u-on:mouseenter"() {
-            console.log('show')
             this.show();
           },
           "u-on:mouseleave"() {

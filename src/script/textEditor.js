@@ -174,7 +174,6 @@ export function TextEditor(Alpine) {
     
 
     quill.on("text-change", (delta, old, source) => {
-      console.log("text-change fired");
       const innerHtml = quill.root.innerHTML;
       innerHtml === "<p><br></p>"
         ? (textarea.value = "")

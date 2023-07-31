@@ -474,7 +474,7 @@ code {
 [u-alert-container] {
   display: flex;
   flex-direction: column;
-  padding: var(--size-md);
+  margin: var(--size-md);
 }
 
 [u-alert-container-placement=top-end] {
@@ -924,11 +924,20 @@ code {
 /* #endregion */
 [u-form-field-label] {
   font-size: calc(var(--size-md) * 0.8);
-  font-weight: bold;
   line-height: var(--size-md);
+  font-weight: bold;
   display: block;
   margin-bottom: var(--size-xxs);
   color: var(--color-base-900);
+}
+
+[u-form-field-description] {
+  font-size: calc(var(--size-sm) * 0.8);
+  line-height: var(--size-sm);
+  display: block;
+  margin-bottom: var(--size-xxs);
+  margin-top: calc(var(--size-xxs) * -1);
+  opacity: 0.8;
 }
 
 [u-form-field-input], [u-code-editor], [u-textarea], [u-autocomplete], .ts-wrapper .ts-control, [u-select], [u-input] {
@@ -989,12 +998,12 @@ code {
 }
 
 [u-checkbox-text]::after, [u-checkbox-group-item-text]::after {
-  left: 6px;
-  top: 4px;
-  width: 4px;
-  height: 9px;
+  left: 4px;
+  top: 3px;
+  width: 3px;
+  height: 6px;
   border: solid white;
-  border-width: 0 4px 4px 0;
+  border-width: 0 3px 3px 0;
   transform: rotate(45deg);
 }
 
@@ -1622,6 +1631,12 @@ select[u-autocomplete], .ts-wrapper select.ts-control {
 
 [u-code-editor] {
   padding: 0 !important;
+}
+
+[u-fieldset] {
+  border: 2px solid var(--color-base-300);
+  padding: var(--size-sm);
+  margin-bottom: var(--size-xs);
 }
 
 [u-container] {
@@ -2772,7 +2787,7 @@ select[u-autocomplete], .ts-wrapper select.ts-control {
 .ql-snow .ql-toolbar .ql-picker-item:hover,
 .ql-snow.ql-toolbar .ql-picker-item.ql-selected,
 .ql-snow .ql-toolbar .ql-picker-item.ql-selected {
-  color: #06c;
+  color: var(--color-primary-500);
 }
 
 .ql-snow.ql-toolbar button:hover .ql-fill,
@@ -2803,7 +2818,7 @@ select[u-autocomplete], .ts-wrapper select.ts-control {
 .ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke.ql-fill,
 .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill,
 .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill {
-  fill: #06c;
+  fill: var(--color-primary-500);
 }
 
 .ql-snow.ql-toolbar button:hover .ql-stroke,
@@ -2834,7 +2849,7 @@ select[u-autocomplete], .ts-wrapper select.ts-control {
 .ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke-miter,
 .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter,
 .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter {
-  stroke: #06c;
+  stroke: var(--color-primary-500);
 }
 
 @media (pointer: coarse) {
@@ -2905,14 +2920,35 @@ select[u-autocomplete], .ts-wrapper select.ts-control {
 }
 
 .ql-snow a {
-  color: #06c;
+  color: var(--color-primary-500);
 }
 
-.ql-container.ql-snow,
+[u-texteditor] {
+  display: flex;
+  flex-direction: column;
+}
+
+.ql-editor {
+  min-height: var(--size-6xl);
+}
+
+.ql-container.ql-snow {
+  border: 1px solid var(--color-base-300);
+  border-bottom-right-radius: calc(var(--size-xxs) / 2);
+  border-bottom-left-radius: calc(var(--size-xxs) / 2);
+  color: var(--color-base-900);
+}
+
 .ql-toolbar.ql-snow {
   border: 1px solid var(--color-base-300);
-  border-radius: calc(var(--size-xxs) / 2);
+  border-top-right-radius: calc(var(--size-xxs) / 2);
+  border-top-left-radius: calc(var(--size-xxs) / 2);
   color: var(--color-base-900);
+}
+
+.ql-toolbar.ql-snow {
+  background-color: var(--color-base-200) !important;
+  padding: var(--size-xxs) var(--size-xs);
 }
 
 .ql-container.ql-snow {

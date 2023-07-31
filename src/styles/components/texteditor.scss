@@ -54,7 +54,7 @@
 .ql-snow .ql-toolbar .ql-picker-item:hover,
 .ql-snow.ql-toolbar .ql-picker-item.ql-selected,
 .ql-snow .ql-toolbar .ql-picker-item.ql-selected {
-  color: #06c;
+  color: var(--color-primary-500);
 }
 
 .ql-snow.ql-toolbar button:hover .ql-fill,
@@ -85,7 +85,7 @@
 .ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke.ql-fill,
 .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill,
 .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill {
-  fill: #06c;
+  fill: var(--color-primary-500);
 }
 
 .ql-snow.ql-toolbar button:hover .ql-stroke,
@@ -116,7 +116,7 @@
 .ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke-miter,
 .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter,
 .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter {
-  stroke: #06c;
+  stroke: var(--color-primary-500);
 }
 
 @media (pointer: coarse) {
@@ -191,16 +191,41 @@
 }
 
 .ql-snow a {
-  color: #06c;
+  color: var(--color-primary-500);
 }
 
 
+[u-texteditor] {
+  display: flex;
+  flex-direction: column;
+}
+
+.ql-editor {
+  min-height: var(--size-6xl);
+}
+
 //ubuilder specific style
-.ql-container.ql-snow,
+.ql-container.ql-snow {
+  border: 1px solid var(--color-base-300);
+  border-bottom-right-radius: calc(var(--size-xxs) / 2);
+  border-bottom-left-radius: calc(var(--size-xxs) / 2);
+  color: var(--color-base-900);
+}
+
 .ql-toolbar.ql-snow {
   border: 1px solid var(--color-base-300);
-  border-radius: calc(var(--size-xxs) / 2);
+  border-top-right-radius: calc(var(--size-xxs) / 2);
+  border-top-left-radius: calc(var(--size-xxs) / 2);
+
   color: var(--color-base-900);
+}
+
+
+
+.ql-toolbar.ql-snow {
+  background-color: var(--color-base-200) !important;
+  // border-bottom: var(--color-base-400);
+  padding: var(--size-xxs) var(--size-xs);
 }
 
 .ql-container.ql-snow {

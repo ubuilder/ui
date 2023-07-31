@@ -7,6 +7,7 @@ export * from "./Checkbox.js";
 export * from "./GridSystem.js";
 export * from "./Icon.js";
 export * from "./Input.js";
+export * from "./Fieldset.js";
 export * from "./Form.js";
 export * from "./Modal.js";
 export * from "./Table.js";

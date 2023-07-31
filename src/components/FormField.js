@@ -1,17 +1,35 @@
-import { Base } from "../utils.js";
+import { Base, extract } from "../utils.js";
 import { View } from "./View.js";
 import { Col } from "./GridSystem.js";
 
-export const FormField = Base({render($props, $slots) {
-  const { component = "form-field", name, label, col=12, ...restProps } = $props;
+export const FormField = Base({
+  render($props, $slots) {
+    const {labelProps, colProps, descriptionProps, props, restProps} = extract($props, {
+      labelProps: {},
+      descriptionProps: {},
+      colProps: {
+        col: 12
+      },
+      props: {
+        label: undefined,
+        name: undefined,
+        description: undefined,  
+      },
+    })
 
-  const props = { tag: "div", 'u-form-field': true, col, ...restProps };
+    labelProps.tag = 'label'
+    labelProps.component = 'form-field-label'
+    labelProps.for = props.name
+    
+    descriptionProps.tag = 'span'
+    descriptionProps.component = 'form-field-description'
 
-  const labelProps = {
-    component: "form-field-label",
-    tag: "label",
-    for: name,
-  };
+    colProps['u-form-field'] = ''
 
-  return Col(props, [label && View(labelProps, label), $slots]);
-}});
+    return Col({...restProps, ...colProps, component: 'col'}, [
+      props.label && View(labelProps, props.label),
+      props.description && View(descriptionProps, props.description),
+      $slots,
+    ]);
+  },
+});

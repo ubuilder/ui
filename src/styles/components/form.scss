@@ -1,10 +1,19 @@
 [u-form-field-label] {
   font-size: calc(var(--size-md) * 0.8);
-  font-weight: bold;
   line-height: var(--size-md);
+  font-weight: bold;
   display: block;
   margin-bottom: var(--size-xxs);
   color: var(--color-base-900);
+}
+
+[u-form-field-description] {
+  font-size: calc(var(--size-sm) * 0.8);
+  line-height: var(--size-sm);
+  display: block;
+  margin-bottom: var(--size-xxs);
+  margin-top: calc(var(--size-xxs) * -1);
+  opacity: 0.8;
 }
 
 [u-form-field-input] {
@@ -82,12 +91,12 @@
 }
 
 [u-checkbox-text]::after {
-  left: 6px;
-  top: 4px;
-  width: 4px;
-  height: 9px;
+  left: 4px;
+  top: 3px;
+  width: 3px;
+  height: 6px;
   border: solid white;
-  border-width: 0 4px 4px 0;
+  border-width: 0 3px 3px 0;
   transform: rotate(45deg);
 }
 

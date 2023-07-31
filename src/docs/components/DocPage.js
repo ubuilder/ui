@@ -1,18 +1,24 @@
-import { Container } from "../../components/GridSystem.js";
-import { Button, View } from "../../components/index.js";
+import { Col, Container } from "../../components/GridSystem.js";
+import { Button, Icon, Row, View } from "../../components/index.js";
 import { tag } from "../../core/tags.js";
 
 export function DocPage(
-  { component = "page", theme="dark", name = "", host, prefix = "/ui/", ...restProps },
+  {
+    component = "page",
+    theme = "dark",
+    name = "",
+    host,
+    prefix = "/ui/",
+    ...restProps
+  },
   slots
 ) {
-
   const style = View({
     tag: "link",
     rel: "stylesheet",
     href: prefix + "styles.css",
   });
-  const title = View({ tag: "title" }, name + ' | UBuilder Component');
+  const title = View({ tag: "title" }, name + " | uLibs Component");
 
   const customCss = `
   .header {
@@ -28,6 +34,15 @@ export function DocPage(
       component,
       ...restProps,
       htmlHead: [
+        `<script>
+        function setTheme(theme) {
+          localStorage.setItem('theme', theme)
+          document.documentElement.setAttribute('u-view-theme', theme)
+        } 
+        
+        setTheme((localStorage.getItem('theme') ?? 'light'))
+        </script>`,
+
         ...(restProps.htmlHead ?? []),
         View({ tag: "meta", charset: "UTF-8" }),
         View({
@@ -37,23 +52,52 @@ export function DocPage(
         }),
         title,
         style,
+        `<style>[u-view-theme="dark"] .hide-dark {display: none} .hide-light {display: none} [u-view-theme="dark"] .hide-light {display: block}</style>`,
         // View({ tag: "script", src: "//unpkg.com/alpinejs", defer: true }),
         View({ tag: "style" }, customCss),
       ],
     },
     [
       View(
-        { p: "xs", class: "border-bottom header" },
+        { py: "xs", class: "border-bottom header" },
         Container({ size: "xl", mx: "auto" }, [
-          Button({ link: true, href: '/ui' }, "Home"),
-          Button({ link: true, onClick: '$routing.back()' }, "back"),
-          Button(
-            {
-              color: "dark",
-              "u-on:click": `el => document.body.setAttribute('u-view-theme', document.body.getAttribute('u-view-theme') === 'dark' ? 'light' : 'dark')`,
-            },
-            "Dark"
-          ),
+          Row([
+            Col([
+              Button(
+                { link: true, p: 0, href: "/ui" },
+                View({ tag: "h3" }, "Home")
+              ),
+            ]),
+            // Col([Button({ link: true, p: 0, onClick: "$routing.back()" }, Icon({name: 'chevron-left'}))]),
+            Col({ ms: "auto", d: 'flex' }, [
+              Button(
+                {
+                  me: "xxs",
+                  color: "dark",
+                  href: "https://github.com/ubuilder/ui",
+                },
+                [Icon({ name: "brand-github" })]
+              ),
+              View({d: 'flex'}, [
+                Button(
+                  {
+                    class: "hide-dark",
+                    ms: "auto",
+                    "u-on:click": `setTheme('dark')`,
+                  },
+                  Icon({ name: "moon" })
+                ),
+                Button(
+                  {
+                    class: "hide-light",
+                    ms: "auto",
+                    "u-on:click": `setTheme('light')`,
+                  },
+                  Icon({ name: "sun" })
+                ),
+              ]),
+            ]),
+          ]),
         ])
       ),
       Container({ size: "xl", mx: "auto" }, [

@@ -19,7 +19,6 @@ import { classname, Base } from "../utils.js";
 export const View = Base({
   render($props, $slots) {
     const {
-      tag: tagName = "div",
       component = "view",
       cssProps = {},
       m,
@@ -64,6 +63,9 @@ export const View = Base({
       wrap,
       ...restProps
     } = $props;
+
+    let tagName = $props.tag ?? 'div'
+    delete restProps['tag']
 
     const viewCssProps = {
       m,
@@ -167,6 +169,7 @@ export const View = Base({
           return View({tag: 'template', 'u-if': uif}, View($props, $slots))
         } else if (key === "$text") {
           props["u-text"] = props[key];
+          if(!$props.tag) tagName = 'span'
         } else if (key === "$show") {
           props["u-show"] = props[key];
         } else if (key === "$data") {

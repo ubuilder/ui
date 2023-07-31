@@ -8,11 +8,12 @@ export const TextEditor = Base({
       type = 'simple',  // show the toolbar options quantity => basic, simple, standard, advanced 
       toolbar,
       value,
-      $model,
       placeholder,
+      h,
       component = "texteditor",
       size = "md",
       readOnly,
+      height,
       disabled,
       name,
       ...restProps
@@ -23,7 +24,7 @@ export const TextEditor = Base({
       ['u-texteditor']: true,
       ['u-texteditor-type']: type,
       ['u-texteditor-toolbar']: toolbar,
-      ['u-texteditor-model']: $model,
+      ['u-texteditor-model']: name,
       ['u-texteditor-readonly']: readOnly,
       cssProps: {
         type,
@@ -32,8 +33,8 @@ export const TextEditor = Base({
     };    
 
     return FormField(props ,[
-      View({tag: 'textarea', component: 'texteditor-textarea', name, value, disabled, placeholder }),
-      View({"u-texteditor-target": ''}),
+      View({tag: 'textarea', component: 'texteditor-textarea', name, $model: name, value, disabled, placeholder }),
+      View({"u-texteditor-target": '', h}),
       $slots
     ])
   }
