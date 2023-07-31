@@ -1,24 +1,18 @@
-import { Base } from "../utils.js";
+import { Base, extract} from "../utils.js";
 import { View } from "./View.js";
 
 export const Divider = Base({
   render($props, $slots) {
-    const {
-      tag = "hr",
-      component = "divider",
-      color = "secondary",
-      ...restProps
-    } = $props;
-
-    const props = {
-      ...restProps,
-      tag,
-      component,
+    const { props, restProps, cssProps } = extract($props, {
+      props: {
+        tag: "hr",
+        component: "divider",
+        color: "secondary",
+      },
       cssProps: {
         color,
       },
-    };
-
+    });
     return View(props, $slots);
   },
 });

@@ -1,32 +1,34 @@
-import { Base } from "../utils.js";
+import { Base, extract } from "../utils.js";
 import { View } from "./View.js";
 import { Image } from "./Image.js";
 
 export const Avatar = Base({
   render($props, $slots) {
-    const {
-      tag = "span",
-      component = "avatar",
-      size = "md",
-      color = "light",
-      src = undefined,
-      alt = undefined,
-      ...restProps
-    } = $props;
-
-    const props = {
-      ...restProps,
-      tag,
-      component,
-      cssProps: {
-        color,
-        size,
+    const { props, cssProps, restProps } = extract($props, {
+      props: {
+        tag: "span",
+        component: "avatar",
+        size: "md",
+        color: "light",
+        src: undefined,
+        alt: undefined,
       },
-    };
+      cssProps: {
+        size: "md",
+        color: undefined,
+      },
+    });
 
-    const content = src
-      ? View(props, Image({ src, alt, component: component + "-image" }))
-      : View(props, $slots);
+    const content = props.src
+      ? View(
+          { ...props, cssProps, ...restProps },
+          Image({
+            src: props.src,
+            alt: props.alt,
+            component: props.component + "-image",
+          })
+        )
+      : View({ ...props, cssProps, ...restProps }, $slots);
 
     return content;
   },
