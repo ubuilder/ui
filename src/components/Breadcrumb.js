@@ -1,4 +1,4 @@
-import { Base } from "../utils.js";
+import { Base, extract } from "../utils.js";
 import { View } from "./View.js";
 
 export const Breadcrumb = Base({
@@ -12,22 +12,18 @@ export const Breadcrumb = Base({
 
 export const BreadcrumbItem = Base({
   render($props, $slots) {
-    const {
-      active = false,
-      disabled = false,
-      component = "breadcrumb-item",
-      ...restProps
-    } = $props;
-
-    const props = {
-      ...restProps,
-      tag: "a",
-      component,
+    const { props, restProps, cssProps } = extract($props, {
+      props: {
+        active: false,
+        disabled: false,
+        component: "breadcrumb-item",
+        tag: "a",
+      },
       cssProps: {
         active,
         disabled,
       },
-    };
+    });
 
     return View(
       { component: component + "-wrapper", tag: "li" },

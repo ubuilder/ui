@@ -1,26 +1,21 @@
-import { Base } from "../utils.js";
+import { Base, extract } from "../utils.js";
 import { View } from "./View.js";
 
 export const Badge = Base({
   render($props, $slots) {
-    const {
-      tag = "span",
-      component = "badge",
-      color,
-      size,
-      ...restProps
-    } = $props;
-
-    const props = {
-      ...restProps,
-      tag,
-      component,
-      cssProps: {
-        color,
-        size,
+    const { props, cssProps, restProps} = extract($props, {
+      props: {
+        tag: "span",
+        component: "badge",
+        color: "light",
+        size: "md",
       },
-    };
+      cssProps: {
+        color: undefined,
+        size: undefined,
+      },
+    });
 
-    return View(props, $slots);
+    return View({ ...props, cssProps, ...restProps }, $slots);
   },
 });
