@@ -39,7 +39,7 @@ export const DatePicker = Base({
         format,
         range,
         options,
-        model:$model,
+        model: $model,
       },
     };
 
