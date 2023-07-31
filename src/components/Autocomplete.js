@@ -30,7 +30,6 @@ export const Autocomplete = Base({
       // TODO ...
     })
   
-    console.log(props)
     const {items, value, key, text} = listProps
     delete props['items']
     delete props['value']

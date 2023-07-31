@@ -1,6 +1,5 @@
 export function Dropdown(Alpine){
   Alpine.directive('dropdown', (el, {}, {Alpine})=>{
-    console.log('dropdown registerd')
     Alpine.bind(el, ()=>({
       "u-data"(){
         return{
@@ -15,11 +14,9 @@ export function Dropdown(Alpine){
           },
           show(){
             this.open = true; 
-            console.log('open', this.open)
           },
           close(){
             this.open = false; 
-            console.log('close', this.open)
           },
         }  
       },
@@ -27,7 +24,6 @@ export function Dropdown(Alpine){
     }))
   })
   Alpine.directive('dropdown-click', (el, {}, {Alpine})=>{
-    console.log('dropdown registerd')
     Alpine.bind(el, ()=>({
       "u-on:click"(){
         this.toggle()
@@ -38,7 +34,6 @@ export function Dropdown(Alpine){
     }))
   })
   Alpine.directive('dropdown-hover', (el, {}, {Alpine})=>{
-    console.log('dropdown hover registered')
     Alpine.bind(el, ()=>({
       "u-on:mouseenter"(){
         clearTimeout(this.timeout);

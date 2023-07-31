@@ -3,48 +3,47 @@ import { Button } from "../../components/Button.js";
 import { Col, Container, Row } from "../../components/GridSystem.js";
 import { View } from "../../components/View.js";
 import { Badge, Card, CardBody } from "../../components/index.js";
-
-// done: true | false | '50'
+import { DocPage } from "../components/DocPage.js";
 
 const components = {
-  accordion: { title: "Accordion", new: true, done: true },
-  alert: { title: "Alert", done: true },
-  autocomplete: { title: "Autocomplete", new: true, done: true },
-  avatar: { title: "Avatar", done: true },
-  badge: { title: "Badge", new: true, done: true },
-  breadcrumb: { title: "Breadcrumb", done: false },
-  button: { title: "Button", updated: true, done: true },
-  card: { title: "Card", done: false },
-  checkbox: { title: "Checkbox & Radio", done: false },
-  colorpicker: {title: 'Colorpicker', soon: true, done: false},
-  codeeditor: { title: "Code Editor", soon: true, done: false },
-  divider: { title: "Divider", done: false },
-  dropdown: { title: "Dropdown", done: false },
-  datepicker: {title: 'Datepicker', soon: true, done: false},
-  fieldset: {title: 'Fieldset', soon: true},
-  'file-upload': {title: 'FileUpload & Dropzone', soon: true, done: false},
-  form: { title: "Form", soon: true, done: false },
-  formfield: { title: "FormField", soon: true, done: false },
-  grid: { title: "Grid", done: false },
-  header: {title: 'Header', done: false, soon: true},
-  icon: { title: "Icon", new: true, done: true },
-  image: { title: "Image", new: true, done: true },
-  input: { title: "Input", done: '50' },
-  modal: { title: "Modal", new: true, done: true },
-  offcanvas: {title: 'Offcanvas', soon: true},
-  popover: { title: "Popover", updated: true, done: true },
-  progress: { title: "Progress", done: true },
-  radio: { title: "Radio", done: '50' },
-  select: { title: "Select", done: '50' },
-  sidebar: {title: 'Sidebar', done: false, soon: true},
-  spinner: { title: "Spinner", done: true },
-  switch: { title: "Switch", updated: true, done: true },
-  table: { title: "Table", updated: true, done: true },
-  tabs: { title: "Tabs", updated: true, done: true },
-  'text-editor': {title: 'TextEditor', soon: true},
-  textarea: { title: "Textarea", new: true, done: true },
-  tooltip: { title: "Tooltip", done: true },
-  view: { title: "View", new: true, done: '50' },
+  accordion: { title: "Accordion" },
+  alert: { title: "Alert" },
+  autocomplete: { title: "Autocomplete" },
+  avatar: { title: "Avatar" },
+  badge: { title: "Badge" },
+  breadcrumb: { title: "Breadcrumb" },
+  button: { title: "Button" },
+  card: { title: "Card", danger: true },
+  checkbox: { title: "Checkbox & Radio", danger: true },
+  colorpicker: { title: "Colorpicker", soon: true },
+  codeeditor: { title: "Code Editor", soon: true },
+  divider: { title: "Divider" },
+  dropdown: { title: "Dropdown", danger: true },
+  datepicker: { title: "Datepicker", soon: true },
+  fieldset: { title: "Fieldset" },
+  "file-upload": { title: "FileUpload & Dropzone", soon: true },
+  form: { title: "Form" },
+  formfield: { title: "FormField" },
+  grid: { title: "Grid" },
+  header: { title: "Header", soon: true },
+  icon: { title: "Icon" },
+  image: { title: "Image" },
+  input: { title: "Input", danger: true },
+  modal: { title: "Modal" },
+  offcanvas: { title: "Offcanvas", soon: true },
+  popover: { title: "Popover" },
+  progress: { title: "Progress" },
+  radio: { title: "Radio", danger: true },
+  select: { title: "Select", danger: true },
+  sidebar: { title: "Sidebar", soon: true },
+  spinner: { title: "Spinner" },
+  switch: { title: "Switch" },
+  table: { title: "Table" },
+  tabs: { title: "Tabs" },
+  texteditor: { title: "TextEditor" },
+  textarea: { title: "Textarea" },
+  tooltip: { title: "Tooltip" },
+  view: { title: "View" },
 };
 
 export default ({ prefix }) => {
@@ -56,6 +55,7 @@ export default ({ prefix }) => {
         slug: key,
         text: components[key].title,
         tags: [
+          components[key].danger && { text: "Documentation Not completed", color: "error" },
           components[key].new && { text: "New", color: "primary" },
           components[key].soon && { text: "Comming Soon", color: "warning" },
           components[key].updated && { text: "Updated", color: "info" },
@@ -82,23 +82,18 @@ export default ({ prefix }) => {
     );
   }
 
-  function Item({ done, disabled, slug, text, tags = [] }) {
-    const doneProps = done === true
-      ? { border: true, borderColor: "success-300" }
-      : done == "50"
-      ? { border: true, borderColor: "warning-300" }
-      : { style: 'box-shadow: 0 2px 6px -1px var(--color-error-300); border: 1px solid var(--color-error-400)' };
+  function Item({ disabled, slug, text, tags = [] }) {
+
     return Col({ col: 12, colSm: 6, colLg: 4 }, [
       Card(
         {
-          ...doneProps,
           tag: disabled ? "span" : "a",
           d: "block",
           href: `${prefix}${slug}`,
           onClick: disabled
             ? `$alert.info('there is no documentation for ${text} component yet!<br/><br/>Please come back later!', 'Page is not available')`
             : undefined,
-          style: (doneProps.style ?? '') + ";text-decoration: none; color: var(--color-base-900)",
+          style: "text-decoration: none; color: var(--color-base-900)",
         },
         [
           CardBody([
@@ -113,46 +108,38 @@ export default ({ prefix }) => {
   }
 
   return [
-    View(
-      { p: "xs", class: "border-bottom header" },
-      Container({ size: "xl", mx: "auto" }, [
-        Row([
-          Col([
-            View({ tag: "h1" }, "Components"),
-            View(
-              {
-                tag: "h3",
-                mb: "lg",
-                mt: "xxs",
-                style: "color: var(--color-base-800); font-weight: 400",
-              },
-              "UI Components for NodeJS"
-            ),
-          ]),
-          Button(
-            {
-              d: "none",
-              dXs: "inline-flex",
-              mt: "sm",
-              ms: "auto",
-              color: "dark",
-              "u-on:click": `el => document.body.setAttribute('u-view-theme', document.body.getAttribute('u-view-theme') === 'dark' ? 'light' : 'dark')`,
-            },
-            "Dark"
-          ),
-        ]),
-      ])
+    DocPage(
+      { name: "Components"},
+      View(
+        {
+          tag: "h3",
+          mb: "lg",
+          mt: "xxs",
+          style: "color: var(--color-base-800); font-weight: 400",
+        },
+        "UI Components for NodeJS"
+      ),
+      
     ),
     Container({ size: "xl", mx: "auto", my: "xl" }, [
       // tag("a", { href: "/" }, "UBuilder"),
 
       View(
         { mb: "md", mt: "sm", style: "line-height: var(--size-lg)" },
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi at numquam est ad unde. Quibusdam blanditiis tempora unde! Eum quam ex totam autem obcaecati fuga quidem dignissimos laudantium et? Nihil, consequatur voluptates reiciendis pariatur tenetur architecto cumque doloremque quas incidunt facilis exercitationem esse deleniti totam dolores dicta commodi suscipit eius."
+        "Welcome to @ulibs/ui documentation, uLibs UI is a set of components which you can use in your javascript based projects, each component is a function which returns Clean HTML code powered by the simplicity and efficiency of Alpine.js."
+      ),
+      View(
+        { mb: "md", mt: "sm", style: "line-height: var(--size-lg)" },
+        "uLibs Components follows a straightforward and intuitive design system, with minimal and consistent designs."
+      ),
+      View(
+        { mb: "md", mt: "sm", style: "line-height: var(--size-lg)" },
+        "All Components extends from a powerful base component (View) which supports features like utility props, two way binding and more..."
       ),
 
       Row([
         Item({ slug: "installation", text: "Installation" }),
+        Item({slug: 'view', text: 'View Component Features'}),
         Item({ slug: "basics", text: "Basics" }),
         Item({ slug: "colors", text: "Colors" }),
 
@@ -160,8 +147,8 @@ export default ({ prefix }) => {
 
         ComponentItems(),
 
-        Heading({ title: "Examples" }),
-        ExampleItems(),
+        // Heading({ title: "Examples" }),
+        // ExampleItems(),
       ]),
       AlertContainer({ placement: "top-end" }),
     ]),

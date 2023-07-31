@@ -19,6 +19,7 @@ import { Tooltip } from "./tooltip";
 import { Popover } from "./popover";
 import { Alert } from "./alert";
 import { Switch } from "./switch";
+import { TextEditor } from "./textEditor";
 
 // import hljs from 'highlight.js/lib/core';
 // import javascript from 'highlight.js/lib/languages/javascript';
@@ -52,6 +53,7 @@ function components(Alpine) {
   Dropdown(Alpine);
   Tooltip(Alpine);
   Popover(Alpine);
+  TextEditor(Alpine);
 }
 
 document.addEventListener("DOMContentLoaded", () => {

@@ -6,9 +6,6 @@ View is the base component of `@ulibs/ui` library, and all other components are 
 
 View is just a wrapper which creates HTML Elements, and you can combine them to make anything that you want. View supports two props, one is for `Props / attributes` of component and other is list of it's children (`Slots`).
 
-```js
-
-```
 
 ## Slots
 
