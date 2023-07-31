@@ -1,35 +1,27 @@
-import { Base } from "../utils.js";
+import { Base, extract } from "../utils.js";
 import { View } from "./View.js";
 import { Icon } from "./Icon.js";
 import { Button } from "./Button.js";
 
 export const Dropdown = Base({
   render($props, $slots) {
-    const {
-      component = "dropdown",
-      label,
-      size = "md",
-      arrow = true,
-      trigger = "click", //click or hover
-      open = false,
-      ...restProps
-    } = $props;
-
-    const props = {
-      ...restProps,
-      component,
-      arrow,
+    const { props, restProps, cssProps } = extract($props, {
+      props: {
+        component: "dropdown",
+        label,
+        size: "md",
+        arrow: true,
+        trigger: "click", //click or hover
+        open: false,
+      },
       cssProps: {
         size,
       },
-    };
-    props['u-dropdown-click'] = 'true'
-    if(trigger == 'hover'){
-      props['u-dropdown-hover'] = 'true'
+    });
+    props["u-dropdown-click"] = "true";
+    if (trigger == "hover") {
+      props["u-dropdown-hover"] = "true";
     }
-    
-
-  
 
     $slots = [DropdownLabel({ text: label, arrow }), $slots];
 
@@ -39,24 +31,18 @@ export const Dropdown = Base({
 
 export const DropdownItem = Base({
   render($props, $slots) {
-    const {
-      component = "dropdown-item",
-      label = undefined,
-      size = "md",
-      href = undefined,
-      icon = undefined,
-      ...restProps
-    } = $props;
-
-    const props = {
-      ...restProps,
-      component,
-      href,
-      icon,
+    const { props, restProps, cssProps } = extract($props, {
+      props: {
+        component: "dropdown-item",
+        label: undefined,
+        size: "md",
+        href: undefined,
+        icon: undefined,
+      },
       cssProps: {
         size,
       },
-    };
+    });
 
     $slots = [
       icon && Icon(icon),
@@ -73,15 +59,15 @@ export const DropdownItem = Base({
 
 export const DropdownPanel = Base({
   render($props, $slots) {
-    const { component = "dropdown-panel", size = "md", ...restProps } = $props;
-
-    const props = {
-      ...restProps,
-      component,
+    const { props, restProps, cssProps } = extract($props, {
+      props: {
+        component: "dropdown-panel",
+        size: "md",
+      },
       cssProps: {
         size: size,
       },
-    };
+    });
 
     return View(props, $slots);
   },
@@ -89,21 +75,17 @@ export const DropdownPanel = Base({
 
 const DropdownLabel = Base({
   render($props, $slots) {
-    const {
-      component = "dropdown-label",
-      text,
-      arrow = true,
-      size = "md",
-      ...restProps
-    } = $props;
-
-    const props = {
-      ...restProps,
-      component,
+    const { props, restProps, cssProps } = extract($props, {
+      props: {
+        component: "dropdown-label",
+        text,
+        arrow: true,
+        size: "md",
+      },
       cssProps: {
         size: size,
       },
-    };
+    });
 
     $props = [
       View({ tag: "span" }, text),

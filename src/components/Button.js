@@ -18,8 +18,6 @@ export const Button = Base({
       }
     });
 
-    console.log({props, cssProps, restProps})
-
     if(!props.tag) {
       if(props.href) {
         props.tag = 'a' 

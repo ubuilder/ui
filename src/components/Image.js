@@ -1,11 +1,15 @@
-import { Base } from "../utils.js";
+import { Base, extract } from "../utils.js";
 import { View } from "./View.js";
 
 export const Image = Base({
   render($props, $slots) {
-    $props.component = $props.component ?? "image";
-    $props.tag = "img";
+    const { props, restProps, cssProps } = extract($props, {
+      props: {
+        component: $props.component ?? "image",
+        tag: "img",
+      },
+    });
 
-    return View($props);
+    return View({ ...props, cssProps, ...restProps });
   },
 });
