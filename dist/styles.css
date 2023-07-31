@@ -1,7 +1,9 @@
+@charset "UTF-8";
 /* #region Root */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inconsolata&display=swap");
 @import "https://cdn.quilljs.com/1.3.7/quill.snow.css";
+@import "https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css";
 :root, [u-view-theme=light] {
   --color-primary-100: #d4e4f9;
   --color-primary-200: #a8c9f3;
@@ -2961,6 +2963,37 @@ select[u-autocomplete], .ts-wrapper select.ts-control {
 
 [u-texteditor-textarea] {
   display: none;
+}
+
+/*!
+ * Pikaday
+ * Copyright © 2014 David Bushell | BSD & MIT license | https://dbushell.com/
+ */
+.u-datepicker-theme,
+.pika-prev,
+.pika-next {
+  border: 1px solid var(--color-base-400);
+  border-radius: calc(var(--size-xxs) / 2);
+  color: var(--color-base-900);
+  background-color: var(--color-base-100) !important;
+}
+
+.pika-label,
+.pika-title,
+.pika-day {
+  color: var(--color-base-900);
+  background-color: var(--color-base-100) !important;
+}
+
+.pika-button:hover,
+.is-selected .pika-button,
+.has-event .pika-button {
+  color: var(--color-base-900);
+  font-weight: bold;
+  background: #33aaff;
+  box-shadow: inset 0 1px 3px #178fe5;
+  border-radius: 3px;
+  border: 1px solid var(--color-base-300);
 }
 
 [u-view-w="0"] {
