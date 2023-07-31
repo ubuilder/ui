@@ -43,9 +43,9 @@ const i18nIR = {
   toString(date, format) {
     const newDate = {
       year: date.getFullYear(),
-      month: date.getMonth() + 1, 
-      date: date.getDate()
-    }
+      month: date.getMonth() + 1,
+      date: date.getDate(),
+    };
     return `${newDate.year}/${newDate.month}/${newDate.date}`;
   },
   parse(dateString, format) {
@@ -90,27 +90,18 @@ export function Datepicker(Alpine) {
     const inputName = el.getAttribute("name");
     const value = el.getAttribute("value");
     const model = el.getAttribute("u-datepicker-model");
-    
 
-    console.log("type:", type);
-    console.log("range:", range);
-    console.log("inputName:", inputName);
-    console.log("value:", value);
-    console.log("model:", model);
-    console.log("format:", format);
-    console.log("new options:", newOptions);
     let options = {
       field: el,
       defaultDate: value ? new Date(value.toString()) : new Date(),
       format: format ?? "YYYY/MM/DD",
       yearRange: JSON.parse(range),
       onSelect: function (date) {
-        console.log('onselect set value: ', picker.toString())
-        el.value = picker.toString()
-        el.dispatchEvent(new Event('input'))
+        el.value = picker.toString();
+        el.dispatchEvent(new Event("input"));
       },
       showDaysInNextAndPreviousMonths: true,
-      theme: 'u-datepicker-theme'
+      theme: "u-datepicker-theme",
     };
 
     if (type === "jalaliAF") {
@@ -131,28 +122,25 @@ export function Datepicker(Alpine) {
       });
     }
 
-    if(model || inputName){
+    if (model || inputName) {
       Alpine.bind(el, () => ({
-        "u-model": model? model : inputName
+        "u-model": model ? model : inputName,
       }));
     }
 
     Alpine.bind(el, () => ({
       "u-effect"() {
         // listening for $data changes
-        if (inputName && (this[inputName] !== picker.toString())) {
-          console.log('inpuname value set: ', el.value)
+        if (inputName && this[inputName] !== picker.toString()) {
           picker.setDate(el.value ? el.value : "");
         }
         //listening for model changed
-        if (model && (this[model] !== picker.toString())) {
-          console.log('model value set: ', this[model])
+        if (model && this[model] !== picker.toString()) {
           picker.setDate(this[model] ? this[model] : "");
         }
       },
       "u-on:input"() {
         if (el.value.toString() !== picker.toString()) {
-          console.log('on input value set: ', el.value)
           picker.setDate(el.value);
         }
       },

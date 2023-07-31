@@ -1,6 +1,5 @@
 # DatePicker
 
-
 ## default DatePicker
 
 this simple DatePicker with default values
@@ -8,13 +7,15 @@ this simple DatePicker with default values
 ```js
 DatePicker();
 ```
-## default initial value 
+
+## default initial value
 
 this simple DatePicker with initial value set
 
 ```js
 DatePicker({ value: "2002/02/02" });
 ```
+
 ## placehoder and lable
 
 ```js
@@ -26,15 +27,15 @@ DatePicker({ placeholder: "yyyy/MM/dd", label: "select Date of birth" });
 the minimum and mazximum years that you can select from in year dropdown. it should be a array of tow elements. e.g: [2000, 2010].
 
 ```js
-DatePicker({ range: "[2000, 2010]", placeholder: 'you can select from year 2000 to 2010'});
+DatePicker({
+  range: "[2000, 2010]",
+  placeholder: "you can select from year 2000 to 2010",
+});
 ```
-
 
 ## DatePicker value binding
 
 you can bind the value of datePicker input to a valrialble by $model propery, just like rest of input elements.
-
-
 
 ```js
 View({$data: {birth: ''}},[
@@ -44,7 +45,6 @@ View({$data: {birth: ''}},[
   Button({onClick: "birth= '2023/5/1'" }, 'reset birth'),
 ]),
 ```
-
 
 ## DatePicker in form
 
