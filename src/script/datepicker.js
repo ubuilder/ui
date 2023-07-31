@@ -1,5 +1,6 @@
 import Pikaday from "pikaday";
-import Jalaali from 'jalaali-js';
+import Jalaali from "jalaali-js";
+import moment from "moment";
 
 const i18nIR = {
   format: "YYYY/MM/DD",
@@ -40,13 +41,12 @@ const i18nIR = {
     weekdaysShort: ["ی", "د", "س", "چ", "پ", "ج", "ش"],
   },
   toString(date, format) {
-    console.log("date: ", date.getFullYear());
-    const jdate = Jalaali.toJalaali(
-      date.getFullYear(),
-      date.getMonth() + 1,
-      date.getDate()
-    );
-    return `${jdate.jy}/${jdate.jm}/${jdate.jd}`;
+    const newDate = {
+      year: date.getFullYear(),
+      month: date.getMonth() + 1, 
+      date: date.getDate()
+    }
+    return `${newDate.year}/${newDate.month}/${newDate.date}`;
   },
   parse(dateString, format) {
     const parts = dateString.split("/");
@@ -76,61 +76,86 @@ const i18nAF = {
       "خدی",
       "دلو",
       "حوت",
-    ]
-  }
+    ],
+  },
 };
 
-
-//bine editor to textarea
+//bind picker to input element
 export function Datepicker(Alpine) {
   Alpine.directive("datepicker", (el) => {
-    const type  = el.getAttribute('u-datepicker-type')
+    const type = el.getAttribute("u-datepicker-type");
+    const range = el.getAttribute("u-datepicker-range");
+    const format = el.getAttribute("u-datepicker-format");
+    const newOptions = el.getAttribute("u-datepicker-options");
+    const inputName = el.getAttribute("name");
+    const value = el.getAttribute("value");
+    const model = el.getAttribute("u-datepicker-model");
+    
+
+    console.log("type:", type);
+    console.log("range:", range);
+    console.log("inputName:", inputName);
+    console.log("value:", value);
+    console.log("model:", model);
+    console.log("format:", format);
+    console.log("new options:", newOptions);
     let options = {
       field: el,
-      format: "YYYY/MM/DD",
+      defaultDate: value ? new Date(value.toString()) : new Date(),
+      format: format ?? "YYYY/MM/DD",
+      yearRange: JSON.parse(range),
       onSelect: function (date) {
-        console.log("Selected date: " + date);
+        console.log('onselect set value: ', picker.toString())
+        el.value = picker.toString()
+        el.dispatchEvent(new Event('input'))
       },
+      showDaysInNextAndPreviousMonths: true,
+      theme: 'u-datepicker-theme'
+    };
+
+    if (type === "jalaliAF") {
+      options = { ...options, ...i18nAF };
     }
-    if(type === 'jalaliFA'){
-      options = {...options, ...i18nAF}
-    }
-    if(type === 'jalaliIR'){
-      options = {...options, ...i18nIR}
+    if (type === "jalaliIR") {
+      options = { ...options, ...i18nIR };
     }
 
-    var picker = new Pikaday(options);
-    console.log("datepicker", picker);
+    if (newOptions) options = newOptions;
 
-    // const model = el.getAttribute("u-texteditor-model");
+    let picker = new Pikaday(options);
 
-    // if (textarea.form) {
-    //   textarea.form.addEventListener("reset", () => {
-    //     textarea.value = "";
-    //     textarea.dispatchEvent(new Event("input"));
-    //   });
-    // }
+    if (el.form) {
+      el.form.addEventListener("reset", () => {
+        el.value = "";
+        el.dispatchEvent(new Event("input"));
+      });
+    }
 
-    // Alpine.bind(textarea, () => ({
-    //   "u-model": model ? model : textareaName,
-    //   "u-on:input"() {
-    //     if (textarea.value !== quill.root.innerHTML || textarea.value === "") {
-    //       quill.root.innerHTML = textarea.value;
-    //     }
-    //   },
-    // }));
+    if(model || inputName){
+      Alpine.bind(el, () => ({
+        "u-model": model? model : inputName
+      }));
+    }
 
-    // Alpine.bind(el, () => ({
-    //   "u-effect"() {
-    //     // listening for $data changes
-    //     if (textareaName && this[textareaName] !== quill.root.innerHTML) {
-    //       quill.root.innerHTML = textarea.value ? textarea.value : "";
-    //     }
-    //     //listening for $model changed
-    //     if (model && this[model] !== quill.root.innerHTML) {
-    //       quill.root.innerHTML = this[model] ? this[model] : "";
-    //     }
-    //   },
-    // }));
+    Alpine.bind(el, () => ({
+      "u-effect"() {
+        // listening for $data changes
+        if (inputName && (this[inputName] !== picker.toString())) {
+          console.log('inpuname value set: ', el.value)
+          picker.setDate(el.value ? el.value : "");
+        }
+        //listening for model changed
+        if (model && (this[model] !== picker.toString())) {
+          console.log('model value set: ', this[model])
+          picker.setDate(this[model] ? this[model] : "");
+        }
+      },
+      "u-on:input"() {
+        if (el.value.toString() !== picker.toString()) {
+          console.log('on input value set: ', el.value)
+          picker.setDate(el.value);
+        }
+      },
+    }));
   });
 }
