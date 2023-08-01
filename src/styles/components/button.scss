@@ -103,18 +103,20 @@
 [u-button-group] {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--size-xxs);
+  gap: var(--size-xs);
   border-radius: var(--size-xxs);
   overflow: hidden;
 
-  [u-button] {
-    border: none;
-    border-radius: 0;
-  }
+
 }
 
 [u-button-group-compact] {
   gap: 0;
+  
+  [u-button] {
+    border: none;
+    border-radius: 0;
+  }
 }
 
 [u-button] > [u-icon] {
