@@ -271,7 +271,7 @@ code {
   width: 100%;
   border: none;
   border-bottom: 1px solid transparent;
-  background: transparent;
+  background-color: var(--color-base-200);
   color: var(--color-base-800);
 }
 
