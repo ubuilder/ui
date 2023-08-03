@@ -21,11 +21,14 @@
   justify-content: space-between;
   width: 100%;
   border: none;
+  border-bottom: 1px solid transparent;
   background: transparent;
+  color: var(--color-base-800);
 }
 
 [u-accordion-header-open] {
   font-weight: bold;
+  border-color: var(--accordion-border-color);
 }
 
 [u-accordion-content] {

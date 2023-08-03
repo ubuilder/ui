@@ -10,6 +10,7 @@
   text-decoration: none;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   border: 1px solid var(--button-hover);
   cursor: pointer;
   gap: calc(var(--button-size) / 1);

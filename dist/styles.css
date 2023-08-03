@@ -270,11 +270,14 @@ code {
   justify-content: space-between;
   width: 100%;
   border: none;
+  border-bottom: 1px solid transparent;
   background: transparent;
+  color: var(--color-base-800);
 }
 
 [u-accordion-header-open] {
   font-weight: bold;
+  border-color: var(--accordion-border-color);
 }
 
 [u-accordion-content] {
@@ -635,6 +638,7 @@ code {
   text-decoration: none;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   border: 1px solid var(--button-hover);
   cursor: pointer;
   gap: calc(var(--button-size) / 1);
