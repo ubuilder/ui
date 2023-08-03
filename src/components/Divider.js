@@ -10,9 +10,9 @@ export const Divider = Base({
         color: "secondary",
       },
       cssProps: {
-        color,
+        color: undefined,
       },
     });
-    return View(props, $slots);
+    return View({...props, ...restProps, cssProps}, $slots);
   },
 });
