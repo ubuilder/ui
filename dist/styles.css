@@ -2677,7 +2677,6 @@ select[u-autocomplete], .ts-wrapper select.ts-control {
   display: flex;
   flex-direction: column;
   width: max-content;
-  padding-left: 12px;
 }
 
 [u-dropdown-panel] {
@@ -2718,7 +2717,11 @@ select[u-autocomplete], .ts-wrapper select.ts-control {
   transition-timing-function: ease-in;
 }
 
-[u-dropdown-arrow]:after {
+[u-dropdown-arrow] > * {
+  padding-right: 30px;
+}
+
+[u-dropdown-arrow] > *:after {
   box-sizing: content-box;
   position: absolute;
   top: 50%;
