@@ -2718,7 +2718,7 @@ select[u-autocomplete], .ts-wrapper select.ts-control {
 }
 
 [u-dropdown-arrow] > * {
-  padding-right: 30px;
+  padding-left: 30px;
 }
 
 [u-dropdown-arrow] > *:after {
