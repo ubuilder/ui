@@ -1,12 +1,11 @@
 import { Base, extract } from "../utils.js";
 import { View } from "./View.js";
+import { Popup } from "./Popup.js"
 
 export const Popover = Base({
   render($props, $slots) {
     const {props, cssProps, otherProps, restProps } = extract($props, {
-      props: {
-        component: 'popover',
-      },
+      
       cssProps: {
         size: undefined,
         target: undefined,
@@ -25,15 +24,6 @@ export const Popover = Base({
       }
     })
 
-    return View({...props, cssProps, ...restProps}, [
-      otherProps.arrow ? View({ component: props.component + "-arrow" }) : [],
-      otherProps.persistant
-        ? View({
-            component: props.component + "-edge",
-            ...(otherProps.focusAble ? { "u-tooltip-focus-able": "" } : ""),
-          })
-        : [],
-      $slots,
-    ]);
+    return Popup({...cssProps, ...otherProps, "u-popover": true}, $slots)
   },
 });

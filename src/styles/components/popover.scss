@@ -16,7 +16,7 @@
   border-radius: calc(var(--size-xxs) / 2);
 }
 
-[u-popover-arrow] {
+[u-popover] [u-popup-arrow] {
   z-index: -1;
   position: absolute;
   width: var(--size-xs);
@@ -26,7 +26,7 @@
   border-color: var(--color-base-400);
 }
 
-[u-popover-edge] {
+[u-popover] [u-popup-edge] {
   z-index: 100;
   box-sizing: content-box;
   position: absolute;
@@ -40,6 +40,6 @@
   opacity: 0;
 }
 
-[u-tooltip-focus-able] {
+[u-popover] [u-popup-focus-able] {
   z-index: -3;
 }
