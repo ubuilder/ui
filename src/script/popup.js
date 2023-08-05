@@ -124,7 +124,7 @@ import {
         },
       }));
 
-      if (trigger == "click") {
+      if (trigger == "focus") {
         Alpine.bind(target, () => ({
           "u-on:focus"() {
             popupController.show();
@@ -133,12 +133,21 @@ import {
             popupController.hide();
           },
         }));
-      } else {
+      } else if(trigger == 'hover') {
         Alpine.bind(target, () => ({
           "u-on:mouseenter"() {
             popupController.show();
           },
           "u-on:mouseleave"() {
+            popupController.hide();
+          },
+        }));
+      }else{
+        Alpine.bind(target, () => ({
+          "u-on:click"() {
+            popupController.show();
+          },
+          "u-on:click.outside"() {
             popupController.hide();
           },
         }));
