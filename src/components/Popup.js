@@ -21,11 +21,13 @@ export const Popup = Base({
       otherProps: {
         arrow: false,
         focusAble: true,
-        persistant: true
+        persistant: false
       }
     })
+    
 
     return View({...props, cssProps, ...restProps}, [
+      otherProps.arrow ? View({ component: props.component + "-arrow" }) : [],
       otherProps.persistant
       ? View({
         component: props.component + "-edge",
@@ -33,7 +35,6 @@ export const Popup = Base({
       })
       : [],
       $slots,
-      otherProps.arrow ? View({ component: props.component + "-arrow" }) : [],
     ]);
   },
 });

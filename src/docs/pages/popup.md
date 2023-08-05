@@ -27,6 +27,29 @@ View([
 ])
 
 ```
+<!-- 
+
+//this usage has some bugs 
+//should be resolved for later updates
+## persistant with target
+persistant and target
+
+```js
+View([
+  Button({id: 'persistant-false'},"persisatnt false"),
+  Popup({target: '#persistant-false', trigger: 'hover', arrow: true, persistant: false}, 'this is popup'),
+]),
+
+```
+## persistant with target
+persistant and target
+
+```js
+View([
+  Button({id: 'persistant-true'},"persistant true"),
+  Popup({target: '#persistant-true', trigger: 'hover', arrow: true,}, 'this is popup'),
+])
+```  -->
 
 ## Trigger
 
@@ -190,4 +213,4 @@ Here is an example of form inside Popup
     ]),
   ]),
 ];
-```
+``` -->

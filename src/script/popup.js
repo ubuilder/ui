@@ -1,8 +1,4 @@
-// tooltip
-// popup
-// dropdown
-// sidebar/navbar items
-// import tippy from "tippy.js/dist/tippy.esm"
+
 
 
 import {
@@ -14,10 +10,12 @@ import {
     arrow,
   } from "@floating-ui/dom";
   
-  //popup using floating-ui
+  //popup using floating-ui 
+  //popup is the base componenet for rest of componenets like popover, tooltip, dropdown,
   export function Popup(Alpine) {
     Alpine.directive("popup", (el) => {
       const edge = el.querySelector('[u-popup-edge]');
+      console.log('edge', edge)
       
       const target =
         document.querySelector(el.getAttribute("u-popup-target")) ?? el.parentNode;
@@ -157,10 +155,12 @@ import {
       if(!edge){
         Alpine.bind(floatingEl, () => ({
           "u-on:mouseenter"() {
-            this.hide();
+            // this.hide();
+            
           },
           "u-on:focus"() {
-            this.hide();
+            // this.hide();
+            
           },
         }));
       }
