@@ -15,7 +15,6 @@ import {
   export function Popup(Alpine) {
     Alpine.directive("popup", (el) => {
       const edge = el.querySelector('[u-popup-edge]');
-      console.log('edge', edge)
       
       const target =
         document.querySelector(el.getAttribute("u-popup-target")) ?? el.parentNode;
