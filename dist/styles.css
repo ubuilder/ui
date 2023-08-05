@@ -270,11 +270,14 @@ code {
   justify-content: space-between;
   width: 100%;
   border: none;
-  background: transparent;
+  border-bottom: 1px solid transparent;
+  background-color: var(--color-base-200);
+  color: var(--color-base-800);
 }
 
 [u-accordion-header-open] {
   font-weight: bold;
+  border-color: var(--accordion-border-color);
 }
 
 [u-accordion-content] {
@@ -699,6 +702,7 @@ code {
   text-decoration: none;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   border: 1px solid var(--button-hover);
   cursor: pointer;
   gap: calc(var(--button-size) / 1);
@@ -866,17 +870,17 @@ code {
 [u-button-group] {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--size-xxs);
+  gap: var(--size-xs);
   border-radius: var(--size-xxs);
   overflow: hidden;
-}
-[u-button-group] [u-button] {
-  border: none;
-  border-radius: 0;
 }
 
 [u-button-group-compact] {
   gap: 0;
+}
+[u-button-group-compact] [u-button] {
+  border: none;
+  border-radius: 0;
 }
 
 [u-button] > [u-icon] {

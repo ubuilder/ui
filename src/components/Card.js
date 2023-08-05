@@ -14,50 +14,60 @@ export const Card = Base({
 
 export const CardBody = Base({
   render($props, $slots) {
-    const props = extract($props, {
-      component: "card-body",
+    const {props, restProps} = extract($props, {
+      props: {
+        component: "card-body",
+      }
     })
 
-    return View(props, $slots);
+    return View({...props, ...restProps}, $slots);
   },
 });
 
 export const CardHeader = Base({
   render($props, $slots) {
-    const props = extract($props, {
-      component: "card-header",
+    const {props, restProps} = extract($props, {
+      props: {
+        component: "card-header",
+      }
     })
 
-    return View(props, $slots);
+    return View({...props, ...restProps}, $slots);
   },
 });
 
 export const CardTitle = Base({
   render($props, $slots) {
-    const props = extract($props, {
-      component: "card-title",
+    const {props, restProps} = extract($props, {
+      props: {
+        component: "card-title",
+      }
     })
 
-    return View(props, $slots);
+    return View({...props, ...restProps}, $slots);
   },
 });
 
 export const CardFooter = Base({
   render($props, $slots) {
-    const props = extract($props, {
-      component: "card-footer",
+    const {props, restProps} = extract($props, {
+      props: {
+        component: "card-footer",
+      }
     })
 
-    return View(props, $slots);
+    return View({...props, ...restProps}, $slots);
   },
 });
 
 export const CardActions = Base({
   render($props, $slots) {
-    const props = extract($props, {
-      component: "card-action",
+    const {props, restProps} = extract($props, {
+      props: {
+        component: "card-action",
+      }
     })
 
-    return View(props, $slots);
+    return View({...props, ...restProps}, $slots);
   },
 });

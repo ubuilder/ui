@@ -10838,21 +10838,21 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       if (typeof names[key] === "object") {
         result[key] = names[key];
         Object.keys(names[key]).map((key2) => {
-          if (allProps[key2]) {
+          if (typeof allProps[key2] !== 'undefined') {
             result[key][key2] = allProps[key2];
             delete restProps[key2];
           }
-          if (allProps["$" + key2]) {
+          if (typeof allProps["$" + key2] !== 'undefined') {
             result[key]["$" + key2] = allProps["$" + key2];
             delete restProps["$" + key2];
           }
         });
       } else {
-        if (allProps[key]) {
+        if (typeof allProps[key] !== 'undefined') {
           result[key] = allProps[key];
           delete restProps[key];
         }
-        if (allProps["$" + key]) {
+        if (typeof allProps["$" + key] !== 'undefined') {
           result["$" + key] = allProps["$" + key];
           delete restProps["$" + key];
         }
