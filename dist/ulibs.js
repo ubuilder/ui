@@ -10481,14 +10481,8 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     });
   };
 
-  // tooltip
-  // popup
-  // dropdown
-  // sidebar/navbar items
-  // import tippy from "tippy.js/dist/tippy.esm"
-
-    
-    //popup using floating-ui
+  //popup using floating-ui 
+    //popup is the base componenet for rest of componenets like popover, tooltip, dropdown,
     function Popup(Alpine) {
       Alpine.directive("popup", (el) => {
         const edge = el.querySelector('[u-popup-edge]');
@@ -10569,52 +10563,63 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           });
         }
 
+        const popupController = {
+          show() {
+            Object.assign(el.style, {
+              display: "block",
+            });
+            cleanUp = autoUpdate(target, floatingEl, () => {
+              updatePosition();
+            });
+          },
+          hide() {
+            Object.assign(el.style, {
+              display: "none",
+            });
+            if (cleanUp) {
+              cleanUp();
+            }
+          },
+          toggle() {
+            if (el.style.display === "block") {
+              this.hide();
+            } else {
+              this.show();
+            }
+          },
+        };
+
         Alpine.bind(target, () => ({
           "u-data"() {
-            return {
-              show() {
-                Object.assign(el.style, {
-                  display: "block",
-                });
-                cleanUp = autoUpdate(target, floatingEl, () => {
-                  updatePosition();
-                });
-              },
-              hide() {
-                Object.assign(el.style, {
-                  display: "none",
-                });
-                if (cleanUp) {
-                  cleanUp();
-                }
-              },
-              toggle() {
-                if (el.style.display === "block") {
-                  hide();
-                } else {
-                  show();
-                }
-              },
-            };
+            return popupController;
           },
         }));
 
-        if (trigger == "click") {
+        if (trigger == "focus") {
           Alpine.bind(target, () => ({
             "u-on:focus"() {
-              this.show();
+              popupController.show();
             },
             "u-on:blur"() {
-              this.hide();
+              popupController.hide();
             },
           }));
-        } else {
+        } else if(trigger == 'hover') {
           Alpine.bind(target, () => ({
             "u-on:mouseenter"() {
-              this.show();
+              popupController.show();
             },
             "u-on:mouseleave"() {
-              this.hide();
+              popupController.hide();
+            },
+          }));
+        }else {
+          Alpine.bind(target, () => ({
+            "u-on:click"() {
+              popupController.show();
+            },
+            "u-on:click.outside"() {
+              popupController.hide();
             },
           }));
         }
@@ -10631,10 +10636,10 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         if(!edge){
           Alpine.bind(floatingEl, () => ({
             "u-on:mouseenter"() {
-              this.hide();
+              popupController.hide();
             },
             "u-on:focus"() {
-              this.hide();
+              popupController.hide();
             },
           }));
         }
@@ -10807,16 +10812,8 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   }
 
   function Dropdown(Alpine){
-    let id = 0;
     Alpine.directive('dropdown', (el, {}, {Alpine})=>{
-      const target = el.querySelector('[target]');
-
-      const panel = el.querySelector('[u-dropdown-panel]');
-      panel.setAttribute('u-popup-target', `[u-dropdown-target-id-${id}]`);
-      target.setAttribute(`u-dropdown-target-id-${id}`, '');
-      panel.setAttribute('u-popup', '');
-      
-      
+     
     });
 
 
