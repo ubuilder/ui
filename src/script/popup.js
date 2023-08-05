@@ -93,52 +93,54 @@ import {
         });
       }
 
+      const popupController = {
+        show() {
+          Object.assign(el.style, {
+            display: "block",
+          });
+          cleanUp = autoUpdate(target, floatingEl, () => {
+            updatePosition();
+          });
+        },
+        hide() {
+          Object.assign(el.style, {
+            display: "none",
+          });
+          if (cleanUp) {
+            cleanUp();
+          }
+        },
+        toggle() {
+          if (el.style.display === "block") {
+            this.hide();
+          } else {
+            this.show();
+          }
+        },
+      };
+
       Alpine.bind(target, () => ({
         "u-data"() {
-          return {
-            show() {
-              Object.assign(el.style, {
-                display: "block",
-              });
-              cleanUp = autoUpdate(target, floatingEl, () => {
-                updatePosition();
-              });
-            },
-            hide() {
-              Object.assign(el.style, {
-                display: "none",
-              });
-              if (cleanUp) {
-                cleanUp();
-              }
-            },
-            toggle() {
-              if (el.style.display === "block") {
-                hide();
-              } else {
-                show();
-              }
-            },
-          };
+          return popupController;
         },
       }));
 
       if (trigger == "click") {
         Alpine.bind(target, () => ({
           "u-on:focus"() {
-            this.show();
+            popupController.show();
           },
           "u-on:blur"() {
-            this.hide();
+            popupController.hide();
           },
         }));
       } else {
         Alpine.bind(target, () => ({
           "u-on:mouseenter"() {
-            this.show();
+            popupController.show();
           },
           "u-on:mouseleave"() {
-            this.hide();
+            popupController.hide();
           },
         }));
       }
@@ -155,12 +157,10 @@ import {
       if(!edge){
         Alpine.bind(floatingEl, () => ({
           "u-on:mouseenter"() {
-            // this.hide();
-            
+            popupController.hide();
           },
           "u-on:focus"() {
-            // this.hide();
-            
+            popupController.hide();
           },
         }));
       }

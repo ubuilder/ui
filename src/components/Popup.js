@@ -21,7 +21,7 @@ export const Popup = Base({
       otherProps: {
         arrow: false,
         focusAble: true,
-        persistant: false
+        persistant: true
       }
     })
     
