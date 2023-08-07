@@ -9076,225 +9076,6 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   !!doc && 'content' in doc.createElement('template');
   !!doc && doc.createRange && 'createContextualFragment' in doc.createRange();
 
-  // tooltip
-  // popover
-  // dropdown
-  // sidebar/navbar items
-  // import tippy from "tippy.js/dist/tippy.esm"
-
-  function Popup(Alpine) {
-
-      // use @floating-ui/dom similar to yesvelte
-      Alpine.directive('popup', (el, {}, {evaluate, cleanup}) => {
-          el.getAttribute('trigger');
-          el.getAttribute('placement');
-          el.getAttribute('target');
-
-          // let targetEl;
-
-          // if(target) {
-          //     targetEl = evaluate(target) ?? el.previousElementSibling
-          // } else {
-          //     targetEl = el.previousElementSibling;
-          // }
-
-          // let instance = tippy(targetEl, {
-          //     // hideOnClick: true,
-          //     arrow: true,
-          //     // placement: placement,
-          //     // trigger: trigger,
-          //     content: (reference) => reference.innerHTML
-          // })[0]
-
-          // cleanup(() => {
-          //     instance.destroy()
-          // })        
-      });
-  }
-
-  function Input(Alpine) {
-    
-      Alpine.directive("input", (el) => {
-        Alpine.bind(el, {
-          // initial value
-          'u-init'() {
-            if(el.value) {
-              this.$data[el.getAttribute('name')] = el.value;
-            } else {
-              el.value = this.$data[el.getAttribute('name')];
-            }
-          },
-          "u-on:input"(e) {
-            this.$data[el.getAttribute("name")] = e.target.value;
-          },
-        });
-        // input
-      });
-    }
-
-  function Textarea(Alpine) {
-      Alpine.directive('textarea', (el) => {
-
-          // Alpine.bind(el, {
-          //     'u-on:input'(e) {
-          //         this.$data[el.getAttribute('name')] = e.target.value
-          //     }
-          // })
-      });
-  }
-
-  function attr($el, key, value) {
-    if (typeof value === "undefined") {
-      const result = $el.getAttribute(key);
-
-      if (result === "false") return false;
-      if (result === "true") return true;
-
-      return $el.getAttribute(key);
-    }
-
-    if (value == "") {
-      $el.removeAttribute(key);
-    } else if (value === true) {
-      $el.setAttribute(key, "");
-    } else {
-      $el.setAttribute(key, value);
-    }
-  }
-  function getAttr($el, key) {
-    const value = attr($el, key);
-
-    if (value === "") return true;
-    if (!value) return false;
-
-    return value;
-  }
-
-  function removeAttr($el, key) {
-    attr($el, key, "");
-  }
-  function setAttr($el, key, value = true) {
-    attr($el, key, value);
-  }
-
-  function query($el, key, callback) {
-    return $el.querySelectorAll(key).forEach((el) => callback(el));
-  }
-  function queryAttr($el, key, callback) {
-    return query($el, `[${key}]`, callback);
-  }
-
-  function Tabs(Alpine) {
-      Alpine.directive('tabs', (el, first, second)=>{
-          let tabItems = [];
-          let tabPanels = [];
-          let activeTab  = 0;
-
-          el.querySelectorAll('[u-tabs-item]').forEach((item) => {
-
-              tabItems.push(item);
-              let index = tabItems.indexOf(item);
-              if(getAttr(item, 'u-tabs-item-active')){
-                  activeTab = index;
-              }
-              item.onclick = (event)=>{
-                  queryAttr(el, 'u-tabs-item-active', (e)=>{
-                      removeAttr(e, 'u-tabs-item-active');
-                  });
-                  queryAttr(el, 'u-tabs-panel-active', (e)=>{
-                      removeAttr(e, 'u-tabs-panel-active');
-                  });
-                  setAttr(item, 'u-tabs-item-active', true);
-                  setAttr(tabPanels[index], 'u-tabs-panel-active', true);
-              };
-          },);
-
-          el.querySelectorAll('[u-tabs-panel]').forEach(panel => {
-              tabPanels.push(panel);
-          });
-
-          
-          setAttr(tabPanels[activeTab], 'u-tabs-panel-active', true);
-          setAttr(tabItems[activeTab], 'u-tabs-item-active', true);
-      
-
-
-
-      });
-  }
-
-  function Dropdown(Alpine){
-    Alpine.directive('dropdown', (el, {}, {Alpine})=>{
-      Alpine.bind(el, ()=>({
-        "u-data"(){
-          return {
-            open: false, 
-            timeout: undefined, 
-            toggle(){
-              if(this.open){ 
-                  return this.close()
-              } else { 
-                  return this.show()
-              }
-            },
-            show(){
-              this.open = true; 
-            },
-            close(){
-              this.open = false; 
-            },
-          }  
-        },
-        "u-id": "['dropdown']",
-      }));
-    });
-    Alpine.directive('dropdown-click', (el, {}, {Alpine})=>{
-      Alpine.bind(el, ()=>({
-        "u-on:click"(){
-          this.toggle();
-        },
-        "u-on:click.outside"(){
-          this.close();
-        }
-      }));
-    });
-    Alpine.directive('dropdown-hover', (el, {}, {Alpine})=>{
-      Alpine.bind(el, ()=>({
-        "u-on:mouseenter"(){
-          clearTimeout(this.timeout);
-          this.show();
-        },
-        "u-on:mouseleave"() {
-          this.timeout = setTimeout(()=>{
-            this.close();
-          },200);
-        },
-      }));
-    });
-
-    
-    // Alpine.directive('dropdown-item', (el, {}, {evaluate})=>{
-    //   Alpine.bind(el, () => ({
-        
-    //   }));
-    // })
-
-    Alpine.directive('dropdown-panel', (el, {}, {evaluate})=>{
-      Alpine.bind(el, () => ({
-        "u-show": "open",
-        // "u-on:click.outside"(){
-        //   this.close()
-        // } ,
-        // "u-on:mouseenter"() {
-        //   clearTimeout(this.timeout)
-        // },
-        // "u-on:mouseleave"(){
-        //   this.timeout = setTimeout(()=>{close()}, 200)
-        // },
-      }));
-    });
-  }
-
   function getAlignment(placement) {
     return placement.split('-')[1];
   }
@@ -10700,143 +10481,26 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     });
   };
 
-  //tooltip using floating-ui
-  function Tooltip(Alpine) {
-    Alpine.directive("tooltip", (el) => {
-      const target =
-        document.querySelector(el.getAttribute("u-tooltip-target")) ??
-        el.parentNode;
-      const floatingEl = el;
-
-      target.setAttribute("u-tooltip-reference", "");
-
-      const offsetValue = el.getAttribute("u-tooltip-offset") ?? 0;
-      const placement = el.getAttribute("u-tooltip-placement") ?? "bottom";
-      const margin = el.getAttribute("u-tooltip-margin") ?? 4;
-      const arrowMargin = el.getAttribute("u-tooltip-arrow-margin") ?? 4;
-      const trigger = el.getAttribute("u-tooltip-trigger") ?? "hover";
-
-      const arrowEl = el.querySelector("[u-tooltip-arrow]");
-
-      let timer;
-      let cleanUp;
-
-      function updatePosition() {
-        computePosition(target, floatingEl, {
-          placement,
-          middleware: [
-            offset(arrowEl ? 6 : offsetValue),
-            flip(),
-            shift({ padding: margin }),
-            arrowEl ? arrow({ element: arrowEl, padding: arrowMargin }) : "",
-          ],
-        }).then(({ x, y, placement, middlewareData }) => {
-          Object.assign(floatingEl.style, {
-            left: `${x}px`,
-            top: `${y}px`,
-          });
-
-          // Accessing the data
-          if (!arrowEl) return;
-          const { x: arrowX, y: arrowY } = middlewareData.arrow;
-
-          const staticSide = {
-            top: "bottom",
-            right: "left",
-            bottom: "top",
-            left: "right",
-          }[placement.split("-")[0]];
-
-          Object.assign(arrowEl.style, {
-            left: arrowX != null ? `${arrowX}px` : "",
-            top: arrowY != null ? `${arrowY}px` : "",
-            right: "",
-            bottom: "",
-            [staticSide]: "-4px",
-          });
-        });
-      }
-
-      Alpine.bind(target, () => ({
-        "u-data"() {
-          return {
-            show() {
-              clearTimeout(timer);
-
-              Object.assign(el.style, {
-                display: "block",
-              });
-              cleanUp = autoUpdate(target, floatingEl, () => {
-                updatePosition();
-              });
-            },
-            hide() {
-              clearTimeout(timer);
-
-              timer = setTimeout(() => {
-                Object.assign(el.style, {
-                  display: "none",
-                });
-                if (cleanUp) {
-                  cleanUp();
-                }
-              }, 150);
-            },
-            toggle() {
-              if (el.style.display === "block") {
-                hide(this);
-              } else {
-                show(this);
-              }
-            },
-          };
-        },
-      }));
-
-      if (trigger == "click") {
-        Alpine.bind(target, () => ({
-          "u-on:focus"() {
-            this.show();
-          },
-          "u-on:blur"() {
-            this.hide();
-          },
-          "u-on:click"() {
-            // this.toggle();
-          },
-        }));
-      } else {
-        Alpine.bind(target, () => ({
-          "u-on:mouseenter"() {
-            this.show();
-          },
-          "u-on:mouseleave"() {
-            this.hide();
-          },
-        }));
-      }
-    });
-  }
-
-  //popover using floating-ui
-    function Popover(Alpine) {
-      Alpine.directive("popover", (el) => {
-        const edge = el.querySelector('[u-popover-edge]');
+  //popup using floating-ui 
+    //popup is the base componenet for rest of componenets like popover, tooltip, dropdown,
+    function Popup(Alpine) {
+      Alpine.directive("popup", (el) => {
+        const edge = el.querySelector('[u-popup-edge]');
         
         const target =
-          document.querySelector(el.getAttribute("u-popover-target")) ?? el.parentNode;
+          document.querySelector(el.getAttribute("u-popup-target")) ?? el.parentNode;
         const floatingEl = el;
         
-        target.setAttribute('u-popover-reference', '');
+        target.setAttribute('u-popup-reference', '');
         
-        const offsetValue = el.getAttribute("u-popover-offset") ?? 0;
-        const placement = el.getAttribute("u-popover-placement") ?? "bottom";
-        const shiftMargin = el.getAttribute("u-popover-margin") ?? 4;
-        const arrowEl = el.querySelector("[u-popover-arrow]");
-        const trigger = el.getAttribute("u-popover-trigger") ?? "click";
-        const arrowMargin = el.getAttribute("u-popover-arrow-margin") ?? 4;
-        const flipAble = el.hasAttribute('u-popover-flip') ?? true;
-        const shiftAble = el.hasAttribute('u-popover-shift') ?? true;
+        const offsetValue = el.getAttribute("u-popup-offset") ?? 0;
+        const placement = el.getAttribute("u-popup-placement") ?? "bottom";
+        const shiftMargin = el.getAttribute("u-popup-margin") ?? 4;
+        const arrowEl = el.querySelector("[u-popup-arrow]");
+        const trigger = el.getAttribute("u-popup-trigger") ?? "click";
+        const arrowMargin = el.getAttribute("u-popup-arrow-margin") ?? 4;
+        const flipAble = el.hasAttribute('u-popup-flip') ?? true;
+        const shiftAble = el.hasAttribute('u-popup-shift') ?? true;
     
         let cleanUp;
     
@@ -10864,13 +10528,21 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
                 bottom: "top",
                 left: "right",
               }[placement.split("-")[0]];
+              const rotateDeg = {
+                bottom: 0,
+                left: 90,
+                top: 180,
+                right: 270,
+              }[placement.split("-")[0]];
               
               Object.assign(arrowEl.style, {
                 left: arrowX != null ? `${arrowX}px` : "",
                 top: arrowY != null ? `${arrowY}px` : "",
                 right: "",
                 bottom: "",
-                [staticSide]: "-4px",
+                [staticSide]: "-8px",
+                transform: `rotate(${rotateDeg}deg)`
+                
               });
             }
 
@@ -10891,52 +10563,63 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           });
         }
 
+        const popupController = {
+          show() {
+            Object.assign(el.style, {
+              display: "block",
+            });
+            cleanUp = autoUpdate(target, floatingEl, () => {
+              updatePosition();
+            });
+          },
+          hide() {
+            Object.assign(el.style, {
+              display: "none",
+            });
+            if (cleanUp) {
+              cleanUp();
+            }
+          },
+          toggle() {
+            if (el.style.display === "block") {
+              this.hide();
+            } else {
+              this.show();
+            }
+          },
+        };
+
         Alpine.bind(target, () => ({
           "u-data"() {
-            return {
-              show() {
-                Object.assign(el.style, {
-                  display: "block",
-                });
-                cleanUp = autoUpdate(target, floatingEl, () => {
-                  updatePosition();
-                });
-              },
-              hide() {
-                Object.assign(el.style, {
-                  display: "none",
-                });
-                if (cleanUp) {
-                  cleanUp();
-                }
-              },
-              toggle() {
-                if (el.style.display === "block") {
-                  hide();
-                } else {
-                  show();
-                }
-              },
-            };
+            return popupController;
           },
         }));
 
-        if (trigger == "click") {
+        if (trigger == "focus") {
           Alpine.bind(target, () => ({
             "u-on:focus"() {
-              this.show();
+              popupController.show();
             },
             "u-on:blur"() {
-              this.hide();
+              popupController.hide();
             },
           }));
-        } else {
+        } else if(trigger == 'hover') {
           Alpine.bind(target, () => ({
             "u-on:mouseenter"() {
-              this.show();
+              popupController.show();
             },
             "u-on:mouseleave"() {
-              this.hide();
+              popupController.hide();
+            },
+          }));
+        }else {
+          Alpine.bind(target, () => ({
+            "u-on:click"() {
+              popupController.show();
+            },
+            "u-on:click.outside"() {
+              popupController.hide();
             },
           }));
         }
@@ -10953,15 +10636,196 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         if(!edge){
           Alpine.bind(floatingEl, () => ({
             "u-on:mouseenter"() {
-              this.hide();
+              popupController.hide();
             },
             "u-on:focus"() {
-              this.hide();
+              popupController.hide();
             },
           }));
         }
         
       });
+    }
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // export function Popup(Alpine) {
+
+  //     // use @floating-ui/dom similar to yesvelte
+  //     Alpine.directive('popup', (el, {}, {evaluate, cleanup}) => {
+  //         const trigger = el.getAttribute('trigger')
+  //         const placement = el.getAttribute('placement')
+  //         const target = el.getAttribute('target')
+
+  //         // let targetEl;
+
+  //         // if(target) {
+  //         //     targetEl = evaluate(target) ?? el.previousElementSibling
+  //         // } else {
+  //         //     targetEl = el.previousElementSibling;
+  //         // }
+
+  //         // let instance = tippy(targetEl, {
+  //         //     // hideOnClick: true,
+  //         //     arrow: true,
+  //         //     // placement: placement,
+  //         //     // trigger: trigger,
+  //         //     content: (reference) => reference.innerHTML
+  //         // })[0]
+
+  //         // cleanup(() => {
+  //         //     instance.destroy()
+  //         // })        
+  //     })
+  // }
+
+  function Input(Alpine) {
+    
+      Alpine.directive("input", (el) => {
+        Alpine.bind(el, {
+          // initial value
+          'u-init'() {
+            if(el.value) {
+              this.$data[el.getAttribute('name')] = el.value;
+            } else {
+              el.value = this.$data[el.getAttribute('name')];
+            }
+          },
+          "u-on:input"(e) {
+            this.$data[el.getAttribute("name")] = e.target.value;
+          },
+        });
+        // input
+      });
+    }
+
+  function Textarea(Alpine) {
+      Alpine.directive('textarea', (el) => {
+
+          // Alpine.bind(el, {
+          //     'u-on:input'(e) {
+          //         this.$data[el.getAttribute('name')] = e.target.value
+          //     }
+          // })
+      });
+  }
+
+  function attr($el, key, value) {
+    if (typeof value === "undefined") {
+      const result = $el.getAttribute(key);
+
+      if (result === "false") return false;
+      if (result === "true") return true;
+
+      return $el.getAttribute(key);
+    }
+
+    if (value == "") {
+      $el.removeAttribute(key);
+    } else if (value === true) {
+      $el.setAttribute(key, "");
+    } else {
+      $el.setAttribute(key, value);
+    }
+  }
+  function getAttr($el, key) {
+    const value = attr($el, key);
+
+    if (value === "") return true;
+    if (!value) return false;
+
+    return value;
+  }
+
+  function removeAttr($el, key) {
+    attr($el, key, "");
+  }
+  function setAttr($el, key, value = true) {
+    attr($el, key, value);
+  }
+
+  function query($el, key, callback) {
+    return $el.querySelectorAll(key).forEach((el) => callback(el));
+  }
+  function queryAttr($el, key, callback) {
+    return query($el, `[${key}]`, callback);
+  }
+
+  function Tabs(Alpine) {
+      Alpine.directive('tabs', (el, first, second)=>{
+          let tabItems = [];
+          let tabPanels = [];
+          let activeTab  = 0;
+
+          el.querySelectorAll('[u-tabs-item]').forEach((item) => {
+
+              tabItems.push(item);
+              let index = tabItems.indexOf(item);
+              if(getAttr(item, 'u-tabs-item-active')){
+                  activeTab = index;
+              }
+              item.onclick = (event)=>{
+                  queryAttr(el, 'u-tabs-item-active', (e)=>{
+                      removeAttr(e, 'u-tabs-item-active');
+                  });
+                  queryAttr(el, 'u-tabs-panel-active', (e)=>{
+                      removeAttr(e, 'u-tabs-panel-active');
+                  });
+                  setAttr(item, 'u-tabs-item-active', true);
+                  setAttr(tabPanels[index], 'u-tabs-panel-active', true);
+              };
+          },);
+
+          el.querySelectorAll('[u-tabs-panel]').forEach(panel => {
+              tabPanels.push(panel);
+          });
+
+          
+          setAttr(tabPanels[activeTab], 'u-tabs-panel-active', true);
+          setAttr(tabItems[activeTab], 'u-tabs-item-active', true);
+      
+
+
+
+      });
+  }
+
+  function Dropdown(Alpine){
+    Alpine.directive('dropdown', (el, {}, {Alpine})=>{
+     
+    });
+
+
+  }
+
+  //tooltip using floating-ui
+  function Tooltip(Alpine) {
+    Alpine.directive("tooltip", (el) => {});
+  }
+
+  function Popover(Alpine) {
+      Alpine.directive("popover", (el) => {});
     }
 
   const prefix = "u";

@@ -32,6 +32,7 @@ const components = {
   modal: { title: "Modal" },
   offcanvas: { title: "Offcanvas", soon: true },
   popover: { title: "Popover" },
+  popup: { title: "Popup" },
   progress: { title: "Progress" },
   radio: { title: "Radio", danger: true },
   select: { title: "Select", danger: true },

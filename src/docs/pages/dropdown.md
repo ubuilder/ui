@@ -5,90 +5,26 @@
 this is defualt Dropdown component
 
 ```js
-Dropdown(
-  { label: "Foods", margin: "md" },
+Dropdown([
+  Button('dropdown'),
   DropdownPanel([
     DropdownItem({ label: "Rice" }),
     DropdownItem({ label: "Spagati" }),
     DropdownItem({ label: "Tunna" }),
-  ])
-);
+  ])]
+)
 ```
 
-## hover
+
+## arrow and hover
+
+arrow: true(default), false 
+trigger: click(defaut), hover
 
 ```js
-Row({gap: 'md'},[
-          Dropdown({label: 'Foods', margin: 'md', trigger: 'hover'},
-            DropdownPanel(
-              [
-                DropdownItem({label: 'Rice'}),
-                DropdownItem({label: 'Spagati'}),
-                DropdownItem({label: 'Tunna'}),
-              ]
-            )
-          ),
-
-          Dropdown({label: 'Foods', margin: 'md', trigger: 'hover'},
-            DropdownPanel(
-              [
-                DropdownItem({label: 'Rice', icon: 'user'}),
-                DropdownItem({label: 'Spagati', icon: 'home'}),
-                DropdownItem({label: 'Tunna', icon: 'star'}),
-              ]
-            )
-          ),
-          Dropdown({label: 'Pages', margin: 'md', trigger: 'hover'},
-            DropdownPanel(
-              [
-                DropdownItem({label: 'Tab',  href: '/compoenents/tab'}),
-                DropdownItem({label: 'Modal',  href: '/components/modal'}),
-                DropdownItem({label: 'Accordion', href: '/components/accordions'}),
-              ]
-            )
-          )
-      ]),
-```
-
-## click
-
-```js
-Row({gap: 'md'},[
-          Dropdown({label: 'Foods', margin: 'md', trigger: 'hover'},
-            DropdownPanel(
-              [
-                DropdownItem({label: 'Rice'}),
-                DropdownItem({label: 'Spagati'}),
-                DropdownItem({label: 'Tunna'}),
-              ]
-            )
-          ),
-          Dropdown({label: 'Foods', margin: 'md', trigger: 'hover'},
-            DropdownPanel(
-              [
-                DropdownItem({label: 'Rice', icon: 'user'}),
-                DropdownItem({label: 'Spagati', icon: 'home'}),
-                DropdownItem({label: 'Tunna', icon: 'star'}),
-              ]
-            )
-          ),
-          Dropdown({label: 'Pages', margin: 'md', trigger: 'hover'},
-            DropdownPanel(
-              [
-                DropdownItem({label: 'Tab',  href: '/compoenents/tab'}),
-                DropdownItem({label: 'Modal',  href: '/components/modal'}),
-                DropdownItem({label: 'Accordion', href: '/components/accordions'}),
-              ]
-            )
-          )
-      ]),
-```
-
-## without arrow
-
-```js
-Row({gap: 'md'},[
-  Dropdown({label: 'Foods', margin: 'md', arrow: false},
+Dropdown({ margin: 'md' , trigger: 'hover', arrow: false},
+  [
+    Button('arrow and hover'),
     DropdownPanel(
       [
         DropdownItem({label: 'Rice'}),
@@ -96,15 +32,44 @@ Row({gap: 'md'},[
         DropdownItem({label: 'Tunna'}),
       ]
     )
-  ),
-  Dropdown({label: 'Foods', margin: 'md', arrow: false, trigger: 'hover'},
+  ]
+)
+```
+
+## items icon property
+
+icon prop can have the name of icons defalut value is 'undefined' means no icon
+
+
+```js
+Dropdown({label: 'Foods', margin: 'md', arrow: false},
+  [
+    Icon({name:'user' , style: 'border: 1px solid gray', target: true}),
     DropdownPanel(
       [
-        DropdownItem({label: 'Rice'}),
-        DropdownItem({label: 'Spagati'}),
-        DropdownItem({label: 'Tunna'}),
+        DropdownItem({label: 'Rice', icon: 'user'}),
+        DropdownItem({label: 'Spagati', icon: 'home'}),
+        DropdownItem({label: 'Tunna', icon: 'star'}),
       ]
     )
-  ),
-]),
+  ]
+),
+```
+
+## items href property
+href property defines the dropdown items as anchor tag with href property equalt to item's href property
+
+```js
+Dropdown({label: 'Pages', margin: 'md', arrow: false},
+  [
+    Avatar({arrow : false, style: 'color:gray', border: 'sm'},"AV"),
+    DropdownPanel(
+      [
+        DropdownItem({label: 'Tab',  href: '/ui/icon'}),
+        DropdownItem({label: 'Modal',  href: '/ui/modal'}),
+        DropdownItem({label: 'Accordion', href: '/ui/accordions'}),
+      ]
+    )
+  ]
+)
 ```

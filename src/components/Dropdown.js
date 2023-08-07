@@ -2,30 +2,31 @@ import { Base, extract } from "../utils.js";
 import { View } from "./View.js";
 import { Icon } from "./Icon.js";
 import { Button } from "./Button.js";
+import { Popup } from "./Popup.js";
 
 export const Dropdown = Base({
   render($props, $slots) {
-    const { props, restProps, cssProps } = extract($props, {
+    const { props, restProps, cssProps , arrow} = extract($props, {
       props: {
         component: "dropdown",
-        label,
-        size: "md",
-        arrow: true,
-        trigger: "click", //click or hover
+        label: undefined,
         open: false,
+        trigger: "click", //click or hover
+        tabindex: '0'
       },
-      cssProps: {
-        size,
+      cssProp: {
+        size : undefined,
       },
+      arrow: true
     });
+    if(arrow)props['u-dropdown-arrow'] = 'true'
+ 
     props["u-dropdown-click"] = "true";
-    if (trigger == "hover") {
+    if (props.trigger == "hover") {
       props["u-dropdown-hover"] = "true";
     }
 
-    $slots = [DropdownLabel({ text: label, arrow }), $slots];
-
-    return View(props, $slots);
+    return View({...props, cssProps}, $slots);
   },
 });
 
@@ -35,23 +36,22 @@ export const DropdownItem = Base({
       props: {
         component: "dropdown-item",
         label: undefined,
-        size: "md",
         href: undefined,
         icon: undefined,
       },
       cssProps: {
-        size,
+        size: undefined,
       },
     });
 
     $slots = [
-      icon && Icon(icon),
-      label && View({ tag: "span" }, label),
+      props.icon && Icon(props.icon),
+      props.label && View({ tag: "span" }, props.label),
       $slots,
     ];
 
-    let content = href
-      ? View({ ...props, tag: "a", href }, $slots)
+    let content = props.href
+      ? View({ ...props, tag: "a", href:props.href }, $slots)
       : Button(props, $slots);
     return content;
   },
@@ -61,46 +61,14 @@ export const DropdownPanel = Base({
   render($props, $slots) {
     const { props, restProps, cssProps } = extract($props, {
       props: {
-        component: "dropdown-panel",
-        size: "md",
+        trigger:'click'
       },
       cssProps: {
-        size: size,
+        size: 'md',
       },
     });
+    props['u-dropdown-panel'] = 'true'
 
-    return View(props, $slots);
-  },
-});
-
-const DropdownLabel = Base({
-  render($props, $slots) {
-    const { props, restProps, cssProps } = extract($props, {
-      props: {
-        component: "dropdown-label",
-        text,
-        arrow: true,
-        size: "md",
-      },
-      cssProps: {
-        size: size,
-      },
-    });
-
-    $props = [
-      View({ tag: "span" }, text),
-      arrow
-        ? [
-            View(
-              { tag: "span", "u-arrow-down": "true", "u-show": "!open" },
-              ">"
-            ),
-            View({ tag: "span", "u-arrow-up": "true", "u-show": "open" }, "<"),
-          ]
-        : "",
-      $slots,
-    ];
-
-    return View(props, $props);
+    return Popup(props, $slots);
   },
 });
