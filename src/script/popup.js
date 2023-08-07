@@ -159,6 +159,9 @@ import {
         "u-on:focus"() {
           floatingEl.focus()
         },
+        "u-on:keyup.escape.window"(){
+          popupController.hide()
+        }
       }));
 
       //if the persistant is false
