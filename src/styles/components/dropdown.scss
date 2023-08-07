@@ -49,10 +49,10 @@
     transition-duration: 400ms;
     transition-timing-function: ease-in;
 }
-[u-dropdown-arrow] >*{
-    padding-left: 30px;
+[u-dropdown-arrow] >*:not([u-dropdown-panel]){
+    padding-right: 30px;
 }
-[u-dropdown-arrow] >*:after{
+[u-dropdown-arrow] > *:not([u-dropdown-panel]):after{
     box-sizing: content-box;
     position: absolute;
     top: 50%;

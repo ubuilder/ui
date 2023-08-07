@@ -51,8 +51,8 @@ export const DropdownItem = Base({
     ];
 
     let content = props.href
-      ? View({ ...props, tag: "a", href:props.href }, $slots)
-      : Button(props, $slots);
+      ? View({ ...props, tag: "a", href:props.href, ...restProps }, $slots)
+      : Button({...props, ...restProps}, $slots);
     return content;
   },
 });
