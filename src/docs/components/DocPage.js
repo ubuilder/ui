@@ -34,14 +34,7 @@ export function DocPage(
       component,
       ...restProps,
       htmlHead: [
-        `<script>
-        function setTheme(theme) {
-          localStorage.setItem('theme', theme)
-          document.documentElement.setAttribute('u-view-theme', theme)
-        } 
-        
-        setTheme((localStorage.getItem('theme') ?? 'light'))
-        </script>`,
+        `م
 
         ...(restProps.htmlHead ?? []),
         View({ tag: "meta", charset: "UTF-8" }),

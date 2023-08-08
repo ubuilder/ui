@@ -4,9 +4,10 @@ import morphdom from "morphdom";
 export function ClientSideRouting(Alpine) {
 
   // Disable routing... (It has some bugs )
-  return true;
+  // return true;
   
     function findAnchorTag(element) {
+      if(!element) return null;
       if (element.tagName === "HTML") return null;
       if (element.tagName === "A") return element;
       else return findAnchorTag(element.parentElement);
