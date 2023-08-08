@@ -34,8 +34,6 @@ export function DocPage(
       component,
       ...restProps,
       htmlHead: [
-        `م
-
         ...(restProps.htmlHead ?? []),
         View({ tag: "meta", charset: "UTF-8" }),
         View({
