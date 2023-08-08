@@ -1,12 +1,10 @@
 import { Base, extract } from "../utils.js";
 import { View } from "./View.js";
-
+import { Popup } from './Popup.js'
 export const Tooltip = Base({
   render($props, $slots){
     const {props, cssProps, arrow, restProps} = extract($props, {
-      props: {
-        component: 'tooltip',
-      },
+      
       cssProps: {
         target: undefined,
         offset: undefined,
@@ -19,12 +17,6 @@ export const Tooltip = Base({
     })
   
  
-    //for later updates
-    // if(arrow)content =  View(props, [$slots, TooltipArrow([View({tag: 'div', "u-tooltip-arrow-inside": ''},'')])])
-    
-    return View({...props, cssProps, ...restProps}, [
-      arrow ? View({component: props.component + '-arrow'}) : [],
-      $slots,
-    ])
+    return Popup({arrow, ...cssProps, ...restProps, "u-tooltip": true}, $slots)
   }
 });
