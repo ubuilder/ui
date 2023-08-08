@@ -6,7 +6,7 @@ export const Icon = Base({
     const { props, restProps, cssProps } = extract($props, {
       props: {
         component: "icon",
-        tag: "span",
+        tag: "i",
         name: undefined,
       },
       cssProps: { size: "md", color: undefined },
