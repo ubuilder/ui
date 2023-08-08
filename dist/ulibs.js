@@ -9920,6 +9920,9 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
             history.pushState({}, undefined, pathname);
             return updateRoute(pathname)
           },
+          reload() {
+            updateRoute(window.location.pathname);
+          }
         };
       });
     }

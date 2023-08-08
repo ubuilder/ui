@@ -90,6 +90,9 @@ export function ClientSideRouting(Alpine) {
           history.pushState({}, undefined, pathname);
           return updateRoute(pathname)
         },
+        reload() {
+          updateRoute(window.location.pathname)
+        }
       };
     });
   }
