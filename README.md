@@ -18,7 +18,7 @@ These components are built as JavaScript functions that generate clean HTML code
 To use @ulibs/ui in your project, you can install it via npm or yarn:
 
 ```bash
-npm install @ulibs/ui
+npm install @ulibs/ui@next
 ```
 
 or
