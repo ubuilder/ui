@@ -26,7 +26,7 @@ export const Dropdown = Base({
       props["u-dropdown-hover"] = "true";
     }
 
-    return View({...props, cssProps}, $slots);
+    return View({...props, cssProps, ...restProps}, $slots);
   },
 });
 
