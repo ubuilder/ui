@@ -984,10 +984,9 @@ code {
 }
 
 [u-divider] {
-  border: none;
-  height: 1px;
-  margin: var(--size-sm) 0;
-  background-color: var(--divider-bg);
+  border-bottom: 1px solid var(--divider-bg);
+  height: 0px;
+  margin: var(--size-xs) 0;
 }
 
 /* #endregion */

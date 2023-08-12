@@ -16,7 +16,7 @@ const components = {
   card: { title: "Card", danger: true },
   checkbox: { title: "Checkbox & Radio", danger: true },
   colorpicker: { title: "Colorpicker", soon: true },
-  codeeditor: { title: "Code Editor", soon: true },
+  'code-editor': { title: "Code Editor", new: true },
   divider: { title: "Divider" },
   dropdown: { title: "Dropdown", danger: true },
   datepicker: { title: "Datepicker", new: true },

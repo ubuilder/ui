@@ -14,8 +14,6 @@ export const BreadcrumbItem = Base({
   render($props, $slots) {
     const { props, restProps, cssProps } = extract($props, {
       props: {
-        active: false,
-        disabled: false,
         component: "breadcrumb-item",
         tag: "a",
       },
@@ -26,8 +24,8 @@ export const BreadcrumbItem = Base({
     });
 
     return View(
-      { component: component + "-wrapper", tag: "li" },
-      View(props, $slots)
+      { component: component + "-wrapper", tag: "li", ...restProps },
+      View({...props, cssProps}, $slots)
     );
   },
 });
