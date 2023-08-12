@@ -32,6 +32,11 @@
   width: 100%;
 }
 
+[u-form-field-input][disabled] {
+  opacity: 0.8;
+}
+
+
 [u-form-field-focus] {
   border: 1px solid var(--color-primary-300);
   outline: none;
@@ -425,11 +430,24 @@ select[u-autocomplete] {
   @extend [u-form-field-focus];
 }
 
+
 // Code editor
+
+@import "../../../node_modules/highlight.js/scss/atom-one-light.scss";
+
 [u-code-editor] {
   @extend [u-form-field-input];
-
-  padding: 0 !important;
+    --code-editor-height: var(--size-md);
+    min-height: calc(var(--code-editor-height) * 10);
+    font-family: 'Inconsolata', 'Courier New', Courier, monospace;
+    @include font-size(lg);
+}
+[u-code-editor-textarea] {
+  height: 0;
+  width: 0;
+  position: absolute;
+  border: none;
+  z-index: -1;
 }
 
 [u-code-editor]:focus-within {
