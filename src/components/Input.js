@@ -23,7 +23,7 @@ export const Input = Base({
       }
     })
 
-    props.$model = props.name
+    // if(props.name)props.$model = props.name
 
     if (!props.value) {
       if (props.type === "number") {
@@ -33,6 +33,6 @@ export const Input = Base({
       }
     }
 
-    return FormField({...wrapperProps, ...restProps}, View(props));
+    return FormField({...wrapperProps}, View({...restProps, ...props}));
   },
 });
