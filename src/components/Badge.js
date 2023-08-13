@@ -7,8 +7,6 @@ export const Badge = Base({
       props: {
         tag: "span",
         component: "badge",
-        color: "light",
-        size: "md",
       },
       cssProps: {
         color: undefined,

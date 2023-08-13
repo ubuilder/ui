@@ -1,84 +1,63 @@
-// import {  keymap, lineNumbers } from '@codemirror/view'
-// import { EditorState } from '@codemirror/state'
-// import {defaultKeymap} from "@codemirror/commands"
-// import { javascript } from '@codemirror/lang-javascript'
-// import { css } from '@codemirror/lang-css'
-// import { html } from '@codemirror/lang-html'
-// import {StateEffect, StateField} from "@codemirror/state"
-// import {Decoration} from "@codemirror/view"
-
-
-// import {autocompletion} from "@codemirror/autocomplete"
-// import { EditorView, basicSetup } from 'codemirror'
-// console.log('basicSetup: ', basicSetup)
-
-// // Our list of completions (can be static, since the editor
-// /// will do filtering based on context).
-// const completions = [
-//     {label: "{{ID}}", type: "constant", info: 'This is help', apply: '{{id}}'},
-//     {label: "{{Name}}", type: "constant", info: 'This is help', apply: '{{name}}'},
-//     {label: "{{Username}}", type: "constant", info: 'This is help', apply: '{{username}}'},
-// ]
-
-// function myCompletions(context) {
-//     console.log('completion', context)
-//   let before = context.matchBefore(/\{\{/)
-//   // If completion wasn't explicitly started and there
-//   // is no word before the cursor, don't open completions.
-
-//   console.log('completion', {context, before})
-//   if (!context.explicit && !before) return null
-
-//   console.log('here')
-//   return {
-//     from: before ? before.from : context.pos,
-//     options: completions,
-//     validFor: (text, from, to, state) => console.log({text, from, to, state})
-//   }
-// }
+import {CodeJar} from 'codejar'
+import * as hljs from 'highlight.js'
 
 export function CodeEditor(Alpine) {
 
-//     Alpine.directive('code-editor', (el, {}, {cleanup}) => {
-//         const lang = el.getAttribute('lang')
-//         const name = el.getAttribute('name')
-//         let doc = el.getAttribute('value')
-//         const readonly = el.getAttribute('readonly')
-        
-//         const languages = {
-//             jsx: javascript({jsx: true}),
-//             js: javascript(),
-//             ts: javascript({typescript: true}),
-//             css: css(),
-//             html: html({autoCloseTags: true})
-//         }
+    Alpine.directive('code-editor', (el, {}, {cleanup}) => {
 
-//         const onUpdate = (tr, view) => {
-//             if(doc !== view.state.doc.toString()) {
-//                 doc = view.state.doc.toString()
-//                 Alpine.$data(el)[name] = doc
-//             }
-//             view.update([tr])
-//         }
-        
-//         const editor = new EditorView({
-//             doc,
-//             dispatch: onUpdate,
-//             extensions: [
-//                 // basicSetup,
-//                 // EditorState.readOnly.of(readonly),
-//                 keymap.of(defaultKeymap), 
-//                 lineNumbers(), 
-//                 languages[lang] ?? languages['js'], // default language is js
-//                 autocompletion({override: [myCompletions]}),
+        const value = el.getAttribute('value')
+        const readonly = el.hasAttribute('readonly')
+        const disabled = el.hasAttribute('disabled')
+        el.classList.add('language-' + el.getAttribute('lang'))
+
+        Alpine.bind(el, {
+            'u-modelable': 'value',
+            'u-data'() {
+                return {
+                    value: el.getAttribute('value')
+                }
+            },
+            'u-init'() {
+                console.log(hljs.default.highlightElement)
+                const instance = CodeJar(el,hljs.default.highlightElement, {
+                    tab: '  ',
+                    catchTab: false
+                })
+                if(value) {
+                    instance.updateCode(value)
+                }
+
+                if(readonly) {
+                    el.setAttribute('contenteditable','false');
+                    el.setAttribute('tabindex','0');
+                }
+
+                if(disabled) {
+                    el.setAttribute('contenteditable','false');
+                }
+
+                let thisValue = instance.toString();
+                instance.onUpdate(code => {
+                    console.log('calling on update', code)
+                    thisValue = code
+                    this.$data.value = code
+                })
+
+                cleanup(() => {
+                    instance.destroy()
+                })
                 
-//             ],
-//             parent: el
-//         })
+                this.$watch('value', (value) => {
 
-//         cleanup(() => {
-//             editor.destroy()
+                    if(thisValue === value) return;
 
-//         })            
-//     })
+                    console.log('calling updateCode', value)
+                    instance.updateCode(value)
+                    
+
+                })        
+            }
+        })
+        
+    })
 }

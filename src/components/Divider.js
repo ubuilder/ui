@@ -7,10 +7,9 @@ export const Divider = Base({
       props: {
         tag: "hr",
         component: "divider",
-        color: "secondary",
       },
       cssProps: {
-        color: undefined,
+        color: 'base',
       },
     });
     return View({...props, ...restProps, cssProps}, $slots);

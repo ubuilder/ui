@@ -181,7 +181,7 @@ export const View = Base({
           delete $props[key]
           return View({tag: 'template', 'u-for': ufor}, View($props, $slots))
         } else if (key === "$model") {
-          props["u-model"] = props[key];
+          props["u-model.fill"] = props[key];
         } else {
           props[`u-bind:` + key.substring(1)] = props[key];
         }
