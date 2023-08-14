@@ -433,14 +433,14 @@ select[u-autocomplete] {
 
 // Code editor
 
-@import "../../../node_modules/highlight.js/scss/atom-one-light.scss";
 
 [u-code-editor] {
   @extend [u-form-field-input];
     --code-editor-height: var(--size-md);
     min-height: calc(var(--code-editor-height) * 10);
     font-family: 'Inconsolata', 'Courier New', Courier, monospace;
-    @include font-size(lg);
+  @include font-size(lg);
+  background-color: var(--color-base-200) !important;
 }
 [u-code-editor-textarea] {
   height: 0;
@@ -448,6 +448,12 @@ select[u-autocomplete] {
   position: absolute;
   border: none;
   z-index: -1;
+}
+
+@import "../../../node_modules/highlight.js/scss/atom-one-light.scss";
+
+[u-view-theme="dark"] {
+  @import "../../../node_modules/highlight.js/scss/atom-one-dark.scss";
 }
 
 [u-code-editor]:focus-within {

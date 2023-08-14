@@ -15,6 +15,19 @@ import { classname, Base } from "../utils.js";
       //* justify (start, center, end, between, evenly, around)
       //* justifySelf (start, center, end, between, evenly, around)
 
+function escapeHTML(str) {
+  if(typeof str === 'string') {
+
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+  }
+  
+return str;
+}
 
 export const View = Base({
   render($props, $slots) {
@@ -191,6 +204,9 @@ export const View = Base({
           props[key] = "";
         }
       }
+    }
+    for(let key in props) {
+      props[key] = escapeHTML(props[key])
     }
 
     return tag(tagName, props, $slots.filter(Boolean));

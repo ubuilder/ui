@@ -35,7 +35,7 @@ CodeEditor({ label: "Template", readonly: true, value: '// This is readonly code
 ## Initial Value
 
 ```js
-CodeEditor({ label: "Template", value: "&lt;h1&gt;Hello&lt;/h1&gt;" });
+CodeEditor({ label: "Template", value: "<h1>Hello</h1>" });
 ```
 
 ## Language
@@ -47,13 +47,13 @@ Default language is hbs (Handlebars)
   CodeEditor({
     label: "Template",
     lang: "html",
-    value: "&lt;h1&gt;Hello&lt;/h1&gt;",
+    value: "<h1>Hello</h1>",
   }),
   CodeEditor({ label: "Style", lang: "css", value: ".h1 {color: red;}" }),
   CodeEditor({
     label: "Script",
     lang: "js",
-    value: "console.log(&quot;Hello World!&quot;)",
+    value: 'console.log("Hello World!")',
   }),
 ];
 ```
@@ -64,8 +64,8 @@ Default language is hbs (Handlebars)
 View(
   {
     $data: {
-      js: "console.log(\";Hello World!\")",
-      html: "&lt;h1&gt;Hello&lt;/h1&gt;",
+      js: `console.log("Hello World!")`,
+      html: "<h1>Hello</h1>",
       css: "h1 {color: red;}",
     },
   },
@@ -84,7 +84,7 @@ View(
       border: true,
       borderColor: 'base-400',
 
-      $srcdoc: `'&lt;html&gt;&lt;head&gt;&lt;style&gt;' + css + '&lt;/style&gt;&lt;/head&gt;&lt;body&gt;' + html + '&lt;script&gt;' + js + '&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;' `,
+      $srcdoc: `'<html><head><style>' + css + '</style></head><body>' + html + '<script>' + js + '&lt;/script></body></html>' `,
     }),
   ]
 );

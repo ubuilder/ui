@@ -11382,7 +11382,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
    * @param {string} value
    * @returns {string}
    */
-  function escapeHTML(value) {
+  function escapeHTML$1(value) {
     return value
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
@@ -11479,7 +11479,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
      *
      * @param {string} text */
     addText(text) {
-      this.buffer += escapeHTML(text);
+      this.buffer += escapeHTML$1(text);
     }
 
     /**
@@ -12922,7 +12922,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   */
 
 
-  const escape = escapeHTML;
+  const escape = escapeHTML$1;
   const inherit = inherit$1;
   const NO_MATCH = Symbol("nomatch");
   const MAX_KEYWORD_HITS = 7;
@@ -71070,7 +71070,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
       Alpine.directive('code-editor', (el, {}, {cleanup}) => {
 
-          const value = el.getAttribute('value');
+          const value = (el.getAttribute('value') ?? '').replace(/\\n/g, '\n');
           const readonly = el.hasAttribute('readonly');
           const disabled = el.hasAttribute('disabled');
           el.classList.add('language-' + el.getAttribute('lang'));
@@ -71412,6 +71412,19 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         //* justify (start, center, end, between, evenly, around)
         //* justifySelf (start, center, end, between, evenly, around)
 
+  function escapeHTML(str) {
+    if(typeof str === 'string') {
+
+    return str
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+    }
+    
+  return str;
+  }
 
   const View = Base({
     render($props, $slots) {
@@ -71588,6 +71601,9 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
             props[key] = "";
           }
         }
+      }
+      for(let key in props) {
+        props[key] = escapeHTML(props[key]);
       }
 
       return tag(tagName, props, $slots.filter(Boolean));

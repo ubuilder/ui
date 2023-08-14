@@ -5,7 +5,7 @@ export function CodeEditor(Alpine) {
 
     Alpine.directive('code-editor', (el, {}, {cleanup}) => {
 
-        const value = el.getAttribute('value')
+        const value = (el.getAttribute('value') ?? '').replace(/\\n/g, '\n')
         const readonly = el.hasAttribute('readonly')
         const disabled = el.hasAttribute('disabled')
         el.classList.add('language-' + el.getAttribute('lang'))

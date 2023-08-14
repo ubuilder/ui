@@ -89,6 +89,8 @@ export async function readMarkdownDoc(path) {
   }
   if (activeSection && activeSection.length > 0) docs.sections.push(activeSection);
 
+
+  console.log(docs.sections.map(section => section))
   return docs;
 }
 // const result = await readMarkdownDoc("./src/docs/pages/alert.md");

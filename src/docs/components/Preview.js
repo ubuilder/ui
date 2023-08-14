@@ -74,8 +74,7 @@ export const Preview = Base({
     const page = View({p: 'lg'}, [${code?.trim()}])
 
     document.getElementById("preview-html-${id}").innerHTML = page.toString()
-    // document.getElementById("preview-code-${id}").innerHTML = page.toString().replace(/</g, "\\n&#60;").replace(/>/g, "&#62;\\n\\t").replace(/\\n/g, '<br/>')
-`
+    `
     
     if(staticc) {
       return components.Card({bgColor: 'base-100', p: 'sm', borderColor: 'base-400'},[
@@ -124,19 +123,8 @@ export const Preview = Base({
             ),
           ]) : '',
           $props.code &&
-            TabsPanel([
-              View(
-                {
-                  tag: "pre",
-                  style:
-                    "font-size: var(--size-md); line-height: var(--size-lg); overflow: auto",
-                },
-                [View({ tag: "code" }, [
-                  $props.code.trim()
-                  // CodeEditor({name: 'preview-code-' + id, value: $props.code, lang: 'js', style: 'min-height: 200px'})
-                
-                ])]
-              ),
+            TabsPanel({p: 0}, [
+              CodeEditor({readonly: true, value: $props.code.trim(), lang: 'js'})
             ]),
         ]),
       ]
