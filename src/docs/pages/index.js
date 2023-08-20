@@ -28,7 +28,7 @@ const components = {
   header: { title: "Header", soon: true },
   icon: { title: "Icon" },
   image: { title: "Image" },
-  input: { title: "Input", danger: true },
+  input: { title: "Input", new: true },
   modal: { title: "Modal" },
   offcanvas: { title: "Offcanvas", soon: true },
   popover: { title: "Popover" },
