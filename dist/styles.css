@@ -1212,10 +1212,10 @@ code {
 }
 
 [u-radio-text]::after, [u-radio-group-item-text]::after {
-  left: 6px;
-  top: 8px;
-  width: 8px;
-  height: 8px;
+  left: 3px;
+  top: 5px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background-color: var(--color-base-200);
 }

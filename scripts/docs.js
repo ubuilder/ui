@@ -43,6 +43,7 @@ function layout(props, slots) {
           rel: "stylesheet",
           href: prefix + "dist/styles.css",
         }),
+        '<meta name="google-site-verification" content="kZEZL3Cu0hiCuH2fifBJNc9O_ZJzuOjWZWgMGURvXEk" />',
         View({ tag: "script", defer: true, src: prefix + "dist/ulibs.js" }),
         View({
           tag: "meta",

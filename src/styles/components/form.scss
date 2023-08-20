@@ -271,14 +271,12 @@
 }
 
 [u-radio-text]::after {
-  left: 6px;
-  top: 8px;
-  width: 8px;
-  height: 8px;
-  // border: solid white;
+  left: 3px;
+  top: 5px;
+  width: 7px;
+  height: 7px;
 
   border-radius: 50%;
-  // transform: rotate(45deg);
   background-color: var(--color-base-200);
 }
 
