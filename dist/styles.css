@@ -1241,8 +1241,24 @@ code {
   flex-direction: row;
 }
 
-[u-input-size-lg] {
+[u-input-size=xs] {
+  --form-field-size: var(--size-xs);
+}
+
+[u-input-size=sm] {
+  --form-field-size: var(--size-sm);
+}
+
+[u-input-size=md] {
+  --form-field-size: var(--size-md);
+}
+
+[u-input-size=lg] {
   --form-field-size: var(--size-lg);
+}
+
+[u-input-size=xl] {
+  --form-field-size: var(--size-xl);
 }
 
 [u-select-size=lg] {

@@ -4,7 +4,7 @@ import { View } from "./View.js";
 
 export const Input = Base({
   render($props, $slots) {
-    const {props, wrapperProps, restProps} = extract($props, {
+    const {props, wrapperProps, cssProps, restProps} = extract($props, {
       props: {
         component: 'input',
         tag: 'input',
@@ -20,7 +20,11 @@ export const Input = Base({
         component: 'input',
         label: undefined,
         name: undefined
+      },
+      cssProps: {
+        size: undefined
       }
+
     })
 
     if(props.name) props.$model = props.name
@@ -33,6 +37,6 @@ export const Input = Base({
       }
     }
 
-    return FormField({...wrapperProps, ...restProps}, View({...props}));
+    return FormField({...wrapperProps, ...restProps}, View({cssProps, ...props}));
   },
 });
