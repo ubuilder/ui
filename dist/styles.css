@@ -2580,6 +2580,8 @@ code.hljs {
 
 [u-modal-body] {
   padding: var(--size-sm) var(--size-md);
+  max-height: 95vh;
+  overflow-y: auto;
 }
 
 [u-modal-backdrop] {
@@ -2861,7 +2863,7 @@ code.hljs {
   position: absolute;
   top: 50%;
   transform: rotate(45deg) translateY(-75%);
-  z-index: 100;
+  z-index: 1;
   right: var(--size-sm);
   content: "";
   width: 8px;
