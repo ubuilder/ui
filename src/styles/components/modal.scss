@@ -37,6 +37,8 @@
 
 [u-modal-body] {
   padding: var(--size-sm) var(--size-md);
+  max-height: 95vh;
+  overflow-y: auto;
 }
 [u-modal-backdrop] {
   z-index: 10;
