@@ -1,6 +1,5 @@
 # Input
 
-
 ## Default
 ```js
 Input()
