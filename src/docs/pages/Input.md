@@ -1,5 +1,6 @@
 # Input
 
+
 ## Default
 ```js
 Input()
@@ -77,6 +78,15 @@ View({$data: {age: ''}},[
   View({$text: 'name'}),
 ]),
 ```
+
+## size
+```js
+Input({size: 'sm', label: "size: sm"}),
+Input({size: 'md', label: "size: md"}),
+Input({size: 'lg', label: "size: lg"}),
+Input({size: 'xl', label: "size: xl"}),
+```
+
 
 
 ## Required (add star for label)

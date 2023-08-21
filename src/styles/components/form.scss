@@ -317,11 +317,14 @@
 // input
 
 [u-input] {
-  @extend [u-form-field-input]
+  @extend [u-form-field-input];
 }
-[u-input-size-lg] {
-  --form-field-size: var(--size-lg);
+
+@include size-variants(input) using($size){
+  --form-field-size: #{var(--size-#{$size})};
 }
+
+
 
 [u-input]:focus {
   @extend [u-form-field-focus];
