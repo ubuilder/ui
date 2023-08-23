@@ -11,7 +11,7 @@ export * from "./Fieldset.js";
 export * from "./Form.js";
 export * from "./Modal.js";
 export * from "./Table.js";
-export * from "./View.js";;
+export * from "./View.js";
 export * from "./CodeEditor.js";
 export * from "./Divider.js";
 export * from "./FormField.js";
@@ -25,7 +25,6 @@ export * from "./Switch.js";
 export * from "./Textarea.js";
 export * from "./Tabs.js";
 export * from "./Image.js";
-
 export * from "./Dropdown.js";
 export * from "./Autocomplete.js";
 export * from "./Tooltip.js";
